@@ -25,7 +25,7 @@ Repository Structure
 	-------->UsedCarLot
 	-> documentation
 	-------->referater
-	-------->diagrams
+	-------->diagramsWIP
 	-------->tex
 	---------------->SDD
 	---------------->RAD
