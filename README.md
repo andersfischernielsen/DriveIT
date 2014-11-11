@@ -1,4 +1,4 @@
-Used Car Lot System
+Sell.IT
 ============
 
 ![Some used cars](readme.jpg)
