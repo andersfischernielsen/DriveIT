@@ -35,10 +35,11 @@ Opgaver Til Næste Gang
 -----------------------------
 ###ALLE:
 - Alle sætter sig ind i Visual studios SCRUM template (fischer linker)
-- Opdater beskrivelsen af gruppen med din NAVN, GITHUB, GMAIL og ITUMAIL infos
-Fischer-Nielsen
-Laver google calendar
-Wind
-Latex opsætning - merging af jacobs latex
-Pierre
-Skriv til Steven - gruppenavn personer initialer
+- Opdater beskrivelsen af gruppen med dit **NAVN**, **GITHUB**, **GMAIL** og **ITUMAIL** info
+
+- Fischer
+	- Laver google calendar
+- Wind
+	- Latex opsætning - merging af jacobs latex
+- Pierre
+	- Skriv til Steven - gruppenavn personer initialer
