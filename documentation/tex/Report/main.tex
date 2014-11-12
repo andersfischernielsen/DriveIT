@@ -1,0 +1,71 @@
+\include{preamble}
+
+\begin{document}
+%\includepdf[fitpaper]{billeder/forside}
+
+
+\begin{center}
+\thispagestyle{empty}
+
+% Upper part of the page. The '~' is needed because \\
+% only works if a paragraph has started.
+
+\textsc{\LARGE IT University of Copenhagen}\\[1.5cm]
+
+\textsc{\Large BDSA 2014 }\\[0.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Requirements Analysis, Software Design and Test Documentation \\ [0.4cm]
+    %\large \\ [0.4cm] 
+    }
+
+\HRule \\[1cm]
+
+\textsc{\Large DriveIT}\\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{1\textwidth}
+\begin{center} \large
+Anders Fischer-Nielsen - afin@itu.dk\\
+Anders Wind Steffensen - awis@itu.dk\\
+Christopher Blundell - ppma@itu.dk\\
+Jacob Stenum Czepluch - jstc@itu.dk\\
+Pierre Mandas - cnbl@itu.dk\\
+\end{center}
+\end{minipage}
+
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\frontmatter%
+
+%\include{abastract}
+%\include{preface}
+
+%\tableofcontents* % stjernen betyder vi ikke har den med i vores indholdsfortegnelse
+\input{RevisionHistory}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+\mainmatter%
+
+%input chapters here
+
+\input{Introduction-Part/Introduction}
+\input{RAD-Part/RAD}
+\input{SDD-Part/SDD}
+\input{ODD-Part/ODD}
+\input{TestDoc-Part/Test}
+\input{SCRUM-Part/SCRUM}
+\input{Appendices-Part/Appendices}
+
+
+\end{document}
