@@ -1,5 +1,6 @@
 Group Contract
 ==============
+_**v.0.1:** Written on the 14/11-2014_
 
 Meetings and Tools
 --------------
