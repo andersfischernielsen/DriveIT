@@ -33,6 +33,7 @@
 *.vrb
 *.xdy
 *.tdo
+*.pdf
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and

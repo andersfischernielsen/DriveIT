@@ -1,7 +1,7 @@
 \section{Boundary Conditions}
 
 \textbf{Boundary Conditions for DriveIT}\\\\
-\begin{tabular}{ |l|p{10cm}| }
+\begin{tabular}{ | p{4cm} | p{10cm} | }
   \hline
   \multicolumn{2}{|c|}{Boundary Conditions:} \\
   \hline
@@ -9,7 +9,7 @@
   \hline
     StartSystem & The DriveITSystem invokes the Check Data Integrity use case on start-up, and depending on the state of connection from previous shutdown will load from either persistent storage or flat text file.\\
     \hline
-    ManageCustomers & The \texttt{Employee} assigns him- or herself to a customer. The \texttt{AssignedCustomers} list will update in the background and be availble to the respective \texttt{Employee}.
+    ManageCustomers & The \texttt{Employee} assigns him- or herself to a customer. The \texttt{AssignedCustomers} list will update in the background and be availble to the respective \texttt{Employee}.\\
     \hline
     ExitSystem & The DriveITSystem checks for any changes being committed at the time of termination, and depending on the internet connection, will confirm saves to the respective storage current. \\
     \hline
