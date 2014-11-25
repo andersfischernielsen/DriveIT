@@ -2,25 +2,30 @@
 \subsection{Usability}
 The \texttt{DriveIT Windows client} should use the Windows design language such that it is intuitive for users who are used to the Windows platform.
 
-Further more the UI must be minimalistic and the most frequently used features should only require minimal work. Some training can be required since only employees will be using the system. 
+Further more the UI must be minimalistic and the most frequently used features should be placed in view no further away than two mouse clicks from the startup page. Some training can be required since only employees will be using the system. \\
 
-The \texttt{DriveIT Web client} should follow modern website design thus making the site intuitive and easy to use for everyday users. Furthermore simplicity should be paramount and the most frequently used features most be easy to come by.
+The \texttt{DriveIT Web client} should follow modern website design thus making the site intuitive and easy to use for everyday users. Furthermore simplicity should be paramount, and viewing information about cars should be quick and not interrupting.
 
 \subsection{Reliability}
-For the \texttt{DriveIT Web client} and \texttt{DriveIT Web API} we assume that Azure takes care of the reliability of the servers and therefore we are therefore not responsible for server maintenance, down time or data loss. Azure is a reliable and fast deployment environment, saving us from the troubles of setting up and hosting our own deployment and server environment.
+For the \texttt{DriveIT Web client} and \texttt{DriveIT Web API} we hold Azure responsible for the servers and therefore we are therefore not responsible for server maintenance, down time or data loss. \\
+%TODO Azure is a reliable and fast deployment environment, saving us from the troubles of setting up and hosting our own deployment and server environment.
 
-The three systems should have proper exception handling and therefore not crash unless something with the operating system or server fails. Although there may be unforeseen exceptions.
+The three systems should have sufficient exception handling and therefore not crash unless something with the operating system or server fails.
 
 \subsection{Performance}
-The system should be responsive and fast to use. Most user actions should be done in the background, therefore giving the UI a fast feel and startup time for the \texttt{DriveIT Windows client} should be maxed at 5 sec for a modern computer. Furthermore 
+The system should be responsive and fast to use. Most user actions should be done in the background, therefore giving the UI a fast feel. The startup time for the \texttt{DriveIT Windows client} should be less than at 5 sec for a modern computer. 
 
-The \texttt{DriveIT Web client} should be fast to use and all pages should be loaded at a maximum of 2 seconds for a 10mbit/1mbit connection + browser refresh time.
+Furthermore the \texttt{DriveIT Web client} should be fast to use and all pages should be loaded in less than of 2 seconds for a 10mbit/1mbit connection excluding browser rendering time, for a modern browser.
 
 \subsection{Maintainability}
-The systems should be easy to maintain achieved through the use of good code structure and extensive documentation. 
+The systems should be easy to maintain and extent achieved through the use of good code structure and extensive documentation. If the system is to be updated a service window will be provided in time intervals with a low user amount.
+
 \subsection{Portability}
-It should be easy to port the functionality to other systems. This will be achieved by using a REST Web API therefore allowing other clients to access the same information. 
+It should be easy to port the functionality to other systems. This will be achieved by using a REST Web API therefore allowing other clients to access the same information. The \texttt{DriveIT Web client} should be usable on mobile devices.
+
 \subsection{Implementation}
-The system will be implemented in different ways. It will have a main \texttt{DriveIT Web API} that will be taking care of persistence and communication between the \texttt{DriveIT Windows client} and the \texttt{DriveIT Web client}. The system will mainly be implemented using the programming language C\#. Implementing in a popular language such as C\# assures available programmers as well.
+The system will be implemented in different ways. It will have a main \texttt{DriveIT Web API} that will be taking care of persistence and communication between the \texttt{DriveIT Windows client} and the \texttt{DriveIT Web client}. The system will mainly be implemented using the programming language C\#. Implementing in a popular language such as C\# assures supportability and extendability. 
+%todo skriv noget om .net framework.
+
 \subsection{Operations}
 The system should mainly be maintained by the DriveIT developers, but training will be given to the users of the system to make sure that day to day problems can be easily solved.
