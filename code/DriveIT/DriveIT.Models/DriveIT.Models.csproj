@@ -7,8 +7,8 @@
     <ProjectGuid>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DriveIT.Model</RootNamespace>
-    <AssemblyName>DriveIT.Model</AssemblyName>
+    <RootNamespace>DriveIT.Models</RootNamespace>
+    <AssemblyName>DriveIT.Models</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarDetailDto.cs" />
     <Compile Include="CarDto.cs" />
     <Compile Include="ContactRequestDto.cs" />
     <Compile Include="CommentDto.cs" />

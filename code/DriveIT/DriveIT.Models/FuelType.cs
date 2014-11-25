@@ -1,4 +1,4 @@
-﻿namespace DriveIT.Model
+﻿namespace DriveIT.Models
 {
     public enum FuelType
     {
