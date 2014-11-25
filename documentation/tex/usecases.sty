@@ -1,0 +1,298 @@
+\ProvidesPackage{usecases}[2013/10/24 v0.1]
+
+% Required Packages
+\RequirePackage{xkeyval}
+\RequirePackage{calc}
+\RequirePackage[10pt]{moresize}
+
+%\DeclareOptionX{style}{%
+%\ProcessOptionsX
+
+\newcommand\boundaryrulerThickness{1.0pt}
+\newcommand\midrulerThickness{0.4pt}
+\newcommand\leftcolwidth{2.3cm}
+\newcommand\rightcolwidth{\textwidth-\leftcolwidth-0.5cm}
+%\newcommand\rightcolwidth{\textwidth-\leftcolwidth}
+
+\newcommand\boundaryruler{\noindent\rule{\textwidth}{\boundaryrulerThickness}}
+\newcommand\midruler{\noindent\rule{\textwidth}{\midrulerThickness}}
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\textwidth}{\textwidth-#1-#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+% Use case counter
+\newcounter{usecasecounter}
+\setcounter{usecasecounter}{0}
+
+\define@key{uc}{title} { \def\@uc@title{#1} }
+\define@key{uc}{description} { \def\@uc@description{#1} }
+\define@key{uc}{scope} { \def\@uc@scope{#1} }
+\define@key{uc}{level} { \def\@uc@level{#1} }
+\define@key{uc}{actors} { \def\@uc@actors{#1} }
+\define@key{uc}{stakeholders and interests} { \def\@uc@stakeholdersAndInterests{#1} }
+\define@key{uc}{preconditions} { \def\@uc@preconditions{#1} }
+\define@key{uc}{postconditions} { \def\@uc@postconditions{#1} }
+\define@key{uc}{precondition} { \def\@uc@precondition{#1} }
+\define@key{uc}{postcondition} { \def\@uc@postcondition{#1} }
+\define@key{uc}{main success scenario} { \def\@uc@mainSuccessScenario{#1} }
+\define@key{uc}{extensions} { \def\@uc@extensions{#1} }
+\define@key{uc}{special requirements} { \def\@uc@specialRequirements{#1} }
+\define@key{uc}{frequency of occurrence} { \def\@uc@frequencyOfOccurrence{#1} }
+\define@key{uc}{open issues} { \def\@uc@openIssues{#1} }
+\define@key{uc}{label} { \def\@uc@label{#1} }
+
+\newcommand\usecase[1]{%
+    \def\@uc@title {%
+        \PackageError{usecases}
+        {%
+            title key required in usecase for entry '\@uc@label'%
+        }%
+        {%
+            You haven't specified a title%
+        }%
+    }
+    \def\@uc@description {}
+    \def\@uc@scope {}
+    \def\@uc@level {}
+    \def\@uc@actors {%
+        \PackageError{usecases}
+        {%
+            actors key required in usecase for entry '\@uc@label'%
+        }%
+        {%
+            You haven't specified a any actors%
+        }%
+    }
+    \def\@uc@stakeholdersAndInterests {}
+    \def\@uc@preconditions {}
+    \def\@uc@postconditions {}
+    \def\@uc@precondition {}
+    \def\@uc@postcondition {}
+    \def\@uc@mainSuccessScenario {%
+        \PackageError{usecases}
+        {%
+            main success scenario key required in usecase for entry '\@uc@label'%
+        }%
+        {%
+            You haven't specified a main success scenario%
+        }%
+    }
+    \def\@uc@extensions {}
+    \def\@uc@specialRequirements {}
+    \def\@uc@frequencyOfOccurrence {}
+    \def\@uc@openIssues {}
+    \def\@uc@label {}
+    
+    \setkeys{uc}{#1}
+
+    {
+%     \begin{changemargin}{-1cm}{-1cm}\ssmall
+     \begin{changemargin}{0cm}{0cm}
+     \ssmall
+     \boundaryruler
+     
+    \refstepcounter{usecasecounter}
+    \ifx\@uc@label\@empty
+        \label{uc:\theusecasecounter}
+    \else
+        \label{\@uc@label}
+    \fi
+    \noindent\large{\textbf{UC-\theusecasecounter}\hspace{1cm}\textbf{\@uc@title}}
+    
+    \midruler
+    
+    \ifx\@uc@description\@empty
+    \else
+        \noindent\emph{Description:}\hspace{0.2cm} \@uc@description
+    
+        \midruler
+    \fi
+    
+    \ifx\@uc@scope\@empty
+    \else
+        \noindent\parbox{\leftcolwidth}{ \emph{Scope:} }
+        \hspace{2.0mm}
+        \begin{minipage}[t]{\rightcolwidth}
+            \@uc@scope
+        \end{minipage}
+        
+        \midruler
+    \fi
+    
+    \ifx\@uc@level\@empty
+    \else
+        \noindent\parbox{\leftcolwidth}{ \emph{Level:} }
+        \hspace{2.0mm}
+        \begin{minipage}[t]{\rightcolwidth}
+            \@uc@level
+        \end{minipage}
+        
+        \midruler
+    \fi
+    
+    \noindent\parbox{\leftcolwidth}{ \emph{Actors:} }
+    \hspace{2.0mm}
+    \begin{minipage}[t]{\rightcolwidth}
+        \@uc@actors
+    \end{minipage}
+    
+    \midruler
+    
+    \ifx\@uc@stakeholdersAndInterests\@empty
+    \else
+        \noindent\parbox{\leftcolwidth}{ \emph{Stakeholders and Interests:} }
+        \hspace{2.0mm}
+        \begin{minipage}[t]{\rightcolwidth}
+            \@uc@stakeholdersAndInterests
+        \end{minipage}
+        
+        \midruler
+    \fi
+    
+    \ifx\@uc@preconditions\@empty
+        \ifx\@uc@precondition\@empty
+        \else
+            \noindent\parbox{\leftcolwidth}{ \emph{Precondition:} }
+            \hspace{2.0mm}
+            \parbox[t]{\rightcolwidth}{\@uc@precondition}
+        
+            \midruler 
+        \fi
+    \else
+        \ifx\@uc@precondition\@empty
+            \noindent\parbox{\leftcolwidth}{ \emph{Preconditions:} }
+            \hspace{2.0mm}
+            \begin{minipage}[t]{\rightcolwidth}
+                \vspace{-4mm} 
+                \begin{enumerate}[leftmargin=*]
+                    \@uc@preconditions            
+                \end{enumerate}
+            \end{minipage}
+        
+            \midruler
+        \else
+            \PackageError{usecases}
+            {%
+                preconditions and precondition keys cannot be used together in usecase for entry '\@uc@label'%
+            }%
+            {%
+                You have specified both a preconditions and a precondition key%
+            }%
+        \fi
+    \fi
+    
+    \ifx\@uc@postconditions\@empty
+        \ifx\@uc@postcondition\@empty
+        \else
+            \noindent\parbox{\leftcolwidth}{ \emph{Postcondition:} }
+            \hspace{2.0mm}
+            \parbox[t]{\rightcolwidth}{\@uc@postcondition}
+        
+            \midruler 
+        \fi
+    \else
+        \ifx\@uc@postcondition\@empty
+            \noindent\parbox{\leftcolwidth}{ \emph{Postconditions:} }
+            \hspace{2.0mm}
+            \begin{minipage}[t]{\rightcolwidth}
+                \vspace{-4mm} 
+                \begin{enumerate}[leftmargin=*]
+                    \@uc@postconditions
+                \end{enumerate}
+            \end{minipage}
+        
+            \midruler
+        \else
+            \PackageError{usecases}
+            {%
+                postconditions and postcondition keys cannot be used together in usecase for entry '\@uc@label'%
+            }%
+            {%
+                You have specified both a postconditions and a postcondition key%
+            }%
+        \fi
+    \fi
+    
+    \noindent\emph{Main Success Scenario:}
+    \vspace{-2mm}
+    \begin{enumerate}
+        \@uc@mainSuccessScenario
+    \end{enumerate}
+    
+    \ifx\@uc@extensions\@empty
+    \else        
+        \midruler
+        
+        \noindent\emph{Extensions:}
+        \vspace{-2mm}
+        \begin{enumerate}
+            \@uc@extensions
+        \end{enumerate}
+    \fi
+    
+    \ifx\@uc@specialRequirements\@empty
+    \else        
+        \midruler
+        
+        \noindent\parbox[t]{\leftcolwidth}{ \emph{Special\\Requirements:} }
+        \hspace{2.0mm}
+        \begin{minipage}[t]{\rightcolwidth}
+            \vspace{-4mm} 
+            \begin{enumerate}[leftmargin=*]
+                \@uc@specialRequirements
+            \end{enumerate}
+        \end{minipage}
+    \fi
+    
+    \ifx\@uc@frequencyOfOccurrence\@empty
+    \else        
+        \midruler
+        
+        \noindent\parbox[t]{\leftcolwidth}{ \emph{Frequency:} }
+        \hspace{2.0mm}
+        \begin{minipage}[t]{\rightcolwidth}
+            \@uc@frequencyOfOccurrence
+        \end{minipage}
+    \fi
+    
+
+    \ifx\@uc@openIssues\@empty
+    \else        
+        \midruler
+        
+        \noindent\parbox[t]{\leftcolwidth}{ \emph{Open Issues:} }
+        \hspace{2.0mm}
+        \begin{minipage}[t]{\rightcolwidth}
+            \@uc@openIssues
+        \end{minipage}
+    \fi
+
+%    \ifx\@uc@openIssues\@empty
+%    \else        
+%        \midruler
+%        
+%        \noindent\parbox{\leftcolwidth}{ \emph{Open issues:} }
+%        \hspace{2.0mm}
+%        \begin{minipage}[t]{\rightcolwidth}
+%            \vspace{-4mm} 
+%            \begin{enumerate}[leftmargin=*]
+%                \@uc@openIssues
+%            \end{enumerate}
+%        \end{minipage}
+%    \fi
+%    
+    \boundaryruler
+    \end{changemargin}
+    }
+}
+
+

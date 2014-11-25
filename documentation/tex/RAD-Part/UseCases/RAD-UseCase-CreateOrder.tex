@@ -1,0 +1,38 @@
+\usecase{
+    title = {CreateOrder},
+    label = uc:createorder,
+    description = {The \emph{Employee} creates an order when the \emph{Customer} wants to buy a car.},
+%    scope = {},
+%    level = {},
+    actors = {\emph{Customer}, \emph{Employee}},
+%    stakeholders and interests = {},
+%    precondition = {},
+    preconditions = {
+        \item The \emph{Customer} and \emph{Employee} has agreed upon a deal regarding the purchase of a given car.
+        \item The \emph{Employee} has the Windows client for the DriveIt system available with Internet connection.
+    },
+%    postcondition = {},
+    postconditions = {
+        \item An \texttt{Order} has been successfully created and persisted in the database.
+        \item The image belonging to the purchased car is now labelled as \texttt{SOLD}.
+    },
+    main success scenario = {
+        \item The \emph{Employee} opens the `make new order' window.
+        \item The \emph{Employee} selects the car that the \emph{Customer} desires to buy and fills in the agreed upon price.
+        \item The \emph{Employee} selects the \emph{Customer}\'s profile to get relevant contact information. If the \emph{Customer} has no profile, the \emph{Employee} creates one.
+        \item When all the required fields to make a valid \texttt{Order} is filled, the \emph{Employee} clicks the \texttt{CreateOrder} button.
+        \item If the car has been sold by another \emph{Employee} in the mean time, the system gives an error message.
+    },
+%    extensions = {
+%        \item 1
+%        \item 2
+%        \item 3
+%    },
+%    special requirements = {
+%       \item 1
+%        \item 2
+%       \\
+%   },
+    frequency of occurrence = Daily,
+    %open issues = {},
+}

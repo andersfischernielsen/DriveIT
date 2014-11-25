@@ -1,0 +1,37 @@
+\usecase{
+    title = {CreateUserAccount},
+    label = uc:createuser,
+    description = {The \emph{Customer} creates a user in the system.},
+%    scope = {},
+%    level = {},
+    actors = {Initiated by \emph{Customer}},
+%    stakeholders and interests = {},
+%    precondition = {},
+    preconditions = {
+        \item  The \texttt{DriveIT System} is initialized and online.
+        \item  The \emph{Customer} has at minimum opened the main view of the \texttt{DriveIT System}.
+    },
+%    postcondition = {},
+    postconditions = {
+        \item The \emph{Customer} has created an account.,
+        \item  The account has been registered in the \texttt{DriveIT System}.
+    },
+    main success scenario = {
+        \item  The \emph{Customer} creates a user account for the \texttt{DriveIT System}
+        \item  The \emph{Customer} selects \texttt{Create User} in the main view of the \texttt{DriveIT System}.
+        \item  The \emph{Customer} inputs an e-mail address, a username and a password. He/she then selects the save button to save the account.
+        \item  If the input is valid (the username and e-mail address is available), the account is saved in the \texttt{DriveIT System} and the \emph{Customer} is logged in.
+    },
+%    extensions = {
+%        \item 1
+%        \item 2
+%        \item 3
+%    },
+%    special requirements = {
+%	    \item 1
+%        \item 2
+%		\\
+%	},
+    frequency of occurrence = Often,
+    open issues = {It is unclear if the use case should revolve around the main view or the rating view of the system.},
+}

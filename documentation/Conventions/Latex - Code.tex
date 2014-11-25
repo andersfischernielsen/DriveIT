@@ -1,0 +1,61 @@
+\chapter{Test chapter}
+\label{ch:test}
+
+C\#
+
+$\sharp$
+
+\begin{lstlisting}[label=lst:discriminated-union, caption={Discriminated union in F$\sharp$}]
+type Expr =
+    | Float of float
+    | Add of Expr * Expr
+    | Sub of Expr * Expr
+    | Mul of Expr * Expr
+    | Div of Expr * Expr
+\end{lstlisting}
+
+\begin{lstlisting}[label=lst:discriminated-union-csharp, language=CSharp, caption={Simulating a discriminated union in C$\sharp$. The implementation of the \texttt{Sub}, \texttt{Mul}, and \texttt{Div} cases has been omitted for brevity.}]
+public abstract class Expr
+{
+    private readonly string _tag;
+
+    public string Tag { get { return _tag; } }
+
+    protected Expr(string tag)
+    {
+        _tag = tag;
+    }
+}
+public class Float : Expr
+{
+    private readonly double _value;
+
+    public double Value { get { return _value; } }
+
+    public Float(double value) : 
+        base ("Float")
+    {
+        _value = value;
+    }
+}
+public class Add : Expr
+{
+    private readonly Expr _expr1;
+    private readonly Expr _expr2;
+
+    public Expr Expr1 { get { return _expr1; } }
+    public Expr Expr2 { get { return _expr2; } }
+
+    public Add(Expr expr1, Expr expr2) : base("Add")
+    {
+        _expr1 = expr1;
+        _expr2 = expr2;
+    }
+}
+\end{lstlisting}
+
+\begin{enumerate}
+\item An immutable class identical to the F$\sharp$ one (listing \ref{lst:ImmutableCell.cs})
+\end{enumerate}
+
+\lstinputlisting[label={lst:ImmutableCell.cs},language={CSharp},caption={C$\sharp$ class immutable cell}]{code/ImmutableCell.cs}

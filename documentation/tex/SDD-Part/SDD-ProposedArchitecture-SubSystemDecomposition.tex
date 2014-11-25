@@ -1,0 +1,8 @@
+\section{Subsystem Decomposition}
+We have defined the following subsystems:
+\begin{itemize}
+	\item Persistence subsystem: A Microsoft Database used for storing the data from the applications.
+	\item WebAPI: The WebAPI is the only way to communicate with the persistence subsystem. This means that every table in the persistence module must be supported by the API. The API will use Authorization to decide if the user has access to certain parts of the persistence module.
+	\item WindowsApp: Used by the employees to serve the customers. The Windows application can only be accessed by employees who will have to login at startup. The application is used to CRUD cars, orders, customers and employees (by the administrator account-type).
+	\item CarQueryAdapter: Used by the employees when creating new cars for sale. The CarQuery API can be used to find more details about car models.
+\end{itemize}

@@ -1,0 +1,24 @@
+\section{Design Goals}
+\begin{enumerate}
+\item Powerful and easy usability\\
+The goal with the usability of the \texttt{DriveIT Windows client} is to give employees a powerful and easy to use tool to perform their work tasks. The gestalt laws are excellent examples on how to make a clean and simple user interface. The gestalt laws focuses on the placement of different GUI objects, such as buttons and text fields in a user interface, to make the interaction between user and user interface easy and painless for the user. By using the gestalt laws, we are able to make a clear distinction of which parts of the user interface that belongs to each other and thereby make it easier for the user to interact with the user interface. To give the Employees a powerful tool, the most frequently used tasks must be achievable quickly but with possible extensions to allow more advanced options. Thus making the usability fast while not dumping down on depth.\\\\
+The goal with the usability of the \texttt{DriveIT Web client}, is to have a website which is simple and allows the user with only a few actions. This will decrease the possibility of confusion and therefore hopefully keep the users on the site. Gestalt laws should be used in the making the GUI such that it is easy for the user to see which functions maps together.
+
+\item High Reliability\\
+It is desired to create a reliable program that will prevent the user from losing progress made to the system, due to unexpected events, whereas an event could be a computer turn-off by accident or any other such similar things. How our system will be handling this, is by doing frequent auto-saving of the data, to a local data file, and then synchronize the auto-saved data with our data storage, to have an external backup of the data. Furthermore, every time the user commits anything, whereas this for example could be a new calendar entry, it will also be saved immediately to the local data file, and thereafter synchronize the local data file with the database. Force restarting should not be acceptable and most exceptions must be caught and handled during runtime. By doing the above mentioned, data loss will be kept to a minimum by limiting it to the user's current activity, should a failure occur.\\
+
+\item Strong architecture with focus on extendability\\
+When rolling out future updates for the system, a full re-installation of the program will be necessary. This is due to resources allocated to other more desired design goals.\\
+
+\item Good documentation and Testing of the most important subsystems\\
+The system will be tested before release, but in a limited way. As a full system test cannot be accomplished due to the time frame set for this systems development, a fully thorough testing will not be attainable, and we will therefore only focus on testing key components that are central parts of our system.
+Documentation will be a central part of our system, as it is important to keep documentation of how the system works as a whole, and how the modules or subsystem works separately, and by making this documentation, it will be easier to extend our system by developers that have no knowledge about the system\\
+
+\item High portability \\
+To make sure that the system is easy to extend and scale, it will be build around a Web REST API that makes it easy to communicate with the system. This allows us to easily make apps for smart phones or other operating systems that supports and uses the DriveIT API. 
+
+\item Easy and efficient implementation\\
+The fact that the system will be developed and maintained in a popular and broadly used programming language such as C\#, assures a relatively painless implementations process. And since C\# uses the @.NET platform there are also a lot of well designed and highly maintained tools available, minimizing the implementation time and increasing the quality of the software.
+
+\item \TODO I don't really have any idea of what to write here? Just a quick discussion could help me,
+\end{enumerate} 

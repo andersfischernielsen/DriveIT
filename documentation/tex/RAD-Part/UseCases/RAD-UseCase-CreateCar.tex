@@ -1,0 +1,31 @@
+\usecase{
+    title = {CreateCar},
+    label = uc:createcar,
+    description = {The \emph{Employee} Creates a car in the \texttt{DriveIT System} thereby making it available for sale.},
+%    scope = {},
+%    level = {},
+    actors = {Initiated by\emph{Employee}},
+%    stakeholders and interests = {},
+    preconditions = {
+        \item 1 The \emph{Employee} has some information about the new car.
+    },
+    postconditions = {
+        \item 1 The car is in the \texttt{DriveIT System} and is available for sale on the \texttt{DriveIT Webclient}. 
+    },
+    main success scenario = {
+        \item 1 The \emph{Employee} logs into the \texttt{DriveIT System}.
+        \item 2 The \emph{Employee} finds the create car view.
+        \item 3 The \emph{Employee} Fills data about the car in the view. 
+        \item 4 The \emph{Employee} Checks the data and accepts it. The car is now succesfully in the system.
+    },
+    extensions = {
+       \item 1 During item 3 in the main succes scenario, the \emph{Employee} should be able to fill in additional data about the car, by the help of an external system(CarQuery), using the model name.
+    },
+%    special requirements = {
+%	    \item 1
+%        \item 2
+%		\\
+%	},
+    frequency of occurrence = Often,
+    open issues = {It is unclear if the car should be immediately up for sale or if the \emph{Employee} should be able to choose what "state" the car should be in.}
+}

@@ -1,0 +1,40 @@
+\section{Functional requirements}
+
+\subsection{General Functional Requirements}
+\begin{itemize}
+    \item It must be possible for users to browse cars with different filters and criteria.
+    \item A user must be able to contact DriveIT without signing in.
+    \item If a user wants to get contacted by DriveIT, the user must create an account.
+    \item The user must be able to create an account.
+    \item The user must be able to sign in.
+    \item A user must be able to rate the cars in the system.
+    \item The user must be able to find contact information about the employees of DriveIT.
+    \item It must be possible for the user to get contacted by employees of DriveIT.
+    \item The user must be able to edit contact information for their profile.
+    \item An employee must be able to browse all cars in the system.
+    \item An employee must be able to edit and create information about cars.
+    \item It must be possible for employees to upload images of a car.
+    \item Employees must be able to see a list of users wanting to get contacted regarding a car.
+    \item Employees must be able to create profiles on behalf of customers calling the office without an existing profile.
+    \item Employees must be able to create orders when a customer has decided to purchase a car.
+    \item An overview of all orders must be available to employees to see.
+    \item Employees must be able to add new cars to the system.
+    \item It must be possible to remove cars from the system.
+    \item There must be an administrator that is able to create and delete new employees.
+\end{itemize}
+
+\subsection{Initial Analysis Objects}
+\begin{itemize}
+    \item \textbf{Customer:}\\
+    A customer is a person visiting the web client of the DriveIT system. A customer object will have contact information about a given customer.
+    \item \textbf{Employee:}\\
+    An employee is a person working for DriveIT, who uses the Windows client. This object will hold information about a given employee. Employees can be administrators, meaning that they are able to CRUD employees.
+    \item \textbf{Car:}\\
+    The car object holds relevant information about itself. The object has an attribute stating whether it is sold or not.
+    \item \textbf{Order:}\\
+    An order consists of a car, an employee, and a customer. It uses some different information from each of these objects to make an order.
+    \item \textbf{Comment:}\\
+    Comment consists of a user and a text field. A car object can have several comments.
+    \item \textbf{ContactRequest:}\\
+    Will be created when a user wants to be contacted by an employee regarding a given car. It contains the car in question an the requesting user.
+\end{itemize}

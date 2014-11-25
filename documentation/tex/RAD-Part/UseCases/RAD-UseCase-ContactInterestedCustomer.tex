@@ -1,0 +1,41 @@
+\usecase{
+    title = {ContactInterestedCustomer},
+    label = uc:cont-int-cust,
+    description = {The \emph{Employee} contacts the \emph{Customer} in the request.},
+%    scope = {},
+%    level = {},
+    actors = {Initiated by \emph{Employee}\\
+		   Participation by \emph{Customer}},
+%    stakeholders and interests = {},
+    precondition = {The \texttt{DriveIT Windows Client} is initialized and online.},
+%    preconditions = {
+%        \item 1
+%        \item 2
+%        \item 3  
+%    },
+    postcondition = {The employee adds an order, containing the specified car and the customer information, and the order has been registered in the \texttt{DriveIT System}.},
+%    postconditions = {
+%        \item 1
+%        \item 2
+%        \item 3
+%    },
+    main success scenario = {
+	   \item The \emph{Employee} opens the list of requests.
+	   \item The \emph{Employee} chooses a request, which will open a new windows containing information about the customer, and the specified car.
+	   \item The \emph{Employee} calls the customer.
+	   \item The \emph{Employee} and the \emph{Customer} start a conversation, talking about the car, in which the customer is interested in.
+	   \item The \emph{Customer} confirms that he is interested in the specified car.
+	   \item The \emph{Customer} terminates the conversation.
+    },
+%    extensions = {
+%        \item 1
+%        \item 2
+%        \item 3
+%    },
+%    special requirements = {
+%	    \item 1
+%        \item 2
+%		\\
+%	},
+    frequency of occurrence = Very often,
+}

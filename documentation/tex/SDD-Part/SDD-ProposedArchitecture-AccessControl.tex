@@ -1,0 +1,37 @@
+\section{Access Control and Security}
+
+\textbf{Access Matrix for DriveIT System}\\\\
+\begin{tabular}{|l||*{5}{c|}}\hline
+\backslashbox{\scriptsize Actors}{\scriptsize Objects}
+&\makebox[1em]{\scriptsize Car}&\makebox[4em]{\scriptsize Customer}&\makebox[3em]{\scriptsize Order}
+&\makebox[3em]{\scriptsize Employee}&\makebox[6em]{\scriptsize Comment}\\\hline\hline
+
+\scriptsize Customer & \scriptsize getCars & \scriptsize getUserInformation & \scriptsize getOrders & \scriptsize getEmployees & \scriptsize createComment\\
+	       && \scriptsize UpdateOwnInformation &&& \scriptsize getComments\\
+	       &&&&& \scriptsize updateComment\\
+	       &&&&& \scriptsize deleteComment\\\hline
+
+\scriptsize Non-Customer & \scriptsize getCars & \scriptsize createNewUser && \scriptsize getEmployees &\\
+	       && \scriptsize getUserInformation &&&\\\hline
+
+\scriptsize Employee & \scriptsize createCar & \scriptsize createNewUser & \scriptsize createOrder & \scriptsize getEmployees &\\
+	       & \scriptsize getCars & \scriptsize getUserInformation & \scriptsize getOrders &&\\
+	       & \scriptsize updateCar & \scriptsize updateUser & \scriptsize updateOrder &&\\
+	       & \scriptsize deleteCar && \scriptsize deleteOrder &&\\\hline
+
+\scriptsize Admin & \scriptsize createCar & \scriptsize createNewUser & \scriptsize createOrder & \scriptsize createEmployee & \scriptsize createComment\\
+	  & \scriptsize getCars & \scriptsize getUserInformation & \scriptsize getOrders & \scriptsize getEmployees & \scriptsize getComments\\
+	  & \scriptsize updateCar & \scriptsize updateUser & \scriptsize updateOrder & \scriptsize updateEmployee & \scriptsize updateComment\\
+	  & \scriptsize deleteCar && \scriptsize deleteOrder & \scriptsize deleteEmployee & \scriptsize deleteComment\\\hline
+
+\end{tabular}\\
+\\\\
+Due to the fact that our DriveIT System is available for many users, it is neccessary to keep track of which users may have access to specific ressources in our system. To keep track of which users got access to which ressources, it is neccessary to check each user at login, through authentication, to confirm which ressources they can access.\\
+
+In our system, a non-customer (a person accessing our DriveIT homepage without login) should be restricted to only be able to search for cars, get a list of employees, create a new user on the homepage and get access to non-private informaton about other users (such as an article owner).\\
+
+The customer is able to access more on our DriveIT homepage than a non-customer. The customer is able to access the same information as a non-customer, but are also able to look through the customers own orders, and also able to create, update or delete the customers own comment on an article. If the customer is an article owner, the customer should also be able to delete other customers comments, if they feel that the comment is inappropriate etc.\\
+
+The employee is able to create, update or delete a car, and search for cars. The employee is also able to create a new user (if a person calls in for help), get information about a specific user and update a user by request of a customer. The employee is also able to create an order, see the orders of a specific customer, update an order and delete an order. The employee should also be able to get a list of employees, if it is needed in any case.\\
+
+Admins of the system is able to get access to any ressources of our system.

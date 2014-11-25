@@ -1,0 +1,14 @@
+\section{Hardware and Software Mapping}
+As the figure shows, we want to run our system on the following hardware:
+The persistence, WebAPI and WebClient subsystems should be hosted on the same hardware which is a webserver running ASP.NET.\\
+The WindowsApp runs on .NET 4(.5) and has a subsystem which helps communicating with CarQuery, which helps Employees fill out missing information about cars.
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.6]{Figures/HardwareSoftwareMapping}\\
+		% place the figure in the Figures folder (located with the main file)
+		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
+	\caption{Hardware software mapping of the entire system.}
+  \label{fig:Hardware-Software-Mapping}
+  % label it something meanfull
+\end{figure}

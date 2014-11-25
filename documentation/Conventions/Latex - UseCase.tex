@@ -1,0 +1,40 @@
+%Template for adding a usecase to the documentation
+% BRUG , I STEDET FOR ITEM MELLEM HVERT PUNKT!
+% \usepackage{usecases}
+\usecase{
+    title = {ViewTrafficInfo},
+    label = uc:view_traffic_info,
+    description = {The \emph{Driver} can see the traffic information on the \texttt{InformationSign}.},
+%    scope = {},
+%    level = {},
+    actors = {Initiated by \emph{Driver}},
+%    stakeholders and interests = {},
+    precondition = {The \texttt{InformationSign} is initialized and online.},
+%    preconditions = {
+%        \item 1
+%        \item 2
+%        \item 3  
+%    },
+    postcondition = {The \emph{Driver} has received traffic information.},
+%    postconditions = {
+%        \item 1
+%        \item 2
+%        \item 3
+%    },
+    main success scenario = {
+        The \texttt{InformationSign} is updated with relevant traffic information.,
+        The \emph{Driver} sees traffic information.
+    },
+%    extensions = {
+%        \item 1
+%        \item 2
+%        \item 3
+%    },
+%    special requirements = {
+%	    \item 1
+%        \item 2
+%		\\
+%	},
+    frequency of occurrence = Often,
+    open issues = {It is quite unclear if a better name for this use case would rather be `DisplayTrafficInfo'?},
+}

@@ -1,0 +1,37 @@
+\usecase{
+    title = {RequestEmployeeContact},
+    label = uc:req-emp-contact,
+    description = {The \emph{User} wishes to be contacted by an \emph{Employee} about a car.},
+%    scope = {},
+%    level = {},
+    actors = {Initiated by \emph{Customer}},
+%    stakeholders and interests = {},
+%    precondition = {},
+    preconditions = {
+    \item The \texttt{DriveIT System} is initialized and online.
+    \item The \texttt{Customer} has found a car in the \texttt{DriveIT System} he/she wishes to be contacted about.
+    },
+%    postcondition = {},    
+    postconditions = {
+    \item The \emph{Customer} has submitted a request form.,
+    \item The request-employee-contact-form has been registered in the \texttt{DriveIT System}.
+    },
+    main success scenario = {
+       \item The \emph{Customer} has found a car he/she wishes to be contacted about.
+       \item The \emph{Customer} fills out a request-employee-contact-form and submits it.
+       \item The request-employee-contact-form is  registered in the \texttt{DriveIT System}.
+       \item Any \emph{Employee} registered in the \texttt{DriveIT System} is now able to view and process the submission.
+    },
+%    extensions = {
+%        \item 1
+%        \item 2
+%        \item 3
+%    },
+%    special requirements = {
+%	    \item 1
+%        \item 2
+%		\\
+%	},
+    frequency of occurrence = Often,
+    open issues = {It is unclear what is unclear},
+}

@@ -1,0 +1,18 @@
+\section{Boundary Conditions}
+
+\textbf{Boundary Conditions for DriveIT}\\\\
+\begin{tabular}{ |l|p{10cm}| }
+  \hline
+  \multicolumn{2}{|c|}{Boundary Conditions:} \\
+  \hline
+  PersistentDataStorage & When the DriveITSystem is shut down, the DriveITSystem can convert the persistent storage from a flat file storage to a database storage or from a database storage to a flat file storage, depending on the current state of internet connection.\\
+  \hline
+    StartSystem & The DriveITSystem invokes the Check Data Integrity use case on start-up, and depending on the state of connection from previous shutdown will load from either persistent storage or flat text file.\\
+    \hline
+    ManageCustomers & The \texttt{Employee} assigns him- or herself to a customer. The \texttt{AssignedCustomers} list will update in the background and be availble to the respective \texttt{Employee}.
+    \hline
+    ExitSystem & The DriveITSystem checks for any changes being committed at the time of termination, and depending on the internet connection, will confirm saves to the respective storage current. \\
+    \hline
+    CheckDataIntegrity & DriveITSystem checks the integrity of the persistent data. For the textfile-based storage, this may include checking if the last logged transactions were saved to the textfile. For database storage, this may include invoking tools providing by the database system to re-index the tables. \\
+  \hline
+\end{tabular}
