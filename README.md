@@ -18,7 +18,6 @@ Meetings and Tools
 - Tuesdays: 10-16
 - Wednesdays: 10-16
 - Fridays: 9-16
-![Some used cars](readme.jpg)
 
 The repository for our third semester exam project at the IT University of Copenhagen.
 
