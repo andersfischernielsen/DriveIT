@@ -1,3 +1,13 @@
+DriveIT
+============
+
+![Some used cars](readme.jpg)
+
+Description
+--------------
+The repository for our third semester exam project at the IT University of Copenhagen.
+
+
 Group Contract
 ==============
 _**v.0.1:** Written on the 14/11-2014_
@@ -8,12 +18,14 @@ Meetings and Tools
 - Tuesdays: 10-16
 - Wednesdays: 10-16
 - Fridays: 9-16
+![Some used cars](readme.jpg)
 
+The repository for our third semester exam project at the IT University of Copenhagen.
 
 ###The group has agreed to use the following tools:
 - SCRUM - Sprints will start Wednesday and end on Tuesday.
-	- SCRUM meetings take place every morning at 10.
-	- Sprints will be reflected on Tuesdays.
+    - SCRUM meetings take place every morning at 10.
+    - Sprints will be reflected on Tuesdays.
 - Visual Studio Online - For SCRUM management.
 - Microsoft Azure - for cloud hosting.
 
