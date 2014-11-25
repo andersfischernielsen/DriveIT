@@ -4,7 +4,7 @@ namespace DriveIT.Model
 {
     public class CarDto
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Model { get; set; }
         public string Make { get; set; }
         public int Year { get; set; }
@@ -14,8 +14,11 @@ namespace DriveIT.Model
         public float Mileage { get; set; }
         public string Color { get; set; }
         public int DistanceDriven { get; set; }
-        public string Fuel { get; set; }
+        public FuelType Fuel { get; set; }
         public string Drive { get; set; }
         public string Transmission { get; set; }
+        public int TopSpeed { get; set; }
+        public int NoughtTo100 { get; set; }
+        public string ImagePath { get; set; }
     }
 }
