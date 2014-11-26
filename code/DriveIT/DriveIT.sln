@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities", "DriveIT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Models", "DriveIT.Models\DriveIT.Models.csproj", "{9279ADF0-FC58-4C2F-B34F-D472F13976EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities.Tests", "Entities.Tests\DriveIT.Entities.Tests.csproj", "{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities.Tests", "DriveIT.Entities.Tests\DriveIT.Entities.Tests.csproj", "{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

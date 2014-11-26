@@ -56,6 +56,12 @@
     <Compile Include="DriveItContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DriveIT.Entities\DriveIT.Entities.csproj">
+      <Project>{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}</Project>
+      <Name>DriveIT.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
