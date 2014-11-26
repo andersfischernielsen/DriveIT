@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DriveIT.Entities
 {
-    public class Class1
+    class Admin : Employee
     {
     }
 }
