@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities", "DriveIT.Entities\DriveIT.Entities.csproj", "{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Models", "DriveIT.Models\DriveIT.Models.csproj", "{9279ADF0-FC58-4C2F-B34F-D472F13976EC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
