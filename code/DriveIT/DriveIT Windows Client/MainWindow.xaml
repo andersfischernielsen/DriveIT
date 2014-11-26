@@ -29,8 +29,14 @@
                 <ColumnDefinition Width="1133*"/>
                 <ColumnDefinition Width="400*"/>
             </Grid.ColumnDefinitions>
-            <Grid Margin="10" Background="Black"/>
-            <Grid Grid.Column="2" Margin="10,10,0,10" HorizontalAlignment="Left" Width="352.258" Background="#FFCB2F2F"/>
+            <Grid Margin="10" Background="Black">
+                <Button Content="Requests for &#xD;&#xA;contact" HorizontalAlignment="Left" Margin="40,44,0,0" VerticalAlignment="Top" Width="287" Height="62" FontSize="18"/>
+                <Button Content="Cars" HorizontalAlignment="Left" Margin="40,202,0,0" VerticalAlignment="Top" Width="287" Height="62" FontSize="18"/>
+                <Button Content="Orders" HorizontalAlignment="Left" Margin="40,358,0,0" VerticalAlignment="Top" Width="287" Height="62" FontSize="18"/>
+                <Button Content="Customers" HorizontalAlignment="Left" Margin="40,510,0,0" VerticalAlignment="Top" Width="287" Height="62" FontSize="18"/>
+                <Button Content="Employees" HorizontalAlignment="Left" Margin="40,668,0,0" VerticalAlignment="Top" Width="287" Height="62" FontSize="18"/>
+            </Grid>
+            <Grid Grid.Column="2" Margin="10,10,0,10" Background="#FFCB2F2F"/>
             <Grid Grid.Column="1" Margin="10" Background="#FF574D99"/>
         </Grid>
     </Grid>
