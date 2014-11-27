@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using DriveIT.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,6 +10,14 @@ namespace DriveIT.Entities.Tests
     [TestClass]
     public class EntityAdapterTests
     {
+        //THIS IS A SHITTY TEST-THING. TESTING SHOULD BE DONE WITH MOCK, BUT I'M TIRED NOW.
+        public static void Main(string[] args)
+        {
+            var t = new EntityAdapter();
+            t.CreateCar(new Car {Color = "Red", Created = DateTime.Now, DistanceDriven = 20, Drive = "FWD", Fuel = "Gas", Id = 1, Make = "Ford", Mileage = 20.5f, Model = "TT", Price = 2000, Sold = false, Transmission = "Manual", Year = 2001});
+            Console.WriteLine(t.GetCarWithId(1).Result.Make);
+        }
+
         private EntityAdapter _toTest;
 
         [TestInitialize]
@@ -23,10 +32,10 @@ namespace DriveIT.Entities.Tests
             };
             var mockSet = new Mock<DbSet<Car>>().SetupData(cars);
 
-            var context = new Mock<DriveITContext>();
+            var context = new Mock<EntityContext>();
             context.Setup(c => c.Cars).Returns(mockSet.Object);
 
-            _toTest = new EntityAdapter(context.Object);
+            _toTest = new EntityAdapter();
         }
 
         [TestMethod]
@@ -39,11 +48,6 @@ namespace DriveIT.Entities.Tests
         public void GetCarTest()
         {
             Assert.AreEqual(1, _toTest.GetCarWithId(1).Id);
-        }
-
-        public static void Main(string[] args)
-        {
-            
         }
     }
 }
