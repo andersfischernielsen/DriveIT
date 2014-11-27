@@ -7,7 +7,7 @@ using Moq;
 namespace DriveIT.Entities.Tests
 {
     [TestClass]
-    public class DriveItContextTests
+    public class EntityAdapterTests
     {
         private EntityAdapter _toTest;
 
