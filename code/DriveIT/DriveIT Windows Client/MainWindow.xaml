@@ -2,12 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="900" Width="1600">
-	<Window.Background>
-		<RadialGradientBrush RadiusX="1" RadiusY="1">
-			<GradientStop Color="Black" Offset="1"/>
-			<GradientStop Color="White"/>
-		</RadialGradientBrush>
-	</Window.Background>
+    <Window.Background>
+        <RadialGradientBrush RadiusX="1" RadiusY="1">
+            <GradientStop Color="Black" Offset="1"/>
+            <GradientStop Color="White"/>
+        </RadialGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -17,15 +17,23 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Height="80" VerticalAlignment="Top">
-        	<Grid.Background>
-        		<SolidColorBrush Color="#FF2E4585" Opacity="0.5"/>
-        	</Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="326"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <SolidColorBrush Color="#FF2E4585" Opacity="0.5"/>
+            </Grid.Background>
             <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="210.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="210,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="420.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Border BorderBrush="Black" BorderThickness="1" Height="80" VerticalAlignment="Top"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="420,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+            <Button Content="Button" HorizontalAlignment="Right" Margin="0,10,118,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+            <Button Content="Button" HorizontalAlignment="Right" Margin="0,10,228,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="527,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
         </Grid>
         <Grid Margin="10,10,10,0" Grid.Row="1">
             <Grid.ColumnDefinitions>
