@@ -6,16 +6,16 @@ The goal with the usability of the \texttt{DriveIT Windows client} is to give em
 The goal with the usability of the \texttt{DriveIT Web client}, is to have a website which is simple and provide the user with only a few actions. This will decrease the possibility of confusion and therefore hopefully keep the users on the site. Gestalt laws should be used in the making the GUI such that it is easy for the user to see which functions maps together.
 
 \subsubsection{High Reliability}
-It is desired to create a reliable program that will prevent the user from losing progress made to the system, due to unexpected events, whereas an event could be a computer turn-off by accident or any other such similar things. How our system will be handling this, is by doing frequent auto-saving of the data, to a local data file, and then synchronize the auto-saved data with our data storage, to have an external backup of the data. Furthermore, every time the user commits anything, whereas this for example could be a new car, it will also be saved immediately to the local data file, and thereafter synchronize the local data file with the database. Force restarting should not be acceptable and most exceptions must be caught and handled during runtime. By doing the above mentioned, data loss will be kept to a minimum by limiting it to the user's current activity, should a failure occur.
-%todo remove stuff about local file.
+It is desired to create a reliable program that will prevent the user from losing progress made to the system due to unexpected events. By synchronizing with the Azure server after every CRUD action and not just at startup and shutdown. Should the system loose connection to the server an overlay message must be shown to the user such that it is not possible to continue work. This is a design choice which is choosen due to the time limit of the project. \\
+Force restarting should not be acceptable and most exceptions must be caught and handled during runtime. By doing the above mentioned, data loss will be kept to a minimum by limiting it to the user's current activity, should a failure occur.
 
 \subsubsection{Strong architecture with focus on extendability}
 When rolling out future updates for the system, a full re-installation of the program will be necessary. This is due to resources allocated to other more desired design goals.\\
 
 \subsubsection{Good documentation and Testing of the most important subsystems}
-The system will be tested before release, but in a limited way. As a full system test cannot be accomplished due to the time frame set for this systems development, a fully thorough testing will not be attainable, and we will therefore only focus on testing key components that are central parts of our system.
+The system must be tested before release, but in a limited way, as a full system test cannot be accomplished due to the time frame set for the development of the system We will therefore only focus on testing key components which are central and critical parts of our system.\\
+
 Documentation will be a central part of our system, as it is important to keep documentation of how the system works as a whole, and how the modules or subsystem works separately, and by making this documentation, it will be easier to extend our system by developers that have no knowledge about the system\\
-% TODO ret igennem ser.
 
 \subsubsection{High portability}
 To make sure that the system is easy to extend and scale, it will be built around a Web REST API that makes it easy to communicate with the system. This allows us to easily make apps for other platforms for example mobile devices that supports and use the \texttt{DriveIT WEB API}.\\
