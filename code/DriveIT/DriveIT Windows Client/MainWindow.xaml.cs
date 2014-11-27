@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,18 @@ namespace DriveIT_Windows_Client
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var entityWindow = new EntityWindow();
+            entityWindow.Show(); // works
         }
     }
 }
