@@ -45,15 +45,20 @@
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <Grid Margin="10">
+            	<Grid.ColumnDefinitions>
+            		<ColumnDefinition Width="40"/>
+            		<ColumnDefinition/>
+            		<ColumnDefinition Width="40"/>
+            	</Grid.ColumnDefinitions>
                 <Grid.Background>
                     <SolidColorBrush Color="#FFBDCFE0" Opacity="0.2"/>
                 </Grid.Background>
-                <Button Content="Requests for &#xA;contact" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" Width="260" Height="62" FontSize="18"/>
-                <Button Content="Cars" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Width="260" Height="62" FontSize="18"/>
-                <Button Content="Orders" HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Width="260" Height="62" FontSize="18"/>
-                <Button Content="Customers" HorizontalAlignment="Left" Margin="10,510,0,0" VerticalAlignment="Top" Width="260" Height="62" FontSize="18"/>
-                <Button Content="Employees" HorizontalAlignment="Left" Margin="10,668,0,0" VerticalAlignment="Top" Width="260" Height="62" FontSize="18"/>
-                <Border BorderBrush="Black" BorderThickness="1"/>
+                <Button Content="Requests for &#xA;contact" HorizontalAlignment="Left" Margin="10,35.5,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
+                <Button Content="Cars" HorizontalAlignment="Left" Margin="10,180.5,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
+                <Button Content="Orders" HorizontalAlignment="Left" Margin="10,325.5,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
+                <Button Content="Customers" HorizontalAlignment="Left" Margin="10,470.5,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
+                <Button Content="Employees" HorizontalAlignment="Left" Margin="10,615.5,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
+                <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3"/>
             </Grid>
             <Grid Grid.Column="1" Margin="10">
                 <Grid.Background>
