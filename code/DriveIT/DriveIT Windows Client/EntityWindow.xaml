@@ -1,0 +1,28 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+	x:Class="DriveIT_Windows_Client.EntityWindow"
+	x:Name="Window"
+	Title="EntityWindow"
+	Width="640" Height="480">
+	<Window.Background>
+		<RadialGradientBrush RadiusX="1" RadiusY="1">
+			<GradientStop Color="Black" Offset="1"/>
+			<GradientStop Color="White"/>
+		</RadialGradientBrush>
+	</Window.Background>
+	<Grid Margin="0,0,-0.667,0">
+		<Grid Height="80" VerticalAlignment="Top">
+			<Grid.Background>
+				<SolidColorBrush Color="#FF2E4585" Opacity="0.5"/>
+			</Grid.Background>
+			<Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+			<Button Content="Button" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+			<Button Content="Button" HorizontalAlignment="Left" Margin="210.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+			<Button Content="Button" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+			<Button Content="Button" HorizontalAlignment="Left" Margin="420.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+			<Border BorderBrush="Black" BorderThickness="1" Height="80" VerticalAlignment="Top"/>
+		</Grid>
+	</Grid>
+</Window>
