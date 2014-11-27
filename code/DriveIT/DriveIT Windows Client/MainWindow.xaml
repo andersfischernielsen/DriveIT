@@ -27,7 +27,7 @@
             <Grid.Background>
                 <SolidColorBrush Color="#FF2E4585" Opacity="0.5"/>
             </Grid.Background>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Button Content="Open entity window" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Click="Button_Click"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="210,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>

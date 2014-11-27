@@ -31,5 +31,11 @@ namespace DriveIT_Windows_Client
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var entityWindow = new EntityWindow();
+            entityWindow.Show(); // works
+        }
     }
 }
