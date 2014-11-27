@@ -4,5 +4,11 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
+    	<ControlTemplate x:Key="UserControlRequestForCar" TargetType="{x:Type UserControl}">
+    		<Grid>
+    			<Label Content="Request For Car" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="55.96" Width="268.093" FontSize="32"/>
+    		</Grid>
+    	</ControlTemplate>
+         
     </Application.Resources>
 </Application>
