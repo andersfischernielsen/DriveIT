@@ -36,6 +36,7 @@
                 <Button Content="Customers" HorizontalAlignment="Left" Margin="10,510,0,0" VerticalAlignment="Top" Width="260" Height="62" FontSize="18"/>
                 <Button Content="Employees" HorizontalAlignment="Left" Margin="10,668,0,0" VerticalAlignment="Top" Width="260" Height="62" FontSize="18"/>
             </Grid>
+            <Grid Grid.Column="1" Margin="10" Background="#FF574D99"/>
             <Grid Grid.Column="2" Margin="0,10" Background="#FFCB2F2F" HorizontalAlignment="Right" Width="290">
                 <Image HorizontalAlignment="Left" Height="270" Margin="10,10,0,0" VerticalAlignment="Top" Width="279">
                     <Image.OpacityMask>
@@ -46,7 +47,6 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-            <Grid Grid.Column="1" Margin="10" Background="#FF574D99"/>
         </Grid>
     </Grid>
 </Window>
