@@ -1,49 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.Remoting.Contexts;
+using System.Security;
+using System.Threading.Tasks;
 using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
 {
     public class EntityAdapter : IPersistentStorage
     {
-        private readonly DriveITContext _context;
 
-        public EntityAdapter(DriveITContext context)
+        public async Task<Car> GetCarWithId(int id)
         {
-            _context = context;
-        }
-
-        public Car GetCarWithId(int id)
-        {
-            using (_context)
+            using (var context = new EntityContext())
             {
-                return _context.Cars.Find(id);
+                return await context.Cars.FindAsync(id);
             }
         }
 
         public IEnumerable<Car> GetAllCars()
         {
-            using (_context)
+            using (var context = new EntityContext())
             {
-                return _context.Cars;
+                return context.Cars;
             }
         }
 
         public async void CreateCar(Car carToCreate)
         {
-            using (_context)
+            using (var context = new EntityContext())
             {
-                _context.Cars.Add(carToCreate);
-                await _context.SaveChangesAsync();
+                context.Cars.Add(carToCreate);
+                await context.SaveChangesAsync();
                 //TODO: Implement checking to see if the request happened succesfully.
             }
         }
 
         public async void DeleteCar(Car carToDelete)
         {
-            using (_context)
+            using (var context = new EntityContext())
             {
-                _context.Cars.Remove(carToDelete);
-                await _context.SaveChangesAsync();
+                context.Cars.Remove(carToDelete);
+                await context.SaveChangesAsync();
                 //TODO: Implement checking to see if the request happened succesfully.
             }
         }
