@@ -86,7 +86,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Models\DtoExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -103,12 +104,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DriveIT.Entities\DriveIT.Entities.csproj">
-      <Project>{ab46da72-12f4-417e-b7d3-2251fa2a94d8}</Project>
+      <Project>{16c04ba6-6fe0-4986-b33a-db39a723e02e}</Project>
       <Name>DriveIT.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DriveIT.EntityFramework\DriveIT.EntityFramework.csproj">
+      <Project>{ab46da72-12f4-417e-b7d3-2251fa2a94d8}</Project>
+      <Name>DriveIT.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
       <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
