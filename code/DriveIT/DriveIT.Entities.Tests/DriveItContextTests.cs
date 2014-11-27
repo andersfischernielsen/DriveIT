@@ -1,26 +1,36 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data.Entity;
+using DriveIT.EntityFramework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace DriveIT.Entities.Tests
 {
     [TestClass]
     public class DriveItContextTests
     {
-        private IPersistentStorage _toTest;
+        private EntityAdapter _toTest;
+
         [TestInitialize]
-        private void SetUp()
+        public void SetUp()
         {
-            _toTest = new EntityAdapter();
+            var mockSet = new Mock<DbSet<Car>>();
+
+            var mockContext = new Mock<DriveITContext>();
+            mockContext.Setup(m => m.Cars).Returns(mockSet.Object);
+
+            _toTest = new EntityAdapter(mockContext.Object);
         }
 
         [TestMethod]
-        public void GetAllCarsTest()
+        public void AddCarTest()
         {
-            
+            _toTest.CreateCar(new Car {Make = "Ford"});
         }
-            
-        public void GetCarsWithIdTest()
-        {
 
+        [TestMethod]
+        public void GetCar_Gets_Correct_Car()
+        {
+            Assert.AreEqual("Ford", _toTest.GetCarWithId(1).Make);
         }
     }
 }
