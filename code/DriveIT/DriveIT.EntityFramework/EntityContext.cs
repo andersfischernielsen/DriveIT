@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using DriveIT.Entities;
 
-namespace DriveIT.Entities
+namespace DriveIT.EntityFramework
 {
 // ReSharper disable once InconsistentNaming
-    class DriveITContext : DbContext
+    public class EntityContext : DbContext
     {
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
