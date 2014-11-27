@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DriveITContext.cs" />
+    <Compile Include="EntityContext.cs" />
     <Compile Include="EntityAdapter.cs" />
     <Compile Include="IPersistentStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
