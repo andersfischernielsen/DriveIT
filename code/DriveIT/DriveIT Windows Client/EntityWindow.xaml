@@ -26,8 +26,10 @@
 		</Grid>
 		<Grid Margin="10,85,10,10">
 			<Label Content="Car" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="51.96" Width="98.71" FontSize="32" FontFamily="Segoe UI Light"/>
-			<Label Content="Model:" HorizontalAlignment="Left" Margin="10,66.96,0,0" VerticalAlignment="Top" Width="61.657" FontSize="16"/>
-			<TextBox HorizontalAlignment="Left" Height="31.28" Margin="76.657,66.96,0,0" TextWrapping="Wrap" Text="Audi A8" VerticalAlignment="Top" Width="389" FontSize="16"/>
+			<Label Content="Model:" HorizontalAlignment="Left" Margin="10,66.96,0,0" VerticalAlignment="Top" Width="88.657" FontSize="16"/>
+			<TextBox HorizontalAlignment="Left" Height="31.28" Margin="103.657,66.96,0,0" TextWrapping="Wrap" Text="Audi A8" VerticalAlignment="Top" Width="389" FontSize="16"/>
+			<Label Content="Price:" HorizontalAlignment="Left" Margin="10,103.24,0,0" VerticalAlignment="Top" Width="88.657" FontSize="16" Height="33.28"/>
+			<TextBox HorizontalAlignment="Left" Height="31.28" Margin="103.657,105.24,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="389" FontSize="16"/>
 		</Grid>
 	</Grid>
 </Window>
