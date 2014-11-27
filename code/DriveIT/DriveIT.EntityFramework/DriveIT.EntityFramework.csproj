@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DriveITContext.cs" />
     <Compile Include="EntityContext.cs" />
     <Compile Include="EntityAdapter.cs" />
     <Compile Include="IPersistentStorage.cs" />
