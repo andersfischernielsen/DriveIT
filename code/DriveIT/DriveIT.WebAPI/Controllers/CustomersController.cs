@@ -8,7 +8,7 @@ namespace DriveIT.WebAPI.Controllers
 {
     public class CustomersController : ApiController
     {
-        private IPersistentStorage _repo = new EntityAdapter(new EntityContext());
+        private readonly IPersistentStorage _repo = new EntityAdapter();
 
         // GET: api/Customer
         public IHttpActionResult Get()

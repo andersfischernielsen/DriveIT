@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -11,7 +12,7 @@ namespace DriveIT.WebAPI.Controllers
 {
     public class CarsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityAdapter(new EntityContext());
+        private readonly IPersistentStorage _repo = new EntityAdapter();
 
         // GET: api/Car
         public IHttpActionResult Get()
@@ -36,9 +37,9 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // GET: api/Car/5
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
-            var car = _repo.GetCarWithId(id);
+            var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
                 return NotFound();
@@ -168,9 +169,9 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Car/5
-        public IHttpActionResult Put(int id, [FromBody]CarDetailDto value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CarDetailDto value)
         {
-            var car = _repo.GetCarWithId(id);
+            var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
                 return NotFound();
@@ -182,9 +183,9 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Car/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            _repo.DeleteCar(_repo.GetCarWithId(id));
+            _repo.DeleteCar(await _repo.GetCarWithId(id));
             return Ok();
         }
     }

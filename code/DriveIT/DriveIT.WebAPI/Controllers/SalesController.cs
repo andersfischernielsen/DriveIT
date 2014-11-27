@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
+using DriveIT.WebAPI.Models;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class SalesController : ApiController
     {
-        private IPersistentStorage _repo = new EntityAdapter(new EntityContext());
+        private readonly IPersistentStorage _repo = new EntityAdapter();
 
         // GET: api/Sales
         public IHttpActionResult Get()
@@ -44,12 +42,14 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Sales
-        public IHttpActionResult Post([FromBody]SaleDto value)
+        public async Task<IHttpActionResult> Post([FromBody]SaleDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            _repo.CreateSale(await value.ToSale(_repo));
+            return Ok();
         }
 
         // PUT: api/Sales/5
