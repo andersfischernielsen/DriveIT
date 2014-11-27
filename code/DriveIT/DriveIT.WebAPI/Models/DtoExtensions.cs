@@ -1,4 +1,5 @@
-﻿using DriveIT.Entities;
+﻿using System;
+using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 
@@ -68,6 +69,12 @@ namespace DriveIT.WebAPI.Models
                 Customer = repo.GetCustomerWithId(dto.CustomerId),
                 Employee = repo.GetEmployeeWithId(dto.EmployeeId)
             };
+        }
+
+        public static Comment ToComment(this CommentDto dto)
+        {
+            //Todo:
+            throw new Exception();
         }
     }
 }
