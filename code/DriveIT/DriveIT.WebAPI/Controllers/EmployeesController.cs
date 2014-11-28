@@ -10,63 +10,66 @@ using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
-    public class SalesController : ApiController
+    public class EmployeesController : ApiController
     {
-
-        // GET: api/Sales
+        // GET: api/Employees
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
-                from sale in await _repo.GetAllSales()
-                select sale.ToDto());
+                from employee in await _repo.GetAllEmployees()
+                select employee.ToDto());
         }
 
-        // GET: api/Sales/5
+        // GET: api/Employees/5
         public async Task<IHttpActionResult> Get(int id)
         {
-            var sale = await _repo.GetSaleWithId(id);
-            if (sale == null)
+            var employee = await _repo.GetEmployeeWithId(id);
+            if (employee == null)
             {
                 return NotFound();
             }
-            return Ok(sale.ToDto());
+            return Ok(employee.ToDto());
         }
 
-        // POST: api/Sales
-        public async Task<IHttpActionResult> Post([FromBody]SaleDto value)
+        // POST: api/Employees
+        public async Task<IHttpActionResult> Post([FromBody]EmployeeDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var newSaleId = await _repo.CreateSale(await value.ToEntity());
+            var newEmployeeId = await _repo.CreateEmployee(value.ToEntity());
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
-            var uri = Url.Link("DefaultApi", new { id = newSaleId });
+            var uri = Url.Link("DefaultApi", new { id = newEmployeeId });
             response.Headers.Location = new Uri(uri);
             return ResponseMessage(response);
         }
 
-        // PUT: api/Sales/5
-        public async Task<IHttpActionResult> Put(int id, [FromBody]SaleDto value)
+        // PUT: api/Employees/5
+        public async Task<IHttpActionResult> Put(int id, [FromBody]EmployeeDto value)
         {
+            if (await _repo.GetEmployeeWithId(id) == null)
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateSale(id, await value.ToEntity());
+            await _repo.UpdateEmployee(id, value.ToEntity());
             return Ok();
         }
 
-        // DELETE: api/Sales/5
+        // DELETE: api/Employees/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var sale = await _repo.GetSaleWithId(id);
-            if (sale == null)
+            var employee = await _repo.GetEmployeeWithId(id);
+            if (employee == null)
             {
                 return NotFound();
             }
-            await _repo.DeleteSale(id);
+            await _repo.DeleteEmployee(id);
             return Ok();
         }
     }
