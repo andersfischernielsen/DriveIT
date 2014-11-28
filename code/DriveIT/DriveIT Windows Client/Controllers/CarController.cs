@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT_Windows_Client.ViewModels;
@@ -16,39 +17,28 @@ namespace DriveIT_Windows_Client.Controllers
         static string apiUrl = @"http://localhost:5552";
         public CarController()
         {
-            var t = ReadCarList();
-            //CreateCar(null);
-            //ReadCarList();
+            var t = ReadCarList().Result;
+            Console.WriteLine(t);
+            //CreateCar(t[1]);
+            //t = ReadCarList().Result;
+            //Console.WriteLine(t.Count);
         }   
 
-        public void CreateCar(CarDetailDto car)
+        public async void CreateCar(CarDetailDto car)
         {
-            DriveITWebAPI.Create("cars", car);
+            await DriveITWebAPI.Create("cars", car);
         }
 
-        public CarDetailDto ReadCar(int id)
+        public async Task<CarDetailDto> ReadCar(int id)
         {
-            //var downloadedString = DriveITWebAPI.Read("cars/" + id);
-            //var car = JsonConvert.DeserializeObject<CarDto>(downloadedString);
-
-            //var detailCar =new CarDetailDto()
-            //{
-            //    Color = car.Color,
-            //    Created = car.Created,
-            //    DistanceDriven = car.DistanceDriven,
-            //    Fuel = car.Fuel,
-            //    Make = car.Make,
-            //    Model = car.Model,
-            //};
-            //return detailCar;
-            return null;
+            var cars = await DriveITWebAPI.Read<CarDetailDto>("cars/" + id);
+            return cars.FirstOrDefault();
         }
 
         public async Task<IList<CarDetailDto>> ReadCarList()
         {
-            var cars = await DriveITWebAPI.Read<CarDetailDto>("cars");
-            return cars;
-
+            var cars = DriveITWebAPI.Read<CarDetailDto>("cars");
+            return await cars;
         }
         public void UpdateCar(CarViewModel car)
         {
