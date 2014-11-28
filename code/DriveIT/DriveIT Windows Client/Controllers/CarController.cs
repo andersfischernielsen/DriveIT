@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using DriveIT.Models;
 using DriveIT_Windows_Client.ViewModels;
 using Newtonsoft.Json;
@@ -19,7 +20,26 @@ namespace DriveIT_Windows_Client.Controllers
         {
             var t = ReadCarList().Result;
             Console.WriteLine(t.Count);
-            CreateCar(t[1]);
+            try
+            {
+                CreateCar(t[0]);
+            }
+            catch (Exception)
+            {
+                CreateCar(new CarDto()
+                {
+                    Color = "Red",
+                    Created = DateTime.Now,
+                    DistanceDriven = 10000,
+                    Model = "A8",
+                    Make = "Audi",
+                    Price = 200000
+                });
+            }
+            Thread.Sleep(5000);
+            t = ReadCarList().Result;
+            Console.WriteLine(t.Count);
+            DeleteCar(t[0].Id.Value);
             Thread.Sleep(5000);
             t = ReadCarList().Result;
             Console.WriteLine(t.Count);
@@ -56,9 +76,9 @@ namespace DriveIT_Windows_Client.Controllers
             throw new NotImplementedException();
         }
 
-        public void DeleteCar(int id)
+        public async void DeleteCar(int id)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Delete<CarDto>("cars", id);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace DriveIT_Windows_Client.Controllers
 {
     public class DriveITWebAPI
     {
-        static string apiUrl = @"http://localhost:5552";
+        static string apiUrl = @"http://localhost:5552/api/";
 
         public async static Task Create<T>(string uri, T objectToCreate)
         {
@@ -24,12 +24,12 @@ namespace DriveIT_Windows_Client.Controllers
                 {
                     httpClient.BaseAddress = new Uri(apiUrl);
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage response = await httpClient.PostAsJsonAsync("/api/" + uri, objectToCreate);
+                    HttpResponseMessage response = await httpClient.PostAsJsonAsync(uri, objectToCreate);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception)
                 {
-                    throw new Exception();
+                    throw new NotImplementedException();
                 }
 
             }
@@ -44,51 +44,51 @@ namespace DriveIT_Windows_Client.Controllers
                     {
                         httpClient.BaseAddress = new Uri(apiUrl);
                         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        HttpResponseMessage response = httpClient.GetAsync("/api/" + uri).Result;
+                        HttpResponseMessage response = httpClient.GetAsync(uri).Result;
                         response.EnsureSuccessStatusCode();
                         objects = await response.Content.ReadAsAsync<T[]>();
                         objects.ToList().ForEach(i => Console.WriteLine(i));
                     }
                     catch (Exception)
                     {
-                        //
+                        throw new NotImplementedException();
                     } 
                     
                 }
             return objects.ToList();
         }
-        public async static Task Update<T>(string uri, T objectToUpdate)
+        public async static Task Update<T>(string uri, T objectToUpdate, int id)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 try
                 {
                     httpClient.BaseAddress = new Uri(apiUrl);
-                    HttpResponseMessage response = await httpClient.PutAsJsonAsync("/api/" + uri, objectToUpdate);
+                    HttpResponseMessage response = await httpClient.PutAsJsonAsync(uri + "/" + id, objectToUpdate);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception)
                 {
 
-                    throw new Exception();
+                    throw new NotImplementedException();
                 }
 
             }
         }
-        public async static Task Delete<T>(string uri)
+        public async static Task Delete<T>(string uri, int id)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 try
                 {
                     httpClient.BaseAddress = new Uri(apiUrl);
-                    HttpResponseMessage response = await httpClient.DeleteAsync("/api/" + uri);
+                    HttpResponseMessage response = await httpClient.DeleteAsync(uri + "/" + id);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception)
                 {
 
-                    throw new Exception();
+                    throw new NotImplementedException();
                 }
 
             }
