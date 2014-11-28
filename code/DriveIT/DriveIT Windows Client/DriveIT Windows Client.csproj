@@ -60,6 +60,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\CarListViewModel.cs" />
+    <Compile Include="ViewModels\CarViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeListViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\RequestForContactListViewModel.cs" />
+    <Compile Include="ViewModels\RequestForContactViewModel.cs" />
+    <Compile Include="ViewModels\IViewModelBase.cs" />
     <Page Include="EntityWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
