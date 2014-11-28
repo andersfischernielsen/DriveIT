@@ -60,11 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-<<<<<<< HEAD
     <Compile Include="Controllers\OrderController.cs" />
-=======
     <Compile Include="Controllers\CustomerController.cs" />
->>>>>>> f48f97ffe48c5258c5efb9f95b32f6e8bc322331
     <Compile Include="ViewModels\CarListViewModel.cs" />
     <Compile Include="ViewModels\CarViewModel.cs" />
     <Compile Include="ViewModels\CustomerListViewModel.cs" />
