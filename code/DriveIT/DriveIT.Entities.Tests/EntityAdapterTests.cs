@@ -14,28 +14,10 @@ namespace DriveIT.Entities.Tests
         public static void Main(string[] args)
         {
             var t = new EntityStorage();
-            
-            var id = t.CreateCar(new Car
-            {
-                Color = "Red",
-                Created = DateTime.Now,
-                DistanceDriven = 20,
-                Drive = "FWD",
-                Fuel = "Gas",
-                Make = "Ford",
-                Mileage = 20.5f, 
-                Model = "TT",
-                Price = 2000, 
-                Sold = false, 
-                Transmission = "Manual", 
-                Year = 2001
-            });
-
-            var car = t.GetCarWithId(id.Result);
 
             var newCar = new Car
             {
-                Color = "Blue",
+                Color = "Green",
                 Created = DateTime.Now,
                 DistanceDriven = 20,
                 Drive = "FWD",
@@ -49,8 +31,8 @@ namespace DriveIT.Entities.Tests
                 Year = 2001
             };
             
-            t.UpdateCar(id.Result, newCar);
-            Console.WriteLine();
+            t.UpdateCar(13, newCar);
+            
         }
 
         private EntityStorage _toTest;
