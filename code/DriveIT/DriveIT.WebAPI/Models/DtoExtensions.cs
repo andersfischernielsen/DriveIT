@@ -33,7 +33,7 @@ namespace DriveIT.WebAPI.Models
                 Created = dto.Created,
                 DistanceDriven = dto.DistanceDriven,
                 Fuel = dto.Fuel.ToString(),
-                Id = dto.Id,
+                Id = dto.Id.HasValue ? dto.Id.Value : 0,
                 Make = dto.Make,
                 Model = dto.Model,
                 Price = dto.Price,
@@ -52,7 +52,7 @@ namespace DriveIT.WebAPI.Models
                 Email = dto.Email,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                Id = dto.Id,
+                Id = dto.Id.HasValue ? dto.Id.Value : 0,
                 //Todo fix.
                 PhoneNumber = long.Parse(dto.Phone),
                 Username = dto.Username
@@ -63,20 +63,26 @@ namespace DriveIT.WebAPI.Models
         {
             return new Sale
             {
-                //TODO: Inform Fischer that ID isn't necessary for a Sale.
+                Id = dto.Id.HasValue ? dto.Id.Value : 0,
                 DateOfSale = dto.Sold,
                 Price = dto.Price,
                 Car = repo.GetCarWithId(dto.CarId),
                 Customer = repo.GetCustomerWithId(dto.CustomerId),
-                //Todo fix:
                 Employee = repo.GetEmployeeWithId(dto.EmployeeId)
             };
         }
 
-        public static Comment ToComment(this CommentDto dto)
+        public static Comment ToComment(this CommentDto dto, IPersistentStorage repo)
         {
-            //Todo:
-            throw new Exception();
+            return new Comment
+            {
+                Id = dto.Id.HasValue ? dto.Id.Value : 0,
+                Car = repo.GetCarWithId(dto.CarId),
+                Customer = repo.GetCustomerWithId(dto.CustomerId),
+                Description = dto.Description,
+                Title = dto.Title,
+                DateCreated = dto.Date
+            };
         }
     }
 }
