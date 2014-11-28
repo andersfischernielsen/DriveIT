@@ -6,9 +6,9 @@ using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
 {
-    public class EntityStorage : IPersistentStorage
+    public static class EntityStorage
     {
-        public async Task<Car> GetCarWithId(int idToGet)
+        public static async Task<Car> GetCarWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
@@ -16,7 +16,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Car>> GetAllCars()
+        public static async Task<IEnumerable<Car>> GetAllCars()
         {
             using (var context = new DriveITContext())
             {
@@ -24,7 +24,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateCar(Car carToCreate)
+        public static async Task<int> CreateCar(Car carToCreate)
         {
             using (var context = new DriveITContext())
             {
@@ -34,7 +34,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith)
+        public static async Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
@@ -45,7 +45,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> DeleteCar(int id)
+        public static async Task<int> DeleteCar(int id)
         {
             using (var context = new DriveITContext())
             {
@@ -70,7 +70,7 @@ namespace DriveIT.EntityFramework
             toChange.Year = toSetFrom.Year;
         }
 
-        public async Task<Employee> GetEmployeeWithId(int idToGet)
+        public static async Task<Employee> GetEmployeeWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
@@ -78,7 +78,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        public static async Task<IEnumerable<Employee>> GetAllEmployees()
         {
             using (var context = new DriveITContext())
             {
@@ -86,7 +86,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateEmployee(Employee employeeToCreate)
+        public static async Task<int> CreateEmployee(Employee employeeToCreate)
         {
             using (var context = new DriveITContext())
             {
@@ -96,7 +96,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith)
+        public static async Task<int> UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
@@ -107,7 +107,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> DeleteEmployee(int idToDelete)
+        public static async Task<int> DeleteEmployee(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
@@ -126,7 +126,7 @@ namespace DriveIT.EntityFramework
             toChange.Username = toSetFrom.Username;
         }
 
-        public async Task<Customer> GetCustomerWithId(int idToGet)
+        public static async Task<Customer> GetCustomerWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
@@ -134,7 +134,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Customer>> GetAllCustomers()
+        public static async Task<IEnumerable<Customer>> GetAllCustomers()
         {
             using (var context = new DriveITContext())
             {
@@ -142,7 +142,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateCustomer(Customer customerToCreate)
+        public static async Task<int> CreateCustomer(Customer customerToCreate)
         {
             using (var context = new DriveITContext())
             {
@@ -152,7 +152,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateCustomer(int idToUpdate, Customer customerToReplaceWith)
+        public static async Task<int> UpdateCustomer(int idToUpdate, Customer customerToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
@@ -163,7 +163,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> DeleteCustomer(int idToDelete)
+        public static async Task<int> DeleteCustomer(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
@@ -182,7 +182,7 @@ namespace DriveIT.EntityFramework
             toChange.Username = toSetFrom.Username;
         }
 
-        public async Task<ContactRequest> GetContactRequestWithId(int idToGet)
+        public static async Task<ContactRequest> GetContactRequestWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
@@ -190,7 +190,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<ContactRequest>> GetAllContactRequests()
+        public static async Task<IEnumerable<ContactRequest>> GetAllContactRequests()
         {
             using (var context = new DriveITContext())
             {
@@ -198,7 +198,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateContactRequest(ContactRequest contactRequestToCreate)
+        public static async Task<int> CreateContactRequest(ContactRequest contactRequestToCreate)
         {
             using (var context = new DriveITContext())
             {
@@ -208,7 +208,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith)
+        public static async Task<int> UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
@@ -219,7 +219,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> DeleteContactRequest(int idToDelete)
+        public static async Task<int> DeleteContactRequest(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
@@ -234,7 +234,7 @@ namespace DriveIT.EntityFramework
             toChange.Customer = toSetFrom.Customer;
         }
 
-        public async Task<Comment> GetCommentWithId(int idToGet)
+        public static async Task<Comment> GetCommentWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
@@ -242,7 +242,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentsForCar(int carId)
+        public static async Task<IEnumerable<Comment>> GetAllCommentsForCar(int carId)
         {
             using (var context = new DriveITContext())
             {
@@ -250,7 +250,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateComment(Comment commentToCreate)
+        public static async Task<int> CreateComment(Comment commentToCreate)
         {
             using (var context = new DriveITContext())
             {
@@ -260,7 +260,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith)
+        private static async Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
@@ -271,7 +271,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> DeleteComment(int idToDelete)
+        public static async Task<int> DeleteComment(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
@@ -289,7 +289,7 @@ namespace DriveIT.EntityFramework
             toChange.Customer = toSetFrom.Customer;
         }
 
-        public async Task<Sale> GetSaleWithId(int idToGet)
+        public static async Task<Sale> GetSaleWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
@@ -297,7 +297,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Sale>> GetAllSales()
+        public static async Task<IEnumerable<Sale>> GetAllSales()
         {
             using (var context = new DriveITContext())
             {
@@ -305,7 +305,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateSale(Sale saleToCreate)
+        public static async Task<int> CreateSale(Sale saleToCreate)
         {
             using (var context = new DriveITContext())
             {
@@ -315,7 +315,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateSale(int idToUpdate, Sale saleToReplaceWith)
+        public static async Task<int> UpdateSale(int idToUpdate, Sale saleToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
@@ -326,7 +326,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> DeleteSale(int idToDelete)
+        public static async Task<int> DeleteSale(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
