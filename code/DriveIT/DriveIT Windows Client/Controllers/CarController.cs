@@ -22,22 +22,22 @@ namespace DriveIT_Windows_Client.Controllers
             //CreateCar(t[1]);
             //t = ReadCarList().Result;
             //Console.WriteLine(t.Count);
-        }   
+        }
 
-        public async void CreateCar(CarDetailDto car)
+        public async void CreateCar(CarDto car)
         {
             await DriveITWebAPI.Create("cars", car);
         }
 
-        public async Task<CarDetailDto> ReadCar(int id)
+        public async Task<CarDto> ReadCar(int id)
         {
-            var cars = await DriveITWebAPI.Read<CarDetailDto>("cars/" + id);
+            var cars = await DriveITWebAPI.Read<CarDto>("cars/" + id);
             return cars.FirstOrDefault();
         }
 
-        public async Task<IList<CarDetailDto>> ReadCarList()
+        public async Task<IList<CarDto>> ReadCarList()
         {
-            var cars = DriveITWebAPI.Read<CarDetailDto>("cars");
+            var cars = DriveITWebAPI.Read<CarDto>("cars");
             return await cars;
         }
         public void UpdateCar(CarViewModel car)

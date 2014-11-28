@@ -47,7 +47,6 @@ namespace DriveIT_Windows_Client.Controllers
                     response.EnsureSuccessStatusCode();
                     objects = await response.Content.ReadAsAsync<T[]>();
                     objects.ToList().ForEach(i => Console.WriteLine(i));
-                    //return objects.ToList();
                     httpClient.Dispose();
                 }
             return objects.ToList();
