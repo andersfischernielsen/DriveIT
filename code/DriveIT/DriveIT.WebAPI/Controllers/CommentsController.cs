@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
+using DriveIT.WebAPI.Models;
 
 namespace DriveIT.WebAPI.Controllers
 {
@@ -33,16 +33,21 @@ namespace DriveIT.WebAPI.Controllers
         // POST: api/Comments
         public IHttpActionResult Post([FromBody]CommentDto value)
         {
+            _repo.CreateComment(value.ToComment());
+            return Ok();
         }
 
         // PUT: api/Comments/5
         public IHttpActionResult Put(int id, [FromBody]CommentDto value)
         {
+            return BadRequest("Not implemented");
         }
 
         // DELETE: api/Comments/5
         public IHttpActionResult Delete(int id)
         {
+            _repo.DeleteComment(_repo.GetCommentWithId(id));
+            return Ok();
         }
     }
 }
