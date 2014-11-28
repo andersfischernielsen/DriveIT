@@ -1,3 +1,5 @@
+using DriveIT.Entities;
+
 namespace DriveIT.EntityFramework.Migrations
 {
     using System;
@@ -15,18 +17,36 @@ namespace DriveIT.EntityFramework.Migrations
 
         protected override void Seed(DriveITContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Cars.AddOrUpdate(
+                c => c.Id,
+                new Car
+                {
+                    Id = 1,
+                    Price = 100000,
+                    Sold = false,
+                    Drive = "FWD",
+                    Mileage = 15.6f,
+                    Fuel = "Gasoline",
+                    Model = "TT",
+                    Make = "Ford",
+                    Created = DateTime.Now,
+                    Color = "Rust",
+                    DistanceDriven = 340000,
+                    Transmission = "Manual",
+                    Year = 1982
+                });
+            context.Customers.AddOrUpdate(
+                c => c.Id,
+                new Customer
+                {
+                    Id = 1,
+                    LastName = "Jepsen",
+                    FirstName = "Mikael",
+                    Username = "mlin",
+                    Email = "mlin@itu.dk",
+                    Password = "Negative",
+                    PhoneNumber = "42752687"
+                });
         }
     }
 }
