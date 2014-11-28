@@ -15,150 +15,69 @@ namespace DriveIT.WebAPI.Controllers
         private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/Cars
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
-            var cars = from c in _repo.GetAllCars()
-                       select new CarDto
-                       {
-                           Color = c.Color,
-                           Created = c.Created,
-                           DistanceDriven = c.DistanceDriven,
-                           Id = c.Id,
-                           Make = c.Make,
-                           Model = c.Model,
-                           Price = c.Price,
-                           Sold = c.Sold,
-                           Transmission = c.Transmission,
-                           Year = c.Year,
-                           Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                       };
+            var cars = from car in await _repo.GetAllCars()
+                       select car.ToDto();
 
             return Ok(cars.ToList());
         }
 
         // GET: api/Cars/5
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             var car = _repo.GetCarWithId(id);
             if (car == null)
             {
                 return NotFound();
             }
-            return Ok(new CarDetailDto
-            {
-                Color = car.Color,
-                Created = car.Created,
-                DistanceDriven = car.DistanceDriven,
-                Id = car.Id,
-                Make = car.Make,
-                Model = car.Model,
-                Price = car.Price,
-                Sold = car.Sold,
-                Transmission = car.Transmission,
-                Year = car.Year,
-                Fuel = (FuelType)Enum.Parse(typeof(FuelType), car.Fuel),
-                Drive = car.Drive,
-                Mileage = car.Mileage
-            });
+            return Ok(car.ToDto());
         }
 
         // GET: api/Cars?fuelType=Diesel
-        public IHttpActionResult GetCarsByFuelType(string fuelType)
+        public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
         {
-            var cars = _repo.GetAllCars()
-                .Where(c => string.Equals(fuelType, c.Fuel, StringComparison.OrdinalIgnoreCase))
-                .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                });
+            var cars = from car in await _repo.GetAllCars()
+                       where string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase)
+                       select car.ToDto();
             return Ok(cars);
         }
 
         // Get: api/Cars?make=Opel
-        public IHttpActionResult GetCarsByMake(string make)
+        public async Task<IHttpActionResult> GetCarsByMake(string make)
         {
-            return Ok(_repo.GetAllCars()
-                .Where(c => string.Equals(make, c.Make, StringComparison.OrdinalIgnoreCase))
-                .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                }));
+            return Ok(from car in await _repo.GetAllCars()
+                      where string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
+                      select car.ToDto());
         }
 
         // Get: api/Cars?make=Opel
-        public IHttpActionResult GetCarsByModel(string model)
+        public async Task<IHttpActionResult> GetCarsByModel(string model)
         {
-            return Ok(_repo.GetAllCars()
-                .Where(c => string.Equals(model, c.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                }));
+            return Ok(from car in await _repo.GetAllCars()
+                      where string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase)
+                      select car.ToDto());
         }
 
         // Get: api/Cars?make=Opel&model=Zafira
-        public IHttpActionResult GetCarsByMakeAndModel(string make, string model)
+        public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
         {
             return
                 Ok(
-                    _repo.GetAllCars().Where(
-                        c =>
-                            string.Equals(make, c.Make, StringComparison.OrdinalIgnoreCase) &&
-                            string.Equals(model, c.Model, StringComparison.OrdinalIgnoreCase))
-                            .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                }));
+                    from car in await _repo.GetAllCars()
+                    where string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase) &&
+                          string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase)
+                    select car.ToDto());
         }
 
         // POST: api/Cars
-        public async Task<IHttpActionResult> Post([FromBody]CarDetailDto value)
+        public async Task<IHttpActionResult> Post([FromBody]CarDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            int newCarId = await _repo.CreateCar(value.ToCar());
+            var newCarId = await _repo.CreateCar(value.ToEntity());
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newCarId });
@@ -167,26 +86,26 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Cars/5
-        public IHttpActionResult Put(int id, [FromBody]CarDetailDto value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CarDto value)
         {
             var car = _repo.GetCarWithId(id);
             if (car == null)
             {
                 return BadRequest("id not found!");
             }
-            _repo.UpdateCar(id, value.ToCar());
+            await _repo.UpdateCar(id, value.ToEntity());
             return Ok();
         }
 
         // DELETE: api/Cars/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             var car = _repo.GetCarWithId(id);
             if (car == null)
             {
                 return BadRequest("Id not found");
             }
-            _repo.DeleteCar(id);
+            await _repo.DeleteCar(id);
             return Ok();
         }
     }

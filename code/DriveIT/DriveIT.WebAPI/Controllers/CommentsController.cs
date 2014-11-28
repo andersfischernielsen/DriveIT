@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -12,41 +16,48 @@ namespace DriveIT.WebAPI.Controllers
 
         // GET: api/Comments/5
         // Where 5 is CarId
-        public IHttpActionResult Get(int carId)
+        public async Task<IHttpActionResult> Get(int carId)
         {
-            // Todo: ask for id:
-            var comments = _repo.GetAllCommentsForCar(_repo.GetCarWithId(carId));
-            if (comments == null)
+            var comments = (from comment in await _repo.GetAllCommentsForCar(carId)
+                            select comment.ToDto()).ToList();
+            if (!comments.Any())
             {
                 return NotFound();
             }
-            return Ok(comments.Select(comment => new CommentDto
-            {
-                CarId = comment.Car.Id,
-                CustomerId = comment.Customer.Id,
-                Date = comment.DateCreated,
-                Description = comment.Description,
-                Title = comment.Title
-            }));
+            return Ok(comments);
         }
 
         // POST: api/Comments
-        public IHttpActionResult Post([FromBody]CommentDto value)
+        public async Task<IHttpActionResult> Post([FromBody]CommentDto value)
         {
-            _repo.CreateComment(value.ToComment(_repo));
-            return Ok();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var newCommentId = await _repo.CreateComment(value.ToEntity(_repo));
+            var response = Request.CreateResponse(HttpStatusCode.Created, value);
+
+            var uri = Url.Link("DefaultApi", new { id = newCommentId });
+            response.Headers.Location = new Uri(uri);
+            return ResponseMessage(response);
         }
 
         // PUT: api/Comments/5
-        public IHttpActionResult Put(int id, [FromBody]CommentDto value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CommentDto value)
         {
-            return BadRequest("Not implemented");
+            var comment = _repo.GetCommentWithId(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            await _repo.UpdateComment(id, value.ToEntity(_repo));
+            return Ok();
         }
 
         // DELETE: api/Comments/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            _repo.DeleteComment(id);
+            await _repo.DeleteComment(id);
             return Ok();
         }
     }

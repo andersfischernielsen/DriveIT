@@ -10,64 +10,63 @@ using DriveIT.WebAPI.Models;
 
 namespace DriveIT.WebAPI.Controllers
 {
-    public class SalesController : ApiController
+    public class ContactRequestsController : ApiController
     {
         private readonly IPersistentStorage _repo = new EntityStorage();
 
-        // GET: api/Sales
+        // GET: api/ContactRequests
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(
-                from sale in await _repo.GetAllSales()
-                select sale.ToDto());
+            return Ok(from contactRequest in await _repo.GetAllContactRequests()
+                      select contactRequest.ToDto());
         }
 
-        // GET: api/Sales/5
+        // GET: api/ContactRequests/5
         public async Task<IHttpActionResult> Get(int id)
         {
-            var sale = _repo.GetSaleWithId(id);
-            if (sale == null)
+            var contactRequest = _repo.GetContactRequestWithId(id);
+            if (contactRequest == null)
             {
                 return NotFound();
             }
-            return Ok(sale.ToDto());
+            return Ok(contactRequest.ToDto());
         }
 
-        // POST: api/Sales
-        public async Task<IHttpActionResult> Post([FromBody]SaleDto value)
+        // POST: api/ContactRequests
+        public async Task<IHttpActionResult> Post([FromBody]ContactRequestDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var newSaleId = await _repo.CreateSale(value.ToEntity(_repo));
+            var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity(_repo));
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
-            var uri = Url.Link("DefaultApi", new { id = newSaleId });
+            var uri = Url.Link("DefaultApi", new { id = newContactRequestId });
             response.Headers.Location = new Uri(uri);
             return ResponseMessage(response);
         }
 
-        // PUT: api/Sales/5
-        public async Task<IHttpActionResult> Put(int id, [FromBody]SaleDto value)
+        // PUT: api/ContactRequests/5
+        public async Task<IHttpActionResult> Put(int id, [FromBody]ContactRequestDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateSale(id, value.ToEntity(_repo));
+            await _repo.UpdateContactRequest(id, value.ToEntity(_repo));
             return Ok();
         }
 
-        // DELETE: api/Sales/5
+        // DELETE: api/ContactRequests/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var sale = _repo.GetSaleWithId(id);
-            if (sale == null)
+            var contactRequest = _repo.GetContactRequestWithId(id);
+            if (contactRequest == null)
             {
                 return NotFound();
             }
-            await _repo.DeleteSale(id);
+            await _repo.DeleteContactRequest(id);
             return Ok();
         }
     }
