@@ -46,7 +46,7 @@ namespace DriveIT.WebAPI.Controllers
         // DELETE: api/Comments/5
         public IHttpActionResult Delete(int id)
         {
-            _repo.DeleteComment(_repo.GetCommentWithId(id));
+            _repo.DeleteComment(id);
             return Ok();
         }
     }

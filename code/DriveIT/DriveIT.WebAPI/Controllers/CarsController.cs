@@ -175,16 +175,14 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return NotFound();
             }
-            //TODO: FIX
-            _repo.DeleteCar(car);
-            _repo.CreateCar(value.ToCar());
+            _repo.UpdateCar(id, value.ToCar());
             return Ok();
         }
 
         // DELETE: api/Car/5
         public IHttpActionResult Delete(int id)
         {
-            _repo.DeleteCar(_repo.GetCarWithId(id));
+            _repo.DeleteCar(id);
             return Ok();
         }
     }

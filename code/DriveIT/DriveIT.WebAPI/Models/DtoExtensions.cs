@@ -69,7 +69,7 @@ namespace DriveIT.WebAPI.Models
                 Car = repo.GetCarWithId(dto.CarId),
                 Customer = repo.GetCustomerWithId(dto.CustomerId),
                 //Todo fix:
-                //Employee = repo.GetEmployeeWithId(dto.EmployeeId)
+                Employee = repo.GetEmployeeWithId(dto.EmployeeId)
             };
         }
 
