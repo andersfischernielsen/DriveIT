@@ -7,33 +7,33 @@ using DriveIT_Windows_Client.ViewModels;
 
 namespace DriveIT_Windows_Client.Controllers
 {
-    public class RequestForContactController
+    public class OrderController
     {
-        public void CreateRequest()
+        public void CreateOrder()
         {
             throw new NotImplementedException();
         }
-        public IList<RequestForContactListViewModel> ReadRequestForContactList()
+        public IList<OrderListViewModel> ReadOrderList()
         {
             throw new NotImplementedException();
         }
-        public IList<RequestForContactViewModel> ReadRequestForContact(int requestForContactID)
+        public IList<OrderViewModel> ReadOrder(int orderID)
         {
             throw new NotImplementedException();
         }
-        public void UpdateRequestsForContact()
+        public void UpdateOrderList()
         {
             throw new NotImplementedException();
         }
-        public void UpdateRequestsForContact(int requestForContactID)
+        public void UpdateOrderList(int orderID)
         {
             throw new NotImplementedException();
         }
-        public void DeleteRequestForContact()
+        public void DeleteOrder()
         {
             throw new NotImplementedException();
         }
-        public void DeleteRequestForContact(int requestForContactID)
+        public void DeleteOrder(int orderID)
         {
             throw new NotImplementedException();
         }

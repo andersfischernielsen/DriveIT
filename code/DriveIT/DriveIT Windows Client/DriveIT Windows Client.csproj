@@ -60,10 +60,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="ViewModels\CarListViewModel.cs" />
     <Compile Include="ViewModels\CarViewModel.cs" />
     <Compile Include="ViewModels\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\OrderListViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\RequestForContactListViewModel.cs" />
     <Compile Include="ViewModels\RequestForContactViewModel.cs" />
     <Compile Include="ViewModels\IViewModelBase.cs" />
