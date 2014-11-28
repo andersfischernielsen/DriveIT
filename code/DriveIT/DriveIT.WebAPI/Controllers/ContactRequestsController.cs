@@ -15,13 +15,14 @@ namespace DriveIT.WebAPI.Controllers
         private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/ContactRequests
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
-            return Ok(_repo.GetAllContactRequests().Select(c => c.ToDto()));
+            return Ok(from contactRequest in await _repo.GetAllContactRequests()
+                      select contactRequest.ToDto());
         }
 
         // GET: api/ContactRequests/5
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             var contactRequest = _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
@@ -47,25 +48,25 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/ContactRequests/5
-        public IHttpActionResult Put(int id, [FromBody]ContactRequestDto value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]ContactRequestDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            _repo.UpdateContactRequest(id, value.ToEntity(_repo));
+            await _repo.UpdateContactRequest(id, value.ToEntity(_repo));
             return Ok();
         }
 
         // DELETE: api/ContactRequests/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             var contactRequest = _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
             {
                 return NotFound();
             }
-            _repo.DeleteContactRequest(id);
+            await _repo.DeleteContactRequest(id);
             return Ok();
         }
     }

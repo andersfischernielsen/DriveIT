@@ -16,14 +16,15 @@ namespace DriveIT.WebAPI.Controllers
 
         // GET: api/Comments/5
         // Where 5 is CarId
-        public IHttpActionResult Get(int carId)
+        public async Task<IHttpActionResult> Get(int carId)
         {
-            var comments = _repo.GetAllCommentsForCar(_repo.GetCarWithId(carId));
-            if (comments == null)
+            var comments = (from comment in await _repo.GetAllCommentsForCar(carId)
+                            select comment.ToDto()).ToList();
+            if (!comments.Any())
             {
                 return NotFound();
             }
-            return Ok(comments.Select(comment => comment.ToDto()));
+            return Ok(comments);
         }
 
         // POST: api/Comments
@@ -42,21 +43,21 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Comments/5
-        public IHttpActionResult Put(int id, [FromBody]CommentDto value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CommentDto value)
         {
             var comment = _repo.GetCommentWithId(id);
             if (comment == null)
             {
                 return NotFound();
             }
-            _repo.UpdateComment(id, value.ToEntity(_repo));
+            await _repo.UpdateComment(id, value.ToEntity(_repo));
             return Ok();
         }
 
         // DELETE: api/Comments/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            _repo.DeleteComment(id);
+            await _repo.DeleteComment(id);
             return Ok();
         }
     }

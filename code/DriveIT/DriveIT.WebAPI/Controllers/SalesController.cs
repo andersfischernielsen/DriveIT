@@ -15,14 +15,15 @@ namespace DriveIT.WebAPI.Controllers
         private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/Sales
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
-            return Ok(_repo.GetAllSales()
-                .Select(s => s.ToDto()));
+            return Ok(
+                from sale in await _repo.GetAllSales()
+                select sale.ToDto());
         }
 
         // GET: api/Sales/5
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             var sale = _repo.GetSaleWithId(id);
             if (sale == null)
@@ -48,25 +49,25 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Sales/5
-        public IHttpActionResult Put(int id, [FromBody]SaleDto value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]SaleDto value)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            _repo.UpdateSale(id, value.ToEntity(_repo));
+            await _repo.UpdateSale(id, value.ToEntity(_repo));
             return Ok();
         }
 
         // DELETE: api/Sales/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             var sale = _repo.GetSaleWithId(id);
             if (sale == null)
             {
                 return NotFound();
             }
-            _repo.DeleteSale(sale);
+            await _repo.DeleteSale(id);
             return Ok();
         }
     }

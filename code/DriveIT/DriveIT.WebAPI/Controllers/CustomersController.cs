@@ -15,14 +15,15 @@ namespace DriveIT.WebAPI.Controllers
         private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/Customers
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
-            return Ok(_repo.GetAllCustomers()
-                .Select(c => c.ToDto()));
+            return Ok(
+                from customer in await _repo.GetAllCustomers()
+                select customer.ToDto());
         }
 
         // GET: api/Customers/5
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             var customer = _repo.GetCustomerWithId(id);
             if (customer == null)
@@ -48,26 +49,26 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Customers/5
-        public IHttpActionResult Put(int id, [FromBody]CustomerDto value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerDto value)
         {
             var customer = _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();
             }
-            _repo.UpdateCustomer(id, value.ToEntity());
+            await _repo.UpdateCustomer(id, value.ToEntity());
             return Ok();
         }
 
         // DELETE: api/Customers/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             var customer = _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();
             }
-            _repo.DeleteCustomer(id);
+            await _repo.DeleteCustomer(id);
             return Ok();
         }
     }
