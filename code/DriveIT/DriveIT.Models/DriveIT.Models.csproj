@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarDetailDto.cs" />
     <Compile Include="CarDto.cs" />
     <Compile Include="ContactRequestDto.cs" />
     <Compile Include="CommentDto.cs" />
