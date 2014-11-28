@@ -23,10 +23,9 @@ namespace DriveIT_Windows_Client.Controllers
                 try
                 {
                     httpClient.BaseAddress = new Uri(apiUrl);
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     HttpResponseMessage response = await httpClient.PostAsJsonAsync("/api/" + uri, objectToCreate);
                     response.EnsureSuccessStatusCode();
-                    var objects = await response.Content.ReadAsAsync<T[]>();
-                    objects.ToList().ForEach(i => Console.WriteLine(i));
                 }
                 catch (Exception)
                 {
@@ -38,16 +37,23 @@ namespace DriveIT_Windows_Client.Controllers
 
         public async static Task<IList<T>> Read<T>(string uri)
         {
-            T[] objects;
+            T[] objects = null;
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri(apiUrl);
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
-                    HttpResponseMessage response = await httpClient.GetAsync("/api/" + uri);
-                    response.EnsureSuccessStatusCode();
-                    objects = await response.Content.ReadAsAsync<T[]>();
-                    objects.ToList().ForEach(i => Console.WriteLine(i));
-                    httpClient.Dispose();
+                    try
+                    {
+                        httpClient.BaseAddress = new Uri(apiUrl);
+                        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage response = httpClient.GetAsync("/api/" + uri).Result;
+                        response.EnsureSuccessStatusCode();
+                        objects = await response.Content.ReadAsAsync<T[]>();
+                        objects.ToList().ForEach(i => Console.WriteLine(i));
+                    }
+                    catch (Exception)
+                    {
+                        //
+                    } 
+                    
                 }
             return objects.ToList();
         }

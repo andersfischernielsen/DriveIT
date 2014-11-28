@@ -18,10 +18,11 @@ namespace DriveIT_Windows_Client.Controllers
         public CarController()
         {
             var t = ReadCarList().Result;
-            Console.WriteLine(t);
-            //CreateCar(t[1]);
-            //t = ReadCarList().Result;
-            //Console.WriteLine(t.Count);
+            Console.WriteLine(t.Count);
+            CreateCar(t[1]);
+            Thread.Sleep(5000);
+            t = ReadCarList().Result;
+            Console.WriteLine(t.Count);
         }
 
         public async void CreateCar(CarDto car)
@@ -37,8 +38,8 @@ namespace DriveIT_Windows_Client.Controllers
 
         public async Task<IList<CarDto>> ReadCarList()
         {
-            var cars = DriveITWebAPI.Read<CarDto>("cars");
-            return await cars;
+            var cars = await DriveITWebAPI.Read<CarDto>("cars");
+            return cars;
         }
         public void UpdateCar(CarViewModel car)
         {
