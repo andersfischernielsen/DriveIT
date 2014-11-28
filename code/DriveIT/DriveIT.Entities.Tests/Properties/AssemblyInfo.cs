@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DriveIT.Entities")]
+[assembly: AssemblyTitle("Entities.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DriveIT.Entities")]
+[assembly: AssemblyProduct("Entities.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d14eaebb-005f-4be3-8f54-7cfff5f3c1f8")]
+[assembly: Guid("bf927478-6023-4489-abd9-727f9c1b25ca")]
 
 // Version information for an assembly consists of the following four values:
 //
