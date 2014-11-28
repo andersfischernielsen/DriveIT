@@ -17,21 +17,8 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Cars
         public IHttpActionResult Get()
         {
-            var cars = from c in _repo.GetAllCars()
-                       select new CarDto
-                       {
-                           Color = c.Color,
-                           Created = c.Created,
-                           DistanceDriven = c.DistanceDriven,
-                           Id = c.Id,
-                           Make = c.Make,
-                           Model = c.Model,
-                           Price = c.Price,
-                           Sold = c.Sold,
-                           Transmission = c.Transmission,
-                           Year = c.Year,
-                           Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                       };
+            var cars = from car in _repo.GetAllCars()
+                       select car.ToDto();
 
             return Ok(cars.ToList());
         }
@@ -44,22 +31,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(new CarDetailDto
-            {
-                Color = car.Color,
-                Created = car.Created,
-                DistanceDriven = car.DistanceDriven,
-                Id = car.Id,
-                Make = car.Make,
-                Model = car.Model,
-                Price = car.Price,
-                Sold = car.Sold,
-                Transmission = car.Transmission,
-                Year = car.Year,
-                Fuel = (FuelType)Enum.Parse(typeof(FuelType), car.Fuel),
-                Drive = car.Drive,
-                Mileage = car.Mileage
-            });
+            return Ok(car.ToDto());
         }
 
         // GET: api/Cars?fuelType=Diesel
@@ -67,20 +39,7 @@ namespace DriveIT.WebAPI.Controllers
         {
             var cars = _repo.GetAllCars()
                 .Where(c => string.Equals(fuelType, c.Fuel, StringComparison.OrdinalIgnoreCase))
-                .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                });
+                .Select(car => car.ToDto());
             return Ok(cars);
         }
 
@@ -89,20 +48,7 @@ namespace DriveIT.WebAPI.Controllers
         {
             return Ok(_repo.GetAllCars()
                 .Where(c => string.Equals(make, c.Make, StringComparison.OrdinalIgnoreCase))
-                .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                }));
+                .Select(car => car.ToDto()));
         }
 
         // Get: api/Cars?make=Opel
@@ -110,20 +56,7 @@ namespace DriveIT.WebAPI.Controllers
         {
             return Ok(_repo.GetAllCars()
                 .Where(c => string.Equals(model, c.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                }));
+                .Select(car => car.ToDto()));
         }
 
         // Get: api/Cars?make=Opel&model=Zafira
@@ -135,24 +68,11 @@ namespace DriveIT.WebAPI.Controllers
                         c =>
                             string.Equals(make, c.Make, StringComparison.OrdinalIgnoreCase) &&
                             string.Equals(model, c.Model, StringComparison.OrdinalIgnoreCase))
-                            .Select(c => new CarDto
-                {
-                    Color = c.Color,
-                    Created = c.Created,
-                    DistanceDriven = c.DistanceDriven,
-                    Id = c.Id,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Price = c.Price,
-                    Sold = c.Sold,
-                    Transmission = c.Transmission,
-                    Year = c.Year,
-                    Fuel = (FuelType)Enum.Parse(typeof(FuelType), c.Fuel)
-                }));
+                            .Select(car => car.ToDto()));
         }
 
         // POST: api/Cars
-        public async Task<IHttpActionResult> Post([FromBody]CarDetailDto value)
+        public async Task<IHttpActionResult> Post([FromBody]CarDto value)
         {
             if (!ModelState.IsValid)
             {
@@ -167,7 +87,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Cars/5
-        public IHttpActionResult Put(int id, [FromBody]CarDetailDto value)
+        public IHttpActionResult Put(int id, [FromBody]CarDto value)
         {
             var car = _repo.GetCarWithId(id);
             if (car == null)
