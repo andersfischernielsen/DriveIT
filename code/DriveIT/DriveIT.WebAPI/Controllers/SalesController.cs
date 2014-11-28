@@ -25,7 +25,7 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Sales/5
         public async Task<IHttpActionResult> Get(int id)
         {
-            var sale = _repo.GetSaleWithId(id);
+            var sale = await _repo.GetSaleWithId(id);
             if (sale == null)
             {
                 return NotFound();
@@ -40,7 +40,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newSaleId = await _repo.CreateSale(value.ToEntity(_repo));
+            var newSaleId = await _repo.CreateSale(await value.ToEntity(_repo));
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newSaleId });
@@ -55,7 +55,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateSale(id, value.ToEntity(_repo));
+            await _repo.UpdateSale(id, await value.ToEntity(_repo));
             return Ok();
         }
 

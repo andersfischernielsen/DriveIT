@@ -25,7 +25,7 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Customers/5
         public async Task<IHttpActionResult> Get(int id)
         {
-            var customer = _repo.GetCustomerWithId(id);
+            var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();

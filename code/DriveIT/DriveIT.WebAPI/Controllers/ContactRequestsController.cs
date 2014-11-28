@@ -24,7 +24,7 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/ContactRequests/5
         public async Task<IHttpActionResult> Get(int id)
         {
-            var contactRequest = _repo.GetContactRequestWithId(id);
+            var contactRequest = await _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
             {
                 return NotFound();
@@ -39,7 +39,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity(_repo));
+            var newContactRequestId = await _repo.CreateContactRequest(await value.ToEntity(_repo));
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newContactRequestId });
@@ -54,7 +54,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateContactRequest(id, value.ToEntity(_repo));
+            await _repo.UpdateContactRequest(id, await value.ToEntity(_repo));
             return Ok();
         }
 
