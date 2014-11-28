@@ -6,40 +6,40 @@ namespace DriveIT.EntityFramework
 {
     public interface IPersistentStorage
     {
-        Car GetCarWithId(int id);
-        IEnumerable<Car> GetAllCars();
+        Car GetCarWithId(int idToGet);
+        Task<IEnumerable<Car>> GetAllCars();
         Task<int> CreateCar(Car carToCreate);
-        void UpdateCar(int idToUpdate, Car carToReplaceWith);
-        void DeleteCar(int id);
+        Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith);
+        Task<int> DeleteCar(int id);
 
         Employee GetEmployeeWithId(int idToGet);
-        IEnumerable<Employee> GetAllEmployees();
+        Task<IEnumerable<Employee>> GetAllEmployees();
         Task<int> CreateEmployee(Employee employeeToCreate);
-        void UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith);
-        void DeleteEmployee(int idToDelete);
+        Task<int> UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith);
+        Task<int> DeleteEmployee(int idToDelete);
 
         Customer GetCustomerWithId(int idToGet);
-        IEnumerable<Customer> GetAllCustomers();
+        Task<IEnumerable<Customer>> GetAllCustomers();
         Task<int> CreateCustomer(Customer customerToCreate);
-        void UpdateCustomer(int idToUpdate, Customer customerRequestToReplaceWith);
-        void DeleteCustomer(int idToDelete);
+        Task<int> UpdateCustomer(int idToUpdate, Customer customerRequestToReplaceWith);
+        Task<int> DeleteCustomer(int idToDelete);
 
         ContactRequest GetContactRequestWithId(int idToGet);
-        IEnumerable<ContactRequest> GetAllContactRequests();
+        Task<IEnumerable<ContactRequest>> GetAllContactRequests();
         Task<int> CreateContactRequest(ContactRequest contactRequestToCreate);
-        void UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith);
-        void DeleteContactRequest(int idToDelete);
+        Task<int> UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith);
+        Task<int> DeleteContactRequest(int idToDelete);
 
-        Comment GetCommentWithId(int id);
-        IEnumerable<Comment> GetAllCommentsForCar(Car car);
+        Comment GetCommentWithId(int idToGet);
+        Task<IEnumerable<Comment>> GetAllCommentsForCar(int carId);
         Task<int> CreateComment(Comment commentToCreate);
-        void UpdateComment(int idToUpdate, Comment commentToReplaceWith);
-        void DeleteComment(int idToDelete);
+        Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith);
+        Task<int> DeleteComment(int idToDelete);
 
-        Sale GetSaleWithId(int id);
-        IEnumerable<Sale> GetAllSales();
-        Task<int> CreateSale(Sale commentToCreate);
-        void UpdateSale(int idToUpdate, Sale saleToReplaceWith);
-        void DeleteSale(Sale saleToDelete);
+        Sale GetSaleWithId(int idToGet);
+        Task<IEnumerable<Sale>> GetAllSales();
+        Task<int> CreateSale(Sale saleToCreate);
+        Task<int> UpdateSale(int idToUpdate, Sale saleToReplaceWith);
+        Task<int> DeleteSale(int idToDelete);
     }
 }
