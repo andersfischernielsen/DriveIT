@@ -33,7 +33,7 @@ namespace DriveIT.WebAPI.Controllers
         // POST: api/Comments
         public IHttpActionResult Post([FromBody]CommentDto value)
         {
-            _repo.CreateComment(value.ToComment());
+            _repo.CreateComment(value.ToComment(_repo));
             return Ok();
         }
 
