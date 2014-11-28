@@ -8,5 +8,6 @@ namespace DriveIT_Windows_Client.ViewModels
 {
     public interface IViewModelBase
     {
+        // kun controller per entity
     }
 }
