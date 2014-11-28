@@ -260,7 +260,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        private static async Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith)
+        public static async Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
