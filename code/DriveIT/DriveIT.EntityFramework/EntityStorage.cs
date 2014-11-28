@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
 {
-    public class EntityAdapter : IPersistentStorage
+    public class EntityStorage : IPersistentStorage
     {
 
         public Car GetCarWithId(int id)
         {
-            using (var context = new EntityContext())
+            using (var context = new DriveITContext())
             {
                 return context.Cars.Select(x => x).FirstOrDefault(x => x.Id == id);
             }
@@ -17,30 +20,39 @@ namespace DriveIT.EntityFramework
 
         public IEnumerable<Car> GetAllCars()
         {
-            using (var context = new EntityContext())
+            using (var context = new DriveITContext())
             {
                 return context.Cars.Select(cars => cars).ToList();
             }
         }
 
-        public async void CreateCar(Car carToCreate)
+        public async Task<int> CreateCar(Car carToCreate)
         {
-            using (var context = new EntityContext())
+            using (var context = new DriveITContext())
             {
                 context.Cars.Add(carToCreate);
+                await context.SaveChangesAsync();
+                return carToCreate.Id;
+                //TODO: Implement checking to see if the request happened succesfully.
+            }
+        }
+
+        public async void UpdateCar(int idToUpdate, Car carToReplaceWith)
+        {
+            using (var context = new DriveITContext())
+            {
+                context.Cars.AddOrUpdate(x => x.Id, carToReplaceWith);
                 await context.SaveChangesAsync();
                 //TODO: Implement checking to see if the request happened succesfully.
             }
         }
 
-        public void UpdateCar(int idToUpdate, Car carToReplaceWith)
+        public async void DeleteCar(int id)
         {
-            //TODO: Implement.
-        }
-
-        public void DeleteCar(int id)
-        {
-            throw new System.NotImplementedException();
+            using (var context = new DriveITContext())
+            {
+                context.Cars.Remove(await context.Cars.FindAsync(id));
+            }
         }
 
         public Employee GetEmployeeWithId(int idToGet)
@@ -53,7 +65,7 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void CreateEmployee(Employee employeeToCreate)
+        public Task<int> CreateEmployee(Employee employeeToCreate)
         {
             throw new System.NotImplementedException();
         }
@@ -78,7 +90,7 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void CreateCustomer(Customer customerToCreate)
+        public Task<int> CreateCustomer(Customer customerToCreate)
         {
             throw new System.NotImplementedException();
         }
@@ -103,7 +115,7 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void CreateContactRequest(ContactRequest contactRequestToCreate)
+        public Task<int> CreateContactRequest(ContactRequest contactRequestToCreate)
         {
             throw new System.NotImplementedException();
         }
@@ -128,7 +140,7 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void CreateComment(Comment commentToCreate)
+        public Task<int> CreateComment(Comment commentToCreate)
         {
             throw new System.NotImplementedException();
         }
@@ -153,7 +165,7 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void CreateSale(Sale commentToCreate)
+        public Task<int> CreateSale(Sale commentToCreate)
         {
             throw new System.NotImplementedException();
         }
@@ -170,7 +182,7 @@ namespace DriveIT.EntityFramework
 
         public async void DeleteCar(Car carToDelete)
         {
-            using (var context = new EntityContext())
+            using (var context = new DriveITContext())
             {
                 context.Cars.Remove(carToDelete);
                 await context.SaveChangesAsync();

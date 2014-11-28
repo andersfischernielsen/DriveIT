@@ -4,7 +4,7 @@ using DriveIT.Entities;
 namespace DriveIT.EntityFramework
 {
 // ReSharper disable once InconsistentNaming
-    public class EntityContext : DbContext
+    public class DriveITContext : DbContext
     {
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
