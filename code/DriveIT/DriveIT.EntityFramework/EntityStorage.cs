@@ -8,11 +8,11 @@ namespace DriveIT.EntityFramework
 {
     public class EntityStorage : IPersistentStorage
     {
-        public Car GetCarWithId(int idToGet)
+        public async Task<Car> GetCarWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return context.Cars.FirstOrDefault(x => x.Id == idToGet);
+                return await context.Cars.FindAsync(idToGet);
             }
         }
 
@@ -53,7 +53,8 @@ namespace DriveIT.EntityFramework
                 return await context.SaveChangesAsync();
             }
         }
-        private void CopyCarProperties(Car toChange, Car toSetFrom)
+
+        private static void CopyCarProperties(Car toChange, Car toSetFrom)
         {
             toChange.Color = toSetFrom.Color;
             toChange.Created = toSetFrom.Created;
@@ -69,11 +70,11 @@ namespace DriveIT.EntityFramework
             toChange.Year = toSetFrom.Year;
         }
 
-        public Employee GetEmployeeWithId(int idToGet)
+        public async Task<Employee> GetEmployeeWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return context.Employees.FirstOrDefault(x => x.Id == idToGet);
+                return await context.Employees.FindAsync(idToGet);
             }
         }
 
@@ -125,11 +126,11 @@ namespace DriveIT.EntityFramework
             toChange.Username = toSetFrom.Username;
         }
 
-        public Customer GetCustomerWithId(int idToGet)
+        public async Task<Customer> GetCustomerWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return context.Customers.FirstOrDefault(x => x.Id == idToGet);
+                return await context.Customers.FindAsync(idToGet);
             }
         }
 
@@ -181,11 +182,11 @@ namespace DriveIT.EntityFramework
             toChange.Username = toSetFrom.Username;
         }
 
-        public ContactRequest GetContactRequestWithId(int idToGet)
+        public async Task<ContactRequest> GetContactRequestWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return context.ContactRequests.FirstOrDefault(x => x.Id == idToGet);
+                return await context.ContactRequests.FindAsync(idToGet);
             }
         }
 
@@ -233,11 +234,11 @@ namespace DriveIT.EntityFramework
             toChange.Customer = toSetFrom.Customer;
         }
 
-        public Comment GetCommentWithId(int idToGet)
+        public async Task<Comment> GetCommentWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return context.Comments.FirstOrDefault(x => x.Id == idToGet);
+                return await context.Comments.FindAsync(idToGet);
             }
         }
 
@@ -288,11 +289,11 @@ namespace DriveIT.EntityFramework
             toChange.Customer = toSetFrom.Customer;
         }
 
-        public Sale GetSaleWithId(int idToGet)
+        public async Task<Sale> GetSaleWithId(int idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return context.Sales.FirstOrDefault(x => x.Id == idToGet);
+                return await context.Sales.FindAsync(idToGet);
             }
         }
 
