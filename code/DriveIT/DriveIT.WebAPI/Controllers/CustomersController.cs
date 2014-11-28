@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -13,19 +17,8 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Customer
         public IHttpActionResult Get()
         {
-            return Ok(_repo.GetAllCustomers().Select(
-                c => new CustomerDto
-                    {
-                        Email = c.Email,
-                        FirstName = c.FirstName,
-                        Id = c.Id,
-                        LastName = c.LastName,
-                        //Todo fix
-                        Phone = string.Format("{0}", c.PhoneNumber),
-                        Username = c.Username
-                    }
-                )
-            );
+            return Ok(_repo.GetAllCustomers()
+                .Select(c => c.ToDto()));
         }
 
         // GET: api/Customer/5
@@ -36,33 +29,44 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(new CustomerDto
-            {
-                Email = customer.Email,
-                Id = customer.Id,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                //Todo fix.
-                Phone = string.Format("{0}", customer.PhoneNumber),
-                Username = customer.Username
-            });
+            return Ok(customer.ToDto());
         }
 
         // POST: api/Customer
-        public IHttpActionResult Post([FromBody]CustomerDto value)
+        public async Task<IHttpActionResult> Post([FromBody]CustomerDto value)
         {
-            _repo.CreateCustomer(value.ToCustomer());
-            return Ok(value);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var newCustomerId = await _repo.CreateCustomer(value.ToCustomer());
+            var response = Request.CreateResponse(HttpStatusCode.Created, value);
+
+            var uri = Url.Link("DefaultApi", new { id = newCustomerId });
+            response.Headers.Location = new Uri(uri);
+            return ResponseMessage(response);
         }
 
         // PUT: api/Customer/5
-        public void Put(int id, [FromBody]CustomerDto value)
+        public IHttpActionResult Put(int id, [FromBody]CustomerDto value)
         {
+            var customer = _repo.GetCustomerWithId(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            _repo.UpdateCustomer(id, value.ToCustomer());
+            return Ok();
         }
 
         // DELETE: api/Customer/5
         public IHttpActionResult Delete(int id)
         {
+            var customer = _repo.GetCustomerWithId(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
             _repo.DeleteCustomer(id);
             return Ok();
         }

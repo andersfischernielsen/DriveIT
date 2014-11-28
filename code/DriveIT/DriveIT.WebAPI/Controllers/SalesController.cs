@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -13,14 +17,8 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Sales
         public IHttpActionResult Get()
         {
-            return Ok(_repo.GetAllSales().Select(s =>
-                new SaleDto
-                {
-                    CarId = s.Car.Id,
-                    CustomerId = s.Customer.Id,
-                    Price = s.Price,
-                    Sold = s.DateOfSale
-                }));
+            return Ok(_repo.GetAllSales()
+                .Select(s => s.ToDto()));
         }
 
         // GET: api/Sales/5
@@ -31,24 +29,22 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(new SaleDto
-            {
-                CarId = sale.Car.Id,
-                CustomerId = sale.Customer.Id,
-                Price = sale.Price,
-                Sold = sale.DateOfSale
-            });
+            return Ok(sale.ToDto());
         }
 
         // POST: api/Sales
-        public IHttpActionResult Post([FromBody]SaleDto value)
+        public async Task<IHttpActionResult> Post([FromBody]SaleDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            _repo.CreateSale(value.ToSale(_repo));
-            return Ok();
+            var newSaleId = await _repo.CreateSale(value.ToSale(_repo));
+            var response = Request.CreateResponse(HttpStatusCode.Created, value);
+
+            var uri = Url.Link("DefaultApi", new { id = newSaleId });
+            response.Headers.Location = new Uri(uri);
+            return ResponseMessage(response);
         }
 
         // PUT: api/Sales/5
@@ -58,7 +54,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            //TODO: PUT implementation
+            _repo.UpdateSale(id, value.ToSale(_repo));
             return Ok();
         }
 

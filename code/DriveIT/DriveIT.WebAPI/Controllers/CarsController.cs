@@ -78,7 +78,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            int newCarId = await _repo.CreateCar(value.ToCar());
+            var newCarId = await _repo.CreateCar(value.ToCar());
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newCarId });
