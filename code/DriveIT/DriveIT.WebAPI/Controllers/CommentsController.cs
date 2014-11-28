@@ -12,10 +12,10 @@ namespace DriveIT.WebAPI.Controllers
 
         // GET: api/Comments/5
         // Where 5 is CarId
-        public async Task<IHttpActionResult> Get(int carId)
+        public IHttpActionResult Get(int carId)
         {
             // Todo: ask for id:
-            var comments = _repo.GetAllCommentsForCar(await _repo.GetCarWithId(carId));
+            var comments = _repo.GetAllCommentsForCar(_repo.GetCarWithId(carId));
             if (comments == null)
             {
                 return NotFound();

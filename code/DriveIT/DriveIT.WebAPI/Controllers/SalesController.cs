@@ -15,7 +15,7 @@ namespace DriveIT.WebAPI.Controllers
         public IHttpActionResult Get()
         {
             return Ok(_repo.GetAllSales().Select(s =>
-                new SaleDto()
+                new SaleDto
                 {
                     CarId = s.Car.Id,
                     CustomerId = s.Customer.Id,
