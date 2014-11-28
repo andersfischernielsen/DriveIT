@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT Windows Client", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Models", "DriveIT.Models\DriveIT.Models.csproj", "{9279ADF0-FC58-4C2F-B34F-D472F13976EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.MVC", "DriveIT.MVC\DriveIT.MVC.csproj", "{7A1CE956-9DAF-488C-9EE4-94F4E9903999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.MVC.Tests", "DriveIT.MVC.Tests\DriveIT.MVC.Tests.csproj", "{BA36A21E-73B8-41FA-B805-0215D66DF5B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{9279ADF0-FC58-4C2F-B34F-D472F13976EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9279ADF0-FC58-4C2F-B34F-D472F13976EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9279ADF0-FC58-4C2F-B34F-D472F13976EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1CE956-9DAF-488C-9EE4-94F4E9903999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1CE956-9DAF-488C-9EE4-94F4E9903999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1CE956-9DAF-488C-9EE4-94F4E9903999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1CE956-9DAF-488C-9EE4-94F4E9903999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA36A21E-73B8-41FA-B805-0215D66DF5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA36A21E-73B8-41FA-B805-0215D66DF5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA36A21E-73B8-41FA-B805-0215D66DF5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA36A21E-73B8-41FA-B805-0215D66DF5B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
