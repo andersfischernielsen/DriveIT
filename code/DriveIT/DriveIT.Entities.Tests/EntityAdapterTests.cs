@@ -13,14 +13,47 @@ namespace DriveIT.Entities.Tests
         //THIS IS A SHITTY TEST-THING. TESTING SHOULD BE DONE WITH MOCK, BUT I'M TIRED OF ENTITY FRAMEWORK NOW.
         public static void Main(string[] args)
         {
-            var t = new EntityAdapter();
+            var t = new EntityStorage();
             
-            t.CreateCar(new Car {Color = "Red", Created = DateTime.Now, DistanceDriven = 20, Drive = "FWD", Fuel = "Gas", Id = 1, Make = "Ford", Mileage = 20.5f, Model = "TT", Price = 2000, Sold = false, Transmission = "Manual", Year = 2001});
-            var c = t.GetCarWithId(1);
+            var id = t.CreateCar(new Car
+            {
+                Color = "Red",
+                Created = DateTime.Now,
+                DistanceDriven = 20,
+                Drive = "FWD",
+                Fuel = "Gas",
+                Make = "Ford",
+                Mileage = 20.5f, 
+                Model = "TT",
+                Price = 2000, 
+                Sold = false, 
+                Transmission = "Manual", 
+                Year = 2001
+            });
+
+            var car = t.GetCarWithId(id.Result);
+
+            var newCar = new Car
+            {
+                Color = "Blue",
+                Created = DateTime.Now,
+                DistanceDriven = 20,
+                Drive = "FWD",
+                Fuel = "Gas",
+                Make = "Ford",
+                Mileage = 20.5f,
+                Model = "TT",
+                Price = 2000,
+                Sold = false,
+                Transmission = "Manual",
+                Year = 2001
+            };
+            
+            t.UpdateCar(id.Result, newCar);
             Console.WriteLine();
         }
 
-        private EntityAdapter _toTest;
+        private EntityStorage _toTest;
 
         [TestInitialize]
         public void SetUp()
@@ -34,10 +67,10 @@ namespace DriveIT.Entities.Tests
             };
             var mockSet = new Mock<DbSet<Car>>().SetupData(cars);
 
-            var context = new Mock<EntityContext>();
+            var context = new Mock<DriveITContext>();
             context.Setup(c => c.Cars).Returns(mockSet.Object);
 
-            _toTest = new EntityAdapter();
+            _toTest = new EntityStorage();
         }
 
         [TestMethod]
