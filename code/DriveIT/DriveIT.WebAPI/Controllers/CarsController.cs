@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -13,7 +14,7 @@ namespace DriveIT.WebAPI.Controllers
     {
         private readonly IPersistentStorage _repo = new EntityStorage();
 
-        // GET: api/Car
+        // GET: api/Cars
         public IHttpActionResult Get()
         {
             var cars = from c in _repo.GetAllCars()
@@ -35,7 +36,7 @@ namespace DriveIT.WebAPI.Controllers
             return Ok(cars.ToList());
         }
 
-        // GET: api/Car/5
+        // GET: api/Cars/5
         public IHttpActionResult Get(int id)
         {
             var car = _repo.GetCarWithId(id);
@@ -61,7 +62,7 @@ namespace DriveIT.WebAPI.Controllers
             });
         }
 
-        // GET: api/Car?fuelType=Diesel
+        // GET: api/Cars?fuelType=Diesel
         public IHttpActionResult GetCarsByFuelType(string fuelType)
         {
             var cars = _repo.GetAllCars()
@@ -83,7 +84,7 @@ namespace DriveIT.WebAPI.Controllers
             return Ok(cars);
         }
 
-        // Get: api/Car?make=Opel
+        // Get: api/Cars?make=Opel
         public IHttpActionResult GetCarsByMake(string make)
         {
             return Ok(_repo.GetAllCars()
@@ -104,7 +105,7 @@ namespace DriveIT.WebAPI.Controllers
                 }));
         }
 
-        // Get: api/Car?make=Opel
+        // Get: api/Cars?make=Opel
         public IHttpActionResult GetCarsByModel(string model)
         {
             return Ok(_repo.GetAllCars()
@@ -125,7 +126,7 @@ namespace DriveIT.WebAPI.Controllers
                 }));
         }
 
-        // Get: api/Car?make=Opel&model=Zafira
+        // Get: api/Cars?make=Opel&model=Zafira
         public IHttpActionResult GetCarsByMakeAndModel(string make, string model)
         {
             return
@@ -150,38 +151,41 @@ namespace DriveIT.WebAPI.Controllers
                 }));
         }
 
-        // POST: api/Car
-        public IHttpActionResult Post([FromBody]CarDetailDto value)
+        // POST: api/Cars
+        public async Task<IHttpActionResult> Post([FromBody]CarDetailDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            // TODO: Make sure Id not already in collection.
-            _repo.CreateCar(value.ToCar());
+            int newCarId = await _repo.CreateCar(value.ToCar());
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
-            // TODO: Make sure that REPO sets the Id of the new car.
-            var uri = Url.Link("DefaultApi", new { id = value.Id });
+            var uri = Url.Link("DefaultApi", new { id = newCarId });
             response.Headers.Location = new Uri(uri);
             return ResponseMessage(response);
         }
 
-        // PUT: api/Car/5
+        // PUT: api/Cars/5
         public IHttpActionResult Put(int id, [FromBody]CarDetailDto value)
         {
             var car = _repo.GetCarWithId(id);
             if (car == null)
             {
-                return NotFound();
+                return BadRequest("id not found!");
             }
             _repo.UpdateCar(id, value.ToCar());
             return Ok();
         }
 
-        // DELETE: api/Car/5
+        // DELETE: api/Cars/5
         public IHttpActionResult Delete(int id)
         {
+            var car = _repo.GetCarWithId(id);
+            if (car == null)
+            {
+                return BadRequest("Id not found");
+            }
             _repo.DeleteCar(id);
             return Ok();
         }
