@@ -72,6 +72,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\RequestForContactController.cs" />
     <Compile Include="EntityWindow.xaml.cs">
       <DependentUpon>EntityWindow.xaml</DependentUpon>
     </Compile>
