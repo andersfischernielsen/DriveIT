@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -54,7 +53,8 @@ namespace DriveIT.WebAPI.Models
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Id = dto.Id,
-                PhoneNumber = dto.Phone,
+                //Todo fix.
+                PhoneNumber = long.Parse(dto.Phone),
                 Username = dto.Username
             };
         }
@@ -68,6 +68,7 @@ namespace DriveIT.WebAPI.Models
                 Price = dto.Price,
                 Car = repo.GetCarWithId(dto.CarId),
                 Customer = repo.GetCustomerWithId(dto.CustomerId),
+                //Todo fix:
                 Employee = repo.GetEmployeeWithId(dto.EmployeeId)
             };
         }

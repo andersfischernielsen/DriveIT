@@ -20,7 +20,8 @@ namespace DriveIT.WebAPI.Controllers
                         FirstName = c.FirstName,
                         Id = c.Id,
                         LastName = c.LastName,
-                        Phone = c.PhoneNumber,
+                        //Todo fix
+                        Phone = string.Format("{0}", c.PhoneNumber),
                         Username = c.Username
                     }
                 )
@@ -41,7 +42,8 @@ namespace DriveIT.WebAPI.Controllers
                 Id = customer.Id,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
-                Phone = customer.PhoneNumber,
+                //Todo fix.
+                Phone = string.Format("{0}", customer.PhoneNumber),
                 Username = customer.Username
             });
         }

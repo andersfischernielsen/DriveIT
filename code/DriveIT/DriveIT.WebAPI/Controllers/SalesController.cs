@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -42,13 +41,13 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Sales
-        public async Task<IHttpActionResult> Post([FromBody]SaleDto value)
+        public IHttpActionResult Post([FromBody]SaleDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            _repo.CreateSale(await value.ToSale(_repo));
+            _repo.CreateSale(value.ToSale(_repo));
             return Ok();
         }
 
