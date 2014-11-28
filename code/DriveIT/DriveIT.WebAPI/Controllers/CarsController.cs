@@ -11,7 +11,7 @@ namespace DriveIT.WebAPI.Controllers
 {
     public class CarsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityAdapter();
+        private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/Car
         public IHttpActionResult Get()

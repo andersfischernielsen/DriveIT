@@ -8,7 +8,7 @@ namespace DriveIT.WebAPI.Controllers
 {
     public class CommentsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityAdapter();
+        private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/Comments/5
         // Where 5 is CarId
