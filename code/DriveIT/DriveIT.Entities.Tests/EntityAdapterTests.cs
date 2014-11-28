@@ -13,8 +13,6 @@ namespace DriveIT.Entities.Tests
         //THIS IS A SHITTY TEST-THING. TESTING SHOULD BE DONE WITH MOCK, BUT I'M TIRED OF ENTITY FRAMEWORK NOW.
         public static void Main(string[] args)
         {
-            var t = new EntityStorage();
-
             var newCar = new Car
             {
                 Color = "Green",
@@ -31,11 +29,9 @@ namespace DriveIT.Entities.Tests
                 Year = 2001
             };
             
-            t.UpdateCar(13, newCar);
+            var bla = EntityStorage.UpdateCar(13, newCar).Result;
             
         }
-
-        private EntityStorage _toTest;
 
         [TestInitialize]
         public void SetUp()
@@ -51,20 +47,18 @@ namespace DriveIT.Entities.Tests
 
             var context = new Mock<DriveITContext>();
             context.Setup(c => c.Cars).Returns(mockSet.Object);
-
-            _toTest = new EntityStorage();
         }
 
         [TestMethod]
         public void AddCarTest()
         {
-            _toTest.CreateCar(new Car {Id = 5, Make = "Mercedes Benz"});
+            var bla = EntityStorage.CreateCar(new Car {Id = 5, Make = "Mercedes Benz"}).Result;
         }
 
         [TestMethod]
         public void GetCarTest()
         {
-            Assert.AreEqual(1, _toTest.GetCarWithId(1).Id);
+            Assert.AreEqual(1, EntityStorage.GetCarWithId(1).Id);
         }
     }
 }
