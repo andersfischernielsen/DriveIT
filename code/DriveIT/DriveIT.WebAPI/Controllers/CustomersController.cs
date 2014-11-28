@@ -63,12 +63,7 @@ namespace DriveIT.WebAPI.Controllers
         // DELETE: api/Customer/5
         public IHttpActionResult Delete(int id)
         {
-            var c = _repo.GetCustomerWithId(id);
-            if (c == null)
-            {
-                return NotFound();
-            }
-            _repo.DeleteCustomer(c);
+            _repo.DeleteCustomer(id);
             return Ok();
         }
     }
