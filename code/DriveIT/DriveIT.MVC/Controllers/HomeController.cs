@@ -16,6 +16,7 @@ namespace DriveIT.MVC.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            ViewBag.Name = "Jacob";
 
             return View();
         }
