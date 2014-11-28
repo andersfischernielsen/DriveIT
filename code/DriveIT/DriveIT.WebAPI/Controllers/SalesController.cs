@@ -4,15 +4,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class SalesController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/Sales
         public async Task<IHttpActionResult> Get()
@@ -40,7 +39,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newSaleId = await _repo.CreateSale(await value.ToEntity(_repo));
+            var newSaleId = await _repo.CreateSale(await value.ToEntity());
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newSaleId });
@@ -55,14 +54,14 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateSale(id, await value.ToEntity(_repo));
+            await _repo.UpdateSale(id, await value.ToEntity());
             return Ok();
         }
 
         // DELETE: api/Sales/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var sale = _repo.GetSaleWithId(id);
+            var sale = await _repo.GetSaleWithId(id);
             if (sale == null)
             {
                 return NotFound();

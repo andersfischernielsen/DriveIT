@@ -4,15 +4,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class CarsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
@@ -88,7 +87,7 @@ namespace DriveIT.WebAPI.Controllers
         // PUT: api/Cars/5
         public async Task<IHttpActionResult> Put(int id, [FromBody]CarDto value)
         {
-            var car = _repo.GetCarWithId(id);
+            var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
                 return BadRequest("id not found!");
@@ -100,7 +99,7 @@ namespace DriveIT.WebAPI.Controllers
         // DELETE: api/Cars/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var car = _repo.GetCarWithId(id);
+            var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
                 return BadRequest("Id not found");

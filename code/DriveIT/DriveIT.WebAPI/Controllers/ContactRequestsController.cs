@@ -4,15 +4,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class ContactRequestsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityStorage();
 
         // GET: api/ContactRequests
         public async Task<IHttpActionResult> Get()
@@ -39,7 +38,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newContactRequestId = await _repo.CreateContactRequest(await value.ToEntity(_repo));
+            var newContactRequestId = await _repo.CreateContactRequest(await value.ToEntity());
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newContactRequestId });
@@ -54,14 +53,14 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateContactRequest(id, await value.ToEntity(_repo));
+            await _repo.UpdateContactRequest(id, await value.ToEntity());
             return Ok();
         }
 
         // DELETE: api/ContactRequests/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var contactRequest = _repo.GetContactRequestWithId(id);
+            var contactRequest = await _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
             {
                 return NotFound();
