@@ -36,6 +36,7 @@ namespace DriveIT.MVC.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.AreEqual("Jacob", result.ViewBag.Name); //Just trying tests out
         }
 
         [TestMethod]
