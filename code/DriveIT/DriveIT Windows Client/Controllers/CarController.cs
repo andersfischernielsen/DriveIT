@@ -18,6 +18,11 @@ namespace DriveIT_Windows_Client.Controllers
         static string apiUrl = @"http://localhost:5552";
         public CarController()
         {
+            testMethods();
+        }
+
+        private void testMethods()
+        {
             var t = ReadCarList().Result;
             Console.WriteLine(t.Count);
             try
@@ -39,10 +44,27 @@ namespace DriveIT_Windows_Client.Controllers
             Thread.Sleep(5000);
             t = ReadCarList().Result;
             Console.WriteLine(t.Count);
+
             DeleteCar(t[0].Id.Value);
             Thread.Sleep(5000);
             t = ReadCarList().Result;
             Console.WriteLine(t.Count);
+
+            int id = t[0].Id.Value;
+            UpdateCar(new CarDto()
+            {
+                Color = "Silver",
+                Created = DateTime.Now.AddDays(1),
+                DistanceDriven = 12000,
+                Model = "Swhifts",
+                Make = "Suzuki",
+                Price = 10000,
+                Id = id
+            });
+            Thread.Sleep(5000);
+            t = ReadCarList().Result;
+            Console.WriteLine(t.Count);
+            Console.WriteLine(t[t.Count - 1].Color);
         }
 
         public async void CreateCar(CarDto car)
@@ -61,14 +83,9 @@ namespace DriveIT_Windows_Client.Controllers
             var cars = await DriveITWebAPI.Read<CarDto>("cars");
             return cars;
         }
-        public void UpdateCar(CarViewModel car)
+        public async void UpdateCar(CarDto car)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateCar(int id)
-        {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Update("cars", car, car.Id.Value);
         }
 
         public void DeleteCar(CarViewModel car)
