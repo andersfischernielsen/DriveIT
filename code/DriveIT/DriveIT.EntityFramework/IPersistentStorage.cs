@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
 {
     public interface IPersistentStorage
     {
-        Task<Car> GetCarWithId(int id);
+        Car GetCarWithId(int id);
         IEnumerable<Car> GetAllCars();
         void CreateCar(Car carToCreate);
         void DeleteCar(Car carToDelete);
