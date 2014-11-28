@@ -1,7 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using DriveIT_Windows_Client.Controllers;
 
 namespace DriveIT_Windows_Client.Views
 {
@@ -13,6 +15,7 @@ namespace DriveIT_Windows_Client.Views
         public MainWindow()
         {
             InitializeComponent();
+            new CarController();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -37,6 +40,7 @@ namespace DriveIT_Windows_Client.Views
         {
             ControlTemplate Temp = (ControlTemplate)FindResource("UserControlCars");
             EntitiesUC.Template = Temp;
+            Console.WriteLine();
         }
     }
 }
