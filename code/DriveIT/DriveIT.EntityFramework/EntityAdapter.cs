@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.Remoting.Contexts;
-using System.Security;
-using System.Threading.Tasks;
 using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
@@ -12,11 +7,11 @@ namespace DriveIT.EntityFramework
     public class EntityAdapter : IPersistentStorage
     {
 
-        public async Task<Car> GetCarWithId(int id)
+        public Car GetCarWithId(int id)
         {
             using (var context = new EntityContext())
             {
-                return await context.Cars.FindAsync(id);
+                return context.Cars.Select(x => x).FirstOrDefault(x => x.Id == id);
             }
         }
 
@@ -24,7 +19,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new EntityContext())
             {
-                return context.Cars;
+                return context.Cars.Select(cars => cars).ToList();
             }
         }
 

@@ -10,12 +10,14 @@ namespace DriveIT.Entities.Tests
     [TestClass]
     public class EntityAdapterTests
     {
-        //THIS IS A SHITTY TEST-THING. TESTING SHOULD BE DONE WITH MOCK, BUT I'M TIRED NOW.
+        //THIS IS A SHITTY TEST-THING. TESTING SHOULD BE DONE WITH MOCK, BUT I'M TIRED OF ENTITY FRAMEWORK NOW.
         public static void Main(string[] args)
         {
             var t = new EntityAdapter();
+            
             t.CreateCar(new Car {Color = "Red", Created = DateTime.Now, DistanceDriven = 20, Drive = "FWD", Fuel = "Gas", Id = 1, Make = "Ford", Mileage = 20.5f, Model = "TT", Price = 2000, Sold = false, Transmission = "Manual", Year = 2001});
-            Console.WriteLine(t.GetCarWithId(1).Result.Make);
+            var c = t.GetCarWithId(1);
+            Console.WriteLine();
         }
 
         private EntityAdapter _toTest;
