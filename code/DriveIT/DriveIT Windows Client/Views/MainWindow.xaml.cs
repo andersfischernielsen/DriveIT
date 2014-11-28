@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace DriveIT_Windows_Client
+namespace DriveIT_Windows_Client.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -34,7 +23,7 @@ namespace DriveIT_Windows_Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var entityWindow = new EntityWindow();
+            var entityWindow = new Views.EntityWindow();
             entityWindow.Show(); // works
         }
 

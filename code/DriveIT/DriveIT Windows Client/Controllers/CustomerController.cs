@@ -7,38 +7,38 @@ using DriveIT_Windows_Client.ViewModels;
 
 namespace DriveIT_Windows_Client.Controllers
 {
-    public class CarController
+    public class CustomerController
     {
-        public void CreateCar(CarViewModel car)
+        public void CreateCustomer(CustomerViewModel customer)
         {
             throw new NotImplementedException();
         }
 
-        public CarViewModel ReadCar(int id)
+        public CustomerViewModel ReadCustomer(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<CarViewModel> ReadCarList()
+        public IList<CustomerViewModel> ReadCustomerList()
         {
             throw new NotImplementedException();
         }
-        public void UpdateCar(CarViewModel car)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateCar(int id)
+        public void UpdateCustomer(CustomerViewModel customer)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteCar(CarViewModel car)
+        public void UpdateCustomer(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteCar(int id)
+        public void DeleteCustomer(CustomerViewModel customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCustomer(int id)
         {
             throw new NotImplementedException();
         }
