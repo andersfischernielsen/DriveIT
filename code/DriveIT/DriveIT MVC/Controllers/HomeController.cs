@@ -8,6 +8,7 @@ namespace DriveIT_MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private DriveITDBContext db = new DriveITDBContext();
         public ActionResult Index()
         {
             return View();
@@ -24,7 +25,7 @@ namespace DriveIT_MVC.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View(db.Employees.ToList());
         }
     }
 }
