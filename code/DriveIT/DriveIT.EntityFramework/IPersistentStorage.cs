@@ -8,31 +8,37 @@ namespace DriveIT.EntityFramework
         Car GetCarWithId(int id);
         IEnumerable<Car> GetAllCars();
         void CreateCar(Car carToCreate);
-        void DeleteCar(Car carToDelete);
+        void UpdateCar(int idToUpdate, Car carToReplaceWith);
+        void DeleteCar(int id);
 
-        Employee GetEmployeeWithId(int id);
+        Employee GetEmployeeWithId(int idToGet);
         IEnumerable<Employee> GetAllEmployees();
         void CreateEmployee(Employee employeeToCreate);
-        void DeleteEmployee(Employee employeeToDelete);
+        void UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith);
+        void DeleteEmployee(int idToDelete);
 
-        Customer GetCustomerWithId(int id);
+        Customer GetCustomerWithId(int idToGet);
         IEnumerable<Customer> GetAllCustomers();
         void CreateCustomer(Customer customerToCreate);
-        void DeleteCustomer(Customer customerToDelete);
+        void UpdateCustomer(int idToUpdate, Customer customerRequestToReplaceWith);
+        void DeleteCustomer(int idToDelete);
 
-        ContactRequest GetContactRequestWithId(int id);
+        ContactRequest GetContactRequestWithId(int idToGet);
         IEnumerable<ContactRequest> GetAllContactRequests();
         void CreateContactRequest(ContactRequest contactRequestToCreate);
-        void DeleteContactRequest(ContactRequest contactRequestToDelete);
+        void UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith);
+        void DeleteContactRequest(int idToDelete);
 
         Comment GetCommentWithId(int id);
         IEnumerable<Comment> GetAllCommentsForCar(Car car);
         void CreateComment(Comment commentToCreate);
-        void DeleteComment(Comment commentToDelete);
+        void UpdateComment(int idToUpdate, Comment commentToReplaceWith);
+        void DeleteComment(int idToDelete);
 
         Sale GetSaleWithId(int id);
         IEnumerable<Sale> GetAllSales();
         void CreateSale(Sale commentToCreate);
+        void UpdateSale(int idToUpdate, Sale saleToReplaceWith);
         void DeleteSale(Sale saleToDelete);
     }
 }

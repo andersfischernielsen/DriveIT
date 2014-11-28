@@ -33,17 +33,17 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async void DeleteCar(Car carToDelete)
+        public void UpdateCar(int idToUpdate, Car carToReplaceWith)
         {
-            using (var context = new EntityContext())
-            {
-                context.Cars.Remove(carToDelete);
-                await context.SaveChangesAsync();
-                //TODO: Implement checking to see if the request happened succesfully.
-            }
+            //TODO: Implement.
         }
 
-        public Employee GetEmployeeWithId(int id)
+        public void DeleteCar(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Employee GetEmployeeWithId(int idToGet)
         {
             throw new System.NotImplementedException();
         }
@@ -58,12 +58,17 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void DeleteEmployee(Employee employeeToDelete)
+        public void UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith)
         {
             throw new System.NotImplementedException();
         }
 
-        public Customer GetCustomerWithId(int id)
+        public void DeleteEmployee(int idToDelete)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Customer GetCustomerWithId(int idToGet)
         {
             throw new System.NotImplementedException();
         }
@@ -78,12 +83,17 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void DeleteCustomer(Customer customerToDelete)
+        public void UpdateCustomer(int idToUpdate, Customer customerRequestToReplaceWith)
         {
             throw new System.NotImplementedException();
         }
 
-        public ContactRequest GetContactRequestWithId(int id)
+        public void DeleteCustomer(int idToDelete)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ContactRequest GetContactRequestWithId(int idToGet)
         {
             throw new System.NotImplementedException();
         }
@@ -98,7 +108,12 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void DeleteContactRequest(ContactRequest contactRequestToDelete)
+        public void UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteContactRequest(int idToDelete)
         {
             throw new System.NotImplementedException();
         }
@@ -118,7 +133,12 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
-        public void DeleteComment(Comment commentToDelete)
+        public void UpdateComment(int idToUpdate, Comment commentToReplaceWith)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteComment(int idToDelete)
         {
             throw new System.NotImplementedException();
         }
@@ -138,9 +158,24 @@ namespace DriveIT.EntityFramework
             throw new System.NotImplementedException();
         }
 
+        public void UpdateSale(int idToUpdate, Sale saleToReplaceWith)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void DeleteSale(Sale saleToDelete)
         {
             throw new System.NotImplementedException();
+        }
+
+        public async void DeleteCar(Car carToDelete)
+        {
+            using (var context = new EntityContext())
+            {
+                context.Cars.Remove(carToDelete);
+                await context.SaveChangesAsync();
+                //TODO: Implement checking to see if the request happened succesfully.
+            }
         }
     }
 }
