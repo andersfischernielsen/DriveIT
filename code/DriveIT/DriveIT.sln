@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities", "DriveIT.Entities\DriveIT.Entities.csproj", "{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT MVC", "DriveIT MVC\DriveIT MVC.csproj", "{37DD8476-C0BE-4F1D-B5E3-E6D96DC3005A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT MVC.Tests", "DriveIT MVC.Tests\DriveIT MVC.Tests.csproj", "{9BE15BC7-27C5-4CEE-9C2D-9ABF4BB6FF7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT Windows Client", "DriveIT Windows Client\DriveIT Windows Client.csproj", "{428232FE-70B1-4952-8C55-F10472FDFE5F}"
 EndProject
@@ -23,14 +19,6 @@ Global
 		{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37DD8476-C0BE-4F1D-B5E3-E6D96DC3005A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37DD8476-C0BE-4F1D-B5E3-E6D96DC3005A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37DD8476-C0BE-4F1D-B5E3-E6D96DC3005A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37DD8476-C0BE-4F1D-B5E3-E6D96DC3005A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BE15BC7-27C5-4CEE-9C2D-9ABF4BB6FF7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BE15BC7-27C5-4CEE-9C2D-9ABF4BB6FF7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BE15BC7-27C5-4CEE-9C2D-9ABF4BB6FF7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BE15BC7-27C5-4CEE-9C2D-9ABF4BB6FF7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{428232FE-70B1-4952-8C55-F10472FDFE5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{428232FE-70B1-4952-8C55-F10472FDFE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{428232FE-70B1-4952-8C55-F10472FDFE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
