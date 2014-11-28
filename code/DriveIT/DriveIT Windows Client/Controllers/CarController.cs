@@ -44,23 +44,10 @@ namespace DriveIT_Windows_Client.Controllers
             return null;
         }
 
-        public async Task<IList<CarDto>> ReadCarList()
+        public async Task<IList<CarDetailDto>> ReadCarList()
         {
-            //var downloadedString = DriveITWebAPI.Read("cars");
-            //var cars = JsonConvert.DeserializeObject<CarDto[]>(downloadedString).ToList();
-            //cars.ToList().ForEach(i => Console.WriteLine(i.Color));
-
-            //return cars;
-
-            using (HttpClient httpClient = new HttpClient())
-            {
-                httpClient.BaseAddress = new Uri(apiUrl);
-                HttpResponseMessage response = await httpClient.GetAsync("/api/cars");
-                response.EnsureSuccessStatusCode();
-                var cars = await response.Content.ReadAsAsync<CarDetailDto[]>(); 
-                cars.ToList().ForEach(i => Console.WriteLine(i.Color));
-            }
-            return null;
+            var cars = await DriveITWebAPI.Read<CarDetailDto>("cars");
+            return cars;
 
         }
         public void UpdateCar(CarViewModel car)

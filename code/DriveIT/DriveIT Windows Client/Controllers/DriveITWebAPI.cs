@@ -30,7 +30,7 @@ namespace DriveIT_Windows_Client.Controllers
             using (HttpClient httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(apiUrl);
-                HttpResponseMessage response = await httpClient.GetAsync("/api/cars");
+                HttpResponseMessage response = await httpClient.GetAsync("/api/" + uri);
                 response.EnsureSuccessStatusCode();
                 var objects = await response.Content.ReadAsAsync<T[]>();
                 objects.ToList().ForEach(i => Console.WriteLine(i));
