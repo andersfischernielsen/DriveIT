@@ -33,7 +33,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newCommentId = await _repo.CreateComment(value.ToComment(_repo));
+            var newCommentId = await _repo.CreateComment(value.ToEntity(_repo));
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newCommentId });
@@ -49,7 +49,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return NotFound();
             }
-            _repo.UpdateComment(id, value.ToComment(_repo));
+            _repo.UpdateComment(id, value.ToEntity(_repo));
             return Ok();
         }
 

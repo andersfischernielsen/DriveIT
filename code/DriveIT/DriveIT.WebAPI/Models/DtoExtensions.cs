@@ -8,7 +8,7 @@ namespace DriveIT.WebAPI.Models
     public static class DtoExtensions
     {
 
-        public static Car ToCar(this CarDto dto)
+        public static Car ToEntity(this CarDto dto)
         {
             return new Car
             {
@@ -48,7 +48,7 @@ namespace DriveIT.WebAPI.Models
             };
         }
 
-        public static Customer ToCustomer(this CustomerDto dto)
+        public static Customer ToEntity(this CustomerDto dto)
         {
             return new Customer
             {
@@ -75,7 +75,7 @@ namespace DriveIT.WebAPI.Models
             };
         }
 
-        public static Sale ToSale(this SaleDto dto, IPersistentStorage repo)
+        public static Sale ToEntity(this SaleDto dto, IPersistentStorage repo)
         {
             return new Sale
             {
@@ -101,7 +101,7 @@ namespace DriveIT.WebAPI.Models
             };
         }
 
-        public static Comment ToComment(this CommentDto dto, IPersistentStorage repo)
+        public static Comment ToEntity(this CommentDto dto, IPersistentStorage repo)
         {
             return new Comment
             {
@@ -124,6 +124,29 @@ namespace DriveIT.WebAPI.Models
                 Date = comment.DateCreated,
                 Description = comment.Description,
                 Title = comment.Title
+            };
+        }
+
+        public static ContactRequest ToEntity(this ContactRequestDto dto, IPersistentStorage repo)
+        {
+            return new ContactRequest
+            {
+                Id = dto.Id.HasValue ? dto.Id.Value : 0,
+                Car = repo.GetCarWithId(dto.CarId),
+                Customer = repo.GetCustomerWithId(dto.CustomerId),
+                Created = dto.Requested
+            };
+        }
+
+        public static ContactRequestDto ToDto(this ContactRequest contactRequest)
+        {
+            return new ContactRequestDto
+            {
+                Id = contactRequest.Id,
+                CarId = contactRequest.Car.Id,
+                CustomerId = contactRequest.Customer.Id,
+                Requested = contactRequest.Created,
+                //TODO: employee / handled.
             };
         }
     }

@@ -78,7 +78,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newCarId = await _repo.CreateCar(value.ToCar());
+            var newCarId = await _repo.CreateCar(value.ToEntity());
             var response = Request.CreateResponse(HttpStatusCode.Created, value);
 
             var uri = Url.Link("DefaultApi", new { id = newCarId });
@@ -94,7 +94,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest("id not found!");
             }
-            _repo.UpdateCar(id, value.ToCar());
+            _repo.UpdateCar(id, value.ToEntity());
             return Ok();
         }
 
