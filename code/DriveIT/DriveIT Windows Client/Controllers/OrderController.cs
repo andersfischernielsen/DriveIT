@@ -2,40 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using DriveIT.Models;
 using DriveIT_Windows_Client.ViewModels;
 
 namespace DriveIT_Windows_Client.Controllers
 {
     public class OrderController
     {
-        public void CreateOrder()
+        public OrderController()
         {
-            throw new NotImplementedException();
+            TestMethod();
         }
-        public IList<OrderListViewModel> ReadOrderList()
+        private void TestMethod()
         {
-            throw new NotImplementedException();
+            var t = ReadOrderList().Result;
+            Console.WriteLine(t.Count);
+            try
+            {
+                CreateOrder(t[0]);
+            }
+            catch (Exception)
+            {
+                CreateOrder(new SaleDto()
+                {
+                    Price = 1000,
+                    Sold = DateTime.Now,
+                });
+            }
+            Thread.Sleep(5000);
+            t = ReadOrderList().Result;
+            Console.WriteLine(t.Count);
+
+
+            Console.WriteLine("Before update: " + ReadOrder(t[t.Count - 1].Id.Value).Result.Price);
+            int id = t[0].Id.Value;
+            CreateOrder(new SaleDto()
+            {
+                Price = 9999,
+                Sold = DateTime.Now,
+            });
+            Thread.Sleep(5000);
+            t = ReadOrderList().Result;
+            Console.WriteLine(t.Count);
+            Console.WriteLine("After update: " + ReadOrder(t[t.Count - 1].Id.Value).Result.Price);
+
+            DeleteOrder(t[0].Id.Value);
+            Thread.Sleep(5000);
+            t = ReadOrderList().Result;
+            Console.WriteLine(t.Count);
         }
-        public IList<OrderViewModel> ReadOrder(int orderID)
+
+        public async void CreateOrder(SaleDto sale)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Create("sales", sale);
         }
-        public void UpdateOrderList()
+        public async Task<SaleDto> ReadOrder(int id)
         {
-            throw new NotImplementedException();
+            var saleToReturn = await DriveITWebAPI.Read<SaleDto>("sales/" + id);
+            return saleToReturn;
         }
-        public void UpdateOrderList(int orderID)
+        public async Task<IList<SaleDto>> ReadOrderList()
         {
-            throw new NotImplementedException();
+            var sales = await DriveITWebAPI.ReadList<SaleDto>("sales");
+            return sales;
         }
-        public void DeleteOrder()
+        public async void UpdateOrder(SaleDto sale)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Update("sales", sale, sale.Id.Value);
         }
-        public void DeleteOrder(int orderID)
+        public async void DeleteOrder(SaleDto sale)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Delete<SaleDto>("sales", sale.Id.Value);
+        }
+        public async void DeleteOrder(int id)
+        {
+            await DriveITWebAPI.Delete<SaleDto>("sales", id);
         }
     }
 }

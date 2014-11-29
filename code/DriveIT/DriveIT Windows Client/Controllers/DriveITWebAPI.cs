@@ -35,7 +35,7 @@ namespace DriveIT_Windows_Client.Controllers
             }
         }
 
-        public async static Task<IList<T>> Read<T>(string uri)
+        public async static Task<IList<T>> ReadList<T>(string uri)
         {
             T[] objects = null;
                 using (HttpClient httpClient = new HttpClient())
@@ -57,6 +57,31 @@ namespace DriveIT_Windows_Client.Controllers
                 }
             return objects.ToList();
         }
+
+        public async static Task<T> Read<T>(string uri)
+        {
+            T objectToRead;
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    httpClient.BaseAddress = new Uri(apiUrl);
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage response = httpClient.GetAsync(uri).Result;
+                    response.EnsureSuccessStatusCode();
+                    objectToRead = await response.Content.ReadAsAsync<T>();
+                    Console.WriteLine(objectToRead);
+                }
+                catch (Exception)
+                {
+                    throw new NotImplementedException();
+                }
+
+            }
+            return objectToRead;
+        }
+
+
         public async static Task Update<T>(string uri, T objectToUpdate, int id)
         {
             using (HttpClient httpClient = new HttpClient())

@@ -15,13 +15,12 @@ namespace DriveIT_Windows_Client.Controllers
 {
     public class CarController
     {
-        static string apiUrl = @"http://localhost:5552";
         public CarController()
         {
-            testMethods();
+            TestMethod();
         }
 
-        private void testMethods()
+        private void TestMethod()
         {
             var t = ReadCarList().Result;
             Console.WriteLine(t.Count);
@@ -45,11 +44,8 @@ namespace DriveIT_Windows_Client.Controllers
             t = ReadCarList().Result;
             Console.WriteLine(t.Count);
 
-            DeleteCar(t[0].Id.Value);
-            Thread.Sleep(5000);
-            t = ReadCarList().Result;
-            Console.WriteLine(t.Count);
 
+            Console.WriteLine("Before update: " + ReadCar(t[t.Count - 1].Id.Value).Result.Color);
             int id = t[0].Id.Value;
             UpdateCar(new CarDto()
             {
@@ -64,7 +60,12 @@ namespace DriveIT_Windows_Client.Controllers
             Thread.Sleep(5000);
             t = ReadCarList().Result;
             Console.WriteLine(t.Count);
-            Console.WriteLine(t[t.Count - 1].Color);
+            Console.WriteLine("After update: " + ReadCar(t[t.Count - 1].Id.Value).Result.Color);
+
+            DeleteCar(t[0].Id.Value);
+            Thread.Sleep(5000);
+            t = ReadCarList().Result;
+            Console.WriteLine(t.Count);
         }
 
         public async void CreateCar(CarDto car)
@@ -74,13 +75,13 @@ namespace DriveIT_Windows_Client.Controllers
 
         public async Task<CarDto> ReadCar(int id)
         {
-            var cars = await DriveITWebAPI.Read<CarDto>("cars/" + id);
-            return cars.FirstOrDefault();
+            var carToReturn = await DriveITWebAPI.Read<CarDto>("cars/" + id);
+            return carToReturn;
         }
 
         public async Task<IList<CarDto>> ReadCarList()
         {
-            var cars = await DriveITWebAPI.Read<CarDto>("cars");
+            var cars = await DriveITWebAPI.ReadList<CarDto>("cars");
             return cars;
         }
         public async void UpdateCar(CarDto car)
@@ -88,9 +89,9 @@ namespace DriveIT_Windows_Client.Controllers
             await DriveITWebAPI.Update("cars", car, car.Id.Value);
         }
 
-        public void DeleteCar(CarViewModel car)
+        public async void DeleteCar(CarDto car)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Delete<CarDto>("cars", car.Id.Value);
         }
 
         public async void DeleteCar(int id)

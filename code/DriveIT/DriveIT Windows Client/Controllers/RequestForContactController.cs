@@ -2,40 +2,82 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using DriveIT.Models;
 using DriveIT_Windows_Client.ViewModels;
 
 namespace DriveIT_Windows_Client.Controllers
 {
     public class RequestForContactController
     {
-        public void CreateRequest()
+        public RequestForContactController()
         {
-            throw new NotImplementedException();
+            TestMethod();
         }
-        public IList<RequestForContactListViewModel> ReadRequestForContactList()
+        private void TestMethod()
         {
-            throw new NotImplementedException();
+            var t = ReadRequestForContactList().Result;
+            Console.WriteLine(t.Count);
+            try
+            {
+                CreateRequestForContact(t[0]);
+            }
+            catch (Exception)
+            {
+                CreateRequestForContact(new ContactRequestDto()
+                {
+                    Handled = false,
+                    Requested = DateTime.Now
+                });
+            }
+            Thread.Sleep(5000);
+            t = ReadRequestForContactList().Result;
+            Console.WriteLine(t.Count);
+
+
+            Console.WriteLine("Before update: " + ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Handled);
+            int id = t[0].Id.Value;
+            CreateRequestForContact(new ContactRequestDto()
+            {
+                Handled = true,
+                Requested = DateTime.Now
+            });
+            Thread.Sleep(5000);
+            t = ReadRequestForContactList().Result;
+            Console.WriteLine(t.Count);
+            Console.WriteLine("After update: " + ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Handled);
+
+            DeleteRequestForContact(t[0].Id.Value);
+            Thread.Sleep(5000);
+            t = ReadRequestForContactList().Result;
+            Console.WriteLine(t.Count);
         }
-        public IList<RequestForContactViewModel> ReadRequestForContact(int requestForContactID)
+        public async void CreateRequestForContact(ContactRequestDto contactRequest)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Create("contactRequests", contactRequest);
         }
-        public void UpdateRequestsForContact()
+        public async Task<ContactRequestDto> ReadRequestForContact(int id)
         {
-            throw new NotImplementedException();
+            var contactRequestToReturn = await DriveITWebAPI.Read<ContactRequestDto>("contactRequests/" + id);
+            return contactRequestToReturn;
         }
-        public void UpdateRequestsForContact(int requestForContactID)
+        public async Task<IList<ContactRequestDto>> ReadRequestForContactList()
         {
-            throw new NotImplementedException();
+            var contactRequests = await DriveITWebAPI.ReadList<ContactRequestDto>("contactRequests");
+            return contactRequests;
         }
-        public void DeleteRequestForContact()
+        public async void UpdateRequestsForContact(ContactRequestDto contactRequest)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Update("contactRequests", contactRequest, contactRequest.Id.Value);
         }
-        public void DeleteRequestForContact(int requestForContactID)
+        public async void DeleteRequestForContact(ContactRequestDto contactRequest)
         {
-            throw new NotImplementedException();
+            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests", contactRequest.Id.Value);
+        }
+        public async void DeleteRequestForContact(int id)
+        {
+            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests", id);
         }
     }
 }
