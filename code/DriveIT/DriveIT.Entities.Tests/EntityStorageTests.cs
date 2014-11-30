@@ -105,8 +105,8 @@ namespace DriveIT.Entities.Tests
 
             var result = await _toTest.GetAllCars(mockContext.Object);
             Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("Ford", result.ElementAt(0).Make);
-            Assert.AreEqual("Bentley", result.ElementAt(1).Make);
+            Assert.AreEqual("Ford", result[0].Make);
+            Assert.AreEqual("Bentley", result[1].Make);
         }
 
         [Test]
@@ -165,7 +165,7 @@ namespace DriveIT.Entities.Tests
             mockContext.Setup(c => c.Cars).Returns(mockSet.Object);
 
             await _toTest.DeleteCar(1, mockContext.Object);
-            Assert.AreEqual(1, mockSet.Object.Count());
+            Assert.AreEqual(1, mockContext.Object.Cars.Count());
             Assert.AreEqual("Bentley", mockContext.Object.Cars.Where(x => x.Id == 2).FirstOrDefault().Make);
         }
 
@@ -226,7 +226,7 @@ namespace DriveIT.Entities.Tests
 
             await _toTest.UpdateCar(1, new Car {Color = "Turquoise" }, mockContext.Object);
             Assert.AreEqual("Turquoise", mockSet.Object.Where(x => x.Id == 1).FirstOrDefault().Color);
-            Assert.AreEqual(20, mockSet.Object.Where(x => x.Id == 1).FirstOrDefault().DistanceDriven);
+            Assert.AreEqual(0, mockSet.Object.Where(x => x.Id == 1).FirstOrDefault().DistanceDriven);
         }
 
         public static void Main(string[] args)
