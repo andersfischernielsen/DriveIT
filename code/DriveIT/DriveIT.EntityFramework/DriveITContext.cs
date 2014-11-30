@@ -1,4 +1,6 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.SqlTypes;
 using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
@@ -6,11 +8,11 @@ namespace DriveIT.EntityFramework
 // ReSharper disable once InconsistentNaming
     public class DriveITContext : DbContext
     {
-        public DbSet<Car> Cars { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<ContactRequest> ContactRequests { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<ContactRequest> ContactRequests { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
     }
 }
