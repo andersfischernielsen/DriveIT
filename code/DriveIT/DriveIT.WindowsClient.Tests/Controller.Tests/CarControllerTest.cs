@@ -6,8 +6,13 @@ namespace DriveIT.WindowsClient.Tests
     [TestFixture]
     public class UnitTest1
     {
+        [SetUp]
+        public void Setup()
+        {
+            
+        }
         [Test]
-        public void TestMethod1()
+        public void TestAll()
         {
         }
     }
