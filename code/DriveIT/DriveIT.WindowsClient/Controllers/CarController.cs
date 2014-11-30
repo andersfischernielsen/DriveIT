@@ -17,55 +17,6 @@ namespace DriveIT_Windows_Client.Controllers
     {
         public CarController()
         {
-            TestMethod();
-        }
-
-        private void TestMethod()
-        {
-            var t = ReadCarList().Result;
-            Console.WriteLine(t.Count);
-            try
-            {
-                CreateCar(t[0]);
-            }
-            catch (Exception)
-            {
-                CreateCar(new CarDto()
-                {
-                    Color = "Red",
-                    Created = DateTime.Now,
-                    DistanceDriven = 10000,
-                    Model = "A8",
-                    Make = "Audi",
-                    Price = 200000
-                });
-            }
-            Thread.Sleep(5000);
-            t = ReadCarList().Result;
-            Console.WriteLine(t.Count);
-
-
-            Console.WriteLine("Before update: " + ReadCar(t[t.Count - 1].Id.Value).Result.Color);
-            int id = t[0].Id.Value;
-            UpdateCar(new CarDto()
-            {
-                Color = "Silver",
-                Created = DateTime.Now.AddDays(1),
-                DistanceDriven = 12000,
-                Model = "Swhifts",
-                Make = "Suzuki",
-                Price = 10000,
-                Id = id
-            });
-            Thread.Sleep(5000);
-            t = ReadCarList().Result;
-            Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + ReadCar(t[t.Count - 1].Id.Value).Result.Color);
-
-            DeleteCar(t[0].Id.Value);
-            Thread.Sleep(5000);
-            t = ReadCarList().Result;
-            Console.WriteLine(t.Count);
         }
 
         public async void CreateCar(CarDto car)

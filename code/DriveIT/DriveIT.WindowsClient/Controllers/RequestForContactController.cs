@@ -13,45 +13,6 @@ namespace DriveIT_Windows_Client.Controllers
     {
         public RequestForContactController()
         {
-            TestMethod();
-        }
-        private void TestMethod()
-        {
-            var t = ReadRequestForContactList().Result;
-            Console.WriteLine(t.Count);
-            try
-            {
-                CreateRequestForContact(t[0]);
-            }
-            catch (Exception)
-            {
-                CreateRequestForContact(new ContactRequestDto()
-                {
-                    Handled = false,
-                    Requested = DateTime.Now
-                });
-            }
-            Thread.Sleep(5000);
-            t = ReadRequestForContactList().Result;
-            Console.WriteLine(t.Count);
-
-
-            Console.WriteLine("Before update: " + ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Handled);
-            int id = t[0].Id.Value;
-            CreateRequestForContact(new ContactRequestDto()
-            {
-                Handled = true,
-                Requested = DateTime.Now
-            });
-            Thread.Sleep(5000);
-            t = ReadRequestForContactList().Result;
-            Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Handled);
-
-            DeleteRequestForContact(t[0].Id.Value);
-            Thread.Sleep(5000);
-            t = ReadRequestForContactList().Result;
-            Console.WriteLine(t.Count);
         }
         public async void CreateRequestForContact(ContactRequestDto contactRequest)
         {
@@ -67,7 +28,7 @@ namespace DriveIT_Windows_Client.Controllers
             var contactRequests = await DriveITWebAPI.ReadList<ContactRequestDto>("contactRequests");
             return contactRequests;
         }
-        public async void UpdateRequestsForContact(ContactRequestDto contactRequest)
+        public async void UpdateRequestForContact(ContactRequestDto contactRequest)
         {
             await DriveITWebAPI.Update("contactRequests", contactRequest, contactRequest.Id.Value);
         }

@@ -15,7 +15,6 @@ namespace DriveIT_Windows_Client.Views
         public MainWindow()
         {
             InitializeComponent();
-            new CarController();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

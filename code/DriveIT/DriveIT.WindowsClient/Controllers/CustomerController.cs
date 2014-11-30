@@ -13,48 +13,6 @@ namespace DriveIT_Windows_Client.Controllers
     {
         public CustomerController()
         {
-            TestMethod();
-        }
-
-        private void TestMethod()
-        {
-            var t = ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
-            try
-            {
-                CreateCustomer(t[0]);
-            }
-            catch (Exception)
-            {
-                CreateCustomer(new CustomerDto()
-                {
-                    Email = "jajaja@itu.dk",
-                    FirstName = "Mr Handsome",
-                    LastName = "Cake"
-                });
-            }
-            Thread.Sleep(5000);
-            t = ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
-
-
-            Console.WriteLine("Before update: " + ReadCustomer(t[t.Count - 1].Id.Value).Result.FirstName);
-            int id = t[0].Id.Value;
-            CreateCustomer(new CustomerDto()
-            {
-                Email = "jajaja@itu.dk",
-                FirstName = "Mr Not So Handsome",
-                LastName = "Cookie"
-            });
-            Thread.Sleep(5000);
-            t = ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + ReadCustomer(t[t.Count - 1].Id.Value).Result.FirstName);
-
-            DeleteCustomer(t[0].Id.Value);
-            Thread.Sleep(5000);
-            t = ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
         }
 
         public async void CreateCustomer(CustomerDto customer)

@@ -53,10 +53,23 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Controller.Tests\CarController.cs" />
+    <Compile Include="Controller.Tests\CarControllerTests.cs" />
+    <Compile Include="Controller.Tests\CustomerControllerTest.cs" />
+    <Compile Include="Controller.Tests\EmployeeControllerTests.cs" />
+    <Compile Include="Controller.Tests\OrderControllerTests.cs" />
+    <Compile Include="Controller.Tests\RequestForContactControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
+      <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
+      <Name>DriveIT.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DriveIT.WindowsClient\DriveIT.WindowsClient.csproj">
+      <Project>{428232FE-70B1-4952-8C55-F10472FDFE5F}</Project>
+      <Name>DriveIT.WindowsClient</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
