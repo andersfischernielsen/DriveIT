@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.EntityFramework", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities", "DriveIT.Entities\DriveIT.Entities.csproj", "{16C04BA6-6FE0-4986-B33A-DB39A723E02E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WindowsClient", "DriveIT Windows Client\DriveIT.WindowsClient.csproj", "{428232FE-70B1-4952-8C55-F10472FDFE5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WindowsClient", "DriveIT.WindowsClient\DriveIT.WindowsClient.csproj", "{428232FE-70B1-4952-8C55-F10472FDFE5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.MVC", "DriveIT.MVC\DriveIT.MVC.csproj", "{7A1CE956-9DAF-488C-9EE4-94F4E9903999}"
 EndProject
