@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
@@ -12,7 +9,12 @@ namespace DriveIT.WebAPI.Controllers
 {
     public class ContactRequestsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityStorage();
+        private readonly IPersistentStorage _repo;
+
+        public ContactRequestsController(IPersistentStorage repo = null)
+        {
+            _repo = repo ?? new EntityStorage();
+        }
 
         // GET: api/ContactRequests
         public async Task<IHttpActionResult> Get()
@@ -24,7 +26,7 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/ContactRequests/5
         public async Task<IHttpActionResult> Get(int id)
         {
-            var contactRequest = _repo.GetContactRequestWithId(id);
+            var contactRequest = await _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
             {
                 return NotFound();
@@ -40,11 +42,7 @@ namespace DriveIT.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
             var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity(_repo));
-            var response = Request.CreateResponse(HttpStatusCode.Created, value);
-
-            var uri = Url.Link("DefaultApi", new { id = newContactRequestId });
-            response.Headers.Location = new Uri(uri);
-            return ResponseMessage(response);
+            return CreatedAtRoute("DefaultApi", new { id = newContactRequestId }, value);
         }
 
         // PUT: api/ContactRequests/5

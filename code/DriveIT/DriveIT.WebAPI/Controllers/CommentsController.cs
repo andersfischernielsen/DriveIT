@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
@@ -12,7 +9,12 @@ namespace DriveIT.WebAPI.Controllers
 {
     public class CommentsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityStorage();
+        private readonly IPersistentStorage _repo;
+
+        public CommentsController(IPersistentStorage repo = null)
+        {
+            _repo = repo ?? new EntityStorage();
+        }
 
         // GET: api/Comments/5
         // Where 5 is CarId
@@ -35,11 +37,7 @@ namespace DriveIT.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
             var newCommentId = await _repo.CreateComment(value.ToEntity(_repo));
-            var response = Request.CreateResponse(HttpStatusCode.Created, value);
-
-            var uri = Url.Link("DefaultApi", new { id = newCommentId });
-            response.Headers.Location = new Uri(uri);
-            return ResponseMessage(response);
+            return CreatedAtRoute("DefaultApi", new { id = newCommentId }, value);
         }
 
         // PUT: api/Comments/5

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
@@ -12,7 +10,12 @@ namespace DriveIT.WebAPI.Controllers
 {
     public class CarsController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityStorage();
+        private readonly IPersistentStorage _repo;
+
+        public CarsController(IPersistentStorage repo = null)
+        {
+            _repo = repo ?? new EntityStorage();
+        }
 
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
@@ -26,7 +29,7 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Cars/5
         public async Task<IHttpActionResult> Get(int id)
         {
-            var car = _repo.GetCarWithId(id);
+            var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
                 return NotFound();
@@ -77,12 +80,12 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if (value == null)
+            {
+                return BadRequest("Null value not allowed.");
+            }
             var newCarId = await _repo.CreateCar(value.ToEntity());
-            var response = Request.CreateResponse(HttpStatusCode.Created, value);
-
-            var uri = Url.Link("DefaultApi", new { id = newCarId });
-            response.Headers.Location = new Uri(uri);
-            return ResponseMessage(response);
+            return CreatedAtRoute("DefaultApi", new {id = newCarId}, value);
         }
 
         // PUT: api/Cars/5
