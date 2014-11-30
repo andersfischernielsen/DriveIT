@@ -20,7 +20,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Car>> GetAllCars(DriveITContext optionalContext = null)
+        public async Task<List<Car>> GetAllCars(DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
 
@@ -91,7 +91,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        public async Task<List<Employee>> GetAllEmployees()
         {
             using (var context = new DriveITContext())
             {
@@ -147,7 +147,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Customer>> GetAllCustomers()
+        public async Task<List<Customer>> GetAllCustomers()
         {
             using (var context = new DriveITContext())
             {
@@ -203,7 +203,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<ContactRequest>> GetAllContactRequests()
+        public async Task<List<ContactRequest>> GetAllContactRequests()
         {
             using (var context = new DriveITContext())
             {
@@ -255,7 +255,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentsForCar(int carId)
+        public async Task<List<Comment>> GetAllCommentsForCar(int carId)
         {
             using (var context = new DriveITContext())
             {
@@ -310,7 +310,7 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<IEnumerable<Sale>> GetAllSales()
+        public async Task<List<Sale>> GetAllSales()
         {
             using (var context = new DriveITContext())
             {
