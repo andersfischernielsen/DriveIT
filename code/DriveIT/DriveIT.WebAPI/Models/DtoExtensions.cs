@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
@@ -57,7 +58,7 @@ namespace DriveIT.WebAPI.Models
                 LastName = dto.LastName,
                 Id = dto.Id.HasValue ? dto.Id.Value : 0,
                 //Todo fix.
-                PhoneNumber = long.Parse(dto.Phone),
+                PhoneNumber = dto.Phone,
                 Username = dto.Username
             };
         }
@@ -75,16 +76,16 @@ namespace DriveIT.WebAPI.Models
             };
         }
 
-        public static Sale ToEntity(this SaleDto dto, IPersistentStorage repo)
+        public static async Task<Sale> ToEntity(this SaleDto dto, IPersistentStorage repo)
         {
             return new Sale
             {
                 Id = dto.Id.HasValue ? dto.Id.Value : 0,
                 DateOfSale = dto.Sold,
                 Price = dto.Price,
-                Car = repo.GetCarWithId(dto.CarId),
-                Customer = repo.GetCustomerWithId(dto.CustomerId),
-                Employee = repo.GetEmployeeWithId(dto.EmployeeId)
+                Car = await repo.GetCarWithId(dto.CarId),
+                Customer = await repo.GetCustomerWithId(dto.CustomerId),
+                Employee = await repo.GetEmployeeWithId(dto.EmployeeId)
             };
         }
 
@@ -101,13 +102,13 @@ namespace DriveIT.WebAPI.Models
             };
         }
 
-        public static Comment ToEntity(this CommentDto dto, IPersistentStorage repo)
+        public static async Task<Comment> ToEntity(this CommentDto dto, IPersistentStorage repo)
         {
             return new Comment
             {
                 Id = dto.Id.HasValue ? dto.Id.Value : 0,
-                Car = repo.GetCarWithId(dto.CarId),
-                Customer = repo.GetCustomerWithId(dto.CustomerId),
+                Car = await repo.GetCarWithId(dto.CarId),
+                Customer = await repo.GetCustomerWithId(dto.CustomerId),
                 Description = dto.Description,
                 Title = dto.Title,
                 DateCreated = dto.Date
@@ -127,13 +128,13 @@ namespace DriveIT.WebAPI.Models
             };
         }
 
-        public static ContactRequest ToEntity(this ContactRequestDto dto, IPersistentStorage repo)
+        public static async Task<ContactRequest> ToEntity(this ContactRequestDto dto, IPersistentStorage repo)
         {
             return new ContactRequest
             {
                 Id = dto.Id.HasValue ? dto.Id.Value : 0,
-                Car = repo.GetCarWithId(dto.CarId),
-                Customer = repo.GetCustomerWithId(dto.CustomerId),
+                Car = await repo.GetCarWithId(dto.CarId),
+                Customer = await repo.GetCustomerWithId(dto.CustomerId),
                 Created = dto.Requested
             };
         }

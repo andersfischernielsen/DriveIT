@@ -41,7 +41,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity(_repo));
+            var newContactRequestId = await _repo.CreateContactRequest(await value.ToEntity(_repo));
             return CreatedAtRoute("DefaultApi", new { id = newContactRequestId }, value);
         }
 
@@ -52,7 +52,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateContactRequest(id, value.ToEntity(_repo));
+            await _repo.UpdateContactRequest(id, await value.ToEntity(_repo));
             return Ok();
         }
 

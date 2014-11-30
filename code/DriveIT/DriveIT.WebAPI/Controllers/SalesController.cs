@@ -42,7 +42,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newSaleId = await _repo.CreateSale(value.ToEntity(_repo));
+            var newSaleId = await _repo.CreateSale(await value.ToEntity(_repo));
             return CreatedAtRoute("DefaultApi", new { id = newSaleId }, value);
         }
 
@@ -53,7 +53,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateSale(id, value.ToEntity(_repo));
+            await _repo.UpdateSale(id, await value.ToEntity(_repo));
             return Ok();
         }
 
