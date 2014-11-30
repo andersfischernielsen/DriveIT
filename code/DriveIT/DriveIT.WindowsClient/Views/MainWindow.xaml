@@ -1,7 +1,7 @@
 ﻿<Window x:Class="DriveIT_Windows_Client.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="900" Width="1600">
+        Title="MainWindow" Height="900" Width="1600" Background="#FFE9EFF3">
     <Window.Resources>
         <ControlTemplate x:Key="UserControlCars" TargetType="{x:Type UserControl}">
             <Grid>
@@ -9,12 +9,6 @@
             </Grid>
         </ControlTemplate>
     </Window.Resources>
-    <Window.Background>
-        <RadialGradientBrush RadiusX="1" RadiusY="1">
-            <GradientStop Color="Black" Offset="1"/>
-            <GradientStop Color="White"/>
-        </RadialGradientBrush>
-    </Window.Background>
     <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ListUpdateGroup"/>
