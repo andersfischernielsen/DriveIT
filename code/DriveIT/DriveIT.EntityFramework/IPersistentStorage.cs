@@ -12,7 +12,7 @@ namespace DriveIT.EntityFramework
     {
         Task<Car> GetCarWithId(int idToGet, DriveITContext optionalContext = null);
 
-        Task<IEnumerable<Car>> GetAllCars(DriveITContext optionalContext = null);
+        Task<List<Car>> GetAllCars(DriveITContext optionalContext = null);
 
         Task<int> CreateCar(Car carToCreate, DriveITContext optionalContext = null);
 
@@ -23,7 +23,7 @@ namespace DriveIT.EntityFramework
 
         Task<Employee> GetEmployeeWithId(int idToGet);
 
-        Task<IEnumerable<Employee>> GetAllEmployees();
+        Task<List<Employee>> GetAllEmployees();
 
         Task<int> CreateEmployee(Employee employeeToCreate);
 
@@ -33,7 +33,7 @@ namespace DriveIT.EntityFramework
 
         Task<Customer> GetCustomerWithId(int idToGet);
 
-        Task<IEnumerable<Customer>> GetAllCustomers();
+        Task<List<Customer>> GetAllCustomers();
 
         Task<int> CreateCustomer(Customer customerToCreate);
 
@@ -43,7 +43,7 @@ namespace DriveIT.EntityFramework
 
         Task<ContactRequest> GetContactRequestWithId(int idToGet);
 
-        Task<IEnumerable<ContactRequest>> GetAllContactRequests();
+        Task<List<ContactRequest>> GetAllContactRequests();
 
         Task<int> CreateContactRequest(ContactRequest contactRequestToCreate);
 
@@ -54,7 +54,7 @@ namespace DriveIT.EntityFramework
 
         Task<Comment> GetCommentWithId(int idToGet);
 
-        Task<IEnumerable<Comment>> GetAllCommentsForCar(int carId);
+        Task<List<Comment>> GetAllCommentsForCar(int carId);
 
         Task<int> CreateComment(Comment commentToCreate);
 
@@ -64,7 +64,7 @@ namespace DriveIT.EntityFramework
 
         Task<Sale> GetSaleWithId(int idToGet);
 
-        Task<IEnumerable<Sale>> GetAllSales();
+        Task<List<Sale>> GetAllSales();
 
         Task<int> CreateSale(Sale saleToCreate);
 
