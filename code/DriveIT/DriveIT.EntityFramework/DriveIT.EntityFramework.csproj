@@ -48,7 +48,8 @@
   <ItemGroup>
     <Compile Include="DriveITContext.cs" />
     <Compile Include="EntityStorage.cs" />
-    <Compile Include="Migrations\201411281016452_InitialCreate.cs" />
+    <Compile Include="IPersistentStorage.cs" />
+    <Compile Include="MicrosoftTestingAsyncMagic.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
