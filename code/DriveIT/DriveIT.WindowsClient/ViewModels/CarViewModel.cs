@@ -14,7 +14,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                return _carDto.Id.Value;
+                return _carDto.Id.GetValueOrDefault();
             }
             set
             {
