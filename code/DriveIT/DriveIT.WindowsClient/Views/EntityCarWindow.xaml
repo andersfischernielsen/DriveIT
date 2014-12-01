@@ -80,20 +80,20 @@
 			</Grid.ColumnDefinitions>
 			<Label Content="Car" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="51.96" Width="98.71" FontSize="32" FontFamily="Segoe UI Light"/>
 			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,10,158.332,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Id" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,43,108.334,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,76,108.334,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Make" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,109,186,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Year" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,142,205,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<DatePicker Padding="6,2" Margin="10,175,186,0" VerticalAlignment="Top" Background="#FFC1C5CF" BorderBrush="{x:Null}" ToolTip="Created" Height="28" FontSize="16" Grid.Row="1"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,208,299.29,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Sold" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,241,174,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Milage" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,274,244,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Color" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,307,0,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="DistanceDriven" Height="28" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="179.21"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="9.999,175,263.925,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Fuel" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="9.999,208,263.925,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Drive" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="9.999,241,247.715,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Transmission" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="9.999,274,263.925,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="TopSpeed" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
-			<xctk:WatermarkTextBox Padding="8,2.5" Margin="9.999,307,209.791,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="NoughtTo100" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,43,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,76,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Make" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,109,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Year" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,142,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+			<DatePicker Padding="6,2" Margin="10,175,158,0" VerticalAlignment="Top" Background="#FFC1C5CF" BorderBrush="{x:Null}" ToolTip="Created" Height="28" FontSize="16" Grid.Row="1"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,208,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Sold" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,241,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Milage" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,274,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Color" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,307,158,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="DistanceDriven" Height="28" Grid.Row="1" VerticalAlignment="Top" Width="251"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,175,163,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Fuel" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,208,163,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Drive" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,241,163,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="Transmission" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,274,163,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="TopSpeed" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
+			<xctk:WatermarkTextBox Padding="8,2.5" Margin="10,307,163,0" BorderBrush="{x:Null}" Background="#FFC1C5CF" FontSize="16" Watermark="NoughtTo100" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
 			<Image Grid.Column="1" Margin="9.999,10,0,0" Grid.RowSpan="2" Source="Image/CarImage.jpg" VerticalAlignment="Top" HorizontalAlignment="Left" Height="235" Width="383.794"/>
 		</Grid>
 	</Grid>
