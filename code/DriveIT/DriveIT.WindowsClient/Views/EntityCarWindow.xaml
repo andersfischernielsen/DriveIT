@@ -3,11 +3,15 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 	xmlns:local="clr-namespace:DriveIT.WindowsClient"
+	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
 	x:Class="DriveIT.WindowsClient.EntityCarWindow"
 	x:Name="Window"
 	Title="EntityCarWindow"
 	Width="853" Height="553" Background="#FFE9EFF3">
     <Grid Margin="0,0,2,1.084">
+        <Grid.DataContext>
+            <viewModels:CarViewModel/>
+        </Grid.DataContext>
         <Grid Height="80" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -81,9 +85,9 @@
             </Grid.ColumnDefinitions>
             <Label Content="Car" Style="{StaticResource HeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="99"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="Id" Height="28" Grid.Row="1"
-                                   Grid.Column="0" VerticalAlignment="Top" />
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="Make" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
+                                   Grid.Column="0" VerticalAlignment="Top" Text="{Binding CarId}" />
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarModel}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="Make" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarMake}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="Year" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,51,0" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top"/>
             <DatePicker Padding="6,2" Margin="10,175,51,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Created" Height="28" FontSize="16" Grid.Row="1">
