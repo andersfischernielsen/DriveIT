@@ -94,7 +94,7 @@ namespace DriveIT.WebAPI.Controllers
             var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
-                return BadRequest("id not found!");
+                return NotFound();
             }
             await _repo.UpdateCar(id, value.ToEntity());
             return Ok();
@@ -106,7 +106,7 @@ namespace DriveIT.WebAPI.Controllers
             var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
-                return BadRequest("Id not found");
+                return NotFound();
             }
             await _repo.DeleteCar(id);
             return Ok();

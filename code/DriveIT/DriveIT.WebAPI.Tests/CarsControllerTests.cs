@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using DriveIT.Entities;
@@ -80,13 +79,8 @@ namespace DriveIT.WebAPI.Tests
             var mockRepo = repo.Create<IPersistentStorage>();
             mockRepo.Setup(x => x.GetAllCars(null)).Returns(cars);
             mockRepo.Setup(x => x.GetCarWithId(2, null)).Returns(Task.Run(() => carList.Find(c => c.Id == 2)));
-            mockRepo.Setup(x => x.CreateCar(_car3, null)).Returns(Task.Run(() =>
-            {
-                var id = carList.Max(c => c.Id);// + 1;
-                _car3.Id = id;
-                //carList.Add(_car3);
-                return id;
-            }));
+            
+            mockRepo.Setup(x => x.CreateCar(It.IsAny<Car>(), null)).Returns(Task.Run(() => carList.Max(x => x.Id) + 1));
 
             _controller = new CarsController(mockRepo.Object);
         }
@@ -205,6 +199,7 @@ namespace DriveIT.WebAPI.Tests
             // Assert
             Assert.IsNotNull(message);
             Assert.AreEqual("DefaultApi", message.RouteName);
+            Assert.IsTrue(message.RouteValues.ContainsKey("id"));
             Assert.AreEqual(3, message.RouteValues["id"]);
         }
 
@@ -215,16 +210,40 @@ namespace DriveIT.WebAPI.Tests
             Assert.IsNotNull(message);
             Assert.AreEqual("Null value not allowed.", message.Message);
 
-            _controller.Request = new HttpRequestMessage {Method = HttpMethod.Post, Content = new StringContent("")};
             //TODO Model state cannot be tested without running the api.
-            var message1 = await _controller.Post(new CarDto()) as InvalidModelStateResult;
-            Assert.IsNotNull(message1);
         }
 
         [TestMethod]
         public async Task Put_Success()
         {
-            var message = await _controller.Put(3, _car3.ToDto());
+            var message = await _controller.Put(2, _car3.ToDto()) as OkResult;
+            Assert.IsNotNull(message);
+        }
+
+        [TestMethod]
+        public async Task Put_NotFound()
+        {
+            var message = await _controller.Put(29141, _car3.ToDto()) as NotFoundResult;
+            Assert.IsNotNull(message);
+        }
+
+        [TestMethod]
+        public async Task Delete_Ok()
+        {
+            var message = await _controller.Delete(2) as OkResult;
+            Assert.IsNotNull(message);
+        }
+
+        [TestMethod]
+        public async Task NotFound()
+        {
+            var message = await _controller.Delete(8) as NotFoundResult;
+            Assert.IsNotNull(message);
+
+            message = await _controller.Delete(0) as NotFoundResult;
+            Assert.IsNotNull(message);
+
+            message = await _controller.Delete(-1) as NotFoundResult;
             Assert.IsNotNull(message);
         }
     }
