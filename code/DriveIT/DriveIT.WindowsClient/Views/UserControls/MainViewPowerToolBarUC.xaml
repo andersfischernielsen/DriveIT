@@ -4,6 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:ViewModels="clr-namespace:DriveIT_Windows_Client.ViewModels"
+	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
 	mc:Ignorable="d"
 	x:Class="DriveIT.WindowsClient.MainViewPowerToolBarUC"
 	x:Name="UserControl" Height="80" VerticalAlignment="Top" Width="833" Template="{DynamicResource CarEntitiesPowerToolBarUC}">
@@ -14,7 +15,7 @@
                     <SolidColorBrush Color="{DynamicResource PowerToolBarColor}" Opacity="0.5"/>
                 </Grid.Background>
                 <Grid.DataContext>
-                    <ViewModels:CarListViewModel/>
+                    <viewModels:CarListViewModel/>
                 </Grid.DataContext>
                 <Label Content="Cars Power Tools:" Style="{DynamicResource HeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="255.197"/>
                 <Button Content="Create" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="288,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>

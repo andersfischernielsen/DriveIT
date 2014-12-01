@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT_Windows_Client.Controllers;
+using DriveIT_Windows_Client.ViewModels;
 
-namespace DriveIT_Windows_Client.ViewModels
+namespace DriveIT.WindowsClient.ViewModels
 {
     public class CarListViewModel : IViewModelBase
     {

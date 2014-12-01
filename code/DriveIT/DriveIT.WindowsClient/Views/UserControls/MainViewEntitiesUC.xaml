@@ -4,6 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:ViewModels="clr-namespace:DriveIT_Windows_Client.ViewModels"
+	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
 	mc:Ignorable="d"
 	x:Class="DriveIT.WindowsClient.MainViewEntitiesUC"
 	x:Name="UserControl"
@@ -19,7 +20,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Grid.DataContext>
-					<ViewModels:CarListViewModel/>
+					<viewModels:CarListViewModel/>
 				</Grid.DataContext>
 				<Label Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="59" Width="212.993" FontSize="32" Style="{DynamicResource HeaderLabel}"/>
 				<DataGrid HorizontalAlignment="Stretch" Margin="10" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Width="Auto" ItemsSource="{Binding Mode=OneWay}"/>
