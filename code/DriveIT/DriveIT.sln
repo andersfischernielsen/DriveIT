@@ -13,13 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.EntityFramework", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities", "DriveIT.Entities\DriveIT.Entities.csproj", "{16C04BA6-6FE0-4986-B33A-DB39A723E02E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT Windows Client", "DriveIT Windows Client\DriveIT Windows Client.csproj", "{428232FE-70B1-4952-8C55-F10472FDFE5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WindowsClient", "DriveIT.WindowsClient\DriveIT.WindowsClient.csproj", "{428232FE-70B1-4952-8C55-F10472FDFE5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.MVC", "DriveIT.MVC\DriveIT.MVC.csproj", "{7A1CE956-9DAF-488C-9EE4-94F4E9903999}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.MVC.Tests", "DriveIT.MVC.Tests\DriveIT.MVC.Tests.csproj", "{BA36A21E-73B8-41FA-B805-0215D66DF5B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WebAPI.Tests", "DriveIT.WebAPI.Tests\DriveIT.WebAPI.Tests.csproj", "{EED2C79F-8DB2-4A69-93C4-222155A77A56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WindowsClient.Tests", "DriveIT.WindowsClient.Tests\DriveIT.WindowsClient.Tests.csproj", "{E0C9361D-30C3-47E3-B119-05F8301CE48B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,16 @@ Global
 		{EED2C79F-8DB2-4A69-93C4-222155A77A56}.Release|ARM.ActiveCfg = Release|Any CPU
 		{EED2C79F-8DB2-4A69-93C4-222155A77A56}.Release|x64.ActiveCfg = Release|Any CPU
 		{EED2C79F-8DB2-4A69-93C4-222155A77A56}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|x64.ActiveCfg = Release|Any CPU
+		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

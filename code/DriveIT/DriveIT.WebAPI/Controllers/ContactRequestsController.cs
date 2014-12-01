@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
 
@@ -59,7 +58,7 @@ namespace DriveIT.WebAPI.Controllers
         // DELETE: api/ContactRequests/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var contactRequest = _repo.GetContactRequestWithId(id);
+            var contactRequest = await _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
             {
                 return NotFound();

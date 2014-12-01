@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
 
@@ -43,7 +42,7 @@ namespace DriveIT.WebAPI.Controllers
         // PUT: api/Comments/5
         public async Task<IHttpActionResult> Put(int id, [FromBody]CommentDto value)
         {
-            var comment = _repo.GetCommentWithId(id);
+            var comment = await _repo.GetCommentWithId(id);
             if (comment == null)
             {
                 return NotFound();

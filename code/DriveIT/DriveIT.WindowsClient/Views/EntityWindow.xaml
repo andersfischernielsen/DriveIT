@@ -1,0 +1,35 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+	x:Class="DriveIT_Windows_Client.Views.EntityWindow"
+	x:Name="Window"
+	Title="EntityWindow"
+	Width="775" Height="568" Background="#FF454A4D">
+    <Grid Margin="0,0,-0.667,0">
+        <Grid Height="80" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="208.667"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <SolidColorBrush Color="#FF2E4585" Opacity="0.5"/>
+            </Grid.Background>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="210.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="420.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+            <Button Content="Button" HorizontalAlignment="Right" Margin="0,10,111.333,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+        </Grid>
+        <Grid Margin="10,85,10,10">
+            <Label Content="Car" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="51.96" Width="98.71" FontSize="32" FontFamily="Segoe UI Light"/>
+            <Label Content="Model:" HorizontalAlignment="Left" Margin="10,66.96,0,0" VerticalAlignment="Top" Width="88.657" FontSize="16"/>
+            <TextBox HorizontalAlignment="Left" Height="31.28" Margin="103.657,66.96,0,0" TextWrapping="Wrap" Text="Audi A8" VerticalAlignment="Top" Width="389" FontSize="16"/>
+            <Label Content="Price:" HorizontalAlignment="Left" Margin="10,103.24,0,0" VerticalAlignment="Top" Width="88.657" FontSize="16" Height="33.28"/>
+            <TextBox HorizontalAlignment="Left" Height="31.28" Margin="103.657,105.24,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="389" FontSize="16"/>
+        </Grid>
+    </Grid>
+</Window>

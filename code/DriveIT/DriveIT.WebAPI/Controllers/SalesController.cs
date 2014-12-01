@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
 
@@ -60,7 +59,7 @@ namespace DriveIT.WebAPI.Controllers
         // DELETE: api/Sales/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var sale = _repo.GetSaleWithId(id);
+            var sale = await _repo.GetSaleWithId(id);
             if (sale == null)
             {
                 return NotFound();

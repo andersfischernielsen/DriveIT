@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
 
@@ -49,7 +48,7 @@ namespace DriveIT.WebAPI.Controllers
         // PUT: api/Customers/5
         public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerDto value)
         {
-            var customer = _repo.GetCustomerWithId(id);
+            var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();
@@ -61,7 +60,7 @@ namespace DriveIT.WebAPI.Controllers
         // DELETE: api/Customers/5
         public async Task<IHttpActionResult> Delete(int id)
         {
-            var customer = _repo.GetCustomerWithId(id);
+            var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();

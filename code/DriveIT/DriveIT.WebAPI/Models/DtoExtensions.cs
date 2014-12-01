@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using DriveIT.Entities;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
+using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Models
 {
@@ -17,7 +17,7 @@ namespace DriveIT.WebAPI.Models
                 Created = dto.Created,
                 DistanceDriven = dto.DistanceDriven,
                 Fuel = dto.Fuel.ToString(),
-                Id = dto.Id.HasValue ? dto.Id.Value : 0,
+                Id = dto.Id ?? 0,
                 Make = dto.Make,
                 Model = dto.Model,
                 Price = dto.Price,
@@ -43,7 +43,7 @@ namespace DriveIT.WebAPI.Models
                 Sold = car.Sold,
                 Transmission = car.Transmission,
                 Year = car.Year,
-                Fuel = (FuelType) Enum.Parse(typeof (FuelType), car.Fuel),
+                Fuel = (FuelType)Enum.Parse(typeof(FuelType), car.Fuel),
                 Drive = car.Drive,
                 Mileage = car.Mileage
             };
@@ -56,7 +56,7 @@ namespace DriveIT.WebAPI.Models
                 Email = dto.Email,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                Id = dto.Id.HasValue ? dto.Id.Value : 0,
+                Id = dto.Id ?? 0,
                 //Todo fix.
                 PhoneNumber = dto.Phone,
                 Username = dto.Username
@@ -80,7 +80,7 @@ namespace DriveIT.WebAPI.Models
         {
             return new Sale
             {
-                Id = dto.Id.HasValue ? dto.Id.Value : 0,
+                Id = dto.Id ?? 0,
                 DateOfSale = dto.Sold,
                 Price = dto.Price,
                 Car = await repo.GetCarWithId(dto.CarId),
@@ -148,6 +148,30 @@ namespace DriveIT.WebAPI.Models
                 CustomerId = contactRequest.Customer.Id,
                 Requested = contactRequest.Created,
                 //TODO: employee / handled.
+            };
+        }
+
+        public static Employee ToEntity(this EmployeeDto dto)
+        {
+            return new Employee
+            {
+                Id = dto.Id ?? 0,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Username = dto.Username,
+                PhoneNumber = dto.Phone
+            };
+        }
+
+        public static EmployeeDto ToDto(this Employee employee)
+        {
+            return new EmployeeDto
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Username = employee.Username,
+                Phone = employee.PhoneNumber
             };
         }
     }
