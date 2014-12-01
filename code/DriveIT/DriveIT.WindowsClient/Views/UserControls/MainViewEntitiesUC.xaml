@@ -3,37 +3,36 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:ViewModels="clr-namespace:DriveIT_Windows_Client.ViewModels"
 	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
 	mc:Ignorable="d"
 	x:Class="DriveIT.WindowsClient.MainViewEntitiesUC"
 	x:Name="UserControl"
-	d:DesignWidth="640" d:DesignHeight="480" Background="#FFA23333" Template="{DynamicResource CarEntitiesUCTemplate}">
-	<UserControl.Resources>
-		<ControlTemplate x:Key="CarEntitiesUCTemplate" TargetType="{x:Type UserControl}">
-			<Grid>
-				<Grid.Background>
-					<SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
-				</Grid.Background>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="75"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
-				<Grid.DataContext>
-					<viewModels:CarListViewModel/>
-				</Grid.DataContext>
-				<Label Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="59" Width="212.993" FontSize="32" Style="{DynamicResource HeaderLabel}"/>
-				<DataGrid HorizontalAlignment="Stretch" Margin="10" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Width="Auto" ItemsSource="{Binding Mode=OneWay}"/>
-			</Grid>
-		</ControlTemplate>
-		<ControlTemplate x:Key="RequestForContactEntititesUCTemplate" TargetType="{x:Type UserControl}">
-			<Grid>
-				<Grid.Background>
-					<SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
-				</Grid.Background>
-				<Label Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="32" Style="{DynamicResource HeaderLabel}"/>
-			</Grid>
-		</ControlTemplate>
-	</UserControl.Resources>
-	<Grid x:Name="LayoutRoot" Height="80" Width="640"/>
+	d:DesignWidth="640" d:DesignHeight="480" Template="{DynamicResource CarEntitiesUCTemplate}">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="CarEntitiesUCTemplate" TargetType="{x:Type UserControl}">
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.DataContext>
+                    <viewModels:CarListViewModel/>
+                </Grid.DataContext>
+                <Label Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="59" Width="212.993" FontSize="32" Style="{DynamicResource HeaderLabel}"/>
+                <DataGrid HorizontalAlignment="Stretch" Margin="10" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Width="Auto" ItemsSource="{Binding CarViewModels}"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="RequestForContactEntititesUCTemplate" TargetType="{x:Type UserControl}">
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
+                </Grid.Background>
+                <Label Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="32" Style="{DynamicResource HeaderLabel}"/>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot" Height="80" Width="640"/>
 </UserControl>
