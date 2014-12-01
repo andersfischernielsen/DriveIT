@@ -7,10 +7,13 @@
 	mc:Ignorable="d"
 	x:Class="DriveIT.WindowsClient.MainViewEntitiesUC"
 	x:Name="UserControl"
-	d:DesignWidth="640" d:DesignHeight="480" Background="#FFA23333" Template="{DynamicResource CarEntitiesUCTemplate}">
+	d:DesignWidth="640" d:DesignHeight="480" Background="#FFA23333" Template="{DynamicResource RequestForContactEntititesUCTemplate}">
 	<UserControl.Resources>
 		<ControlTemplate x:Key="CarEntitiesUCTemplate" TargetType="{x:Type UserControl}">
-			<Grid Background="#FF991F1F">
+			<Grid>
+				<Grid.Background>
+					<SolidColorBrush Color="#FF991F1F" Opacity="0.2"/>
+				</Grid.Background>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="75"/>
 					<RowDefinition Height="*"/>
@@ -23,9 +26,13 @@
 			</Grid>
 		</ControlTemplate>
 		<ControlTemplate x:Key="RequestForContactEntititesUCTemplate" TargetType="{x:Type UserControl}">
-			<Grid Background="#FF9F49A8">
+			<Grid>
+				<Grid.Background>
+					<SolidColorBrush Color="#FF9F49A8" Opacity="0.2"/>
+				</Grid.Background>
 				<Label Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="32"/>
 			</Grid>
 		</ControlTemplate>
 	</UserControl.Resources>
+	<Grid x:Name="LayoutRoot" Height="80" Width="640"/>
 </UserControl>

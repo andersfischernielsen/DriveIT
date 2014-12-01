@@ -33,11 +33,13 @@ namespace DriveIT_Windows_Client.Views
         private void RequestsForContactsClick(object sender, RoutedEventArgs e)
         {
             EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("RequestForContactEntititesUCTemplate");
+            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("RequestForContactEntitiesPowerToolBarUC");
         }
 
         private void CarsClick(object sender, RoutedEventArgs e)
         {
             EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("CarEntitiesUCTemplate");
+            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("CarEntitiesPowerToolBarUC");
         }
     }
 }
