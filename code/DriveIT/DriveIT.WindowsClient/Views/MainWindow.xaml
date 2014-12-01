@@ -1,7 +1,7 @@
 ﻿<Window x:Class="DriveIT_Windows_Client.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="900" Width="1600">
+        Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3">
     <Window.Resources>
         <ControlTemplate x:Key="UserControlCars" TargetType="{x:Type UserControl}">
             <Grid>
@@ -9,12 +9,6 @@
             </Grid>
         </ControlTemplate>
     </Window.Resources>
-    <Window.Background>
-        <RadialGradientBrush RadiusX="1" RadiusY="1">
-            <GradientStop Color="Black" Offset="1"/>
-            <GradientStop Color="White"/>
-        </RadialGradientBrush>
-    </Window.Background>
     <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ListUpdateGroup"/>
@@ -58,7 +52,7 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <Grid.Background>
-                    <SolidColorBrush Color="#FFBDCFE0" Opacity="0.2"/>
+                    <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
                 </Grid.Background>
                 <Button Content="Requests for &#xA;contact" HorizontalAlignment="Left" Margin="10,35.5,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1" Click="RequestForContactButtonClick"/>
                 <Button Content="Cars" HorizontalAlignment="Left" Margin="10,180.5,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1" Click="CarsButtonClick"/>
@@ -69,7 +63,7 @@
             </Grid>
             <Grid x:Name="EntitiesGrid" Grid.Column="1" Margin="10">
                 <Grid.Background>
-                    <SolidColorBrush Color="#FFBDCFE0" Opacity="0.2"/>
+                    <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
                 </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="76"/>
@@ -84,7 +78,7 @@
                     <RowDefinition Height="439*"/>
                 </Grid.RowDefinitions>
                 <Grid.Background>
-                    <SolidColorBrush Color="#FFBDCFE0" Opacity="0.2"/>
+                    <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
                 </Grid.Background>
                 <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="270" Source="Image/EmployeeTemplatePic.jpg">
                     <Image.OpacityMask>

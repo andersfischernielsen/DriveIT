@@ -13,45 +13,6 @@ namespace DriveIT_Windows_Client.Controllers
     {
         public OrderController()
         {
-            TestMethod();
-        }
-        private void TestMethod()
-        {
-            var t = ReadOrderList().Result;
-            Console.WriteLine(t.Count);
-            try
-            {
-                CreateOrder(t[0]);
-            }
-            catch (Exception)
-            {
-                CreateOrder(new SaleDto()
-                {
-                    Price = 1000,
-                    Sold = DateTime.Now,
-                });
-            }
-            Thread.Sleep(5000);
-            t = ReadOrderList().Result;
-            Console.WriteLine(t.Count);
-
-
-            Console.WriteLine("Before update: " + ReadOrder(t[t.Count - 1].Id.Value).Result.Price);
-            int id = t[0].Id.Value;
-            CreateOrder(new SaleDto()
-            {
-                Price = 9999,
-                Sold = DateTime.Now,
-            });
-            Thread.Sleep(5000);
-            t = ReadOrderList().Result;
-            Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + ReadOrder(t[t.Count - 1].Id.Value).Result.Price);
-
-            DeleteOrder(t[0].Id.Value);
-            Thread.Sleep(5000);
-            t = ReadOrderList().Result;
-            Console.WriteLine(t.Count);
         }
 
         public async void CreateOrder(SaleDto sale)

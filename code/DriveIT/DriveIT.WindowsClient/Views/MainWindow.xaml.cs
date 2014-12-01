@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using DriveIT.WindowsClient;
 using DriveIT_Windows_Client.Controllers;
 
 namespace DriveIT_Windows_Client.Views
@@ -15,7 +16,6 @@ namespace DriveIT_Windows_Client.Views
         public MainWindow()
         {
             InitializeComponent();
-            new CarController();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -26,7 +26,7 @@ namespace DriveIT_Windows_Client.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var entityWindow = new Views.EntityWindow();
+            var entityWindow = new EntityCarWindow();
             entityWindow.Show(); // works
         }
 

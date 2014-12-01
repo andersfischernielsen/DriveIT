@@ -13,48 +13,7 @@ namespace DriveIT_Windows_Client.Controllers
     {
         public EmployeeController()
         {
-            TestMethod();
-        }
 
-        private void TestMethod()
-        {
-            var t = ReadEmployeeList().Result;
-            Console.WriteLine(t.Count);
-            try
-            {
-                CreateEmployee(t[0]);
-            }
-            catch (Exception)
-            {
-                CreateEmployee(new EmployeeDto()
-                {
-                    Username = "sexydude123",
-                    FirstName = "Mr Handsome",
-                    LastName = "Cake"
-                });
-            }
-            Thread.Sleep(5000);
-            t = ReadEmployeeList().Result;
-            Console.WriteLine(t.Count);
-
-
-            Console.WriteLine("Before update: " + ReadEmployee(t[t.Count - 1].Id.Value).Result.FirstName);
-            int id = t[0].Id.Value;
-            CreateEmployee(new EmployeeDto()
-            {
-                Username = "sexydude123",
-                FirstName = "Mr Not So Handsome",
-                LastName = "Cookie"
-            });
-            Thread.Sleep(5000);
-            t = ReadEmployeeList().Result;
-            Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + ReadEmployee(t[t.Count - 1].Id.Value).Result.FirstName);
-
-            DeleteEmployee(t[0].Id.Value);
-            Thread.Sleep(5000);
-            t = ReadEmployeeList().Result;
-            Console.WriteLine(t.Count);
         }
 
         public async void CreateEmployee(EmployeeDto employee)
