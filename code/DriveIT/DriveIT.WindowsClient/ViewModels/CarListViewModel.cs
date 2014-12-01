@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DriveIT.Models;
+using DriveIT_Windows_Client.Controllers;
 
 namespace DriveIT_Windows_Client.ViewModels
 {
     public class CarListViewModel : IViewModelBase
     {
-        public IList<CarViewModel> CarViewModels { get; set; }
+        public ObservableCollection<CarViewModel> CarViewModels { get; set; }
 
         public CarListViewModel(IList<CarDto> carDtos)
         {
-            CarViewModels = new List<CarViewModel>();
+            CarViewModels = new ObservableCollection<CarViewModel>();
             foreach (CarDto carDto in carDtos)
             {
                 CarViewModels.Add(new CarViewModel(carDto));
             }
+        }
+        public CarListViewModel()
+        {
+            CarViewModels = new ObservableCollection<CarViewModel>();
+            ReadList();
         }
  
         #region INotifyPropertyChanged
@@ -32,5 +39,16 @@ namespace DriveIT_Windows_Client.ViewModels
             }
         }
         #endregion
+
+        #region CRUD
+        public void ReadList()
+        {
+            var carController = new CarController();
+            foreach (CarDto carDto in carController.ReadCarList())
+            {
+                CarViewModels.Add(new CarViewModel(carDto));
+            }
+        }
+        #endregion CRUD
     }
 }
