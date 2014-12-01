@@ -10,6 +10,17 @@ namespace DriveIT_Windows_Client.ViewModels
 {
     public class CarListViewModel : IViewModelBase
     {
+        public IList<CarViewModel> CarViewModels { get; set; }
+
+        public CarListViewModel(IList<CarDto> carDtos)
+        {
+            CarViewModels = new List<CarViewModel>();
+            foreach (CarDto carDto in carDtos)
+            {
+                CarViewModels.Add(new CarViewModel(carDto));
+            }
+        }
+ 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
