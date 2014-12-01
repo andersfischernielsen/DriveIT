@@ -29,5 +29,15 @@ namespace DriveIT_Windows_Client.Views
             var entityWindow = new EntityCarWindow();
             entityWindow.Show(); // works
         }
+
+        private void RequestsForContactsClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("RequestForContactEntititesUCTemplate");
+        }
+
+        private void CarsClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("CarEntitiesUCTemplate");
+        }
     }
 }
