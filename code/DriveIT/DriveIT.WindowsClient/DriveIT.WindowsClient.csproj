@@ -138,6 +138,9 @@
     <Compile Include="Views\UserControls\MainViewEntitiesUC.xaml.cs">
       <DependentUpon>MainViewEntitiesUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\MainViewPowerToolBarUC.xaml.cs">
+      <DependentUpon>MainViewPowerToolBarUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControlWithViewModel.xaml.cs">
       <DependentUpon>UserControlWithViewModel.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControls\MainViewEntitiesUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\MainViewPowerToolBarUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
