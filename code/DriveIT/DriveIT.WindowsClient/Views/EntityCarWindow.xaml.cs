@@ -10,14 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace DriveIT_Windows_Client
+namespace DriveIT.WindowsClient
 {
 	/// <summary>
-	/// Interaction logic for EntityWindow.xaml
+	/// Interaction logic for EntityCarWindow.xaml
 	/// </summary>
-	public partial class EntityWindow : Window
+	public partial class EntityCarWindow : Window
 	{
-		public EntityWindow()
+		public EntityCarWindow()
 		{
 			this.InitializeComponent();
 			

@@ -1,69 +1,73 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class CustomersController : ApiController
     {
-        private readonly IPersistentStorage _repo = new EntityStorage();
 
-        // GET: api/Customer
-        public IHttpActionResult Get()
+        // GET: api/Customers
+        public async Task<IHttpActionResult> Get()
         {
-            return Ok(_repo.GetAllCustomers().Select(
-                c => new CustomerDto
-                    {
-                        Email = c.Email,
-                        FirstName = c.FirstName,
-                        Id = c.Id,
-                        LastName = c.LastName,
-                        //Todo fix
-                        Phone = string.Format("{0}", c.PhoneNumber),
-                        Username = c.Username
-                    }
-                )
-            );
+            return Ok(
+                from customer in await _repo.GetAllCustomers()
+                select customer.ToDto());
         }
 
-        // GET: api/Customer/5
-        public IHttpActionResult Get(int id)
+        // GET: api/Customers/5
+        public async Task<IHttpActionResult> Get(int id)
         {
-            var customer = _repo.GetCustomerWithId(id);
+            var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();
             }
-            return Ok(new CustomerDto
+            return Ok(customer.ToDto());
+        }
+
+        // POST: api/Customers
+        public async Task<IHttpActionResult> Post([FromBody]CustomerDto value)
+        {
+            if (!ModelState.IsValid)
             {
-                Email = customer.Email,
-                Id = customer.Id,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                //Todo fix.
-                Phone = string.Format("{0}", customer.PhoneNumber),
-                Username = customer.Username
-            });
+                return BadRequest(ModelState);
+            }
+            var newCustomerId = await _repo.CreateCustomer(value.ToEntity());
+            var response = Request.CreateResponse(HttpStatusCode.Created, value);
+
+            var uri = Url.Link("DefaultApi", new { id = newCustomerId });
+            response.Headers.Location = new Uri(uri);
+            return ResponseMessage(response);
         }
 
-        // POST: api/Customer
-        public IHttpActionResult Post([FromBody]CustomerDto value)
+        // PUT: api/Customers/5
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerDto value)
         {
-            _repo.CreateCustomer(value.ToCustomer());
-            return Ok(value);
+            var customer = await _repo.GetCustomerWithId(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            await _repo.UpdateCustomer(id, value.ToEntity());
+            return Ok();
         }
 
-        // PUT: api/Customer/5
-        public void Put(int id, [FromBody]CustomerDto value)
+        // DELETE: api/Customers/5
+        public async Task<IHttpActionResult> Delete(int id)
         {
-        }
-
-        // DELETE: api/Customer/5
-        public IHttpActionResult Delete(int id)
-        {
-            _repo.DeleteCustomer(id);
+            var customer = await _repo.GetCustomerWithId(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            await _repo.DeleteCustomer(id);
             return Ok();
         }
     }
