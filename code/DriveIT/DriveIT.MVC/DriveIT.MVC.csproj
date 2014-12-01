@@ -235,6 +235,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
+      <Project>{9279adf0-fc58-4c2f-b34f-d472f13976ec}</Project>
+      <Name>DriveIT.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DriveIT.WebAPI\DriveIT.WebAPI.csproj">
       <Project>{ba31942d-2335-465a-b23a-607f7a3dd7ca}</Project>
       <Name>DriveIT.WebAPI</Name>
