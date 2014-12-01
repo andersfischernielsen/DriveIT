@@ -22,7 +22,7 @@
                     <viewModels:CarListViewModel/>
                 </Grid.DataContext>
                 <Label Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="59" Width="212.993" FontSize="32" Style="{DynamicResource HeaderLabel}"/>
-                <DataGrid x:Name="CarEntitiesDataGrid" HorizontalAlignment="Stretch" Margin="10" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Width="Auto" ItemsSource="{Binding CarViewModels}" AddingNewItem="CarEntitiesDataGrid_AddingNewItem"/>
+                <DataGrid x:Name="CarEntitiesDataGrid" HorizontalAlignment="Stretch" Margin="10" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Width="Auto" ItemsSource="{Binding CarViewModels}"/>
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="RequestForContactEntititesUCTemplate" TargetType="{x:Type UserControl}">
