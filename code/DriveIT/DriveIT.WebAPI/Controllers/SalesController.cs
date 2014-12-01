@@ -11,10 +11,12 @@ namespace DriveIT.WebAPI.Controllers
     {
         private readonly IPersistentStorage _repo;
 
-        public SalesController(IPersistentStorage repo = null)
+        public SalesController(IPersistentStorage repo)
         {
-            _repo = repo ?? new EntityStorage();
+            _repo = repo;
         }
+
+        public SalesController() : this(new EntityStorage()) { }
 
         // GET: api/Sales
         public async Task<IHttpActionResult> Get()
@@ -42,7 +44,8 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newSaleId = await _repo.CreateSale(await value.ToEntity(_repo));
+            var newSaleId = await _repo.CreateSale(value.ToEntity());
+            value.Id = newSaleId;
             return CreatedAtRoute("DefaultApi", new { id = newSaleId }, value);
         }
 
@@ -53,7 +56,12 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateSale(id, await value.ToEntity(_repo));
+            var sale = await _repo.GetSaleWithId(id);
+            if (sale == null)
+            {
+                return NotFound();
+            }
+            await _repo.UpdateSale(id, value.ToEntity());
             return Ok();
         }
 

@@ -12,10 +12,12 @@ namespace DriveIT.WebAPI.Controllers
     {
         private readonly IPersistentStorage _repo;
 
-        public CarsController(IPersistentStorage repo = null)
+        public CarsController(IPersistentStorage repo)
         {
-            _repo = repo ?? new EntityStorage();
+            _repo = repo;
         }
+
+        public CarsController() : this(new EntityStorage()) { }
 
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
@@ -85,12 +87,16 @@ namespace DriveIT.WebAPI.Controllers
                 return BadRequest("Null value not allowed.");
             }
             var newCarId = await _repo.CreateCar(value.ToEntity());
-            return CreatedAtRoute("DefaultApi", new {id = newCarId}, value);
+            return CreatedAtRoute("DefaultApi", new { id = newCarId }, value);
         }
 
         // PUT: api/Cars/5
         public async Task<IHttpActionResult> Put(int id, [FromBody]CarDto value)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var car = await _repo.GetCarWithId(id);
             if (car == null)
             {

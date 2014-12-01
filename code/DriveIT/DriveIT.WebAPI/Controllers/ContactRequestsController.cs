@@ -11,10 +11,12 @@ namespace DriveIT.WebAPI.Controllers
     {
         private readonly IPersistentStorage _repo;
 
-        public ContactRequestsController(IPersistentStorage repo = null)
+        public ContactRequestsController(IPersistentStorage repo)
         {
-            _repo = repo ?? new EntityStorage();
+            _repo = repo;
         }
+
+        public ContactRequestsController() : this(new EntityStorage()) { }
 
         // GET: api/ContactRequests
         public async Task<IHttpActionResult> Get()
@@ -41,7 +43,12 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newContactRequestId = await _repo.CreateContactRequest(await value.ToEntity(_repo));
+            if (value == null)
+            {
+                return BadRequest("Null value not allowed.");
+            }
+            var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity());
+            value.Id = newContactRequestId;
             return CreatedAtRoute("DefaultApi", new { id = newContactRequestId }, value);
         }
 
@@ -52,7 +59,12 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateContactRequest(id, await value.ToEntity(_repo));
+            var contactRequest = await _repo.GetContactRequestWithId(id);
+            if (contactRequest == null)
+            {
+                return NotFound();
+            }
+            await _repo.UpdateContactRequest(id, value.ToEntity());
             return Ok();
         }
 
