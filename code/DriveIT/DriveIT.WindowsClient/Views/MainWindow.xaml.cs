@@ -29,18 +29,5 @@ namespace DriveIT_Windows_Client.Views
             var entityWindow = new EntityCarWindow();
             entityWindow.Show(); // works
         }
-
-        private void RequestForContactButtonClick(object sender, RoutedEventArgs e)
-        {
-            ControlTemplate Temp = (ControlTemplate)FindResource("UserControlRequestForCar");
-            EntitiesUC.Template = Temp;
-        }
-
-        private void CarsButtonClick(object sender, RoutedEventArgs e)
-        {
-            ControlTemplate Temp = (ControlTemplate)FindResource("UserControlCars");
-            EntitiesUC.Template = Temp;
-            Console.WriteLine();
-        }
     }
 }
