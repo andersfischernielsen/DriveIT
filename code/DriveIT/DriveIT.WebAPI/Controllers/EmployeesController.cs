@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
 
@@ -15,7 +16,7 @@ namespace DriveIT.WebAPI.Controllers
 		
 		public EmployeesController(IPersistentStorage repo = null)
 		{
-			_repo = repo ?? new EntityAdapter();
+		    _repo = repo ?? new EntityStorage();
 		}
 	
         // GET: api/Employees
