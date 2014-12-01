@@ -41,10 +41,10 @@ namespace DriveIT_Windows_Client.ViewModels
         #endregion
 
         #region CRUD
-        public void ReadList()
+        public async void ReadList()
         {
             var carController = new CarController();
-            foreach (CarDto carDto in carController.ReadCarList())
+            foreach (CarDto carDto in await carController.ReadCarList())
             {
                 CarViewModels.Add(new CarViewModel(carDto));
             }
