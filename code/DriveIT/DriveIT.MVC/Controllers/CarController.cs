@@ -18,19 +18,13 @@ namespace DriveIT.MVC.Controllers
             return View();
         }
 
-        //anvendes til test
-        public async void CreateCar(CarDto car)
-        {
-            await DriveITWebAPI.Create("cars", car);
-        }
-
-        public async Task<IList<CarDto>>getAllCars()
+        public async Task<IList<CarDto>> getAllCars()
         {
             var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars");
             return carsToReturn;
         }
 
-        public async Task<CarDto>getSingleCar(int Id)
+        public async Task<CarDto> getSingleCar(int Id)
         {
             var carToReturn = await DriveITWebAPI.Read<CarDto>("Cars/" + Id);
             return carToReturn;

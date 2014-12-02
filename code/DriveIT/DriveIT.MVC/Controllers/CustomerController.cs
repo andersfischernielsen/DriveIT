@@ -11,7 +11,7 @@ namespace DriveIT.MVC.Controllers
     public class CustomerController : AsyncController
     {
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult CustomerView()
         {
             return View();
         }

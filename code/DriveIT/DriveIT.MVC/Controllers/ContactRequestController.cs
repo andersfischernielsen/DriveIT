@@ -11,7 +11,7 @@ namespace DriveIT.MVC.Controllers
     public class ContactRequestController : AsyncController
     {
         // GET: ContactRequest
-        public ActionResult Index()
+        public ActionResult ContactRequestView()
         {
             return View();
         }

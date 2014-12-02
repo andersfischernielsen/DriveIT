@@ -11,7 +11,7 @@ namespace DriveIT.MVC.Controllers
     public class EmployeeController : AsyncController
     {
         // GET: Employee
-        public ActionResult Index()
+        public ActionResult EmployeeView()
         {
             return View();
         }

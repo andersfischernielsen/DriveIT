@@ -11,12 +11,12 @@ namespace DriveIT.MVC.Controllers
     public class CommentController : AsyncController
     {
         // GET: Comment
-        public ActionResult Index()
+        public ActionResult CommentView()
         {
             return View();
         }
 
-        public async Task<IList<CommentDto>>GetComments(int carId)
+        public async Task<IList<CommentDto>> GetComments(int carId)
         {
             var commentsToReturn = await DriveITWebAPI.ReadList<CommentDto>("Comments/" + carId);
             return commentsToReturn;
