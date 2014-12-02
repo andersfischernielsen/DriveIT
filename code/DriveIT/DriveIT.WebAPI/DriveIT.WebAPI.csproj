@@ -92,6 +92,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Models\DtoExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
