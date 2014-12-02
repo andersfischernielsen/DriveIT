@@ -234,11 +234,8 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Car\CarSearch.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Car\CarInformation.cshtml" />
-=======
     <Content Include="Views\Customer\Index.cshtml" />
->>>>>>> 63b0305150bce23e19176bba68c85d48a4170e1a
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
