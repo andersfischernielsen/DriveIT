@@ -49,7 +49,6 @@
     <Compile Include="DriveITContext.cs" />
     <Compile Include="EntityStorage.cs" />
     <Compile Include="IPersistentStorage.cs" />
-    <Compile Include="MicrosoftTestingAsyncMagic.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

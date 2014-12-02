@@ -26,26 +26,18 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);
-            try
-            {
-                _customerController.CreateCustomer(t[0]);
-            }
-            catch (Exception)
-            {
                 _customerController.CreateCustomer(new CustomerDto()
                 {
                     Email = "jajaja@itu.dk",
                     FirstName = "Mr Handsome",
                     LastName = "Cake"
                 });
-            }
             Thread.Sleep(2000);
             t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);
 
 
             Console.WriteLine("Before update: " + _customerController.ReadCustomer(t[t.Count - 1].Id.Value).Result.FirstName);
-            int id = t[0].Id.Value;
             _customerController.UpdateCustomer(new CustomerDto()
             {
                 Email = "jajaja@itu.dk",
