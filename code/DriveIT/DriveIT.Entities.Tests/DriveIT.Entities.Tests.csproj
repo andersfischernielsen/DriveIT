@@ -73,6 +73,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EntityStorageTests.cs" />
+    <Compile Include="MicrosoftTestingAsyncMagic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
