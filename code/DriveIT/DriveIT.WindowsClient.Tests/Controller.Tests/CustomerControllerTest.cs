@@ -42,14 +42,15 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             {
                 Email = "jajaja@itu.dk",
                 FirstName = "Mr Not So Handsome",
-                LastName = "Cookie"
+                LastName = "Cookie",
+                Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(2000);
             t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);
             Console.WriteLine("After update: " + _customerController.ReadCustomer(t[t.Count - 1].Id.Value).Result.FirstName);
 
-            _customerController.DeleteCustomer(t[0].Id.Value);
+            _customerController.DeleteCustomer(t[t.Count - 1].Id.Value);
             Thread.Sleep(2000);
             t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);
