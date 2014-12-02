@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
-using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class CarsController : ApiController
     {
+        private readonly IPersistentStorage _repo;
+
+        public CarsController(IPersistentStorage repo)
+        {
+            _repo = repo;
+        }
+
+        public CarsController() : this(new EntityStorage()) { }
 
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
@@ -76,21 +82,25 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if (value == null)
+            {
+                return BadRequest("Null value not allowed.");
+            }
             var newCarId = await _repo.CreateCar(value.ToEntity());
-            var response = Request.CreateResponse(HttpStatusCode.Created, value);
-
-            var uri = Url.Link("DefaultApi", new { id = newCarId });
-            response.Headers.Location = new Uri(uri);
-            return ResponseMessage(response);
+            return CreatedAtRoute("DefaultApi", new { id = newCarId }, value);
         }
 
         // PUT: api/Cars/5
         public async Task<IHttpActionResult> Put(int id, [FromBody]CarDto value)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
-                return BadRequest("id not found!");
+                return NotFound();
             }
             await _repo.UpdateCar(id, value.ToEntity());
             return Ok();
@@ -102,7 +112,7 @@ namespace DriveIT.WebAPI.Controllers
             var car = await _repo.GetCarWithId(id);
             if (car == null)
             {
-                return BadRequest("Id not found");
+                return NotFound();
             }
             await _repo.DeleteCar(id);
             return Ok();

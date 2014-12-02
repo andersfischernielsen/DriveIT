@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DriveIT.Entities;
 using DriveIT.Models;
 using _repo = DriveIT.EntityFramework.EntityStorage;
@@ -57,7 +56,6 @@ namespace DriveIT.WebAPI.Models
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Id = dto.Id ?? 0,
-                //Todo fix.
                 PhoneNumber = dto.Phone,
                 Username = dto.Username
             };
@@ -76,16 +74,16 @@ namespace DriveIT.WebAPI.Models
             };
         }
 
-        public static async Task<Sale> ToEntity(this SaleDto dto)
+        public static Sale ToEntity(this SaleDto dto)
         {
             return new Sale
             {
                 Id = dto.Id ?? 0,
                 DateOfSale = dto.Sold,
                 Price = dto.Price,
-                Car = await _repo.GetCarWithId(dto.CarId),
-                Customer = await _repo.GetCustomerWithId(dto.CustomerId),
-                Employee = await _repo.GetEmployeeWithId(dto.EmployeeId)
+                CarId = dto.CarId,
+                CustomerId = dto.CustomerId,
+                EmployeeId = dto.EmployeeId
             };
         }
 
@@ -93,22 +91,22 @@ namespace DriveIT.WebAPI.Models
         {
             return new SaleDto
             {
-                CarId = sale.Car.Id,
-                CustomerId = sale.Customer.Id,
-                EmployeeId = sale.Employee.Id,
+                CarId = sale.CarId,
+                CustomerId = sale.CustomerId,
+                EmployeeId = sale.EmployeeId,
                 Id = sale.Id,
                 Price = sale.Price,
                 Sold = sale.DateOfSale
             };
         }
 
-        public static async Task<Comment> ToEntity(this CommentDto dto)
+        public static Comment ToEntity(this CommentDto dto)
         {
             return new Comment
             {
-                Id = dto.Id ?? 0,
-                Car = await _repo.GetCarWithId(dto.CarId),
-                Customer = await _repo.GetCustomerWithId(dto.CustomerId),
+                Id = dto.Id.HasValue ? dto.Id.Value : 0,
+                CarId = dto.CarId,
+                CustomerId = dto.CustomerId,
                 Description = dto.Description,
                 Title = dto.Title,
                 DateCreated = dto.Date
@@ -120,21 +118,21 @@ namespace DriveIT.WebAPI.Models
             return new CommentDto
             {
                 Id = comment.Id,
-                CarId = comment.Car.Id,
-                CustomerId = comment.Customer.Id,
+                CarId = comment.CarId,
+                CustomerId = comment.CustomerId,
                 Date = comment.DateCreated,
                 Description = comment.Description,
                 Title = comment.Title
             };
         }
 
-        public static async Task<ContactRequest> ToEntity(this ContactRequestDto dto)
+        public static ContactRequest ToEntity(this ContactRequestDto dto)
         {
             return new ContactRequest
             {
-                Id = dto.Id ?? 0,
-                Car = await _repo.GetCarWithId(dto.CarId),
-                Customer = await _repo.GetCustomerWithId(dto.CustomerId),
+                Id = dto.Id.HasValue ? dto.Id.Value : 0,
+                CarId = dto.CarId,
+                CustomerId = dto.CustomerId,
                 Created = dto.Requested
             };
         }
@@ -144,8 +142,8 @@ namespace DriveIT.WebAPI.Models
             return new ContactRequestDto
             {
                 Id = contactRequest.Id,
-                CarId = contactRequest.Car.Id,
-                CustomerId = contactRequest.Customer.Id,
+                CarId = contactRequest.CarId,
+                CustomerId = contactRequest.CustomerId,
                 Requested = contactRequest.Created,
                 //TODO: employee / handled.
             };
