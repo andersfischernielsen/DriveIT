@@ -1,17 +1,22 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
-using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class ContactRequestsController : ApiController
     {
+        private readonly IPersistentStorage _repo;
+
+        public ContactRequestsController(IPersistentStorage repo)
+        {
+            _repo = repo;
+        }
+
+        public ContactRequestsController() : this(new EntityStorage()) { }
 
         // GET: api/ContactRequests
         public async Task<IHttpActionResult> Get()
@@ -38,12 +43,13 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newContactRequestId = await _repo.CreateContactRequest(await value.ToEntity());
-            var response = Request.CreateResponse(HttpStatusCode.Created, value);
-
-            var uri = Url.Link("DefaultApi", new { id = newContactRequestId });
-            response.Headers.Location = new Uri(uri);
-            return ResponseMessage(response);
+            if (value == null)
+            {
+                return BadRequest("Null value not allowed.");
+            }
+            var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity());
+            value.Id = newContactRequestId;
+            return CreatedAtRoute("DefaultApi", new { id = newContactRequestId }, value);
         }
 
         // PUT: api/ContactRequests/5
@@ -53,7 +59,12 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateContactRequest(id, await value.ToEntity());
+            var contactRequest = await _repo.GetContactRequestWithId(id);
+            if (contactRequest == null)
+            {
+                return NotFound();
+            }
+            await _repo.UpdateContactRequest(id, value.ToEntity());
             return Ok();
         }
 
