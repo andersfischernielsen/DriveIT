@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Navigation;
 
 namespace DriveIT.WindowsClient.Views
@@ -29,14 +30,12 @@ namespace DriveIT.WindowsClient.Views
 
         private void RequestsForContactsClick(object sender, RoutedEventArgs e)
         {
-            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("RequestForContactEntititesUCTemplate");
-            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("RequestForContactEntitiesPowerToolBarUC");
+            EntitiesTabControl.SelectedIndex = 0;
         }
 
         private void CarsClick(object sender, RoutedEventArgs e)
         {
-            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("CarEntitiesUCTemplate");
-            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("CarEntitiesPowerToolBarUC");
+            EntitiesTabControl.SelectedIndex = 1;
         }
     }
 }
