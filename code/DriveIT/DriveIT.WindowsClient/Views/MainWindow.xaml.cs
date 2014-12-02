@@ -30,17 +30,16 @@ namespace DriveIT_Windows_Client.Views
             entityWindow.Show(); // works
         }
 
-        private void RequestForContactButtonClick(object sender, RoutedEventArgs e)
+        private void RequestsForContactsClick(object sender, RoutedEventArgs e)
         {
-            ControlTemplate Temp = (ControlTemplate)FindResource("UserControlRequestForCar");
-            EntitiesUC.Template = Temp;
+            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("RequestForContactEntititesUCTemplate");
+            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("RequestForContactEntitiesPowerToolBarUC");
         }
 
-        private void CarsButtonClick(object sender, RoutedEventArgs e)
+        private void CarsClick(object sender, RoutedEventArgs e)
         {
-            ControlTemplate Temp = (ControlTemplate)FindResource("UserControlCars");
-            EntitiesUC.Template = Temp;
-            Console.WriteLine();
+            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("CarEntitiesUCTemplate");
+            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("CarEntitiesPowerToolBarUC");
         }
     }
 }
