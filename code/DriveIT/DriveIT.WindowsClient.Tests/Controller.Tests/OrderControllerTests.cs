@@ -25,18 +25,15 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _orderController.ReadOrderList().Result;
             Console.WriteLine(t.Count);
-            try
-            {
-                _orderController.CreateOrder(t[0]);
-            }
-            catch (Exception)
-            {
                 _orderController.CreateOrder(new SaleDto()
                 {
                     Price = 1000,
                     Sold = DateTime.Now,
+                    CarId = 4,
+                    CustomerId = 3,
+                    EmployeeId = 1
                 });
-            }
+
             Thread.Sleep(2000);
             t = _orderController.ReadOrderList().Result;
             Console.WriteLine(t.Count);
@@ -48,6 +45,9 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             {
                 Price = 9999,
                 Sold = DateTime.Now,
+                CarId = 4,
+                CustomerId = 4,
+                EmployeeId = 1
             });
             Thread.Sleep(2000);
             t = _orderController.ReadOrderList().Result;

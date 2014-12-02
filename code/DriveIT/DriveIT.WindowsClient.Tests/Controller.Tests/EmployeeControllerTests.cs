@@ -25,26 +25,18 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _employeeController.ReadEmployeeList().Result;
             Console.WriteLine(t.Count);
-            try
-            {
-                _employeeController.CreateEmployee(t[0]);
-            }
-            catch (Exception)
-            {
                 _employeeController.CreateEmployee(new EmployeeDto()
                 {
                     Username = "sexydude123",
                     FirstName = "Mr Handsome",
                     LastName = "Cake"
                 });
-            }
             Thread.Sleep(2000);
             t = _employeeController.ReadEmployeeList().Result;
             Console.WriteLine(t.Count);
 
 
             Console.WriteLine("Before update: " + _employeeController.ReadEmployee(t[t.Count - 1].Id.Value).Result.FirstName);
-            int id = t[0].Id.Value;
             _employeeController.UpdateEmployee(new EmployeeDto()
             {
                 Username = "sexydude123",
