@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:WindowsClient="clr-namespace:DriveIT.WindowsClient" x:Class="DriveIT_Windows_Client.Views.MainWindow"
-        Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3">
+        Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
     </Window.Resources>

@@ -27,31 +27,31 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine(t.Count);
                 _requestForContactController.CreateRequestForContact(new ContactRequestDto()
                 {
-                    Handled = false,
                     Requested = DateTime.Now,
                     CarId = 4,
                     CustomerId = 3,
+                    EmployeeId = 1,
                 });
             Thread.Sleep(5000);
             t = _requestForContactController.ReadRequestForContactList().Result;
             Console.WriteLine(t.Count);
 
 
-            Console.WriteLine("Before update: " + _requestForContactController.ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Handled);
+            Console.WriteLine("Before update: " + _requestForContactController.ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Requested);
             _requestForContactController.UpdateRequestForContact(new ContactRequestDto()
             {
-                Handled = true,
-                Requested = DateTime.Now,
-                CarId = 4,
-                CustomerId = 4,
-
+                EmployeeId = 1,
+                Requested = DateTime.Now.AddDays(1),
+                CarId = 1,
+                CustomerId = 1,
+                Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(5000);
             t = _requestForContactController.ReadRequestForContactList().Result;
             Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + _requestForContactController.ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Handled);
+            Console.WriteLine("After update: " + _requestForContactController.ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Requested);
 
-            _requestForContactController.DeleteRequestForContact(t[0].Id.Value);
+            _requestForContactController.DeleteRequestForContact(t[t.Count - 1].Id.Value);
             Thread.Sleep(5000);
             t = _requestForContactController.ReadRequestForContactList().Result;
             Console.WriteLine(t.Count);
