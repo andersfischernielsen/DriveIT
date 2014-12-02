@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DriveIT.CarQuery
 {
-    public class CarQuery
+    public interface ICarQuery
     {
 
     }
