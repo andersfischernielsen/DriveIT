@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using DriveIT.Models;
+using DriveIT.WebAPI.Controllers;
 
 namespace DriveIT.MVC.Controllers
 {
     public class CustomerController : AsyncController
     {
+        private CustomersController controller = new CustomersController();
+        public  ActionResult Index()
+        {
+            var cars =  controller.Get().Result as OkNegotiatedContentResult<IEnumerable<CustomerDto>>;
+
+            return View(cars.Content);
+        }
+
+
+        /*
+         
         // GET: Customer
         public ActionResult CustomerView()
         {
@@ -31,5 +45,6 @@ namespace DriveIT.MVC.Controllers
         {
             await DriveITWebAPI.Update("customers", customer, customer.Id.Value);
         }
+         **/
     }
 }
