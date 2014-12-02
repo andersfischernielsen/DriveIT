@@ -31,11 +31,31 @@ namespace DriveIT.WindowsClient.Views
         private void RequestsForContactsClick(object sender, RoutedEventArgs e)
         {
             EntitiesTabControl.SelectedIndex = 0;
+            PowerToolsbarTabControl.SelectedIndex = 0;
         }
 
         private void CarsClick(object sender, RoutedEventArgs e)
         {
             EntitiesTabControl.SelectedIndex = 1;
+            PowerToolsbarTabControl.SelectedIndex = 1;
+        }
+
+        private void OrdersClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 2;
+            PowerToolsbarTabControl.SelectedIndex = 2;
+        }
+
+        private void CustomersClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 3;
+            PowerToolsbarTabControl.SelectedIndex = 3;
+        }
+
+        private void EmployeesClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 4;
+            PowerToolsbarTabControl.SelectedIndex = 4;
         }
     }
 }

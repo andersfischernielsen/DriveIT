@@ -23,7 +23,6 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="259"/>
             </Grid.ColumnDefinitions>
-            <userControls:MainViewPowerToolBarUC x:Name="PowerToolsBarUC" VerticalAlignment="Top" Width="Auto"/>
             <Grid x:Name="PowerToolsBarGeneral" Grid.Column="1" Height="80" VerticalAlignment="Top">
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource PowerToolBarColor}" Opacity="0.5"/>
@@ -31,54 +30,111 @@
                 <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81.5" Height="60" Margin="0,10,144.5,0"/>
                 <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81" Height="60" Margin="0,10,29,0"/>
             </Grid>
+            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0">
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TabItem}"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabControl.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource PowerToolBarColor}" Opacity="0.5"/>
+                </TabControl.BorderBrush>
+                <TabControl.Background>
+                    <SolidColorBrush Color="{DynamicResource PowerToolBarColor}" Opacity="0.5"/>
+                </TabControl.Background>
+                <TabItem Header="RequestsForContactPowerTabItem">
+                    <Grid>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="CarsPowerTabItem">
+                    <Grid>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="OrdersPowerTabItem">
+                    <Grid>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="CustomersPowerTabItem">
+                    <Grid>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="EmployeesPowerTabItem">
+                    <Grid>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="232"/>
+                <ColumnDefinition Width="208"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Margin="-10,0,0,0" Grid.Column="1"/>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" Margin="198,0,0,0"/>
             <Grid Margin="0,0,10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="12"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="11"/>
                 </Grid.ColumnDefinitions>
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource PowerToolBarColor}" Opacity="0.5"/>
                 </Grid.Background>
-                <Button Content="Requests for &#xA;contact" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1" Click="RequestsForContactsClick"/>
-                <Button Content="Cars" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1" Click="CarsClick"/>
-                <Button Content="Orders" HorizontalAlignment="Left" Margin="10,326,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
-                <Button Content="Customers" HorizontalAlignment="Left" Margin="10,470,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
-                <Button Content="Employees" HorizontalAlignment="Left" Margin="10,616,0,0" VerticalAlignment="Top" Width="180" Height="100" FontSize="18" Grid.Column="1"/>
+                <Button Content="Requests for &#xA;contact" Margin="10,38,10,0" VerticalAlignment="Top" Height="100" FontSize="18" Grid.Column="1" Click="RequestsForContactsClick"/>
+                <Button Content="Cars" Margin="10,178,10,0" VerticalAlignment="Top" Height="100" FontSize="18" Grid.Column="1" Click="CarsClick"/>
+                <Button Content="Orders" Margin="10,328,10,0" VerticalAlignment="Top" Height="100" FontSize="18" Click="OrdersClick" Grid.Column="1"/>
+                <Button Content="Customers" Margin="10,472,10,0" VerticalAlignment="Top" Height="100" FontSize="18" Grid.Column="1" Click="CustomersClick"/>
+                <Button Content="Employees" Margin="10,614,10,0" VerticalAlignment="Top" Height="100" FontSize="18" Grid.Column="1" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36"/>
             </Grid>
             <Grid Grid.Column="1" Margin="10">
-            	<TabControl x:Name="EntitiesTabControl">
-            		<TabControl.Resources>
-            			<Style TargetType="{x:Type TabItem}">
-            				<Setter Property="Template">
-            					<Setter.Value>
-            						<ControlTemplate TargetType="{x:Type TabItem}"/>
-            					</Setter.Value>
-            				</Setter>
-            			</Style>
-            		</TabControl.Resources>
-            		<TabControl.Background>
-            			<SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
-            		</TabControl.Background>
-            		<TabItem Header="TabItem">
-            			<Grid>
-            				<Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            			</Grid>
-            		</TabItem>
-            		<TabItem Header="TabItem">
-            			<Grid>
-            				<Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            			</Grid>
-            		</TabItem>
-            	</TabControl>
+                <TabControl x:Name="EntitiesTabControl">
+                    <TabControl.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TabItem}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+                    <TabControl.Background>
+                        <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
+                    </TabControl.Background>
+                    <TabItem Header="RequestsForContactTabItem">
+                        <Grid>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="CarsTabItem">
+                        <Grid>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="OrdersTabItem">
+                        <Grid>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="CustomersTabItem">
+                        <Grid>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="EmployeesTabItem">
+                        <Grid>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </Grid>
             <Grid Grid.Column="2" Margin="0,10,10,10" HorizontalAlignment="Right" Width="280">
                 <Grid.RowDefinitions>
@@ -89,9 +145,9 @@
                     <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
                 </Grid.Background>
                 <Border BorderThickness="1" Grid.RowSpan="2">
-                	<Border.BorderBrush>
-                		<SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
-                	</Border.BorderBrush>
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
+                    </Border.BorderBrush>
                 </Border>
                 <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="Image/EmployeeTemplatePic.jpg">
                     <Image.OpacityMask>
