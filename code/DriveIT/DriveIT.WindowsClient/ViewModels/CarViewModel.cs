@@ -221,12 +221,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public void CreateCar()
         {
             var carController = new CarController();
-            carController.CreateCar(new CarDto()
-            {
-                Id = CarId,
-                Model = CarModel,
-                Make = CarMake
-            });
+            carController.CreateCar(_carDto);
         }
         /// <summary>
         /// Gets called from the view
