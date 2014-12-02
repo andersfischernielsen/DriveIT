@@ -1,5 +1,7 @@
 ﻿@using System.Threading
 @using System.Threading.Tasks
+@using System.Web.Mvc.Html
+@using DriveIT.Entities
 @using DriveIT.Models
 @using DriveIT.MVC.Controllers
 @using Microsoft.Ajax.Utilities
@@ -7,13 +9,11 @@
 @functions
 {
     CarController c = new CarController();
-    
 }
 
 @{
     ViewBag.Title = "Car Search";
 }
-
 
 <!DOCTYPE html>
 <html>
@@ -28,33 +28,27 @@
 
     FuelType:
     <select name="car-fuelType" id="car-fuelType">
-        <option></option>
+        <option value=""></option>
         <option value="Gasoline">Gasoline</option>
         <option value="Diesel">Diesel</option>
         <option value="Electric">Electric</option>
     </select>
-    
-    <script type="text/javascript">
-    function myTestFunction() {
-        var selects = document.getElementById("car-fuelType");
-        document.getElementById("test").innerHTML = selects.options[selects.selectedIndex].value;
-    }
-    </script>
 
     Make: <select name="car-makes" id="car-makes"></select>
     Model: <select name="car-models" id="car-models"></select>
-    
+
     <br/>
     <br/>
 
-    <button onclick="myTestFunction()">Search for cars</button>
+    <button onclick="">Search for cars</button>
 
-    @foreach (var row in c.GetCarsByFuelType("Diesel").Result)
+    @foreach (var element in c.GetCarsByFuelType("Gasoline").Result)
     {
-        <hr />
-        <h6>FuelType: @row.Fuel</h6>
-        <h6>Make: @row.Make</h6>
-        <h6>Model: @row.Model</h6>
+        <hr/>
+        <h6>FuelType: @element.Fuel</h6>
+        <h6>Make: @element.Make</h6>
+        <h6>Model: @element.Model</h6>
+        @Html.ActionLink("More Information", "CarInformation", new {carId = element.Id})
     }
 
 </body>
