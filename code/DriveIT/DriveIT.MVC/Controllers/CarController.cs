@@ -13,14 +13,27 @@ namespace DriveIT.MVC.Controllers
     {
 
         // GET: Car/CarSearch
-        public async Task<ActionResult> CarSearchAsync()
+        public ActionResult CarSearch()
         {
             return View();
         }
 
+        //anvendes til test
         public async void CreateCar(CarDto car)
         {
             await DriveITWebAPI.Create("cars", car);
+        }
+
+        public async Task<IList<CarDto>>getAllCars()
+        {
+            var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars");
+            return carsToReturn;
+        }
+
+        public async Task<CarDto>getSingleCar(int Id)
+        {
+            var carToReturn = await DriveITWebAPI.Read<CarDto>("Cars/" + Id);
+            return carToReturn;
         }
 
         public async Task<IList<CarDto>> GetCarsByFuelType(string fuelType)
