@@ -133,7 +133,8 @@ namespace DriveIT.WebAPI.Models
                 Id = dto.Id.HasValue ? dto.Id.Value : 0,
                 CarId = dto.CarId,
                 CustomerId = dto.CustomerId,
-                Created = dto.Requested
+                Created = dto.Requested,
+                EmployeeId = dto.EmployeeId ?? 0
             };
         }
 
@@ -145,7 +146,7 @@ namespace DriveIT.WebAPI.Models
                 CarId = contactRequest.CarId,
                 CustomerId = contactRequest.CustomerId,
                 Requested = contactRequest.Created,
-                //TODO: employee / handled.
+                EmployeeId = contactRequest.EmployeeId == 0 ? (int?) null : contactRequest.EmployeeId
             };
         }
 

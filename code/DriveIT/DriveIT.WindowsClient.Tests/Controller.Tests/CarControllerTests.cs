@@ -21,12 +21,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _carController.ReadCarList().Result;
             Console.WriteLine(t.Count);
-            try
-            {
-                _carController.CreateCar(t[0]);
-            }
-            catch (Exception)
-            {
                 _carController.CreateCar(new CarDto()
                 {
                     Color = "Red",
@@ -36,14 +30,12 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                     Make = "Audi",
                     Price = 200000
                 });
-            }
             Thread.Sleep(2000);
             t = _carController.ReadCarList().Result;
             Console.WriteLine(t.Count);
 
 
             Console.WriteLine("Before update: " + _carController.ReadCar(t[t.Count - 1].Id.Value).Result.Color);
-            int id = t[0].Id.Value;
             _carController.UpdateCar(new CarDto()
             {
                 Color = "Silver",
@@ -52,7 +44,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Model = "Swhifts",
                 Make = "Suzuki",
                 Price = 10000,
-                Id = id
             });
             Thread.Sleep(2000);
             t = _carController.ReadCarList().Result;

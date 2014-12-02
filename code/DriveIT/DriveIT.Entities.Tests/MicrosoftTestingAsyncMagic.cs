@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DriveIT.EntityFramework
+namespace DriveIT.Entities.Tests
 {
     public class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider
     {
