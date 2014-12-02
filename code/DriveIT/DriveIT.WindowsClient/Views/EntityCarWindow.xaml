@@ -4,7 +4,7 @@
 	xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 	xmlns:local="clr-namespace:DriveIT.WindowsClient"
 	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
-	x:Class="DriveIT.WindowsClient.EntityCarWindow"
+	x:Class="DriveIT.WindowsClient.Views.EntityCarWindow"
 	x:Name="Window"
 	Title="EntityCarWindow"
 	Width="853" Height="553" Background="#FFE9EFF3">

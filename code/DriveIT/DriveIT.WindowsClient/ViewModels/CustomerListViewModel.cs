@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DriveIT.Models;
-using DriveIT.WindowsClient.ViewModels;
-using DriveIT_Windows_Client.Controllers;
+using DriveIT.WindowsClient.Controllers;
 
-namespace DriveIT_Windows_Client.ViewModels
+namespace DriveIT.WindowsClient.ViewModels
 {
     public class CustomerListViewModel : IViewModelBase
     {
@@ -34,10 +30,10 @@ namespace DriveIT_Windows_Client.ViewModels
 
         public async void ReadList()
         {
-            var carController = new CarController();
-            foreach (CarDto carDto in await carController.ReadCarList())
+            var customerController = new CustomerController();
+            foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
             {
-                CustomerViewModels.Add(new CarViewModel(carDto));
+                CustomerViewModels.Add(new CustomerViewModel(customerDto));
             }
         }
 

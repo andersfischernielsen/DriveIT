@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DriveIT.Models;
-using DriveIT_Windows_Client.ViewModels;
 
-namespace DriveIT_Windows_Client.Controllers
+namespace DriveIT.WindowsClient.Controllers
 {
     public class RequestForContactController
     {

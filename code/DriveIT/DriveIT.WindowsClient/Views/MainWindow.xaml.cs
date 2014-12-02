@@ -1,12 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using DriveIT.WindowsClient;
-using DriveIT_Windows_Client.Controllers;
 
-namespace DriveIT_Windows_Client.Views
+namespace DriveIT.WindowsClient.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

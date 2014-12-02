@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using DriveIT.Models;
-using DriveIT_Windows_Client.Controllers;
-using DriveIT_Windows_Client.ViewModels;
+using DriveIT.WindowsClient.Controllers;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
