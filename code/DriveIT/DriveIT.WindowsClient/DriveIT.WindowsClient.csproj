@@ -107,6 +107,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DriveITWebAPI.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\CarListViewModel.cs" />
     <Compile Include="ViewModels\CarViewModel.cs" />
     <Compile Include="ViewModels\CustomerListViewModel.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="ViewModels\RequestForContactListViewModel.cs" />
     <Compile Include="ViewModels\RequestForContactViewModel.cs" />
     <Compile Include="ViewModels\IViewModelBase.cs" />
+    <Compile Include="ViewModels\UserControlWithViewModelModel.cs" />
     <Compile Include="Views\EntityCarWindow.xaml.cs">
       <DependentUpon>EntityCarWindow.xaml</DependentUpon>
     </Compile>
@@ -134,6 +136,19 @@
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\RequestForContactController.cs" />
+    <Compile Include="Views\UserControls\MainViewEntitiesUC.xaml.cs">
+      <DependentUpon>MainViewEntitiesUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\MainViewPowerToolBarUC.xaml.cs">
+      <DependentUpon>MainViewPowerToolBarUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlWithViewModel.xaml.cs">
+      <DependentUpon>UserControlWithViewModel.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\EntityCarWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,6 +158,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\MainViewEntitiesUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\MainViewPowerToolBarUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControlWithViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -203,10 +230,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\UserControls\MainViewEntities\" />
-    <Folder Include="Views\UserControls\MainViewPowerButtons\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\CarImage.jpg" />
