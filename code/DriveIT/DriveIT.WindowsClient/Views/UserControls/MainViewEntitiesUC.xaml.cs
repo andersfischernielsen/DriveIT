@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DriveIT.WindowsClient.ViewModels;
 
 namespace DriveIT.WindowsClient
 {
@@ -21,6 +22,10 @@ namespace DriveIT.WindowsClient
 		public MainViewEntitiesUC()
 		{
 			this.InitializeComponent();
+            var temp = (ControlTemplate)FindResource("CarEntitiesUCTemplate");
+		    var temp1 = FindName("CarEntitiesUCTemplate");
+		    Console.WriteLine("hej");
+            //todo find out how to reference datagrid inside template http://stackoverflow.com/questions/19116327/accessing-a-control-inside-a-controltemplate
 		}
 	}
 }

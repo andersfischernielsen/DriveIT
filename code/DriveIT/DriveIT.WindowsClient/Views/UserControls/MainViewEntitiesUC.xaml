@@ -9,9 +9,11 @@
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480" Template="{DynamicResource CarEntitiesUCTemplate}">
     <UserControl.Resources>
-        <viewModels:CarListViewModel x:Key="CarListViewModel" CarViewModels="{Binding Source=CarViewModel}"></viewModels:CarListViewModel>
             <ControlTemplate x:Key="CarEntitiesUCTemplate" TargetType="{x:Type UserControl}">
             <Grid>
+                <Grid.DataContext>
+                    <viewModels:CarListViewModel/>
+                </Grid.DataContext>
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
                 </Grid.Background>
@@ -19,11 +21,8 @@
                     <RowDefinition Height="75"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid.DataContext>
-                    <viewModels:CarListViewModel/>
-                </Grid.DataContext>
                 <Label Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="59" Width="212.993" FontSize="32" Style="{DynamicResource HeaderLabel}"/>
-                <DataGrid Margin="10" Grid.Row="1" ItemsSource="{DynamicResource CarListViewModel}"/>
+                <DataGrid x:Name="CarsDataGrid" Margin="10" Grid.Row="1" ItemsSource="{Binding CarViewModels}"/>
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="RequestForContactEntititesUCTemplate" TargetType="{x:Type UserControl}">
