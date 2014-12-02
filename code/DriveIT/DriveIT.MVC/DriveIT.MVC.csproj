@@ -244,11 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
-<<<<<<< HEAD
-      <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
-      <Name>DriveIT.Models</Name>
-    </ProjectReference>
-=======
       <Project>{9279adf0-fc58-4c2f-b34f-d472f13976ec}</Project>
       <Name>DriveIT.Models</Name>
     </ProjectReference>
@@ -256,7 +251,6 @@
       <Project>{ba31942d-2335-465a-b23a-607f7a3dd7ca}</Project>
       <Name>DriveIT.WebAPI</Name>
     </ProjectReference>
->>>>>>> 014dd8df57235759e1d4fd09da0a3eba73ded23e
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
