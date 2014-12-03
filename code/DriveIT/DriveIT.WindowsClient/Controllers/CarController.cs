@@ -17,14 +17,12 @@ namespace DriveIT.WindowsClient.Controllers
 
         public async Task<CarDto> ReadCar(int id)
         {
-            var carToReturn = await DriveITWebAPI.Read<CarDto>("cars/" + id);
-            return carToReturn;
+            return await DriveITWebAPI.Read<CarDto>("cars/" + id);
         }
 
         public async Task<IList<CarDto>> ReadCarList()
         {
-            var cars = await DriveITWebAPI.ReadList<CarDto>("cars");
-            return cars;
+            return await DriveITWebAPI.ReadList<CarDto>("cars");
         }
         public async void UpdateCar(CarDto car)
         {
