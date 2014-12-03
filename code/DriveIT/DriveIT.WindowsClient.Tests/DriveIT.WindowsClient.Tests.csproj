@@ -56,8 +56,8 @@
     <Compile Include="Controller.Tests\CarControllerTests.cs" />
     <Compile Include="Controller.Tests\CustomerControllerTest.cs" />
     <Compile Include="Controller.Tests\EmployeeControllerTests.cs" />
-    <Compile Include="Controller.Tests\OrderControllerTests.cs" />
-    <Compile Include="Controller.Tests\RequestForContactControllerTests.cs" />
+    <Compile Include="Controller.Tests\SaleControllerTests.cs" />
+    <Compile Include="Controller.Tests\ContactRequestControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
