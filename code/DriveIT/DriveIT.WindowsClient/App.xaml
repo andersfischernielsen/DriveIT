@@ -28,10 +28,10 @@
             <Color x:Key="OrdersBarGridColor">#9B59B6</Color>
             <!-- Seance og WISTERIA-->
             <Color x:Key="CustomersBarColor">#CF000F</Color>
-            <Color x:Key="CustomersBarGridColor">#F22613</Color>
+            <Color x:Key="CustomersBarGridColor">#DA2211</Color>
             <!-- Monza og Pomergranate-->
             <Color x:Key="EmployeesBarColor">#F89406</Color>
-            <Color x:Key="EmployeesBarGridColor">#F9BF3B</Color>
+            <Color x:Key="EmployeesBarGridColor">#E0AC35</Color>
             <!-- California og SANDSTORM -->
 
             <Style x:Key="DatagridStyle">
@@ -41,39 +41,62 @@
             <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"></SolidColorBrush>
             <SolidColorBrush x:Key="TextBoxTextColorBrush" Color="{DynamicResource TextBoxTextColor}"></SolidColorBrush>
             <SolidColorBrush x:Key="StatusLabelColorBrush" Color="{DynamicResource StatusLabelColor}"></SolidColorBrush>
+            <SolidColorBrush x:Key="OverlayComponentsBorderColorBrush" Color="{DynamicResource OverlayComponentsBorderColor}"></SolidColorBrush>
 
-            <Style x:Key="HeaderLabel">
-                <Setter Property="Label.FontSize" Value="32"/>
-                <Setter Property="Label.FontFamily" Value="Segoe UI Light"/>
-                <Setter Property="Label.Foreground" Value="AntiqueWhite"></Setter>
+            <Style x:Key="HeaderLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="32"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="Foreground" Value="AntiqueWhite"></Setter>
             </Style>
 
-            <Style x:Key="EntityWindowHeaderLabel">
-                <Setter Property="Label.FontSize" Value="32"/>
-                <Setter Property="Label.FontFamily" Value="Segoe UI Light"/>
+            <Style x:Key="EntityWindowHeaderLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="32"/>
+                <Setter Property="FontFamily" Value="Segoe UI Light"/>
             </Style>
 
-            <Style x:Key="FillTextBlockStyle">
-                <Setter Property="TextBox.FontSize" Value="16"/>
-                <Setter Property="TextBox.Padding" Value="8,2.5"/>
-                <Setter Property="TextBox.BorderBrush" Value="{x:Null}"/>
-                <Setter Property="TextBox.Padding" Value="8,2.5"/>
-                <Setter Property="TextBox.Background" Value="{DynamicResource TextBoxBackgroundColorBrush}"/>
-                <Setter Property="TextBox.Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+            <Style x:Key="FillTextBlockStyle" TargetType="TextBox">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="8,2.5"/>
+                <Setter Property="BorderBrush" Value="{x:Null}"/>
+                <Setter Property="Padding" Value="8,2.5"/>
+                <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundColorBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
             </Style>
-            <Style x:Key="StatusLabelStyle">
-                <Setter Property="Label.FontSize" Value="16"/>
-                <Setter Property="Label.FontStyle" Value="Italic"/>
-                <Setter Property="Label.Foreground" Value="{DynamicResource StatusLabelColorBrush}"/>
+            <Style x:Key="StatusLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="Foreground" Value="{DynamicResource StatusLabelColorBrush}"/>
             </Style>
 
             <Style x:Key="PowerToolButtonStyle">
                 <Setter Property="Button.Width" Value="80"/>
             </Style>
 
-            <Style x:Key="MenuBarButtonStyle">
-                <Setter Property="Button.FontWeight" Value="Normal"/>
-                <Setter Property="Button.Foreground" Value="AntiqueWhite"></Setter>
+
+
+            <Style x:Key="MenuBarButtonStyle" TargetType="Button">
+                <Setter Property="Foreground" Value="AntiqueWhite"/>
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Name="border" 
+                            BorderThickness="1.5"
+                            Padding="4,2" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource OverlayComponentsBorderColorBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
 

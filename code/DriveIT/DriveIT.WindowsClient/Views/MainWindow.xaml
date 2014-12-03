@@ -224,7 +224,7 @@
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                 </Grid.Background>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="0,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="-5,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070" BorderThickness="0">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                     </Button.Background>
@@ -234,7 +234,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="0,115,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="-5,115,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CarBarState"/>
@@ -245,7 +245,7 @@
                         <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="0,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="-5,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="OrdersBarState"/>
@@ -255,7 +255,7 @@
                         <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="0,295,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CustomersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="-5,295,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CustomersClick">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CustomerBarState"/>
@@ -265,7 +265,7 @@
                         <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="0,385,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="-5,385,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="EmployeeBarState"/>
