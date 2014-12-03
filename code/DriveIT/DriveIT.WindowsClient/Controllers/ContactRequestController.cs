@@ -18,7 +18,7 @@ namespace DriveIT.WindowsClient.Controllers
             var contactRequestToReturn = await DriveITWebAPI.Read<ContactRequestDto>("contactRequests/" + id);
             return contactRequestToReturn;
         }
-        public async Task<IList<ContactRequestDto>> ReadContactRequest()
+        public async Task<IList<ContactRequestDto>> ReadContactRequests()
         {
             var contactRequests = await DriveITWebAPI.ReadList<ContactRequestDto>("contactRequests");
             return contactRequests;
