@@ -1,12 +1,12 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Navigation;
-using DriveIT.WindowsClient;
-using DriveIT_Windows_Client.Controllers;
+using DriveIT.WindowsClient.ViewModels;
 
-namespace DriveIT_Windows_Client.Views
+namespace DriveIT.WindowsClient.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -32,14 +32,32 @@ namespace DriveIT_Windows_Client.Views
 
         private void RequestsForContactsClick(object sender, RoutedEventArgs e)
         {
-            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("RequestForContactEntititesUCTemplate");
-            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("RequestForContactEntitiesPowerToolBarUC");
+            EntitiesTabControl.SelectedIndex = 0;
+            PowerToolsbarTabControl.SelectedIndex = 0;
         }
 
         private void CarsClick(object sender, RoutedEventArgs e)
         {
-            EntitiesUC.Template = (ControlTemplate)EntitiesUC.FindResource("CarEntitiesUCTemplate");
-            PowerToolsBarUC.Template = (ControlTemplate)PowerToolsBarUC.FindResource("CarEntitiesPowerToolBarUC");
+            EntitiesTabControl.SelectedIndex = 1;
+            PowerToolsbarTabControl.SelectedIndex = 1;
+        }
+
+        private void OrdersClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 2;
+            PowerToolsbarTabControl.SelectedIndex = 2;
+        }
+
+        private void CustomersClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 3;
+            PowerToolsbarTabControl.SelectedIndex = 3;
+        }
+
+        private void EmployeesClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 4;
+            PowerToolsbarTabControl.SelectedIndex = 4;
         }
     }
 }
