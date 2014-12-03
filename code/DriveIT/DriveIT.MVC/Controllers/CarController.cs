@@ -5,7 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using DriveIT.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace DriveIT.MVC.Controllers
 {
@@ -18,13 +20,19 @@ namespace DriveIT.MVC.Controllers
             return View();
         }
 
-        public async Task<IList<CarDto>> getAllCars()
+        public ActionResult CarInformation(int carId)
+        {
+            var car = GetSingleCar(carId).Result;
+            return View(car);
+        }
+
+        public async Task<IList<CarDto>> GetAllCars()
         {
             var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars");
             return carsToReturn;
         }
 
-        public async Task<CarDto> getSingleCar(int Id)
+        public async Task<CarDto> GetSingleCar(int Id)
         {
             var carToReturn = await DriveITWebAPI.Read<CarDto>("Cars/" + Id);
             return carToReturn;

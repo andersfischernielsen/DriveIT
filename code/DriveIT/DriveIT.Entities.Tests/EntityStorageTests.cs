@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using DriveIT.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -161,12 +164,16 @@ namespace DriveIT.Entities.Tests
             mockSet.As<IQueryable<Car>>().Setup(m => m.ElementType).Returns(cars.ElementType);
             mockSet.As<IQueryable<Car>>().Setup(m => m.GetEnumerator()).Returns(cars.GetEnumerator());
 
+            mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(() => null);
+
             var mockContext = new Mock<DriveITContext>();
             mockContext.Setup(c => c.Cars).Returns(mockSet.Object);
 
             await _toTest.DeleteCar(1, mockContext.Object);
-            Assert.AreEqual(1, mockContext.Object.Cars.Count());
-            Assert.AreEqual("Bentley", mockContext.Object.Cars.Where(x => x.Id == 2).FirstOrDefault().Make);
+
+            Assert.IsNull(mockContext.Object.Cars.FindAsync(1));
+            mockSet.Verify(m => m.Remove(It.IsAny<Car>()), Times.Once);
+            mockContext.Verify(m => m.SaveChangesAsync(), Times.Once);
         }
 
         [Test]
@@ -220,13 +227,17 @@ namespace DriveIT.Entities.Tests
             mockSet.As<IQueryable<Car>>().Setup(m => m.Expression).Returns(cars.Expression);
             mockSet.As<IQueryable<Car>>().Setup(m => m.ElementType).Returns(cars.ElementType);
             mockSet.As<IQueryable<Car>>().Setup(m => m.GetEnumerator()).Returns(cars.GetEnumerator());
+            mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(Task.Run(() => cars.ElementAt(1)));
 
             var mockContext = new Mock<DriveITContext>();
             mockContext.Setup(c => c.Cars).Returns(mockSet.Object);
 
             await _toTest.UpdateCar(1, new Car {Color = "Turquoise" }, mockContext.Object);
-            Assert.AreEqual("Turquoise", mockSet.Object.Where(x => x.Id == 1).FirstOrDefault().Color);
-            Assert.AreEqual(0, mockSet.Object.Where(x => x.Id == 1).FirstOrDefault().DistanceDriven);
+
+            var result = await mockContext.Object.Cars.FirstOrDefaultAsync(x => x.Color == "Turquoise");
+            Assert.AreEqual("Turquoise", result.Color);
+            Assert.AreEqual(0, result.DistanceDriven);
+            mockContext.Verify(m => m.SaveChangesAsync(), Times.Once);
         }
 
         public static void Main(string[] args)
