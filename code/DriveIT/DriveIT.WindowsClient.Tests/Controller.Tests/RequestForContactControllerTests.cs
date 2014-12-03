@@ -13,19 +13,19 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     [TestFixture]
     public class RequestForContactControllerTests
     {
-        private RequestForContactController _requestForContactController;
+        private ContactRequestController _requestForContactController;
         [SetUp]
         public void Setup()
         {
-            _requestForContactController = new RequestForContactController();
+            _requestForContactController = new ContactRequestController();
         }
 
         [Test]
         public void TestAllMethods()
         {
-            var t = _requestForContactController.ReadRequestForContactList().Result;
+            var t = _requestForContactController.ReadContactRequest().Result;
             Console.WriteLine(t.Count);
-                _requestForContactController.CreateRequestForContact(new ContactRequestDto()
+                _requestForContactController.CreateContactRequest(new ContactRequestDto()
                 {
                     Requested = DateTime.Now,
                     CarId = 1,
@@ -33,12 +33,12 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                     EmployeeId = 1,
                 });
             Thread.Sleep(5000);
-            t = _requestForContactController.ReadRequestForContactList().Result;
+            t = _requestForContactController.ReadContactRequest().Result;
             Console.WriteLine(t.Count);
 
 
-            Console.WriteLine("Before update: " + _requestForContactController.ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Requested);
-            _requestForContactController.UpdateRequestForContact(new ContactRequestDto()
+            Console.WriteLine("Before update: " + _requestForContactController.ReadContactRequest(t[t.Count - 1].Id.Value).Result.Requested);
+            _requestForContactController.UpdateContactRequest(new ContactRequestDto()
             {
                 EmployeeId = 1,
                 Requested = DateTime.Now.AddDays(1),
@@ -47,13 +47,13 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(5000);
-            t = _requestForContactController.ReadRequestForContactList().Result;
+            t = _requestForContactController.ReadContactRequest().Result;
             Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + _requestForContactController.ReadRequestForContact(t[t.Count - 1].Id.Value).Result.Requested);
+            Console.WriteLine("After update: " + _requestForContactController.ReadContactRequest(t[t.Count - 1].Id.Value).Result.Requested);
 
-            _requestForContactController.DeleteRequestForContact(t[t.Count - 1].Id.Value);
+            _requestForContactController.DeleteContactRequest(t[t.Count - 1].Id.Value);
             Thread.Sleep(5000);
-            t = _requestForContactController.ReadRequestForContactList().Result;
+            t = _requestForContactController.ReadContactRequest().Result;
             Console.WriteLine(t.Count);
         }
     }

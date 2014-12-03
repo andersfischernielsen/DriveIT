@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
-    public class RequestForContactListViewModel : IViewModelBase
+    public class ContactRequestViewModel : IViewModelBase
     {
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
