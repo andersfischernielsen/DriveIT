@@ -10,7 +10,7 @@ namespace DriveIT.WindowsClient.Controllers
         {
         }
 
-        public async void CreateCar(CarDto car)
+        public async Task CreateCar(CarDto car)
         {
             await DriveITWebAPI.Create("cars", car);
         }

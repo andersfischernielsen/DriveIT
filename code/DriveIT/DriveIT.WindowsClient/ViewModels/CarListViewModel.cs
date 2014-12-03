@@ -48,11 +48,22 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        public async void UpdateList()
+        {
+            CarViewModels.Clear();
+            var carController = new CarController();
+            foreach (CarDto carDto in await carController.ReadCarList())
+            {
+                CarViewModels.Add(new CarViewModel(carDto));
+            }
+        }
+
         public void CreateNewCarWindow()
         {
             CarViewModel newCar = new CarViewModel(new CarDto());
             var window = new EntityCarWindow();
             window.DataContext = newCar;
+            CarViewModels.Add(newCar);
             window.Show();
         }
         #endregion CRUD

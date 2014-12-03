@@ -15,7 +15,8 @@
             <Color x:Key="OverlayComponentsBorderColor"   A="255" R="200" G="200" B="200"></Color>
             <Color x:Key="DatagridBackgroundColor"   A="255" R="200" G="200" B="200"></Color>
             <Color x:Key="TextBoxBackgroundColor"   A="255" R="193" G="197" B="207"></Color>
-            <Color x:Key="TextBoxTextColor"         A="255" R="207" G="206" B="202"></Color>
+            <Color x:Key="TextBoxTextColor"         A="255" R="44" G="62" B="80"></Color>
+            <Color x:Key="StatusLabelColor"         A="255" R="4" G="7" B="25"></Color>
             <Color x:Key="CarsBarColor"         A="255" R="52" G="152" B="219"></Color> 
             <!-- rgb(52, 152, 219) -->
             <Color x:Key="EmployeesBarColor"         A="255" R="46" G="204" B="113"></Color>
@@ -34,6 +35,7 @@
             
             <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"></SolidColorBrush>
             <SolidColorBrush x:Key="TextBoxTextColorBrush" Color="{DynamicResource TextBoxTextColor}"></SolidColorBrush>
+            <SolidColorBrush x:Key="StatusLabelColorBrush" Color="{DynamicResource StatusLabelColor}"></SolidColorBrush>
 
             <Style x:Key="HeaderLabel">
                 <Setter Property="Label.FontSize" Value="32"/>
@@ -48,7 +50,12 @@
                 <Setter Property="TextBox.Background" Value="{DynamicResource TextBoxBackgroundColorBrush}"/>
                 <Setter Property="TextBox.Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
             </Style>
-            
+            <Style x:Key="StatusLabelStyle">
+                <Setter Property="Label.FontSize" Value="16"/>
+                <Setter Property="Label.FontStyle" Value="Italic"/>
+                <Setter Property="Label.Foreground" Value="{DynamicResource StatusLabelColorBrush}"/>
+            </Style>
+
             <Style x:Key="PowerToolButtonStyle">
                 <Setter Property="Button.Width" Value="80"/>
             </Style>

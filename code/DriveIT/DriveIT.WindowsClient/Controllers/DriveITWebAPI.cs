@@ -22,8 +22,9 @@ namespace DriveIT.WindowsClient.Controllers
                     HttpResponseMessage response = await httpClient.PostAsJsonAsync(uri, objectToCreate);
                     response.EnsureSuccessStatusCode();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     throw new NotImplementedException();
                 }
 

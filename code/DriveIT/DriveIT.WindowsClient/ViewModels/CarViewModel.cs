@@ -10,13 +10,15 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         private CarDto _carDto;
 
+        #region Attributes
+        private string _status = "";
         public string Status
         {
             get
             {
                 try
                 {
-                    return Status;
+                    return _status;
                 }
                 catch (Exception)
                 {
@@ -27,7 +29,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             set
             {
-                Status = value;
+                _status = value;
                 NotifyPropertyChanged("Status");
             }
         }
@@ -44,7 +46,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
                     return null;
                 }
-                
+
             }
             set
             {
@@ -63,7 +65,6 @@ namespace DriveIT.WindowsClient.ViewModels
             _carDto = new CarDto();
         }
 
-        #region Attributes
         public string CarModel
         {
             get { return _carDto.Model; }
@@ -236,10 +237,12 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void CreateCar()
+        public async void CreateCar()
         {
             var carController = new CarController();
-            carController.CreateCar(_carDto);
+            _carDto.Created = DateTime.Now;
+            await carController.CreateCar(_carDto);
+            Status = "Car saved";
         }
         /// <summary>
         /// Gets called from the view

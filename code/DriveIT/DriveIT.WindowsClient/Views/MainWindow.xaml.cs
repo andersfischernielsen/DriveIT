@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Navigation;
+using DriveIT.WindowsClient.ViewModels;
 
 namespace DriveIT.WindowsClient.Views
 {
