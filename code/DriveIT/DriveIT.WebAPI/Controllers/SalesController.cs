@@ -19,6 +19,7 @@ namespace DriveIT.WebAPI.Controllers
         public SalesController() : this(new EntityStorage()) { }
 
         // GET: api/Sales
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
@@ -27,6 +28,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // GET: api/Sales/5
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Get(int id)
         {
             var sale = await _repo.GetSaleWithId(id);
@@ -37,7 +39,17 @@ namespace DriveIT.WebAPI.Controllers
             return Ok(sale.ToDto());
         }
 
+        [Authorize]
+        public async Task<IHttpActionResult> GetFromUserId(int userId)
+        {
+            //Todo: If customer, check id matches user.
+            return Ok((from sale in await _repo.GetAllSales()
+                where sale.CustomerId == userId
+                select sale.ToDto()).ToList());
+        }
+
         // POST: api/Sales
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Post([FromBody]SaleDto value)
         {
             if (!ModelState.IsValid)
@@ -50,6 +62,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Sales/5
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Put(int id, [FromBody]SaleDto value)
         {
             if (!ModelState.IsValid)
@@ -66,6 +79,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Sales/5
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             var sale = await _repo.GetSaleWithId(id);

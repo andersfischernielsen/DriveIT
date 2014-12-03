@@ -19,6 +19,7 @@ namespace DriveIT.WebAPI.Controllers
         public CustomersController() : this(new EntityStorage()) { }
 
         // GET: api/Customers
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
@@ -27,8 +28,13 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // GET: api/Customers/5
+        [Authorize]
         public async Task<IHttpActionResult> Get(int id)
         {
+            if (User.IsInRole("Customer"))
+            {
+                //TODO check that Id is only their own.
+            }
             var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
@@ -38,6 +44,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Customers
+        [Authorize]
         public async Task<IHttpActionResult> Post([FromBody]CustomerDto value)
         {
             if (!ModelState.IsValid)
@@ -54,8 +61,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Customers/5
+        [Authorize]
         public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerDto value)
         {
+            //Todo check user is changing himself!
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -70,8 +79,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Customers/5
+        [Authorize]
         public async Task<IHttpActionResult> Delete(int id)
         {
+            //Todo check that user can only delete himself.
             var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {

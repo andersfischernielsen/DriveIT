@@ -19,6 +19,7 @@ namespace DriveIT.WebAPI.Controllers
         public ContactRequestsController() : this(new EntityStorage()) { }
 
         // GET: api/ContactRequests
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Get()
         {
             return Ok(from contactRequest in await _repo.GetAllContactRequests()
@@ -26,6 +27,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // GET: api/ContactRequests/5
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Get(int id)
         {
             var contactRequest = await _repo.GetContactRequestWithId(id);
@@ -36,9 +38,20 @@ namespace DriveIT.WebAPI.Controllers
             return Ok(contactRequest.ToDto());
         }
 
+        [Authorize(Roles = "Customer, Administrator")]
+        public async Task<IHttpActionResult> GetByUserId(int userId)
+        {
+            //Todo if customer, check id to see if it is the logged in one.
+            return Ok((from contactRequest in await _repo.GetAllContactRequests()
+                where contactRequest.CustomerId == userId
+                select contactRequest.ToDto()).ToList());
+        }
+
         // POST: api/ContactRequests
+        [Authorize(Roles = "Customer")]
         public async Task<IHttpActionResult> Post([FromBody]ContactRequestDto value)
         {
+            //Todo make stuff valid for customer.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -53,8 +66,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/ContactRequests/5
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Put(int id, [FromBody]ContactRequestDto value)
         {
+            //Todo check.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -69,8 +84,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/ContactRequests/5
+        [Authorize(Roles = "Customer, Employee, Administrator")]
         public async Task<IHttpActionResult> Delete(int id)
         {
+            //Todo customer check.
             var contactRequest = await _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
             {

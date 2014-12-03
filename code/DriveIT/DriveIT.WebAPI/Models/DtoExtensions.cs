@@ -57,7 +57,6 @@ namespace DriveIT.WebAPI.Models
                 LastName = dto.LastName,
                 Id = dto.Id ?? 0,
                 PhoneNumber = dto.Phone,
-                Username = dto.Username
             };
         }
 
@@ -70,7 +69,6 @@ namespace DriveIT.WebAPI.Models
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Phone = string.Format("{0}", customer.PhoneNumber),
-                Username = customer.Username
             };
         }
 
@@ -157,8 +155,8 @@ namespace DriveIT.WebAPI.Models
                 Id = dto.Id ?? 0,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                Username = dto.Username,
-                PhoneNumber = dto.Phone
+                PhoneNumber = dto.Phone,
+                Email = dto.Email
             };
         }
 
@@ -169,8 +167,8 @@ namespace DriveIT.WebAPI.Models
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
-                Username = employee.Username,
-                Phone = employee.PhoneNumber
+                Phone = employee.PhoneNumber,
+                Email = employee.Email
             };
         }
     }

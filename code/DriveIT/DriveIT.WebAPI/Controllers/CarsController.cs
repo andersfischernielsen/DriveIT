@@ -22,8 +22,8 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
         {
-            var cars = from car in await _repo.GetAllCars()
-                       select car.ToDto();
+            var cars = (from car in await _repo.GetAllCars()
+                       select car.ToDto()).ToList();
 
             return Ok(cars.ToList());
         }
@@ -76,6 +76,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Cars
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Post([FromBody]CarDto value)
         {
             if (!ModelState.IsValid)
@@ -87,10 +88,12 @@ namespace DriveIT.WebAPI.Controllers
                 return BadRequest("Null value not allowed.");
             }
             var newCarId = await _repo.CreateCar(value.ToEntity());
+            value.Id = newCarId;
             return CreatedAtRoute("DefaultApi", new { id = newCarId }, value);
         }
 
         // PUT: api/Cars/5
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Put(int id, [FromBody]CarDto value)
         {
             if (!ModelState.IsValid)
@@ -107,6 +110,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Cars/5
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             var car = await _repo.GetCarWithId(id);

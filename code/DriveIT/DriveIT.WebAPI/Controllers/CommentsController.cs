@@ -20,7 +20,8 @@ namespace DriveIT.WebAPI.Controllers
 
         // GET: api/Comments/5
         // Where 5 is CarId
-        public async Task<IHttpActionResult> Get(int id)
+
+        public async Task<IHttpActionResult> GetByCarId(int id)
         {
             // Remember: It is a car-id. Not commentId.
             var carId = id;
@@ -34,8 +35,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Comments
+        [Authorize(Roles = "Customer, Administrator")]
         public async Task<IHttpActionResult> Post([FromBody]CommentDto value)
         {
+            //Todo if customer, check that it is his own comment.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -49,8 +52,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Comments/5
+        [Authorize(Roles = "Customer, Administrator")]
         public async Task<IHttpActionResult> Put(int id, [FromBody]CommentDto value)
         {
+            //Todo if customer, check that it is his own comment.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -65,8 +70,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Comments/5
+        [Authorize(Roles = "Customer, Administrator")]
         public async Task<IHttpActionResult> Delete(int id)
         {
+            //Todo if customer check that it is his own comment.
             var comment = await _repo.GetCommentWithId(id);
             if (comment == null)
             {

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
 
@@ -16,6 +11,7 @@ namespace DriveIT.WebAPI.Controllers
     public class UploadController : ApiController
     {
 
+        [Authorize(Roles = "Employee, Administrator")]
         public async Task<IHttpActionResult> PostFormData()
         {
             //Check if the request contains multipart/form-data.

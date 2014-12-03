@@ -38,6 +38,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Employees
+        [Authorize(Roles = "Administrator")]
         public async Task<IHttpActionResult> Post([FromBody]EmployeeDto value)
         {
             if (!ModelState.IsValid)
@@ -54,6 +55,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Employees/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IHttpActionResult> Put(int id, [FromBody]EmployeeDto value)
         {
             if (!ModelState.IsValid)
@@ -69,6 +71,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Employees/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             var employee = await _repo.GetEmployeeWithId(id);
