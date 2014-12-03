@@ -15,7 +15,17 @@
             <Color x:Key="OverlayComponentsBorderColor"   >#FF8C8E94</Color>
             <Color x:Key="TextBoxBackgroundColor"   A="255" R="193" G="197" B="207"></Color>
             <Color x:Key="TextBoxTextColor"         A="255" R="207" G="206" B="202"></Color>
-            <Color x:Key="PowerToolBarColor"         A="255" R="51" G="145" B="212"></Color>
+            <Color x:Key="CarsBarColor"         A="255" R="52" G="152" B="219"></Color> 
+            <!-- rgb(52, 152, 219) -->
+            <Color x:Key="EmployeesBarColor"         A="255" R="46" G="204" B="113"></Color>
+            <!-- rgb(46, 204, 113)-->
+            <Color x:Key="OrdersBarColor"         A="255" R="243" G="156" B="18"></Color>
+            <!-- rgb(243, 156, 18)-->
+            <Color x:Key="CustomersBarColor"         A="255" R="155" G="89" B="182"></Color>
+            <!--rgb(155, 89, 182)-->
+            <Color x:Key="RequestsForContactBarColor"         A="255" R="231" G="76" B="60"></Color>
+            <!--rgb(231, 76, 60)-->
+            <Color x:Key="CurrentBarColor"></Color>
 
             <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"></SolidColorBrush>
             <SolidColorBrush x:Key="TextBoxTextColorBrush" Color="{DynamicResource TextBoxTextColor}"></SolidColorBrush>
