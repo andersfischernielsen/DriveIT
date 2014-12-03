@@ -16,7 +16,11 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ListUpdateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
                 <VisualStateGroup.Transitions>
-                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                    <VisualTransition GeneratedDuration="0:0:0.2">
+                    	<VisualTransition.GeneratedEasingFunction>
+                    		<CircleEase EasingMode="EaseOut"/>
+                    	</VisualTransition.GeneratedEasingFunction>
+                    </VisualTransition>
                 </VisualStateGroup.Transitions>
                 <VisualState x:Name="CarBarState">
                     <Storyboard>
@@ -29,6 +33,9 @@
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
+                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,107,0,0"/>
+                        </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="RequestForContactBarState">
@@ -42,6 +49,9 @@
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
+                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,27,0,0"/>
+                        </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="OrdersBarState">
@@ -55,6 +65,9 @@
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
+                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,187,0,0"/>
+                        </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="CustomerBarState">
@@ -68,6 +81,9 @@
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
+                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,267,0,0"/>
+                        </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="EmployeeBarState">
@@ -81,6 +97,9 @@
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
+                        	<EasingThicknessKeyFrame KeyTime="0" Value="0,347,0,0"/>
+                        </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -104,8 +123,8 @@
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
                 </Grid.Background>
-                <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81.5" Height="60" Margin="0,10,144.5,0"/>
-                <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81" Height="60" Margin="0,10,29,0"/>
+                <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="60" Margin="0,10,144.5,0"/>
+                <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="60" Margin="0,10,29,0"/>
             </Grid>
             <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0">
                 <TabControl.Resources>
@@ -122,27 +141,52 @@
                     <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
                 </TabControl.Background>
                 <TabItem Header="RequestsForContactPowerTabItem">
-                    <Grid Margin="0">
+                    <TabItem.DataContext>
+                        <ViewModels:ContactRequestListViewModel/>
+                    </TabItem.DataContext>
+                    <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="375,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="481,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="589,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="695,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="805,10,0,10" Width="80"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
-                    <Grid Margin="0">
+                    <TabItem.DataContext>
+                        <ViewModels:CarListViewModel/>
+                    </TabItem.DataContext>
+                    <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="211,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="323,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="441,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="563,10,0,10" Width="80"/>
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="687,10,0,10" Width="80"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="OrdersPowerTabItem">
-                    <Grid Margin="0">
+                    <TabItem.DataContext>
+                        <ViewModels:SaleListViewModel/>
+                    </TabItem.DataContext>
+                    <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
-                    <Grid Margin="0">
+                    <TabItem.DataContext>
+                        <ViewModels:CustomerListViewModel/>
+                    </TabItem.DataContext>
+                    <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="EmployeesPowerTabItem">
-                    <Grid Margin="0">
+                    <TabItem.DataContext>
+                        <ViewModels:EmployeeListViewModel/>
+                    </TabItem.DataContext>
+                    <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
@@ -192,7 +236,7 @@
                         <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Content="Customers" Margin="0,267,0,0" VerticalAlignment="Top" Height="77" FontSize="18" Click="CustomersClick">
+                <Button Content="Customers" Margin="0,267,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CustomersClick">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CustomerBarState"/>
@@ -202,7 +246,7 @@
                         <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Content="Employees" Margin="0,344,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
+                <Button Content="Employees" Margin="0,347,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="EmployeeBarState"/>
@@ -212,6 +256,7 @@
                         <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                     </Button.Background>
                 </Button>
+                <Rectangle x:Name="rectangle" Fill="#FF4F5A5B" HorizontalAlignment="Right" Height="80" Margin="187,0,0,0" VerticalAlignment="Top" Width="6"/>
             </Grid>
             <Grid Grid.Column="1" Margin="10">
                 <TabControl x:Name="EntitiesTabControl">
@@ -229,13 +274,14 @@
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
                     </TabControl.Background>
                     <TabItem Header="RequestsForContactTabItem">
+                        <TabItem.DataContext>
+                            <ViewModels:ContactRequestListViewModel/>
+                        </TabItem.DataContext>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80*"/>
-                                <RowDefinition Height="667*"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding ContactRequestViewModels}">
+                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding ContactRequestViewModels}">
                                 <DataGrid.DataContext>
                                     <ViewModels:ContactRequestListViewModel/>
                                 </DataGrid.DataContext>
@@ -243,59 +289,47 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="CarsTabItem">
+                        <TabItem.DataContext>
+                            <ViewModels:CarListViewModel/>
+                        </TabItem.DataContext>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80*"/>
-                                <RowDefinition Height="676*"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <DataGrid Margin="10,10,10,11" Grid.Row="1" ItemsSource="{Binding CarViewModels}">
-                                <DataGrid.DataContext>
-                                    <ViewModels:CarListViewModel/>
-                                </DataGrid.DataContext>
-                            </DataGrid>
+                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10,7,10,11" ItemsSource="{Binding CarViewModels}"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="OrdersTabItem">
+                        <TabItem.DataContext>
+                            <ViewModels:SaleListViewModel/>
+                        </TabItem.DataContext>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80*"/>
-                                <RowDefinition Height="680*"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding SaleViewModels}">
-                                <DataGrid.DataContext>
-                                    <ViewModels:SaleListViewModel/>
-                                </DataGrid.DataContext>
-                            </DataGrid>
+                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding SaleViewModels}"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="CustomersTabItem">
+                        <TabItem.DataContext>
+                            <ViewModels:CustomerListViewModel/>
+                        </TabItem.DataContext>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80*"/>
-                                <RowDefinition Height="671*"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding CustomerViewModels}">
-                                <DataGrid.DataContext>
-                                    <ViewModels:CustomerListViewModel/>
-                                </DataGrid.DataContext>
-                            </DataGrid>
+                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding CustomerViewModels}"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="EmployeesTabItem">
+                        <TabItem.DataContext>
+                            <ViewModels:EmployeeListViewModel/>
+                        </TabItem.DataContext>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80*"/>
-                                <RowDefinition Height="682*"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding EmployeeViewModels}">
-                                <DataGrid.DataContext>
-                                    <ViewModels:EmployeeListViewModel/>
-                                </DataGrid.DataContext>
-                            </DataGrid>
+                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding EmployeeViewModels}"/>
                         </Grid>
                     </TabItem>
                 </TabControl>
