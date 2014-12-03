@@ -155,9 +155,6 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
-                    <TabItem.DataContext>
-                        <ViewModels:CarListViewModel/>
-                    </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="CreateCar" HorizontalAlignment="Left" Margin="211,10,0,10">
@@ -181,7 +178,13 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="563,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="563,10,0,10">
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
+                        </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="687,10,0,10"/>
                     </Grid>
                 </TabItem>
