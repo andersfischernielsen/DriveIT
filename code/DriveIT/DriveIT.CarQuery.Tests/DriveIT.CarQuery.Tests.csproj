@@ -61,6 +61,10 @@
       <Project>{3924AEC3-E411-44A7-B145-D7AB4B361F62}</Project>
       <Name>DriveIT.CarQuery</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
+      <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
+      <Name>DriveIT.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
