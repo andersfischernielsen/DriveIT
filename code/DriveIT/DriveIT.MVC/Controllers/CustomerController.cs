@@ -28,16 +28,39 @@ namespace DriveIT.MVC.Controllers
             return View(customer.Content);
         }
 
+        [System.Web.Mvc.HttpGet]
         public ActionResult Create()
         {
             return View();
         }
         
-        //[HttpPost]
+        [System.Web.Mvc.HttpPost]
         public async Task<ActionResult> Create(CustomerDto cust)
         {
             var customer = await controller.Post(cust) as CreatedAtRouteNegotiatedContentResult<CustomerDto>;
-            return RedirectToAction("Show", customer);
+            return RedirectToAction("Show", customer.Content);
+        }
+
+        [System.Web.Mvc.HttpGet]
+        public async Task<ActionResult> Edit(int id)
+        {
+            var customer = await controller.Get(id) as OkNegotiatedContentResult<CustomerDto>;
+            return View(customer.Content);
+        }
+
+        [System.Web.Mvc.HttpPost]
+        public async Task<ActionResult> Edit(CustomerDto cust)
+        {
+            await controller.Put(cust.Id.Value, cust);
+            // Customer to redirect to
+            var customer = await controller.Get(cust.Id.Value) as OkNegotiatedContentResult<CustomerDto>;
+            return RedirectToAction("Show", customer.Content);
+        }
+
+        public async Task<ActionResult> Delete(int id)
+        {
+            await controller.Delete(id);
+            return RedirectToAction("Index");
         }
 
 
