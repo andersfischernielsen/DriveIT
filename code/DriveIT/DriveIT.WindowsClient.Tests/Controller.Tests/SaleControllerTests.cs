@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace DriveIT.WindowsClient.Tests.Controller.Tests
 {
     [TestFixture]
-    public class OrderControllerTests
+    public class SaleControllerTests
     {
         private SaleController _orderController;
         [SetUp]
