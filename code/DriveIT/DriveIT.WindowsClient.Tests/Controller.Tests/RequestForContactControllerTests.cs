@@ -28,8 +28,8 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 _requestForContactController.CreateRequestForContact(new ContactRequestDto()
                 {
                     Requested = DateTime.Now,
-                    CarId = 4,
-                    CustomerId = 3,
+                    CarId = 1,
+                    CustomerId = 1,
                     EmployeeId = 1,
                 });
             Thread.Sleep(5000);
