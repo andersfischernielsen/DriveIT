@@ -9,7 +9,7 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         private CustomerDto _customerDto;
 
-        public int? Id
+        public int? CustomerId
         {
             get
             {
@@ -27,7 +27,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _customerDto.Id = value;
-                NotifyPropertyChanged("Id");
+                NotifyPropertyChanged("CustomerId");
             }
         }
 
