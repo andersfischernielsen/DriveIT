@@ -3,280 +3,327 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:WindowsClient="clr-namespace:DriveIT.WindowsClient"
         xmlns:userControls="clr-namespace:DriveIT.WindowsClient.Views.UserControls"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ViewModels="clr-namespace:DriveIT.WindowsClient.ViewModels" mc:Ignorable="d"
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
         Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen">
-	<Grid>
-		<VisualStateManager.VisualStateGroups>
-			<VisualStateGroup x:Name="ListUpdateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
-				<VisualState x:Name="CarBarState">
-					<Storyboard>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-				<VisualState x:Name="RequestForContactBarState">
-					<Storyboard>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-				<VisualState x:Name="OrdersBarState">
-					<Storyboard>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-				<VisualState x:Name="CustomerBarState">
-					<Storyboard>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-				<VisualState x:Name="EmployeeBarState">
-					<Storyboard>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-						<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
-							<EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
-						</ColorAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-			</VisualStateGroup>
-		</VisualStateManager.VisualStateGroups>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="80"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		<VisualStateManager.CustomVisualStateManager>
-			<ei:ExtendedVisualStateManager/>
-		</VisualStateManager.CustomVisualStateManager>
-		<Grid x:Name="PowerToolsGrid" Height="80" VerticalAlignment="Top">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="259"/>
-			</Grid.ColumnDefinitions>
-			<Grid x:Name="PowerToolsBarGeneral" Grid.Column="1" Height="80" VerticalAlignment="Top">
-				<Grid.Background>
-					<SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
-				</Grid.Background>
-				<Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81.5" Height="60" Margin="0,10,144.5,0"/>
-				<Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81" Height="60" Margin="0,10,29,0"/>
-			</Grid>
-			<TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0" Background="{x:Null}">
-				<TabControl.Resources>
-					<!-- Remove the headers by overriding the header style -->
-					<Style TargetType="{x:Type TabItem}">
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="{x:Type TabItem}"/>
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</TabControl.Resources>
-				<TabItem Header="RequestsForContactPowerTabItem">
-					<Grid Margin="-3">
-						<Grid.Background>
-							<SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
-						</Grid.Background>
-						<Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-					</Grid>
-				</TabItem>
-				<TabItem Header="CarsPowerTabItem">
-					<Grid Margin="-3">
-						<Grid.Background>
-							<SolidColorBrush Color="{DynamicResource CarsBarColor}" Opacity="0.5"/>
-						</Grid.Background>
-						<Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-					</Grid>
-				</TabItem>
-				<TabItem Header="OrdersPowerTabItem">
-					<Grid Margin="-3">
-						<Grid.Background>
-							<SolidColorBrush Color="{DynamicResource OrdersBarColor}" Opacity="0.5"/>
-						</Grid.Background>
-						<Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-					</Grid>
-				</TabItem>
-				<TabItem Header="CustomersPowerTabItem">
-					<Grid Margin="-3">
-						<Grid.Background>
-							<SolidColorBrush Color="{DynamicResource CustomersBarColor}" Opacity="0.5"/>
-						</Grid.Background>
-						<Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-					</Grid>
-				</TabItem>
-				<TabItem Header="EmployeesPowerTabItem">
-					<Grid Margin="-3">
-						<Grid.Background>
-							<SolidColorBrush Color="{DynamicResource EmployeesBarColor}" Opacity="0.5"/>
-						</Grid.Background>
-						<Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-					</Grid>
-				</TabItem>
-			</TabControl>
-		</Grid>
-		<Grid Grid.Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="208"/>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="300"/>
-			</Grid.ColumnDefinitions>
-			<Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" Margin="198,0,0,0"/>
-			<Grid x:Name="MenuBarGrid" Margin="0,0,10,0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="198"/>
-				</Grid.ColumnDefinitions>
-				<Grid.Background>
-					<SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
-				</Grid.Background>
-				<Button Content="Requests for &#xA;contact" Margin="0,27,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070">
-					<Button.Background>
-						<SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
-					</Button.Background>
-					<i:Interaction.Triggers>
-						<i:EventTrigger EventName="Click">
-							<ei:GoToStateAction StateName="RequestForContactBarState"/>
-						</i:EventTrigger>
-					</i:Interaction.Triggers>
-				</Button>
-				<Button Content="Cars" Margin="0,107,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
-					<i:Interaction.Triggers>
-						<i:EventTrigger EventName="Click">
-							<ei:GoToStateAction StateName="CarBarState"/>
-						</i:EventTrigger>
-					</i:Interaction.Triggers>
-					<Button.Background>
-						<SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
-					</Button.Background>
-				</Button>
-				<Button Content="Orders" Margin="0,187,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
-					<i:Interaction.Triggers>
-						<i:EventTrigger EventName="Click">
-							<ei:GoToStateAction StateName="OrdersBarState"/>
-						</i:EventTrigger>
-					</i:Interaction.Triggers>
-					<Button.Background>
-						<SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
-					</Button.Background>
-				</Button>
-				<Button Content="Customers" Margin="0,267,0,0" VerticalAlignment="Top" Height="77" FontSize="18" Click="CustomersClick">
-					<i:Interaction.Triggers>
-						<i:EventTrigger EventName="Click">
-							<ei:GoToStateAction StateName="CustomerBarState"/>
-						</i:EventTrigger>
-					</i:Interaction.Triggers>
-					<Button.Background>
-						<SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
-					</Button.Background>
-				</Button>
-				<Button Content="Employees" Margin="0,344,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
-					<i:Interaction.Triggers>
-						<i:EventTrigger EventName="Click">
-							<ei:GoToStateAction StateName="EmployeeBarState"/>
-						</i:EventTrigger>
-					</i:Interaction.Triggers>
-					<Button.Background>
-						<SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
-					</Button.Background>
-				</Button>
-			</Grid>
-			<Grid Grid.Column="1" Margin="10">
-				<TabControl x:Name="EntitiesTabControl">
-					<TabControl.Resources>
-						<!-- Remove the headers by overriding the header style -->
-						<Style TargetType="{x:Type TabItem}">
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="{x:Type TabItem}"/>
-								</Setter.Value>
-							</Setter>
-						</Style>
-					</TabControl.Resources>
-					<TabControl.Background>
-						<SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
-					</TabControl.Background>
-					<TabItem Header="RequestsForContactTabItem">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="94*"/>
-								<RowDefinition Height="667*"/>
-							</Grid.RowDefinitions>
-							<Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-							<DataGrid HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="647" Width="1038" Grid.Row="1"/>
-						</Grid>
-					</TabItem>
-					<TabItem Header="CarsTabItem">
-						<Grid>
-							<Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-						</Grid>
-					</TabItem>
-					<TabItem Header="OrdersTabItem">
-						<Grid>
-							<Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-						</Grid>
-					</TabItem>
-					<TabItem Header="CustomersTabItem">
-						<Grid>
-							<Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-						</Grid>
-					</TabItem>
-					<TabItem Header="EmployeesTabItem">
-						<Grid>
-							<Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-						</Grid>
-					</TabItem>
-				</TabControl>
-			</Grid>
-			<Grid Grid.Column="2" Margin="0,10,10,10" HorizontalAlignment="Right" Width="280">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="311*"/>
-					<RowDefinition Height="439*"/>
-				</Grid.RowDefinitions>
-				<Grid.Background>
-					<SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
-				</Grid.Background>
-				<Border BorderThickness="1" Grid.RowSpan="2">
-					<Border.BorderBrush>
-						<SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
-					</Border.BorderBrush>
-				</Border>
-				<Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="Image/EmployeeTemplatePic.jpg">
-					<Image.OpacityMask>
-						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-							<GradientStop Color="Black" Offset="0"/>
-							<GradientStop Color="White" Offset="1"/>
-						</LinearGradientBrush>
-					</Image.OpacityMask>
-				</Image>
-				<Label Content="Anders Wind Steffensen" Margin="10,10,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1"/>
-				<Label Content="Employee of the month" Margin="10,56,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1"/>
-				<Label Content="Commision:" Margin="10,125.666,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1"/>
-				<TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="29" Width="270" FontStyle="Italic" TextAlignment="Center" Grid.Row="1"><TextBlock.Background>
-						<SolidColorBrush Color="Black" Opacity="0.15"/>
-					</TextBlock.Background><Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
-			</Grid>
-		</Grid>
-	</Grid>
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ListUpdateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="CarBarState">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="RequestForContactBarState">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="OrdersBarState">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="CustomerBarState">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="EmployeeBarState">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MenuBarGrid">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsBarGeneral">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PowerToolsbarTabControl">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.CustomVisualStateManager>
+            <ei:ExtendedVisualStateManager/>
+        </VisualStateManager.CustomVisualStateManager>
+        <Grid x:Name="PowerToolsGrid" Height="80" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="259"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="PowerToolsBarGeneral" Grid.Column="1" Height="80" VerticalAlignment="Top">
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
+                </Grid.Background>
+                <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81.5" Height="60" Margin="0,10,144.5,0"/>
+                <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="81" Height="60" Margin="0,10,29,0"/>
+            </Grid>
+            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0">
+                <TabControl.Resources>
+                    <!-- Remove the headers by overriding the header style -->
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TabItem}"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabControl.Background>
+                    <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
+                </TabControl.Background>
+                <TabItem Header="RequestsForContactPowerTabItem">
+                    <Grid Margin="0">
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="CarsPowerTabItem">
+                    <Grid Margin="0">
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="OrdersPowerTabItem">
+                    <Grid Margin="0">
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="CustomersPowerTabItem">
+                    <Grid Margin="0">
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="EmployeesPowerTabItem">
+                    <Grid Margin="0">
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="208"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" Margin="198,0,0,0"/>
+            <Grid x:Name="MenuBarGrid" Margin="0,0,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="198"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}" Opacity="0.5"/>
+                </Grid.Background>
+                <Button Content="Requests for &#xA;contact" Margin="0,27,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070">
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
+                    </Button.Background>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:GoToStateAction StateName="RequestForContactBarState"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="Cars" Margin="0,107,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:GoToStateAction StateName="CarBarState"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="Orders" Margin="0,187,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:GoToStateAction StateName="OrdersBarState"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="Customers" Margin="0,267,0,0" VerticalAlignment="Top" Height="77" FontSize="18" Click="CustomersClick">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:GoToStateAction StateName="CustomerBarState"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="Employees" Margin="0,344,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:GoToStateAction StateName="EmployeeBarState"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <Grid Grid.Column="1" Margin="10">
+                <TabControl x:Name="EntitiesTabControl">
+                    <TabControl.Resources>
+                        <!-- Remove the headers by overriding the header style -->
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TabItem}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+                    <TabControl.Background>
+                        <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
+                    </TabControl.Background>
+                    <TabItem Header="RequestsForContactTabItem">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80*"/>
+                                <RowDefinition Height="667*"/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <DataGrid Margin="10,10,10,15" Height="647" Width="1038" Grid.Row="1" ItemsSource="{Binding Mode=OneWay}">
+                                <DataGrid.DataContext>
+                                    <ViewModels:ContactRequestListViewModel/>
+                                </DataGrid.DataContext>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="CarsTabItem">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80*"/>
+                                <RowDefinition Height="676*"/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <DataGrid Margin="10,10,10,11" Grid.Row="1" ItemsSource="{Binding CarViewModels}">
+                                <DataGrid.DataContext>
+                                    <ViewModels:CarListViewModel/>
+                                </DataGrid.DataContext>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="OrdersTabItem">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80*"/>
+                                <RowDefinition Height="680*"/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding SaleViewModels}">
+                                <DataGrid.DataContext>
+                                    <ViewModels:SaleListViewModel/>
+                                </DataGrid.DataContext>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="CustomersTabItem">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80*"/>
+                                <RowDefinition Height="671*"/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding CustomerViewModels}">
+                                <DataGrid.DataContext>
+                                    <ViewModels:CustomerListViewModel/>
+                                </DataGrid.DataContext>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="EmployeesTabItem">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80*"/>
+                                <RowDefinition Height="682*"/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding EmployeeViewModels}">
+                                <DataGrid.DataContext>
+                                    <ViewModels:EmployeeListViewModel/>
+                                </DataGrid.DataContext>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            <Grid Grid.Column="2" Margin="0,10,10,10" HorizontalAlignment="Right" Width="280">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="311*"/>
+                    <RowDefinition Height="439*"/>
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
+                </Grid.Background>
+                <Border BorderThickness="1" Grid.RowSpan="2">
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
+                    </Border.BorderBrush>
+                </Border>
+                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="Image/EmployeeTemplatePic.jpg">
+                    <Image.OpacityMask>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Image.OpacityMask>
+                </Image>
+                <Label Content="Anders Wind Steffensen" Margin="10,10,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1"/>
+                <Label Content="Employee of the month" Margin="10,56,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1"/>
+                <Label Content="Commision:" Margin="10,125.666,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="29" Width="270" FontStyle="Italic" TextAlignment="Center" Grid.Row="1">
+                    <TextBlock.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.15"/>
+                    </TextBlock.Background><Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
 </Window>
