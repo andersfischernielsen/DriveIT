@@ -166,8 +166,20 @@
                         		</i:EventTrigger>
                         	</i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="323,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="441,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="323,10,0,10">
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateCarWindow"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
+                        </Button>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="441,10,0,10">
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="DeleteCar"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
+                        </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="563,10,0,10"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="687,10,0,10"/>
                     </Grid>
@@ -303,7 +315,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid x:Name="CarsDataGrid" Style="{DynamicResource DatagridStyle}" Margin="10,7,10,11" ItemsSource="{Binding CarViewModels}"/>
+                            <DataGrid x:Name="CarsDataGrid" Style="{DynamicResource DatagridStyle}" Margin="10,7,10,11" ItemsSource="{Binding CarViewModels}" SelectedValue="{Binding SelectedCar, Mode=TwoWay}"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="OrdersTabItem">

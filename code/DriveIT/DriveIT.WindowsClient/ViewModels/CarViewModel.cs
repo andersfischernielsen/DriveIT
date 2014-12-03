@@ -10,6 +10,25 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         private CarDto _carDto;
 
+        public enum CarState
+        {
+            Initial,
+            ForSale,
+            Advertised,
+            Sold,
+        }
+
+        public CarViewModel(CarDto carDto)
+        {
+            _carDto = carDto;
+            _carState = CarState.ForSale;
+        }
+        public CarViewModel()
+        {
+            _carDto = new CarDto();
+        }
+
+
         #region Attributes
         private string _status = "";
         public string Status
@@ -33,6 +52,32 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Status");
             }
         }
+
+
+
+        private CarState _actualCarState = CarState.Initial;
+        public  CarState _carState
+        {
+            get { return _actualCarState; }
+            set
+            {
+                _actualCarState = value;
+                NotifyPropertyChanged("CreateUpdateButtonText");
+            }
+        }
+        public string CreateUpdateButtonText
+        {
+            get
+            {
+                switch (_carState)
+                {
+                    case CarState.Initial:
+                        return "Create";
+                    default:
+                        return "Update";
+                }
+            }
+        }
         public int? CarId
         {
             get
@@ -53,16 +98,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 _carDto.Id = value;
                 NotifyPropertyChanged("CarId");
             }
-        }
-
-
-        public CarViewModel(CarDto carDto)
-        {
-            _carDto = carDto;
-        }
-        public CarViewModel()
-        {
-            _carDto = new CarDto();
         }
 
         public string CarModel
@@ -234,6 +269,19 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion Attributes
 
         #region CRUDS
+
+        public void SaveCar()
+        {
+            switch (_carState)
+            {
+                case CarState.Initial:
+                    CreateCar();
+                    break;
+                default: 
+                    UpdateCar();
+                    break;
+            }            
+        }
         /// <summary>
         /// Gets called from the view
         /// </summary>
@@ -242,7 +290,8 @@ namespace DriveIT.WindowsClient.ViewModels
             var carController = new CarController();
             _carDto.Created = DateTime.Now;
             await carController.CreateCar(_carDto);
-            Status = "Car saved";
+            Status = "Car Created";
+            _carState = CarState.ForSale;
         }
         /// <summary>
         /// Gets called from the view
@@ -251,6 +300,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             var carController = new CarController();
             carController.UpdateCar(_carDto);
+            Status = "Car Updated";
         }
         /// <summary>
         /// Gets called from the view
@@ -259,6 +309,9 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             var carController = new CarController();
             carController.DeleteCar(_carDto);
+            _carDto.Id = null;
+            Status = "Car Deleted";
+            _carState = CarState.Initial;
         }
         #endregion CRUDS
 

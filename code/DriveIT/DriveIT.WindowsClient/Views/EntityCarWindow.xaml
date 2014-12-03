@@ -22,14 +22,20 @@
 				<SolidColorBrush Color="{DynamicResource CarsBarColor}" Opacity="0.5"/>
 			</Grid.Background>
 			<Border BorderBrush="Black" BorderThickness="1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-			<Button Content="Create" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
+			<Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Content="{Binding CreateUpdateButtonText, Mode=OneWay}">
 				<i:Interaction.Triggers>
 					<i:EventTrigger EventName="Click">
-						<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="CreateCar"/>
+						<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SaveCar"/>
 					</i:EventTrigger>
 				</i:Interaction.Triggers>
 			</Button>
-			<Button Content="Delete" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+			<Button Content="Delete" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Click">
+						<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="DeleteCar"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Button>
 			<Button Content="Car Query" HorizontalAlignment="Left" Margin="210.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
 			<Button Content="Advertise" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
 			<Button Content="Cancel" HorizontalAlignment="Left" Margin="423.333,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
