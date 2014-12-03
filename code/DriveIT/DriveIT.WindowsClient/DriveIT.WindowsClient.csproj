@@ -104,7 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DriveITWebAPI.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -114,8 +114,8 @@
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
-    <Compile Include="ViewModels\OrderListViewModel.cs" />
-    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\SaleListViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModel.cs" />
     <Compile Include="ViewModels\RequestForContactListViewModel.cs" />
     <Compile Include="ViewModels\RequestForContactViewModel.cs" />
     <Compile Include="ViewModels\IViewModelBase.cs" />
