@@ -1,43 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using DriveIT.Models;
 
 namespace DriveIT.MVC.Controllers
 {
-    public class ContactRequestController : AsyncController
+    public class ContactRequestController : Controller
     {
         // GET: ContactRequest
-        public ActionResult ContactRequestView()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public async void CreateRequestForContact(ContactRequestDto contactRequest)
+        // GET: ContactRequest/Details/5
+        public ActionResult Details(int id)
         {
-            await DriveITWebAPI.Create("ContactRequests", contactRequest);
-        }
-        public async Task<ContactRequestDto> ReadRequestForContact(int id)
-        {
-            var contactRequestToReturn = await DriveITWebAPI.Read<ContactRequestDto>("ContactRequests/" + id);
-            return contactRequestToReturn;
-        }
-        public async Task<IList<ContactRequestDto>> ReadRequestForContactList()
-        {
-            var contactRequests = await DriveITWebAPI.ReadList<ContactRequestDto>("ContactRequests");
-            return contactRequests;
-        }
-        public async void UpdateRequestForContact(ContactRequestDto contactRequest)
-        {
-            await DriveITWebAPI.Update("ContactRequests", contactRequest, contactRequest.Id.Value);
+            return View();
         }
 
-        public async void DeleteRequestForContact(int id)
+        // GET: ContactRequest/Create
+        public ActionResult Create()
         {
-            await DriveITWebAPI.Delete<ContactRequestDto>("ContactRequests", id);
+            return View();
+        }
+
+        // POST: ContactRequest/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ContactRequest/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: ContactRequest/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ContactRequest/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: ContactRequest/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
