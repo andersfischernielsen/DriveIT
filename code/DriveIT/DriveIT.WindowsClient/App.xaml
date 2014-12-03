@@ -34,8 +34,11 @@
             <Color x:Key="EmployeesBarGridColor">#E0AC35</Color>
             <!-- California og SANDSTORM -->
 
-            <Style x:Key="DatagridStyle">
-                <!--<Setter Property="DataGrid.Background" Value="{DynamicResource DatagridBackgroundColor}"/>-->
+            <Style x:Key="DatagridStyle" TargetType="DataGrid">
+                <Setter Property="CanUserAddRows" Value="False"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
+                <Setter Property="ColumnWidth" Value="*"/>
             </Style>
             
             <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"></SolidColorBrush>

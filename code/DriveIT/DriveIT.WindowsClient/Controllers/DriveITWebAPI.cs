@@ -43,7 +43,6 @@ namespace DriveIT.WindowsClient.Controllers
                         HttpResponseMessage response = httpClient.GetAsync(uri).Result;
                         response.EnsureSuccessStatusCode();
                         objects = await response.Content.ReadAsAsync<T[]>();
-                        objects.ToList().ForEach(i => Console.WriteLine(i));
                     }
                     catch (Exception)
                     {
@@ -66,7 +65,6 @@ namespace DriveIT.WindowsClient.Controllers
                     HttpResponseMessage response = httpClient.GetAsync(uri).Result;
                     response.EnsureSuccessStatusCode();
                     objectToRead = await response.Content.ReadAsAsync<T>();
-                    Console.WriteLine(objectToRead);
                 }
                 catch (Exception)
                 {

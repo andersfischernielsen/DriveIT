@@ -18,6 +18,8 @@ namespace DriveIT.WindowsClient.ViewModels
             Sold,
         }
 
+        // todo ; til at notifie at alt er updated.
+
         public CarViewModel(CarDto carDto)
         {
             _carDto = carDto;
@@ -267,6 +269,11 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion Attributes
+
+        public void ImportCarQueryData()
+        {
+            NotifyPropertyChanged(String.Empty);
+        }
 
         #region CRUDS
 

@@ -315,7 +315,21 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid x:Name="CarsDataGrid" Style="{DynamicResource DatagridStyle}" Margin="10,7,10,11" ItemsSource="{Binding CarViewModels}" SelectedValue="{Binding SelectedCar, Mode=TwoWay}"/>
+                            <DataGrid>
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    </Style>
+                                </DataGrid.Resources>
+                            </DataGrid>
+                            <DataGrid x:Name="CarsDataGrid" Style="{DynamicResource DatagridStyle}" Margin="10,7,10,10" ItemsSource="{Binding CarViewModels}" SelectedValue="{Binding SelectedCar, Mode=TwoWay}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="CarId" Binding="{Binding CarId}" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="Make" Binding="{Binding CarMake}" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="Model" Binding="{Binding CarModel}" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="Fueltype" Binding="{Binding Fuel}" ClipboardContentBinding="{x:Null}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
                     </TabItem>
                     <TabItem Header="OrdersTabItem">
