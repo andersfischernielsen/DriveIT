@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:WindowsClient="clr-namespace:DriveIT.WindowsClient"
-        xmlns:userControls="clr-namespace:DriveIT.WindowsClient.Views.UserControls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ViewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
     xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
     mc:Ignorable="d"
@@ -318,12 +317,17 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <xcdg:DataGridControl x:Name="CarsDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedCar, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding CarViewModels}">
+                                <xcdg:DataGridControl.Resources>
+                                    <Style TargetType="xcdg:HierarchicalGroupByControl">
+                                        <Setter Property="Background" Value="{DynamicResource CarsDataGridHeaderBrush}"></Setter>
+                                    </Style>
+                                </xcdg:DataGridControl.Resources>
                                 <xcdg:DataGridControl.Columns>
-                                    <xcdg:Column IsMainColumn="True" FieldName="CarId" Title="CarId" Width="*" ReadOnly="True"/>
-                                    <xcdg:Column FieldName="Status" Title="Status" Width="*" ReadOnly="True"/>
-                                    <xcdg:Column FieldName="CarMake" Title="Make" Width="*" ReadOnly="True"/>
-                                    <xcdg:Column FieldName="CarModel" Title="Model" Width="*" ReadOnly="True"/>
-                                    <xcdg:Column FieldName="Fuel"  Title="Fuel" Width="*" ReadOnly="True"/>
+                                    <xcdg:Column IsMainColumn="True" FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="CarMake" Title="Make"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="CarModel" Title="Model" ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Fuel"  Title="Fuel"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>

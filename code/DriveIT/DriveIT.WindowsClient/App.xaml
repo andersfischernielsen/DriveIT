@@ -21,18 +21,23 @@
             <!-- http://www.flatuicolorpicker.com/ -->
             <Color x:Key="RequestsForContactBarColor">#26A65B</Color>
             <Color x:Key="RequestsForContactBarGridColor">#3FC380</Color>
+            <SolidColorBrush x:Key="RequestsForContactDataGridHeaderBrush" Color="{DynamicResource RequestsForContactBarColor}"></SolidColorBrush>
             <!-- Eucalyptus og Emerald -->
             <Color x:Key="CarsBarColor">#19B5FE</Color>
             <Color x:Key="CarsBarGridColor">#59ABE3</Color>
+            <SolidColorBrush x:Key="CarsDataGridHeaderBrush" Color="{DynamicResource CarsBarColor}"></SolidColorBrush>
             <!-- Dodger og Pickton Blue -->
             <Color x:Key="OrdersBarColor">#9A12B3</Color>
             <Color x:Key="OrdersBarGridColor">#9B59B6</Color>
+            <SolidColorBrush x:Key="OrdersDataGridHeaderBrush" Color="{DynamicResource OrdersBarColor}"></SolidColorBrush>
             <!-- Seance og WISTERIA-->
             <Color x:Key="CustomersBarColor">#CF000F</Color>
             <Color x:Key="CustomersBarGridColor">#DA2211</Color>
+            <SolidColorBrush x:Key="CustomersDataGridHeaderBrush" Color="{DynamicResource CustomersBarColor}"></SolidColorBrush>
             <!-- Monza og Pomergranate-->
             <Color x:Key="EmployeesBarColor">#F89406</Color>
             <Color x:Key="EmployeesBarGridColor">#E0AC35</Color>
+            <SolidColorBrush x:Key="EmployeesDataGridHeaderBrush" Color="{DynamicResource EmployeesBarColor}"></SolidColorBrush>
             <!-- California og SANDSTORM -->
 
             <Style x:Key="DatagridStyle" TargetType="DataGrid">
@@ -45,6 +50,10 @@
             <Style x:Key="ExtendedDatagridStyle" TargetType="xcdg:DataGridControl">
                 <Setter Property="IsCopyCommandEnabled" Value="False"></Setter>
                 <Setter Property="IsDeleteCommandEnabled" Value="False"></Setter>
+            </Style>
+
+            <Style x:Key="ExtendedDatagridGroupStyle" TargetType="xcdg:GroupByControl">
+                
             </Style>
 
             <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"></SolidColorBrush>
@@ -107,8 +116,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-
+                            
+                            
+                            
         </ResourceDictionary>
          
     </Application.Resources>
