@@ -23,7 +23,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         [Test]
         public void TestAllMethods()
         {
-            var t = _requestForContactController.ReadContactRequest().Result;
+            var t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
                 _requestForContactController.CreateContactRequest(new ContactRequestDto()
                 {
@@ -33,7 +33,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                     EmployeeId = 1,
                 });
             Thread.Sleep(5000);
-            t = _requestForContactController.ReadContactRequest().Result;
+            t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
 
 
@@ -47,13 +47,13 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(5000);
-            t = _requestForContactController.ReadContactRequest().Result;
+            t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
             Console.WriteLine("After update: " + _requestForContactController.ReadContactRequest(t[t.Count - 1].Id.Value).Result.Requested);
 
             _requestForContactController.DeleteContactRequest(t[t.Count - 1].Id.Value);
             Thread.Sleep(5000);
-            t = _requestForContactController.ReadContactRequest().Result;
+            t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
         }
     }
