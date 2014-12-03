@@ -8,6 +8,11 @@
         Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen">
     <Grid>
+    	<i:Interaction.Triggers>
+    		<i:EventTrigger>
+    			<ei:GoToStateAction StateName="RequestForContactBarState" UseTransitions="False"/>
+    		</i:EventTrigger>
+    	</i:Interaction.Triggers>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ListUpdateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
                 <VisualStateGroup.Transitions>
@@ -230,7 +235,7 @@
                                 <RowDefinition Height="667*"/>
                             </Grid.RowDefinitions>
                             <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <DataGrid Margin="10,10,10,15" Height="647" Width="1038" Grid.Row="1" ItemsSource="{Binding Mode=OneWay}">
+                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding Mode=OneWay}">
                                 <DataGrid.DataContext>
                                     <ViewModels:ContactRequestListViewModel/>
                                 </DataGrid.DataContext>
