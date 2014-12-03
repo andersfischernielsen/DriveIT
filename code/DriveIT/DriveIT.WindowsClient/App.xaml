@@ -48,8 +48,6 @@
             </Style>
 
             <Style x:Key="ExtendedDatagridStyle" TargetType="xcdg:DataGridControl">
-                <Setter Property="IsCopyCommandEnabled" Value="False"></Setter>
-                <Setter Property="IsDeleteCommandEnabled" Value="False"></Setter>
             </Style>
 
             <Style x:Key="ExtendedDatagridGroupStyle" TargetType="xcdg:GroupByControl">
@@ -58,7 +56,7 @@
 
             <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"></SolidColorBrush>
             <SolidColorBrush x:Key="TextBoxTextColorBrush" Color="{DynamicResource TextBoxTextColor}"></SolidColorBrush>
-            <SolidColorBrush x:Key="StatusLabelColorBrush" Color="{DynamicResource StatusLabelColor}"></SolidColorBrush>
+            <SolidColorBrush x:Key="StatusLabelColorBrush" Color="{DynamicResource StatusLabelColor}" Opacity="75"></SolidColorBrush>
             <SolidColorBrush x:Key="OverlayComponentsBorderColorBrush" Color="{DynamicResource OverlayComponentsBorderColor}"></SolidColorBrush>
 
             <Style x:Key="HeaderLabel" TargetType="Label">
@@ -81,9 +79,10 @@
                 <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
             </Style>
             <Style x:Key="StatusLabelStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="FontStyle" Value="Italic"/>
                 <Setter Property="Foreground" Value="{DynamicResource StatusLabelColorBrush}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
             </Style>
 
             <Style x:Key="PowerToolButtonStyle">
