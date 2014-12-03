@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DriveIT.Models
 {
@@ -21,7 +22,7 @@ namespace DriveIT.Models
         public string Drive { get; set; }
         public string Transmission { get; set; }
         public int TopSpeed { get; set; }
-        public int NoughtTo100 { get; set; }
-        public string ImagePath { get; set; }
+        public float NoughtTo100 { get; set; }
+        public List<string> ImagePaths { get; set; }
     }
 }

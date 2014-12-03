@@ -236,9 +236,10 @@ namespace DriveIT.EntityFramework
         }
         private void CopyContactRequestProperties(ContactRequest toChange, ContactRequest toSetFrom)
         {
-            toChange.Car = toSetFrom.Car;
+            toChange.CarId = toSetFrom.CarId;
             toChange.Created = toSetFrom.Created;
-            toChange.Customer = toSetFrom.Customer;
+            toChange.CustomerId = toSetFrom.CustomerId;
+            toChange.EmployeeId = toSetFrom.EmployeeId;
         }
 
         public async Task<Comment> GetCommentWithId(int idToGet)
@@ -253,7 +254,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Comments.Where(c => c.Car.Id == carId).ToListAsync();
+                return await context.Comments.Where(c => c.CarId == carId).ToListAsync();
             }
         }
 
@@ -289,11 +290,11 @@ namespace DriveIT.EntityFramework
 
         private void CopyCommentProperties(Comment toChange, Comment toSetFrom)
         {
-            toChange.Car = toSetFrom.Car;
+            toChange.CarId = toSetFrom.CarId;
             toChange.DateCreated = toSetFrom.DateCreated;
             toChange.Description = toSetFrom.Description;
             toChange.Title = toSetFrom.Title;
-            toChange.Customer = toSetFrom.Customer;
+            toChange.CustomerId = toSetFrom.CustomerId;
         }
 
         public async Task<Sale> GetSaleWithId(int idToGet)
@@ -344,10 +345,10 @@ namespace DriveIT.EntityFramework
 
         private void CopySaleProperties(Sale toChange, Sale toSetFrom)
         {
-            toChange.Car = toSetFrom.Car;
-            toChange.Customer = toSetFrom.Customer;
+            toChange.CarId = toSetFrom.CarId;
+            toChange.CustomerId = toSetFrom.CustomerId;
             toChange.DateOfSale = toSetFrom.DateOfSale;
-            toChange.Employee = toSetFrom.Employee;
+            toChange.EmployeeId = toSetFrom.EmployeeId;
             toChange.Price = toSetFrom.Price;
         }
     }

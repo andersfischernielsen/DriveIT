@@ -24,7 +24,10 @@ namespace DriveIT.WebAPI.Models
                 Transmission = dto.Transmission,
                 Year = dto.Year,
                 Drive = dto.Drive,
-                Mileage = dto.Mileage
+                Mileage = dto.Mileage,
+                ImagePaths = dto.ImagePaths,
+                NoughtTo100 = dto.NoughtTo100,
+                TopSpeed = dto.TopSpeed
             };
         }
 
@@ -44,7 +47,10 @@ namespace DriveIT.WebAPI.Models
                 Year = car.Year,
                 Fuel = (FuelType)Enum.Parse(typeof(FuelType), car.Fuel),
                 Drive = car.Drive,
-                Mileage = car.Mileage
+                Mileage = car.Mileage,
+                ImagePaths = car.ImagePaths,
+                TopSpeed = car.TopSpeed,
+                NoughtTo100 = car.NoughtTo100
             };
         }
 

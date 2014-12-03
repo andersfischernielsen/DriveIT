@@ -200,7 +200,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("TopSpeed");
             }
         }
-        public int NoughtTo100
+        public float NoughtTo100
         {
             get
             {
