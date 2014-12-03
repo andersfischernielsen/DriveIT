@@ -25,7 +25,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _orderController.ReadSaleList().Result;
             Console.WriteLine(t.Count);
-                _orderController.CreateOrder(new SaleDto()
+                _orderController.CreateSale(new SaleDto()
                 {
                     Price = 1000,
                     Sold = DateTime.Now,
