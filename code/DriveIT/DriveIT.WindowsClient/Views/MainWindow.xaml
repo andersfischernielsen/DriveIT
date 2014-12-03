@@ -8,18 +8,18 @@
         Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen">
     <Grid>
-    	<i:Interaction.Triggers>
-    		<i:EventTrigger>
-    			<ei:GoToStateAction StateName="RequestForContactBarState" UseTransitions="False"/>
-    		</i:EventTrigger>
-    	</i:Interaction.Triggers>
+        <i:Interaction.Triggers>
+            <i:EventTrigger>
+                <ei:GoToStateAction StateName="RequestForContactBarState" UseTransitions="False"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ListUpdateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
                 <VisualStateGroup.Transitions>
-                    <VisualTransition GeneratedDuration="0:0:0.2">
-                    	<VisualTransition.GeneratedEasingFunction>
-                    		<CircleEase EasingMode="EaseOut"/>
-                    	</VisualTransition.GeneratedEasingFunction>
+                    <VisualTransition GeneratedDuration="0:0:0.25">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CircleEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
                     </VisualTransition>
                 </VisualStateGroup.Transitions>
                 <VisualState x:Name="CarBarState">
@@ -34,7 +34,7 @@
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
-                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,107,0,0"/>
+                            <EasingThicknessKeyFrame KeyTime="0" Value="0,115,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -50,7 +50,7 @@
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
-                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,27,0,0"/>
+                            <EasingThicknessKeyFrame KeyTime="0" Value="0,25,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -66,7 +66,7 @@
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
-                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,187,0,0"/>
+                            <EasingThicknessKeyFrame KeyTime="0" Value="0,205,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -82,7 +82,7 @@
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
-                        	<EasingThicknessKeyFrame KeyTime="0" Value="188,267,0,0"/>
+                            <EasingThicknessKeyFrame KeyTime="0" Value="0,295,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -98,7 +98,7 @@
                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
-                        	<EasingThicknessKeyFrame KeyTime="0" Value="0,347,0,0"/>
+                            <EasingThicknessKeyFrame KeyTime="0" Value="0,385,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -121,7 +121,7 @@
             </Grid.ColumnDefinitions>
             <Grid x:Name="PowerToolsBarGeneral" Grid.Column="1" Height="80" VerticalAlignment="Top">
                 <Grid.Background>
-                    <SolidColorBrush Color="{DynamicResource BackgroundColor}" Opacity="0.5"/>
+                    <SolidColorBrush Color="{DynamicResource BackgroundColor}" Opacity="0.75"/>
                 </Grid.Background>
                 <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,147,10"/>
                 <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,29,10"/>
@@ -138,7 +138,7 @@
                     </Style>
                 </TabControl.Resources>
                 <TabControl.Background>
-                    <SolidColorBrush Color="{DynamicResource BackgroundColor}" Opacity="0.5"/>
+                    <SolidColorBrush Color="{DynamicResource BackgroundColor}" Opacity="0.75"/>
                 </TabControl.Background>
                 <TabItem Header="RequestsForContactPowerTabItem">
                     <TabItem.DataContext>
@@ -160,25 +160,25 @@
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="CreateCar" HorizontalAlignment="Left" Margin="211,10,0,10">
-                        	<i:Interaction.Triggers>
-                        		<i:EventTrigger EventName="Click">
-                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="CreateNewCarWindow"/>
-                        		</i:EventTrigger>
-                        	</i:Interaction.Triggers>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="CreateNewCarWindow"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="323,10,0,10">
-                        	<i:Interaction.Triggers>
-                        		<i:EventTrigger EventName="Click">
-                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateCarWindow"/>
-                        		</i:EventTrigger>
-                        	</i:Interaction.Triggers>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateCarWindow"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="441,10,0,10">
-                        	<i:Interaction.Triggers>
-                        		<i:EventTrigger EventName="Click">
-                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="DeleteCar"/>
-                        		</i:EventTrigger>
-                        	</i:Interaction.Triggers>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="DeleteCar"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="563,10,0,10"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="687,10,0,10"/>
@@ -222,9 +222,9 @@
                     <ColumnDefinition Width="198"/>
                 </Grid.ColumnDefinitions>
                 <Grid.Background>
-                    <SolidColorBrush Color="{DynamicResource BackgroundColor}" Opacity="0.5"/>
+                    <SolidColorBrush Color="{DynamicResource BackgroundColor}" Opacity="0.75"/>
                 </Grid.Background>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="0,27,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="0,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                     </Button.Background>
@@ -234,7 +234,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="0,107,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="0,115,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CarBarState"/>
@@ -245,7 +245,7 @@
                         <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="0,187,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="0,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="OrdersBarState"/>
@@ -255,7 +255,7 @@
                         <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="0,267,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CustomersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="0,295,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CustomersClick">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CustomerBarState"/>
@@ -265,7 +265,7 @@
                         <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="0,347,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="0,385,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="EmployeeBarState"/>

@@ -70,7 +70,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public async void DeleteCar()
+        public void DeleteCar()
         {
             SelectedCar.DeleteCar();
         }
