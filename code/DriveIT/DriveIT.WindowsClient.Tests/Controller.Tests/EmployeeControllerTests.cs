@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DriveIT.Models;
-using DriveIT_Windows_Client.Controllers;
+using DriveIT.WindowsClient.Controllers;
 using NUnit.Framework;
 
 namespace DriveIT.WindowsClient.Tests.Controller.Tests

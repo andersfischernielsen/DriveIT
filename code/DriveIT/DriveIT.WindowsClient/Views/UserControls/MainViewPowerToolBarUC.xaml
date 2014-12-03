@@ -3,10 +3,9 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:ViewModels="clr-namespace:DriveIT_Windows_Client.ViewModels"
-	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
+    xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
 	mc:Ignorable="d"
-	x:Class="DriveIT.WindowsClient.MainViewPowerToolBarUC"
+	x:Class="DriveIT.WindowsClient.Views.UserControls.MainViewPowerToolBarUC"
 	x:Name="UserControl" Height="80" VerticalAlignment="Top" Width="833" Template="{DynamicResource CarEntitiesPowerToolBarUC}">
     <UserControl.Resources>
         <ControlTemplate x:Key="CarEntitiesPowerToolBarUC" TargetType="{x:Type UserControl}">

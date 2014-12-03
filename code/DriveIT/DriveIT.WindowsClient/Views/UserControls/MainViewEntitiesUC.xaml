@@ -5,7 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
 	mc:Ignorable="d"
-	x:Class="DriveIT.WindowsClient.MainViewEntitiesUC"
+	x:Class="DriveIT.WindowsClient.Views.UserControls.MainViewEntitiesUC"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480" Template="{DynamicResource CarEntitiesUCTemplate}">
     <UserControl.Resources>

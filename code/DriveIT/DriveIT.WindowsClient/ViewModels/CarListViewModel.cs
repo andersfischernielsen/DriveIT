@@ -2,15 +2,27 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Controls;
 using DriveIT.Models;
-using DriveIT_Windows_Client.Controllers;
-using DriveIT_Windows_Client.ViewModels;
+using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
     public class CarListViewModel : IViewModelBase
     {
         public ObservableCollection<CarViewModel> CarViewModels { get; set; }
+        private CarViewModel _selectedCar;
+        public CarViewModel SelectedCar
+        {
+            get { return _selectedCar; }
+
+            set
+            {
+                _selectedCar = value;
+                NotifyPropertyChanged("SelectedCar");
+            }
+        }
 
         public CarListViewModel(IList<CarDto> carDtos)
         {
@@ -46,6 +58,38 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 CarViewModels.Add(new CarViewModel(carDto));
             }
+        }
+
+        public async void UpdateList()
+        {
+            CarViewModels.Clear();
+            var carController = new CarController();
+            foreach (CarDto carDto in await carController.ReadCarList())
+            {
+                CarViewModels.Add(new CarViewModel(carDto));
+            }
+        }
+
+        public async void DeleteCar()
+        {
+            SelectedCar.DeleteCar();
+        }
+
+        public void CreateNewCarWindow()
+        {
+            CarViewModel newCar = new CarViewModel();
+            var window = new EntityCarWindow();
+            window.DataContext = newCar;
+            CarViewModels.Add(newCar);
+            window.Show();
+        }
+
+        public void UpdateCarWindow()
+        {
+            CarViewModel car = SelectedCar;
+            var window = new EntityCarWindow();
+            window.DataContext = car;
+            window.Show();
         }
         #endregion CRUD
     }

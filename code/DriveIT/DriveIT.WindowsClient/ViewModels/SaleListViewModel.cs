@@ -7,21 +7,21 @@ using DriveIT.WindowsClient.Controllers;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
-    public class EmployeeListViewModel : IViewModelBase
+    public class SaleListViewModel : IViewModelBase
     {
-    public ObservableCollection<EmployeeViewModel> EmployeeViewModels { get; set; }
+    public ObservableCollection<SaleViewModel> SaleViewModels { get; set; }
 
-        public EmployeeListViewModel(IList<EmployeeDto> employeeDtos)
+        public SaleListViewModel(IList<SaleDto> saleDtos)
         {
-            EmployeeViewModels = new ObservableCollection<EmployeeViewModel>();
-            foreach (EmployeeDto employeeDto in employeeDtos)
+            SaleViewModels = new ObservableCollection<SaleViewModel>();
+            foreach (SaleDto saleDto in saleDtos)
             {
-                EmployeeViewModels.Add(new EmployeeViewModel(employeeDto));
+                SaleViewModels.Add(new SaleViewModel(saleDto));
             }
         }
-        public EmployeeListViewModel()
+        public SaleListViewModel()
         {
-            EmployeeViewModels = new ObservableCollection<EmployeeViewModel>();
+            SaleViewModels = new ObservableCollection<SaleViewModel>();
             ReadList();
         }
  
@@ -40,10 +40,10 @@ namespace DriveIT.WindowsClient.ViewModels
         #region CRUD
         public async void ReadList()
         {
-            var employeeController = new EmployeeController();
-            foreach (EmployeeDto employeeDto in await employeeController.ReadEmployeeList())
+            var saleController = new SaleController();
+            foreach (SaleDto saleDto in await saleController.ReadSaleList())
             {
-                EmployeeViewModels.Add(new EmployeeViewModel(employeeDto));
+                SaleViewModels.Add(new SaleViewModel(saleDto));
             }
         }
         #endregion CRUD

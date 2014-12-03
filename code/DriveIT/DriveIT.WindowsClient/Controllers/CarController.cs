@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
 using DriveIT.Models;
-using DriveIT_Windows_Client.ViewModels;
-using Newtonsoft.Json;
 
-namespace DriveIT_Windows_Client.Controllers
+namespace DriveIT.WindowsClient.Controllers
 {
     public class CarController
     {
@@ -19,7 +10,7 @@ namespace DriveIT_Windows_Client.Controllers
         {
         }
 
-        public async void CreateCar(CarDto car)
+        public async Task CreateCar(CarDto car)
         {
             await DriveITWebAPI.Create("cars", car);
         }
