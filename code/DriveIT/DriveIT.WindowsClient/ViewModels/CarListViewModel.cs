@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -45,6 +46,14 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 CarViewModels.Add(new CarViewModel(carDto));
             }
+        }
+
+        public void CreateNewCarWindow()
+        {
+            CarViewModel newCar = new CarViewModel(new CarDto());
+            var window = new EntityCarWindow();
+            window.DataContext = newCar;
+            window.Show();
         }
         #endregion CRUD
     }

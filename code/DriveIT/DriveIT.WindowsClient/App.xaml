@@ -53,6 +53,11 @@
                 <Setter Property="Button.Width" Value="80"/>
             </Style>
 
+            <Style x:Key="MenuBarButtonStyle">
+                <Setter Property="Button.FontWeight" Value="Normal"/>
+            </Style>
+
+
         </ResourceDictionary>
          
     </Application.Resources>

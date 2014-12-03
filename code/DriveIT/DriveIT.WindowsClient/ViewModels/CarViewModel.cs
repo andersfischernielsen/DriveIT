@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 
@@ -9,6 +10,27 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         private CarDto _carDto;
 
+        public string Status
+        {
+            get
+            {
+                try
+                {
+                    return Status;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+
+            }
+            set
+            {
+                Status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
         public int? CarId
         {
             get
@@ -38,16 +60,13 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         public CarViewModel()
         {
-            
+            _carDto = new CarDto();
         }
 
         #region Attributes
         public string CarModel
         {
-            get
-            {
-                return _carDto.Model;
-            }
+            get { return _carDto.Model; }
             set
             {
                 _carDto.Model = value;
