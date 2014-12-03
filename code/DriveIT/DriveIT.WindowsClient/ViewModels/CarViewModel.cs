@@ -28,6 +28,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public CarViewModel()
         {
             _carDto = new CarDto();
+            Created = DateTime.Now;
         }
 
 
@@ -270,9 +271,20 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion Attributes
 
-        public void ImportCarQueryData()
+        public async void ImportCarQueryData()
         {
-            NotifyPropertyChanged(String.Empty);
+            Status = "Importing...";
+            try
+            {
+                _carDto = await CarQuery.CarQuery.FillCarData(_carDto);
+                NotifyPropertyChanged(String.Empty);
+                Status = "CarQuery Data imported";
+            }
+            catch (Exception)
+            {
+                Status = "Failed to import from CarQuery";
+            }
+            
         }
 
         #region CRUDS
@@ -295,7 +307,6 @@ namespace DriveIT.WindowsClient.ViewModels
         public async void CreateCar()
         {
             var carController = new CarController();
-            _carDto.Created = DateTime.Now;
             await carController.CreateCar(_carDto);
             Status = "Car Created";
             CarState = CarStateEnum.ForSale;

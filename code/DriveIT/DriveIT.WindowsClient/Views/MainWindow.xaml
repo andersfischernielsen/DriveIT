@@ -325,6 +325,11 @@
                                         <Setter Property="Background" Value="{DynamicResource CarsDataGridHeaderBrush}"></Setter>
                                     </Style>
                                 </xcdg:DataGridControl.Resources>
+                            	<i:Interaction.Triggers>
+                            		<i:EventTrigger EventName="MouseDoubleClick">
+                            			<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="UpdateCarWindow"/>
+                            		</i:EventTrigger>
+                            	</i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column IsMainColumn="True" FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
