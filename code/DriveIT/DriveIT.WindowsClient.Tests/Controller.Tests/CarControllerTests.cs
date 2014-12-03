@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using DriveIT.Models;
-using DriveIT_Windows_Client.Controllers;
+using DriveIT.WindowsClient.Controllers;
 using NUnit.Framework;
 
 namespace DriveIT.WindowsClient.Tests.Controller.Tests
@@ -44,13 +45,14 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Model = "Swhifts",
                 Make = "Suzuki",
                 Price = 10000,
+                Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(2000);
             t = _carController.ReadCarList().Result;
             Console.WriteLine(t.Count);
             Console.WriteLine("After update: " + _carController.ReadCar(t[t.Count - 1].Id.Value).Result.Color);
 
-            _carController.DeleteCar(t[0].Id.Value);
+            _carController.DeleteCar(t[t.Count - 1].Id.Value);
             Thread.Sleep(2000);
             t = _carController.ReadCarList().Result;
             Console.WriteLine(t.Count);

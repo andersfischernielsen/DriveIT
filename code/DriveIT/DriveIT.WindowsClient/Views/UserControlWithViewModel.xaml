@@ -5,10 +5,11 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	xmlns:local="clr-namespace:DriveIT.WindowsClient"
-	x:Class="DriveIT.WindowsClient.UserControlWithViewModel"
+	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
+	x:Class="DriveIT.WindowsClient.Views.UserControlWithViewModel"
 	d:DesignWidth="640" d:DesignHeight="480">
 	<UserControl.Resources>
-		<local:UserControlWithViewModelModel x:Key="UserControlWithViewModelModelDataSource" />
+		<viewModels:UserControlWithViewModelModel x:Key="UserControlWithViewModelModelDataSource" />
 	</UserControl.Resources>
 
 	<Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource UserControlWithViewModelModelDataSource}}"/>

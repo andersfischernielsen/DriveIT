@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace DriveIT_Windows_Client.Views
+namespace DriveIT.WindowsClient.Views
 {
 	/// <summary>
 	/// Interaction logic for EntityWindow.xaml
