@@ -20,8 +20,8 @@ namespace DriveIT.Models
         public FuelType Fuel { get; set; }
         public string Drive { get; set; }
         public string Transmission { get; set; }
-        public int TopSpeed { get; set; }
-        public int NoughtTo100 { get; set; }
+        public double TopSpeed { get; set; }
+        public double NoughtTo100 { get; set; }
         public string ImagePath { get; set; }
     }
 }
