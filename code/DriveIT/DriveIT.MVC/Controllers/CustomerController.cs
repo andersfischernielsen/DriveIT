@@ -14,11 +14,30 @@ namespace DriveIT.MVC.Controllers
     public class CustomerController : AsyncController
     {
         private CustomersController controller = new CustomersController();
-        public  ActionResult Index()
+        
+        //GET: Customer
+        public async Task<ActionResult> Index()
         {
-            var cars =  controller.Get().Result as OkNegotiatedContentResult<IEnumerable<CustomerDto>>;
+            var customers = await controller.Get() as OkNegotiatedContentResult<List<CustomerDto>>;
+            return View(customers.Content);
+        }
 
-            return View(cars.Content);
+        public async Task<ActionResult> Show(int id)
+        {
+            var customer = await controller.Get(id) as OkNegotiatedContentResult<CustomerDto>;
+            return View(customer.Content);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        
+        //[HttpPost]
+        public async Task<ActionResult> Create(CustomerDto cust)
+        {
+            var customer = await controller.Post(cust) as CreatedAtRouteNegotiatedContentResult<CustomerDto>;
+            return RedirectToAction("Show", customer);
         }
 
 
