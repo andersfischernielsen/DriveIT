@@ -235,7 +235,7 @@
                                 <RowDefinition Height="667*"/>
                             </Grid.RowDefinitions>
                             <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding Mode=OneWay}">
+                            <DataGrid Margin="10" Grid.Row="1" ItemsSource="{Binding ContactRequestViewModels}">
                                 <DataGrid.DataContext>
                                     <ViewModels:ContactRequestListViewModel/>
                                 </DataGrid.DataContext>
