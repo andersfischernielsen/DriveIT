@@ -53,7 +53,7 @@
 			</Grid.ColumnDefinitions>
 			<Label Content="Car" Style="{StaticResource HeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="99"/>
 			<xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="Id" Height="28" Grid.Row="1"
-				Grid.Column="0" VerticalAlignment="Top" Text="{Binding CarId}" IsReadOnly="true" />
+				Grid.Column="0" VerticalAlignment="Top" Text="{Binding CarId}" IsReadOnly="true" IsEnabled="False"/>
 			<xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarModel}"/>
 			<xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="Make" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarMake}"/>
 			<xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="Year" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Year}"/>
