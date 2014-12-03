@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:WindowsClient="clr-namespace:DriveIT.WindowsClient"
         xmlns:userControls="clr-namespace:DriveIT.WindowsClient.Views.UserControls"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ViewModels="clr-namespace:DriveIT.WindowsClient.ViewModels" mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ViewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    mc:Ignorable="d"
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
         Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen">
@@ -126,7 +128,7 @@
                 <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,147,10"/>
                 <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,29,10"/>
             </Grid>
-            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0">
+            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0" BorderThickness="1,0">
                 <TabControl.Resources>
                     <!-- Remove the headers by overriding the header style -->
                     <Style TargetType="{x:Type TabItem}">
@@ -315,21 +317,15 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid>
-                                <DataGrid.Resources>
-                                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                                    </Style>
-                                </DataGrid.Resources>
-                            </DataGrid>
-                            <DataGrid x:Name="CarsDataGrid" Style="{DynamicResource DatagridStyle}" Margin="10,7,10,10" ItemsSource="{Binding CarViewModels}" SelectedValue="{Binding SelectedCar, Mode=TwoWay}" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" ClipboardContentBinding="{x:Null}"/>
-                                    <DataGridTextColumn Header="CarId" Binding="{Binding CarId}" ClipboardContentBinding="{x:Null}"/>
-                                    <DataGridTextColumn Header="Make" Binding="{Binding CarMake}" ClipboardContentBinding="{x:Null}"/>
-                                    <DataGridTextColumn Header="Model" Binding="{Binding CarModel}" ClipboardContentBinding="{x:Null}"/>
-                                    <DataGridTextColumn Header="Fueltype" Binding="{Binding Fuel}" ClipboardContentBinding="{x:Null}"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                            <xcdg:DataGridControl x:Name="CarsDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedCar, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding CarViewModels}">
+                                <xcdg:DataGridControl.Columns>
+                                    <xcdg:Column IsMainColumn="True" FieldName="CarId" Title="CarId" Width="*" ReadOnly="True"/>
+                                    <xcdg:Column FieldName="Status" Title="Status" Width="*" ReadOnly="True"/>
+                                    <xcdg:Column FieldName="CarMake" Title="Make" Width="*" ReadOnly="True"/>
+                                    <xcdg:Column FieldName="CarModel" Title="Model" Width="*" ReadOnly="True"/>
+                                    <xcdg:Column FieldName="Fuel"  Title="Fuel" Width="*" ReadOnly="True"/>
+                                </xcdg:DataGridControl.Columns>
+                            </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                     <TabItem Header="OrdersTabItem">
