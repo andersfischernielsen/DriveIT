@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace DriveIT.WindowsClient.Tests.Controller.Tests
 {
     [TestFixture]
-    public class RequestForContactControllerTests
+    public class ContactRequestControllerTests
     {
         private ContactRequestController _requestForContactController;
         [SetUp]
