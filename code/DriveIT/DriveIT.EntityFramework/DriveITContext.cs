@@ -1,13 +1,14 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Data.SqlTypes;
 using DriveIT.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DriveIT.EntityFramework
 {
 // ReSharper disable once InconsistentNaming
-    public class DriveITContext : DbContext
+    public class DriveITContext : IdentityDbContext<DriveITUser>
     {
+        public DriveITContext() : base("DriveIT.EntityFramework.DriveITContext") { }
+
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }

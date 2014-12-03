@@ -132,9 +132,7 @@ namespace DriveIT.EntityFramework
             toChange.Email = toSetFrom.Email;
             toChange.FirstName = toSetFrom.FirstName;
             toChange.LastName = toSetFrom.LastName;
-            toChange.Password = toSetFrom.Password;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
-            toChange.Username = toSetFrom.Username;
         }
 
         public async Task<Customer> GetCustomerWithId(int idToGet)
@@ -188,9 +186,7 @@ namespace DriveIT.EntityFramework
             toChange.Email = toSetFrom.Email;
             toChange.FirstName = toSetFrom.FirstName;
             toChange.LastName = toSetFrom.LastName;
-            toChange.Password = toSetFrom.Password;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
-            toChange.Username = toSetFrom.Username;
         }
 
         public async Task<ContactRequest> GetContactRequestWithId(int idToGet)

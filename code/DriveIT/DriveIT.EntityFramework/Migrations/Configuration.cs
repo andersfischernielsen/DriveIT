@@ -1,5 +1,7 @@
 using System;
 using DriveIT.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DriveIT.EntityFramework.Migrations
 {
@@ -14,6 +16,41 @@ namespace DriveIT.EntityFramework.Migrations
 
         protected override void Seed(DriveITContext context)
         {
+            var roleStore = new RoleStore<IdentityRole>(context);
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+            if (!roleManager.RoleExists("Customer"))
+            {
+                roleManager.Create(new IdentityRole("Customer"));
+            }
+            if (!roleManager.RoleExists("Employee"))
+            {
+                roleManager.Create(new IdentityRole("Employee"));
+            }
+            if (!roleManager.RoleExists("Administrator"))
+            {
+                roleManager.Create(new IdentityRole("Administrator"));
+            }
+
+            var userStore = new UserStore<DriveITUser>(context);
+            var userManager = new UserManager<DriveITUser>(userStore);
+
+            if (userManager.FindByEmail("mlin@itu.dk") == null)
+            {
+                var user = new DriveITUser
+                {
+                    Id = "mlin@itu.dk",
+                    UserName = "mlin@itu.dk",
+                    Email = "mlin@itu.dk",
+                };
+                var result = userManager.Create(user, "N0t_Really_a_password");
+                userManager.AddToRole(user.Id, "Administrator");
+
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception(string.Format("{0}", result.Errors));
+                }
+            }
 
             var car = new Car
             {
@@ -38,9 +75,7 @@ namespace DriveIT.EntityFramework.Migrations
                 Email = "cust@driveit.dk",
                 FirstName = "Cu",
                 LastName = "St",
-                Password = "Should not be present in this object",
                 PhoneNumber = "37 48 34 81",
-                Username = "cust" //Should probably not be part of this object as well.
             };
             var comment = new Comment
             {
@@ -57,9 +92,7 @@ namespace DriveIT.EntityFramework.Migrations
                 Email = "empl@driveit.dk",
                 FirstName = "Em",
                 LastName = "Pl",
-                Password = "Should not be present in this object",
                 PhoneNumber = "36 75 69 33",
-                Username = "empl" //Should probably no be part of this object as well.
             };
             var contactRequest = new ContactRequest
             {
