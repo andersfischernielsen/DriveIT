@@ -309,7 +309,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             var carController = new CarController();
             carController.DeleteCar(_carDto);
-            _carDto.Id = null;
+            CarId = null;
             Status = "Car Deleted";
             _carState = CarState.Initial;
         }
