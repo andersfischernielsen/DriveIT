@@ -22,8 +22,8 @@ namespace DriveIT.WebAPI.Controllers
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
-                from customer in await _repo.GetAllCustomers()
-                select customer.ToDto());
+                (from customer in await _repo.GetAllCustomers()
+                select customer.ToDto()).ToList());
         }
 
         // GET: api/Customers/5
