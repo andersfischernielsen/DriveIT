@@ -122,7 +122,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                context.Cars.Remove(await context.Cars.FindAsync(idToDelete));
+                context.Employees.Remove(await context.Employees.FindAsync(idToDelete));
                 return await context.SaveChangesAsync();
             }
         }
