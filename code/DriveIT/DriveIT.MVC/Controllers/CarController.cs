@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -18,14 +19,7 @@ namespace DriveIT.MVC.Controllers
 
         private CarsController controller = new CarsController();
 
-        public async Task<ActionResult> Index()
-        {
-            var elements = await controller.Get() as OkNegotiatedContentResult<List<CarDto>>;
-            return View(elements.Content);
-        }
-
-        [HttpGet]
-        public async Task<ViewResult> Index(string model)
+        public async Task<ActionResult> Index(string model)
         {
             //Select all cars
             var elements = await controller.Get() as OkNegotiatedContentResult<List<CarDto>>;
@@ -39,12 +33,13 @@ namespace DriveIT.MVC.Controllers
                                select c.Model;
 
             //Set distinct list of models in ViewBag property
-            ViewBag.Models = new SelectList(modelList.Distinct());
+            ViewBag.model = new SelectList(modelList.Distinct());
 
             //Search records of models
-            
-                carList = carList.Where(e => e.Model.Equals(model));
-            
+            if (!String.IsNullOrEmpty(model))
+            {
+                carList = carList.Where(e => e.Model == model);
+            } 
 
             return View(carList);
         }

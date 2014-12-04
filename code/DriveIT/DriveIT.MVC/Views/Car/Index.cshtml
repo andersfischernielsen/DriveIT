@@ -14,28 +14,10 @@
 @using (Html.BeginForm("Index", "Car", FormMethod.Get))
 {
     <p>
-        Models: @Html.DropDownList("Models", "All")
+        Models: @Html.DropDownList("model", "---")
         <input type="submit" value="Search"/>
     </p>
 }
-
-
-
-FuelType:
-<select name="car-fuelType" id="car-fuelType"> 
-    <option value=""></option>
-    <option value="Gasoline">Gasoline</option>
-    <option value="Diesel">Diesel</option>
-    <option value="Electric">Electric</option>
-</select>
-
-Make: <select name="car-makes" id="car-makes"></select>
-Model: <select name="car-models" id="car-models"></select>
-
-<br><br/>
-<button>Search</button>
-
-<br><br/>
 
 <table class="table">
     <tr>
