@@ -41,18 +41,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         #region ATTRIBUTES
-        public string Username
-        {
-            get
-            {
-                return _customerDto.Username;
-            }
-            set
-            {
-                _customerDto.Username = value;
-                NotifyPropertyChanged("Username");
-            }
-        }
+        
         public string FirstName
         {
             get

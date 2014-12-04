@@ -10,7 +10,7 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         private CarDto _carDto;
 
-        public enum CarState
+        public enum CarStateEnum
         {
             Initial,
             ForSale,
@@ -18,14 +18,17 @@ namespace DriveIT.WindowsClient.ViewModels
             Sold,
         }
 
+        // todo ; til at notifie at alt er updated.
+
         public CarViewModel(CarDto carDto)
         {
             _carDto = carDto;
-            _carState = CarState.ForSale;
+            CarState = CarStateEnum.ForSale;
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
+            Created = DateTime.Now;
         }
 
 
@@ -55,8 +58,8 @@ namespace DriveIT.WindowsClient.ViewModels
 
 
 
-        private CarState _actualCarState = CarState.Initial;
-        public  CarState _carState
+        private CarStateEnum _actualCarState = CarStateEnum.Initial;
+        public  CarStateEnum CarState
         {
             get { return _actualCarState; }
             set
@@ -69,9 +72,9 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                switch (_carState)
+                switch (CarState)
                 {
-                    case CarState.Initial:
+                    case CarStateEnum.Initial:
                         return "Create";
                     default:
                         return "Update";
@@ -126,7 +129,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                return _carDto.Year;
+                return _carDto.Year ?? 0;
             }
             set
             {
@@ -242,7 +245,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Transmission");
             }
         }
-        public int TopSpeed
+        public float TopSpeed
         {
             get
             {
@@ -268,13 +271,29 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion Attributes
 
+        public async void ImportCarQueryData()
+        {
+            Status = "Importing...";
+            try
+            {
+                _carDto = await CarQuery.CarQuery.FillCarData(_carDto);
+                NotifyPropertyChanged(String.Empty);
+                Status = "CarQuery Data imported";
+            }
+            catch (Exception)
+            {
+                Status = "Failed to import from CarQuery";
+            }
+            
+        }
+
         #region CRUDS
 
         public void SaveCar()
         {
-            switch (_carState)
+            switch (CarState)
             {
-                case CarState.Initial:
+                case CarStateEnum.Initial:
                     CreateCar();
                     break;
                 default: 
@@ -288,10 +307,9 @@ namespace DriveIT.WindowsClient.ViewModels
         public async void CreateCar()
         {
             var carController = new CarController();
-            _carDto.Created = DateTime.Now;
             await carController.CreateCar(_carDto);
             Status = "Car Created";
-            _carState = CarState.ForSale;
+            CarState = CarStateEnum.ForSale;
         }
         /// <summary>
         /// Gets called from the view
@@ -307,11 +325,14 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public void DeleteCar()
         {
-            var carController = new CarController();
-            carController.DeleteCar(_carDto);
-            _carDto.Id = null;
-            Status = "Car Deleted";
-            _carState = CarState.Initial;
+            if (CarState != CarStateEnum.Initial)
+            {
+                var carController = new CarController();
+                carController.DeleteCar(_carDto);
+                CarId = null;
+                Status = "Car Deleted";
+                CarState = CarStateEnum.Initial;
+            }
         }
         #endregion CRUDS
 

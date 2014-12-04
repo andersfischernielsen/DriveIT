@@ -22,7 +22,7 @@ namespace DriveIT.WebAPI.Models
                 Price = dto.Price,
                 Sold = dto.Sold,
                 Transmission = dto.Transmission,
-                Year = dto.Year,
+                Year = dto.Year ?? 0,
                 Drive = dto.Drive,
                 Mileage = dto.Mileage,
                 ImagePaths = dto.ImagePaths,

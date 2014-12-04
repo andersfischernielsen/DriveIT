@@ -70,9 +70,14 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public async void DeleteCar()
+        public void DeleteCar()
         {
-            SelectedCar.DeleteCar();
+            if(SelectedCar.CarId.HasValue) SelectedCar.DeleteCar();
+            else
+            {
+                CarViewModels.Remove(SelectedCar);
+                SelectedCar = null;
+            }
         }
 
         public void CreateNewCarWindow()

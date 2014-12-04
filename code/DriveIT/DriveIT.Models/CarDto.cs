@@ -11,7 +11,7 @@ namespace DriveIT.Models
         public int? Id { get; set; }
         public string Model { get; set; }
         public string Make { get; set; }
-        public int Year { get; set; }
+        public int? Year { get; set; }
         public decimal Price { get; set; }
         public DateTime Created { get; set; }
         public bool Sold { get; set; }
@@ -21,7 +21,7 @@ namespace DriveIT.Models
         public FuelType Fuel { get; set; }
         public string Drive { get; set; }
         public string Transmission { get; set; }
-        public int TopSpeed { get; set; }
+        public float TopSpeed { get; set; }
         public float NoughtTo100 { get; set; }
         public List<string> ImagePaths { get; set; }
     }
