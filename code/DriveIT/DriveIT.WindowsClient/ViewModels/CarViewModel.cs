@@ -129,7 +129,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                return _carDto.Year.Value;
+                return _carDto.Year ?? 0;
             }
             set
             {
