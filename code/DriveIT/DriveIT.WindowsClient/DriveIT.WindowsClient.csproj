@@ -132,6 +132,9 @@
     <Compile Include="Views\EntityEmployeeWindow.xaml.cs">
       <DependentUpon>EntityEmployeeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EntitySaleWindow.xaml.cs">
+      <DependentUpon>EntitySaleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EntityEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EntitySaleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
