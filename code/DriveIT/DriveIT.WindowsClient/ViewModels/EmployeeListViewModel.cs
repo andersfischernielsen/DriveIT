@@ -70,7 +70,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public void DeleteCar()
+        public void DeleteEmployee()
         {
             if(SelectedEmployee.EmployeeId.HasValue) SelectedEmployee.DeleteEmployee();
             else
@@ -80,7 +80,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public void CreateNewCarWindow()
+        public void CreateNewEmployeeWindow()
         {
             EmployeeViewModel newEmployee = new EmployeeViewModel();
             var window = new EntityEmployeeWindow();
@@ -89,7 +89,7 @@ namespace DriveIT.WindowsClient.ViewModels
             window.Show();
         }
 
-        public void UpdateCarWindow()
+        public void UpdateEmployeeWindow()
         {
             EmployeeViewModel employee = SelectedEmployee;
             var window = new EntityEmployeeWindow();
