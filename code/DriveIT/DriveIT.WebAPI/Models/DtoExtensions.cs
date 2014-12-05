@@ -61,7 +61,7 @@ namespace DriveIT.WebAPI.Models
                 Email = dto.Email,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                Id = dto.Id ?? 0,
+                Id = dto.Id,
                 PhoneNumber = dto.Phone,
             };
         }
@@ -138,7 +138,7 @@ namespace DriveIT.WebAPI.Models
                 CarId = dto.CarId,
                 CustomerId = dto.CustomerId,
                 Created = dto.Requested,
-                EmployeeId = dto.EmployeeId ?? 0
+                EmployeeId = dto.EmployeeId
             };
         }
 
@@ -150,7 +150,7 @@ namespace DriveIT.WebAPI.Models
                 CarId = contactRequest.CarId,
                 CustomerId = contactRequest.CustomerId,
                 Requested = contactRequest.Created,
-                EmployeeId = contactRequest.EmployeeId == 0 ? (int?) null : contactRequest.EmployeeId
+                EmployeeId = contactRequest.EmployeeId
             };
         }
 
@@ -158,7 +158,7 @@ namespace DriveIT.WebAPI.Models
         {
             return new Employee
             {
-                Id = dto.Id ?? 0,
+                Id = dto.Id,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 PhoneNumber = dto.Phone,
