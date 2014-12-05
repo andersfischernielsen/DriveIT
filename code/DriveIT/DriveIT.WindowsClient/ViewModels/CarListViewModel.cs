@@ -82,7 +82,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void CreateNewCarWindow()
         {
-            CarViewModel newCar = new CarViewModel();
+            var newCar = new CarViewModel();
             var window = new EntityCarWindow {DataContext = newCar};
             CarViewModels.Add(newCar);
             window.Show();

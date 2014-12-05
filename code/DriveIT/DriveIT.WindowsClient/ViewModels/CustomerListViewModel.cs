@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -47,6 +48,39 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 CustomerViewModels.Add(new CustomerViewModel(customerDto));
             }
+        }
+        public async void UpdateList()
+        {
+            CustomerViewModels.Clear();
+            var customerController = new CustomerController();
+            foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
+            {
+                CustomerViewModels.Add(new CustomerViewModel(customerDto));
+            }
+        }
+        public void DeleteCustomer()
+        {
+            if (SelectedCustomer.CustomerId.HasValue) SelectedCustomer.DeleteCustomer();
+            else
+            {
+                CustomerViewModels.Remove(SelectedCustomer);
+                SelectedCustomer = null;
+            }
+        }
+
+        public void CreateNewCustomerWindow()
+        {
+            var newCustomer = new CustomerViewModel();
+            var window = new EntityCustomerWindow { DataContext = newCustomer };
+            CustomerViewModels.Add(newCustomer);
+            window.Show();
+        }
+
+        public void UpdateCustomerWindow()
+        {
+            CustomerViewModel customer = SelectedCustomer;
+            var window = new EntityCustomerWindow { DataContext = customer };
+            window.Show();
         }
 
         #endregion CRUD

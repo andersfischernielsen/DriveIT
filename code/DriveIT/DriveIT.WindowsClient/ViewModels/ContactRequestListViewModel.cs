@@ -70,7 +70,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void CreateNewContactRequestWindow()
         {
-            ContactRequestViewModel newContactRequest = new ContactRequestViewModel();
+            var newContactRequest = new ContactRequestViewModel();
             var window = new EntityContactRequestWindow {DataContext = newContactRequest};
             ContactRequestViewModels.Add(newContactRequest);
             window.Show();

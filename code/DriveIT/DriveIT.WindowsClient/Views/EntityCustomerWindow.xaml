@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="208.667"/>
             </Grid.ColumnDefinitions>
             <Grid.Background>
-                <SolidColorBrush Color="{DynamicResource CarsBarGridColor}"/>
+                <SolidColorBrush Color="{DynamicResource CustomersBarGridColor}"/>
             </Grid.Background>
             <Border BorderBrush="Black" BorderThickness="1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
             <Button Content="Button"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
