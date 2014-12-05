@@ -8,6 +8,6 @@ namespace DriveIT.Models
         public DateTime Requested { get; set; }
         public int CustomerId { get; set; }
         public int CarId { get; set; }
-        public bool Handled { get; set; }
+        public int? EmployeeId { get; set; }
     }
 }

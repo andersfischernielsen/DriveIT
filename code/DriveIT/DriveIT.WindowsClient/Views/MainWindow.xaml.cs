@@ -1,12 +1,12 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Navigation;
-using DriveIT.WindowsClient;
-using DriveIT_Windows_Client.Controllers;
+using DriveIT.WindowsClient.ViewModels;
 
-namespace DriveIT_Windows_Client.Views
+namespace DriveIT.WindowsClient.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -30,17 +30,34 @@ namespace DriveIT_Windows_Client.Views
             entityWindow.Show(); // works
         }
 
-        private void RequestForContactButtonClick(object sender, RoutedEventArgs e)
+        private void RequestsForContactsClick(object sender, RoutedEventArgs e)
         {
-            ControlTemplate Temp = (ControlTemplate)FindResource("UserControlRequestForCar");
-            EntitiesUC.Template = Temp;
+            EntitiesTabControl.SelectedIndex = 0;
+            PowerToolsbarTabControl.SelectedIndex = 0;
         }
 
-        private void CarsButtonClick(object sender, RoutedEventArgs e)
+        private void CarsClick(object sender, RoutedEventArgs e)
         {
-            ControlTemplate Temp = (ControlTemplate)FindResource("UserControlCars");
-            EntitiesUC.Template = Temp;
-            Console.WriteLine();
+            EntitiesTabControl.SelectedIndex = 1;
+            PowerToolsbarTabControl.SelectedIndex = 1;
+        }
+
+        private void OrdersClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 2;
+            PowerToolsbarTabControl.SelectedIndex = 2;
+        }
+
+        private void CustomersClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 3;
+            PowerToolsbarTabControl.SelectedIndex = 3;
+        }
+
+        private void EmployeesClick(object sender, RoutedEventArgs e)
+        {
+            EntitiesTabControl.SelectedIndex = 4;
+            PowerToolsbarTabControl.SelectedIndex = 4;
         }
     }
 }

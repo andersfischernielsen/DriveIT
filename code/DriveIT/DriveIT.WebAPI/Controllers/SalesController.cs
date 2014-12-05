@@ -1,17 +1,22 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
-using _repo = DriveIT.EntityFramework.EntityStorage;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class SalesController : ApiController
     {
+        private readonly IPersistentStorage _repo;
+
+        public SalesController(IPersistentStorage repo)
+        {
+            _repo = repo;
+        }
+
+        public SalesController() : this(new EntityStorage()) { }
 
         // GET: api/Sales
         public async Task<IHttpActionResult> Get()
@@ -39,12 +44,9 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newSaleId = await _repo.CreateSale(await value.ToEntity());
-            var response = Request.CreateResponse(HttpStatusCode.Created, value);
-
-            var uri = Url.Link("DefaultApi", new { id = newSaleId });
-            response.Headers.Location = new Uri(uri);
-            return ResponseMessage(response);
+            var newSaleId = await _repo.CreateSale(value.ToEntity());
+            value.Id = newSaleId;
+            return CreatedAtRoute("DefaultApi", new { id = newSaleId }, value);
         }
 
         // PUT: api/Sales/5
@@ -54,7 +56,12 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.UpdateSale(id, await value.ToEntity());
+            var sale = await _repo.GetSaleWithId(id);
+            if (sale == null)
+            {
+                return NotFound();
+            }
+            await _repo.UpdateSale(id, value.ToEntity());
             return Ok();
         }
 

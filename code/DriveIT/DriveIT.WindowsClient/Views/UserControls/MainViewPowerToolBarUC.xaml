@@ -1,0 +1,37 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
+	mc:Ignorable="d"
+	x:Class="DriveIT.WindowsClient.Views.UserControls.MainViewPowerToolBarUC"
+	x:Name="UserControl" Height="80" VerticalAlignment="Top" Width="833" Template="{DynamicResource CarEntitiesPowerToolBarUC}">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="CarEntitiesPowerToolBarUC" TargetType="{x:Type UserControl}">
+            <Grid Height="80" VerticalAlignment="Top">
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource PowerToolBarColor}" Opacity="0.5"/>
+                </Grid.Background>
+                <Label Content="Cars Power Tools:" Style="{DynamicResource HeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="255.197"/>
+                <Button Content="Create" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="288,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+                <Button Content="See Data" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="397,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+                <Button Content="Delete" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="510,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+                <Button Content="Advertise" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="622,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="RequestForContactEntitiesPowerToolBarUC" TargetType="{x:Type UserControl}">
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource PowerToolBarColor}" Opacity="0.5"/>
+                </Grid.Background>
+                <Label Content="Request for contact" Style="{DynamicResource HeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button Content="See Info" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="315,10,0,10" VerticalAlignment="Stretch"/>
+                <Button Content="Lock/Finish" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="421,10,0,10" VerticalAlignment="Stretch"/>
+                <Button Content="Delete" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="526,10,0,10" VerticalAlignment="Stretch"/>
+                <Button Content="Customer" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="638,10,0,10" VerticalAlignment="Stretch"/>
+                <Button Content="Car" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="743,10,0,10" VerticalAlignment="Stretch"/>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
+</UserControl>
