@@ -66,7 +66,7 @@
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="CarId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarId}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,51,0" Watermark="EmployeeId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding EmployeeId}"/>
             <Image Grid.Column="1" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="235" Width="384"/>
-            <DatePicker Padding="6,2" Margin="10,43,51,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Created" Height="28" FontSize="16" Grid.Row="1" DisplayDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Long" SelectedDate="{Binding Requested}" Text="{Binding Requested}">
+            <DatePicker Padding="6,2" Margin="10,43,51,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Requested" Height="28" FontSize="16" Grid.Row="1" DisplayDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Long" SelectedDate="{Binding Requested}" Text="{Binding Requested}">
                 <DatePicker.Background>
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
                 </DatePicker.Background>
