@@ -90,7 +90,7 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 switch (EmployeeState)
                 {
-                    case EmployeeStateEnum.InSystem:
+                    case EmployeeStateEnum.NotInSystem:
                         return "Create";
                     default:
                         return "Update";
