@@ -21,8 +21,8 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/ContactRequests
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(from contactRequest in await _repo.GetAllContactRequests()
-                      select contactRequest.ToDto());
+            return Ok((from contactRequest in await _repo.GetAllContactRequests()
+                      select contactRequest.ToDto()).ToList());
         }
 
         // GET: api/ContactRequests/5

@@ -47,6 +47,10 @@
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GravatarHelper">
+      <HintPath>..\packages\GravatarHelper.3.2.3\lib\Net40\GravatarHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -236,6 +240,7 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Show.cshtml" />
     <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Car\Index.cshtml" />
     <Content Include="Views\Car\Details.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
@@ -245,6 +250,12 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\ContactRequest\" />
     <Folder Include="Views\Employee\" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\ContactRequest\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Comment\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\States\" />
   </ItemGroup>
