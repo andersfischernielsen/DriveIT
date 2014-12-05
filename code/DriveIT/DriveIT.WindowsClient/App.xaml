@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
-             StartupUri="Views/MainWindow.xaml">
+             StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
          
     	<ResourceDictionary>

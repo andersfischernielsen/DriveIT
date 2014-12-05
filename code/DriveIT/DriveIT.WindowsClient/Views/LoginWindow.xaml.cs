@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DriveIT.WindowsClient.ViewModels;
 
 namespace DriveIT.WindowsClient.Views
 {
@@ -21,6 +22,10 @@ namespace DriveIT.WindowsClient.Views
     {
         public LoginWindow()
         {
+            //LoginViewModel vm = new LoginViewModel(); // this creates an instance of the ViewModel
+           // DataContext = vm; // this sets the newly created ViewModel as the DataContext for the View
+            //if (vm.CloseAction == null)
+           //     vm.CloseAction = new Action(() => this.Close());
             InitializeComponent();
         }
     }
