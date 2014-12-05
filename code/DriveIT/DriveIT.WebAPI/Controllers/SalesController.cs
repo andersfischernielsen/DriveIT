@@ -5,6 +5,7 @@ using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DriveIT.WebAPI.Controllers
 {
@@ -43,7 +44,10 @@ namespace DriveIT.WebAPI.Controllers
         [Authorize]
         public async Task<IHttpActionResult> GetFromUserId(string userId)
         {
-            //Todo: If customer, check id matches user.
+            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != userId)
+            {
+                return Unauthorized();
+            }
             return Ok((from sale in await _repo.GetAllSales()
                        where sale.CustomerId == userId
                        select sale.ToDto()).ToList());

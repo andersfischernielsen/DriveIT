@@ -5,6 +5,7 @@ using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DriveIT.WebAPI.Controllers
 {
@@ -28,14 +29,13 @@ namespace DriveIT.WebAPI.Controllers
                 select customer.ToDto()).ToList());
         }
 
-        // GET: api/Customers/5
+        // GET: api/Customers/?id=mlin@itu.dk
         [Authorize]
         public async Task<IHttpActionResult> Get(string id)
         {
-            //TODO Figure out if this should go with AccountController.
-            if (User.IsInRole("Customer"))
+            if (User.IsInRole("Customer") && User.Identity.GetUserId() != id)
             {
-                //TODO check that Id is only their own.
+                return Unauthorized();
             }
             var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
@@ -46,7 +46,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Customers/5
-        [Authorize]
+        [AuthorizeRoles(Role.Administrator, Role.Employee)]
         public async Task<IHttpActionResult> Put(string id, [FromBody]CustomerDto value)
         {
             //Todo check user is changing himself!
@@ -64,7 +64,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Customers/5
-        [Authorize]
+        [AuthorizeRoles(Role.Administrator, Role.Customer)]
         public async Task<IHttpActionResult> Delete(string id)
         {
             //Todo check that user can only delete himself.

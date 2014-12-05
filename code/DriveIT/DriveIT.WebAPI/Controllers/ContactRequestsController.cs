@@ -5,6 +5,7 @@ using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DriveIT.WebAPI.Controllers
 {
@@ -42,7 +43,10 @@ namespace DriveIT.WebAPI.Controllers
         [AuthorizeRoles(Role.Customer, Role.Administrator)]
         public async Task<IHttpActionResult> GetByUserId(string userId)
         {
-            //Todo if customer, check id to see if it is the logged in one.
+            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != userId)
+            {
+                return Unauthorized();
+            }
             return Ok((from contactRequest in await _repo.GetAllContactRequests()
                 where contactRequest.CustomerId == userId
                 select contactRequest.ToDto()).ToList());
@@ -70,7 +74,6 @@ namespace DriveIT.WebAPI.Controllers
         [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Put(int id, [FromBody]ContactRequestDto value)
         {
-            //Todo check.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

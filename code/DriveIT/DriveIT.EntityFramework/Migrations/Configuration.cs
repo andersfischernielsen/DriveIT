@@ -29,7 +29,7 @@ namespace DriveIT.EntityFramework.Migrations
 
             var userStore = new UserStore<DriveITUser>(context);
             var userManager = new UserManager<DriveITUser>(userStore);
-            var employee = (Employee) userManager.FindById("mlin@itu.dk");
+            var employee = (Employee)userManager.FindById("mlin@itu.dk");
             if (employee == null)
             {
                 employee = new Employee
@@ -78,10 +78,6 @@ namespace DriveIT.EntityFramework.Migrations
             }
 
             userManager.AddToRoles(customer.Id, Role.Customer.ToString());
-
-
-            
-
 
             var car = new Car
             {
@@ -150,5 +146,5 @@ namespace DriveIT.EntityFramework.Migrations
         }
     }
 
-    
+
 }
