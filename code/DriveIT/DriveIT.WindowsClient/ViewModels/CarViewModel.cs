@@ -29,6 +29,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
+            CarState = CarStateEnum.Initial;
         }
 
 
@@ -58,7 +59,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
 
 
-        private CarStateEnum _actualCarState = CarStateEnum.Initial;
+        private CarStateEnum _actualCarState;
         public  CarStateEnum CarState
         {
             get { return _actualCarState; }
