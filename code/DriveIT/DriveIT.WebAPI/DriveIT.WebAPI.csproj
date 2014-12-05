@@ -118,7 +118,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\StartupAuth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AuthorizeRolesAttributes.cs" />
+    <Compile Include="AuthorizeRolesAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
