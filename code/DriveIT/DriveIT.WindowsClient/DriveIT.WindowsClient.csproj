@@ -114,12 +114,12 @@
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\SaleListViewModel.cs" />
     <Compile Include="ViewModels\SaleViewModel.cs" />
     <Compile Include="ViewModels\ContactRequestListViewModel.cs" />
     <Compile Include="ViewModels\ContactRequestViewModel.cs" />
     <Compile Include="ViewModels\IViewModelBase.cs" />
-    <Compile Include="ViewModels\UserControlWithViewModelModel.cs" />
     <Compile Include="Views\EntityCarWindow.xaml.cs">
       <DependentUpon>EntityCarWindow.xaml</DependentUpon>
     </Compile>
@@ -134,6 +134,9 @@
     </Compile>
     <Compile Include="Views\EntitySaleWindow.xaml.cs">
       <DependentUpon>EntitySaleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EntitySaleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
