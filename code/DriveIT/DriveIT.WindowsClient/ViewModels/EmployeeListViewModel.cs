@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -58,6 +59,44 @@ namespace DriveIT.WindowsClient.ViewModels
                 EmployeeViewModels.Add(new EmployeeViewModel(employeeDto));
             }
         }
+
+        public async void UpdateList()
+        {
+            EmployeeViewModels.Clear();
+            var employeeController = new EmployeeController();
+            foreach (EmployeeDto employeeDtoDto in await employeeController.ReadEmployeeList())
+            {
+                EmployeeViewModels.Add(new EmployeeViewModel(employeeDtoDto));
+            }
+        }
+
+        public void DeleteCar()
+        {
+            if(SelectedEmployee.EmployeeId.HasValue) SelectedEmployee.DeleteEmployee();
+            else
+            {
+                EmployeeViewModels.Remove(SelectedEmployee);
+                SelectedEmployee = null;
+            }
+        }
+
+        public void CreateNewCarWindow()
+        {
+            EmployeeViewModel newEmployee = new EmployeeViewModel();
+            var window = new EntityEmployeeWindow();
+            window.DataContext = newEmployee;
+            EmployeeViewModels.Add(newEmployee);
+            window.Show();
+        }
+
+        public void UpdateCarWindow()
+        {
+            EmployeeViewModel employee = SelectedEmployee;
+            var window = new EntityEmployeeWindow();
+            window.DataContext = employee;
+            window.Show();
+        }
+
         #endregion CRUD
     }
 }

@@ -188,19 +188,34 @@
                 <TabItem Header="OrdersPowerTabItem">
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="253.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="382.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="523.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="658.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="799.5,10,0,10"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="253.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="376.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="502.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="630,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="765,10,0,10"/>
                     </Grid>
                 </TabItem>
-                <TabItem>
+                <TabItem Header="EmployeesPowerTabItem">
                     <TabItem.DataContext>
                         <ViewModels:EmployeeListViewModel/>
                     </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="235.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="342,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="460.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="579,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="697.5,10,0,10"/>
                     </Grid>
                 </TabItem>
             </TabControl>
