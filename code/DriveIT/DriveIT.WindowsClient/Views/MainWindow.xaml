@@ -317,7 +317,7 @@
                         			</Style>
                         		</xcdg:DataGridControl.Resources>
                         		<xcdg:DataGridControl.Columns>
-                        			<xcdg:Column FieldName="RequestId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+                                    <xcdg:Column FieldName="ContactRequestId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
 									<xcdg:Column FieldName="Created" Title="Created"  ReadOnly="True" Width="*"/>
 									<xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
 									<xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
