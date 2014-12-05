@@ -26,6 +26,18 @@ namespace DriveIT.WindowsClient.ViewModels
             ReadList();
         }
 
+        private CustomerViewModel _selectedCustomer;
+        public CustomerViewModel SelectedCustomer
+        {
+            get { return _selectedCustomer; }
+
+            set
+            {
+                _selectedCustomer = value;
+                NotifyPropertyChanged("SelectedCustomer");
+            }
+        }
+
         #region CRUD
 
         public async void ReadList()

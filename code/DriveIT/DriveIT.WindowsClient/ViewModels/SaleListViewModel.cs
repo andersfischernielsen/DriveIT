@@ -25,8 +25,8 @@ namespace DriveIT.WindowsClient.ViewModels
             ReadList();
         }
 
-        private ContactRequestViewModel _selectedSale;
-        public ContactRequestViewModel SelectedSale
+        private SaleViewModel _selectedSale;
+        public SaleViewModel SelectedSale
         {
             get { return _selectedSale; }
 

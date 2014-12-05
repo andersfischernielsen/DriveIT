@@ -24,7 +24,19 @@ namespace DriveIT.WindowsClient.ViewModels
             EmployeeViewModels = new ObservableCollection<EmployeeViewModel>();
             ReadList();
         }
- 
+
+        private EmployeeViewModel _selectedEmployee;
+        public EmployeeViewModel SelectedEmployee
+        {
+            get { return _selectedEmployee; }
+
+            set
+            {
+                _selectedEmployee = value;
+                NotifyPropertyChanged("SelectedEmployee");
+            }
+        }
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
