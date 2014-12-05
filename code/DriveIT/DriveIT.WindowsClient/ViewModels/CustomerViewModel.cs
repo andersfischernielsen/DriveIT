@@ -158,6 +158,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion ATTRIBUTES
+
+        #region CRUDS
         public void SaveCustomer()
         {
             switch (CustomerState)
@@ -170,7 +172,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     break;
             }
         }
-        #region CRUDS
+        
         /// <summary>
         /// Gets called from the view
         /// </summary>

@@ -69,7 +69,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public void DeleteCar()
+        public void DeleteSale()
         {
             if (SelectedSale.SaleId.HasValue) SelectedSale.DeleteSale();
             else

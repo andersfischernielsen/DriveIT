@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityContactRequestWindow"
 	x:Name="ContactRequestWindow"
 	Title="EntityContactRequestWindow"
-	Width="853" Height="553" Background="#FFE9EFF3">
+	Width="912" Height="536" Background="#FFE9EFF3">
     <Window.DataContext>
         <viewModels:ContactRequestViewModel/>
     </Window.DataContext>
@@ -22,32 +22,26 @@
             <Grid.Background>
                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarGridColor}"/>
             </Grid.Background>
-            <Border BorderBrush="Black" BorderThickness="1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-            <Button Content="Button"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+            <Button  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Content="{Binding CreateUpdateButtonText, Mode=OneWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}"/>
+                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SaveContactRequest"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
+            <Button Content="Delete" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}"/>
+                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="DeleteContactRequest"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="210.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="210.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="423.333,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Button Content="Button" HorizontalAlignment="Right" Margin="0,10,111.333,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
-            <Button Content="Button" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+            <Button Content="Cancel" HorizontalAlignment="Left" Margin="423.333,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+            <Button Content="Help" HorizontalAlignment="Right" Margin="0,10,111.333,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+            <Button Content="Settings" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
         </Grid>
         <Grid Margin="10,85,10,10">
             <Grid.RowDefinitions>
@@ -55,8 +49,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="388*"/>
-                <ColumnDefinition Width="435*"/>
+                <ColumnDefinition Width="87*"/>
+                <ColumnDefinition Width="67*"/>
             </Grid.ColumnDefinitions>
             <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="235" Margin="10,10,0,0" VerticalAlignment="Top" Width="384" Grid.RowSpan="2"/>
             <Label Content="Contact Request" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="232.037"/>
@@ -71,6 +65,7 @@
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
                 </DatePicker.Background>
             </DatePicker>
+            <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="247.037,10,10,0" VerticalAlignment="Top" Height="35" Content="{Binding Status}"/>
         </Grid>
     </Grid>
 </Window>
