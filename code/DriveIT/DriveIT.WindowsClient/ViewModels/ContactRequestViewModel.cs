@@ -163,32 +163,35 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void CreateContactRequest()
+        public async void CreateContactRequest()
         {
             var contactRequestController = new ContactRequestController();
-            contactRequestController.CreateContactRequest(_contactRequestDto);
+            await contactRequestController.CreateContactRequest(_contactRequestDto);
             Status = "Contact Request Created";
             ContactRequestState = ContactRequestEnum.InSystem;
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateContactRequest()
+        public async void UpdateContactRequest()
         {
             var contactRequestController = new ContactRequestController();
-            contactRequestController.UpdateContactRequest(_contactRequestDto);
+            await contactRequestController.UpdateContactRequest(_contactRequestDto);
             Status = "Contact Request Updated";
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteContactRequest()
+        public async void DeleteContactRequest()
         {
-            var contactRequestController = new ContactRequestController();
-            contactRequestController.DeleteContactRequest(_contactRequestDto);
-            ContactRequestId = null;
-            Status = "Contact Request Deleted";
-            ContactRequestState = ContactRequestEnum.NotInSystem;
+            if (ContactRequestState != ContactRequestEnum.NotInSystem)
+            {
+                var contactRequestController = new ContactRequestController();
+                await contactRequestController.DeleteContactRequest(_contactRequestDto);
+                ContactRequestId = null;
+                Status = "Contact Request Deleted";
+                ContactRequestState = ContactRequestEnum.NotInSystem;
+            }
         }
         #endregion CRUDS
 

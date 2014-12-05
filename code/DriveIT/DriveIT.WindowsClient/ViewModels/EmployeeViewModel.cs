@@ -169,10 +169,10 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void CreateEmployee()
+        public async void CreateEmployee()
         {
             var employeeController = new EmployeeController();
-            employeeController.CreateEmployee(_employeeDto);
+            await employeeController.CreateEmployee(_employeeDto);
             Status = "Employee Created";
             EmployeeState = EmployeeStateEnum.InSystem;
         }
@@ -180,23 +180,26 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateEmployee()
+        public async void UpdateEmployee()
         {
             var employeeController = new EmployeeController();
-            employeeController.UpdateEmployee(_employeeDto);
+            await employeeController.UpdateEmployee(_employeeDto);
             Status = "Employee Updated";
         }
 
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteEmployee()
+        public async void DeleteEmployee()
         {
-            var employeeController = new EmployeeController();
-            employeeController.DeleteEmployee(_employeeDto);
-            EmployeeId = null;
-            Status = "Employee Deleted";
-            EmployeeState = EmployeeStateEnum.NotInSystem;
+            if (EmployeeState != EmployeeStateEnum.NotInSystem)
+            {
+                var employeeController = new EmployeeController();
+                await employeeController.DeleteEmployee(_employeeDto);
+                EmployeeId = null;
+                Status = "Employee Deleted";
+                EmployeeState = EmployeeStateEnum.NotInSystem;
+            }
         }
 
         #endregion CRUDS
