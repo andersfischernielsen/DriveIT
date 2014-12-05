@@ -16,12 +16,12 @@ namespace DriveIT.CarQuery
             var make = carToFill.Make;
 
             if (string.IsNullOrEmpty(make) || string.IsNullOrWhiteSpace(make))
-                throw new Exception("Make of the CarDto object must not be null.");
+                throw new ArgumentNullException(carToFill.Make, "Make of the CarDto object must not be null.");
 
             if (string.IsNullOrEmpty(model) || string.IsNullOrWhiteSpace(model))
-                throw new Exception("Model of the CarDto object must not be null.");
+                throw new ArgumentNullException(carToFill.Model, "Model of the CarDto object must not be null.");
 
-            var query = "make=" + make + "&model=" + model;
+            var query = "make=" + make + "&model=" + model + "&fuel=" + carToFill.Fuel;
 
             if (carToFill.Year.HasValue)
             {
