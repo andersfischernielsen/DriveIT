@@ -110,6 +110,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Username");
             }
         }
+
         public string FirstName
         {
             get

@@ -245,7 +245,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Transmission");
             }
         }
-        public double TopSpeed
+        public float TopSpeed
         {
             get
             {
@@ -257,7 +257,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("TopSpeed");
             }
         }
-        public double NoughtTo100
+        public float NoughtTo100
         {
             get
             {

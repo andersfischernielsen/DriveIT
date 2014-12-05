@@ -1,13 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Models", "DriveIT.Models\DriveIT.Models.csproj", "{9279ADF0-FC58-4C2F-B34F-D472F13976EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Entities.Tests", "DriveIT.Entities.Tests\DriveIT.Entities.Tests.csproj", "{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WebAPI", "DriveIT.WebAPI\DriveIT.WebAPI.csproj", "{BA31942D-2335-465A-B23A-607F7A3DD7CA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47} = {36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.EntityFramework", "DriveIT.EntityFramework\DriveIT.EntityFramework.csproj", "{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}"
 EndProject
@@ -20,6 +23,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.MVC.Tests", "DriveIT.MVC.Tests\DriveIT.MVC.Tests.csproj", "{BA36A21E-73B8-41FA-B805-0215D66DF5B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WebAPI.Tests", "DriveIT.WebAPI.Tests\DriveIT.WebAPI.Tests.csproj", "{EED2C79F-8DB2-4A69-93C4-222155A77A56}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47} = {36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WindowsClient.Tests", "DriveIT.WindowsClient.Tests\DriveIT.WindowsClient.Tests.csproj", "{E0C9361D-30C3-47E3-B119-05F8301CE48B}"
 EndProject
