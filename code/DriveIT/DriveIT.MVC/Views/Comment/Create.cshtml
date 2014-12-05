@@ -1,0 +1,18 @@
+﻿@model DriveIT.Models.CommentDto
+
+@using (Html.BeginForm("Create", "Comment", FormMethod.Post)) 
+{
+    <div class="form-horizontal">
+        <h4>CommentDto</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="addcommentbox">
+            <h2> Add Comment </h2>
+            @Html.TextAreaFor(model => model.Description)
+            <div class="ErrorMessage">
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <input id="addComment" type="button" onclick="" value="Add" />
+        </div>
+    </div>
+}
