@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using DriveIT.Models;
-using DriveIT_Windows_Client.ViewModels;
-using Newtonsoft.Json;
 
-namespace DriveIT_Windows_Client.Controllers
+namespace DriveIT.WindowsClient.Controllers
 {
     public class DriveITWebAPI
     {
@@ -27,8 +22,9 @@ namespace DriveIT_Windows_Client.Controllers
                     HttpResponseMessage response = await httpClient.PostAsJsonAsync(uri, objectToCreate);
                     response.EnsureSuccessStatusCode();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     throw new NotImplementedException();
                 }
 
@@ -47,7 +43,6 @@ namespace DriveIT_Windows_Client.Controllers
                         HttpResponseMessage response = httpClient.GetAsync(uri).Result;
                         response.EnsureSuccessStatusCode();
                         objects = await response.Content.ReadAsAsync<T[]>();
-                        objects.ToList().ForEach(i => Console.WriteLine(i));
                     }
                     catch (Exception)
                     {
@@ -70,7 +65,6 @@ namespace DriveIT_Windows_Client.Controllers
                     HttpResponseMessage response = httpClient.GetAsync(uri).Result;
                     response.EnsureSuccessStatusCode();
                     objectToRead = await response.Content.ReadAsAsync<T>();
-                    Console.WriteLine(objectToRead);
                 }
                 catch (Exception)
                 {

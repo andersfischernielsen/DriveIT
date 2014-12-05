@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E0C9361D-30C3-47E3-B119-05F8301CE48B}</ProjectGuid>
+    <ProjectGuid>{5649925B-E84F-4BED-9780-527D07EB8773}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DriveIT.WindowsClient.Tests</RootNamespace>
-    <AssemblyName>DriveIT.WindowsClient.Tests</AssemblyName>
+    <RootNamespace>DriveIT.CarQuery.Tests</RootNamespace>
+    <AssemblyName>DriveIT.CarQuery.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -53,22 +53,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Controller.Tests\CarControllerTests.cs" />
-    <Compile Include="Controller.Tests\CustomerControllerTest.cs" />
-    <Compile Include="Controller.Tests\EmployeeControllerTests.cs" />
-    <Compile Include="Controller.Tests\SaleControllerTests.cs" />
-    <Compile Include="Controller.Tests\ContactRequestControllerTests.cs" />
+    <Compile Include="CarQueryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DriveIT.CarQuery\DriveIT.CarQuery.csproj">
+      <Project>{3924AEC3-E411-44A7-B145-D7AB4B361F62}</Project>
+      <Name>DriveIT.CarQuery</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
       <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
       <Name>DriveIT.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DriveIT.WindowsClient\DriveIT.WindowsClient.csproj">
-      <Project>{428232FE-70B1-4952-8C55-F10472FDFE5F}</Project>
-      <Name>DriveIT.WindowsClient</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Models", "DriveIT.Models\DriveIT.Models.csproj", "{9279ADF0-FC58-4C2F-B34F-D472F13976EC}"
 EndProject
@@ -22,6 +22,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WebAPI.Tests", "DriveIT.WebAPI.Tests\DriveIT.WebAPI.Tests.csproj", "{EED2C79F-8DB2-4A69-93C4-222155A77A56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.WindowsClient.Tests", "DriveIT.WindowsClient.Tests\DriveIT.WindowsClient.Tests.csproj", "{E0C9361D-30C3-47E3-B119-05F8301CE48B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.CarQuery", "DriveIT.CarQuery\DriveIT.CarQuery.csproj", "{3924AEC3-E411-44A7-B145-D7AB4B361F62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.CarQuery.Tests", "DriveIT.CarQuery.Tests\DriveIT.CarQuery.Tests.csproj", "{5649925B-E84F-4BED-9780-527D07EB8773}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +139,26 @@ Global
 		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|ARM.ActiveCfg = Release|Any CPU
 		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|x64.ActiveCfg = Release|Any CPU
 		{E0C9361D-30C3-47E3-B119-05F8301CE48B}.Release|x86.ActiveCfg = Release|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Release|x64.ActiveCfg = Release|Any CPU
+		{3924AEC3-E411-44A7-B145-D7AB4B361F62}.Release|x86.ActiveCfg = Release|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|x64.ActiveCfg = Release|Any CPU
+		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

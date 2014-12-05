@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Data;
 using System.ComponentModel;
 
-namespace DriveIT.WindowsClient
+namespace DriveIT.WindowsClient.ViewModels
 {
 	public class UserControlWithViewModelModel : INotifyPropertyChanged
 	{
