@@ -315,21 +315,21 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateCar()
+        public async void UpdateCar()
         {
             var carController = new CarController();
-            carController.UpdateCar(_carDto);
+            await carController.UpdateCar(_carDto);
             Status = "Car Updated";
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteCar()
+        public async void DeleteCar()
         {
             if (CarState != CarStateEnum.Initial)
             {
                 var carController = new CarController();
-                carController.DeleteCar(_carDto);
+                await carController.DeleteCar(_carDto);
                 CarId = null;
                 Status = "Car Deleted";
                 CarState = CarStateEnum.Initial;
