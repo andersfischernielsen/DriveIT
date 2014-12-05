@@ -142,9 +142,6 @@
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                 </TabControl.Background>
                 <TabItem Header="RequestsForContactPowerTabItem">
-                    <TabItem.DataContext>
-                        <ViewModels:ContactRequestListViewModel/>
-                    </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="375,10,0,10"/>
@@ -189,22 +186,16 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="OrdersPowerTabItem">
-                    <TabItem.DataContext>
-                        <ViewModels:SaleListViewModel/>
-                    </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
-                    <TabItem.DataContext>
-                        <ViewModels:CustomerListViewModel/>
-                    </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="EmployeesPowerTabItem">
+                <TabItem>
                     <TabItem.DataContext>
                         <ViewModels:EmployeeListViewModel/>
                     </TabItem.DataContext>
@@ -304,11 +295,20 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding ContactRequestViewModels}">
-                                <DataGrid.DataContext>
-                                    <ViewModels:ContactRequestListViewModel/>
-                                </DataGrid.DataContext>
-                            </DataGrid>
+                        	<xcdg:DataGridControl x:Name="RequestsDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedRequest, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding ContactRequestViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource RequestsForContactDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<xcdg:DataGridControl.Columns>
+                        			<xcdg:Column FieldName="RequestId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+									<xcdg:Column FieldName="Created" Title="Created"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                     <TabItem Header="CarsTabItem">
@@ -348,7 +348,21 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding SaleViewModels}"/>
+                        	<xcdg:DataGridControl x:Name="RequestsDataGrid_Copy" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedSale, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding SaleViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource OrdersDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<xcdg:DataGridControl.Columns>
+                        			<xcdg:Column FieldName="SaleId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+                        			<xcdg:Column FieldName="Price" Title="Created"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="Sold" Title="Sold"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                     <TabItem Header="CustomersTabItem">

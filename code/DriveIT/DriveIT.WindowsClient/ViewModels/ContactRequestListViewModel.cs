@@ -10,6 +10,17 @@ namespace DriveIT.WindowsClient.ViewModels
     public class ContactRequestListViewModel : IViewModelBase
     {
         public ObservableCollection<ContactRequestViewModel> ContactRequestViewModels { get; set; }
+        private ContactRequestViewModel _selectedRequest;
+        public ContactRequestViewModel SelectedRequest
+        {
+            get { return _selectedRequest; }
+
+            set
+            {
+                _selectedRequest = value;
+                NotifyPropertyChanged("SelectedRequest");
+            }
+        }
 
         public ContactRequestListViewModel(IList<ContactRequestDto> contactRequestDtos)
         {

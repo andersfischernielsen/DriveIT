@@ -24,6 +24,18 @@ namespace DriveIT.WindowsClient.ViewModels
             SaleViewModels = new ObservableCollection<SaleViewModel>();
             ReadList();
         }
+
+        private ContactRequestViewModel _selectedSale;
+        public ContactRequestViewModel SelectedSale
+        {
+            get { return _selectedSale; }
+
+            set
+            {
+                _selectedSale = value;
+                NotifyPropertyChanged("SelectedSale");
+            }
+        }
  
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

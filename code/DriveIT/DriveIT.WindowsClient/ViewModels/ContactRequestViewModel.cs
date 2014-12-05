@@ -37,10 +37,22 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         public ContactRequestViewModel()
         {
-            
         }
 
+        
         #region ATTRIBUTES
+        public int RequestId
+        {
+            get
+            {
+                return _contactRequestDto.Id ?? 0;
+            }
+            set
+            {
+                _contactRequestDto.Id = value;
+                NotifyPropertyChanged("RequestId");
+            }
+        }
         public DateTime Requested
         {
             get
