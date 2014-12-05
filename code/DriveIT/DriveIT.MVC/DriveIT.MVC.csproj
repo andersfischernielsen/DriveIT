@@ -246,11 +246,11 @@
     <Content Include="Views\Car\Index.cshtml" />
     <Content Include="Views\Car\Details.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\ContactRequest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\ContactRequest\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\States\" />
   </ItemGroup>
