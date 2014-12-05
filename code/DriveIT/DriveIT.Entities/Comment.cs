@@ -16,7 +16,7 @@ namespace DriveIT.Entities
 
         public virtual Car Car { get; set; }
         [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         public virtual Customer Customer { get; set; }
     }

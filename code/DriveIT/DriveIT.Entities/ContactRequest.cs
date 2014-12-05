@@ -13,11 +13,11 @@ namespace DriveIT.Entities
 
         public virtual Car Car { get; set; }
         [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         public virtual Customer Customer { get; set; }
         [ForeignKey("Employee")]
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
 
         public virtual Employee Employee { get; set; }
         public DateTime Created { get; set; }
