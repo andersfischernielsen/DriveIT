@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
@@ -19,7 +20,7 @@ namespace DriveIT.WebAPI.Controllers
         public ContactRequestsController() : this(new EntityStorage()) { }
 
         // GET: api/ContactRequests
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get()
         {
             return Ok(from contactRequest in await _repo.GetAllContactRequests()
@@ -27,7 +28,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // GET: api/ContactRequests/5
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get(int id)
         {
             var contactRequest = await _repo.GetContactRequestWithId(id);
@@ -38,8 +39,8 @@ namespace DriveIT.WebAPI.Controllers
             return Ok(contactRequest.ToDto());
         }
 
-        [Authorize(Roles = "Customer, Administrator")]
-        public async Task<IHttpActionResult> GetByUserId(int userId)
+        [AuthorizeRoles(Role.Customer, Role.Administrator)]
+        public async Task<IHttpActionResult> GetByUserId(string userId)
         {
             //Todo if customer, check id to see if it is the logged in one.
             return Ok((from contactRequest in await _repo.GetAllContactRequests()
@@ -48,7 +49,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/ContactRequests
-        [Authorize(Roles = "Customer")]
+        [AuthorizeRoles(Role.Customer)]
         public async Task<IHttpActionResult> Post([FromBody]ContactRequestDto value)
         {
             //Todo make stuff valid for customer.
@@ -66,7 +67,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/ContactRequests/5
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Put(int id, [FromBody]ContactRequestDto value)
         {
             //Todo check.
@@ -84,7 +85,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/ContactRequests/5
-        [Authorize(Roles = "Customer, Employee, Administrator")]
+        [AuthorizeRoles(Role.Customer, Role.Administrator, Role.Employee)]
         public async Task<IHttpActionResult> Delete(int id)
         {
             //Todo customer check.

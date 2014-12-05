@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
@@ -35,7 +36,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Comments
-        [Authorize(Roles = "Customer, Administrator")]
+        [AuthorizeRoles(Role.Customer, Role.Administrator)]
         public async Task<IHttpActionResult> Post([FromBody]CommentDto value)
         {
             //Todo if customer, check that it is his own comment.
@@ -52,7 +53,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Comments/5
-        [Authorize(Roles = "Customer, Administrator")]
+        [AuthorizeRoles(Role.Customer, Role.Administrator)]
         public async Task<IHttpActionResult> Put(int id, [FromBody]CommentDto value)
         {
             //Todo if customer, check that it is his own comment.
@@ -70,7 +71,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Comments/5
-        [Authorize(Roles = "Customer, Administrator")]
+        [AuthorizeRoles(Role.Customer, Role.Administrator)]
         public async Task<IHttpActionResult> Delete(int id)
         {
             //Todo if customer check that it is his own comment.

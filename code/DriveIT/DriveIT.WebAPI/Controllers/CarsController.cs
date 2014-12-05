@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
@@ -76,7 +77,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Cars
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Administrator, Role.Employee)]
         public async Task<IHttpActionResult> Post([FromBody]CarDto value)
         {
             if (!ModelState.IsValid)
@@ -93,7 +94,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Cars/5
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Administrator, Role.Employee)]
         public async Task<IHttpActionResult> Put(int id, [FromBody]CarDto value)
         {
             if (!ModelState.IsValid)
@@ -110,7 +111,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Cars/5
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Administrator, Role.Employee)]
         public async Task<IHttpActionResult> Delete(int id)
         {
             var car = await _repo.GetCarWithId(id);

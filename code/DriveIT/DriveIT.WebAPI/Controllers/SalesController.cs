@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
@@ -19,7 +20,7 @@ namespace DriveIT.WebAPI.Controllers
         public SalesController() : this(new EntityStorage()) { }
 
         // GET: api/Sales
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
@@ -28,7 +29,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // GET: api/Sales/5
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get(int id)
         {
             var sale = await _repo.GetSaleWithId(id);
@@ -40,16 +41,16 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         [Authorize]
-        public async Task<IHttpActionResult> GetFromUserId(int userId)
+        public async Task<IHttpActionResult> GetFromUserId(string userId)
         {
             //Todo: If customer, check id matches user.
             return Ok((from sale in await _repo.GetAllSales()
-                where sale.CustomerId == userId
-                select sale.ToDto()).ToList());
+                       where sale.CustomerId == userId
+                       select sale.ToDto()).ToList());
         }
 
         // POST: api/Sales
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Post([FromBody]SaleDto value)
         {
             if (!ModelState.IsValid)
@@ -62,7 +63,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // PUT: api/Sales/5
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Put(int id, [FromBody]SaleDto value)
         {
             if (!ModelState.IsValid)
@@ -79,7 +80,7 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Sales/5
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Delete(int id)
         {
             var sale = await _repo.GetSaleWithId(id);

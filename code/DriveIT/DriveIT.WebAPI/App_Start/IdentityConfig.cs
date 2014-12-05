@@ -1,4 +1,5 @@
-﻿using DriveIT.EntityFramework;
+﻿using DriveIT.Entities;
+using DriveIT.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;

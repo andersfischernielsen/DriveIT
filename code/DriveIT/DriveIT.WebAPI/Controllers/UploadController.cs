@@ -5,13 +5,14 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Http;
+using DriveIT.Entities;
 
 namespace DriveIT.WebAPI.Controllers
 {
     public class UploadController : ApiController
     {
 
-        [Authorize(Roles = "Employee, Administrator")]
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> PostFormData()
         {
             //Check if the request contains multipart/form-data.

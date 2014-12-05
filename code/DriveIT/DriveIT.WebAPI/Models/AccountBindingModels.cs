@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DriveIT.Entities;
 
 namespace DriveIT.WebAPI.Models
 {
@@ -55,6 +56,17 @@ namespace DriveIT.WebAPI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Confirm phone number")]
+        [Compare("Phone Number", ErrorMessage = "The phone number and confirmation phone number do not match.")]
+        public string ConfirmPhoneNumber { get; set; }
+
+        public Role? Role { get; set; }
     }
 
     public class RegisterExternalBindingModel

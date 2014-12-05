@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using DriveIT.EntityFramework;
+using DriveIT.Entities;
 using DriveIT.WebAPI.Models;
 using DriveIT.WebAPI.Providers;
 using DriveIT.WebAPI.Results;
@@ -317,32 +317,44 @@ namespace DriveIT.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new DriveITUser { UserName = model.Email, Email = model.Email, Id = model.Email };
+            IdentityResult result = null;
 
-            var result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            if (User != null && User.IsInRole(Role.Administrator.ToString()) && (model.Role != null && model.Role != Role.Customer))
             {
-                return GetErrorResult(result);
-            }
-
-            if (User != null)
-            {
-                if (User.IsInRole("Employee"))
+                switch (model.Role)
                 {
-                    result = await UserManager.AddToRoleAsync(user.Id, "Customer");
-                }
-                else if (User.IsInRole("Administrator"))
-                {
-                    result = await UserManager.AddToRoleAsync(user.Id, "Employee");
+                    case Role.Administrator:
+                        var admin = new Employee { UserName = model.Email, Email = model.Email, Id = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
+                        result = await UserManager.CreateAsync(admin, model.Password);
+                        if (!result.Succeeded)
+                        {
+                            return GetErrorResult(result);
+                        }
+                        result = await UserManager.AddToRoleAsync(admin.Id, Role.Administrator.ToString());
+                        break;
+                    case Role.Employee:
+                        var employee = new Employee { UserName = model.Email, Email = model.Email, Id = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
+                        result = await UserManager.CreateAsync(employee, model.Password);
+                        if (!result.Succeeded)
+                        {
+                            return GetErrorResult(result);
+                        }
+                        result = await UserManager.AddToRoleAsync(employee.Id, Role.Employee.ToString());
+                        break;
                 }
             }
             else
             {
-                result = await UserManager.AddToRoleAsync(user.Id, "Customer");
+                var customer = new Customer { UserName = model.Email, Email = model.Email, Id = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
+                result = await UserManager.CreateAsync(customer, model.Password);
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+                result = await UserManager.AddToRoleAsync(customer.Id, Role.Customer.ToString());
             }
 
-
+            if (result == null) return BadRequest();
             return result.Succeeded ? Ok() : GetErrorResult(result);
         }
 
@@ -363,7 +375,11 @@ namespace DriveIT.WebAPI.Controllers
                 return InternalServerError();
             }
 
-            var user = new DriveITUser { UserName = model.Email, Email = model.Email };
+            var user = UserManager.FindById(model.Email);
+            if (user == null)
+            {
+                user = new Customer {Id = model.Email, UserName = model.Email, Email = model.Email};
+            }
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
