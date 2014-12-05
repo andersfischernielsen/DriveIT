@@ -83,8 +83,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public void CreateNewCarWindow()
         {
             CarViewModel newCar = new CarViewModel();
-            var window = new EntityCarWindow();
-            window.DataContext = newCar;
+            var window = new EntityCarWindow {DataContext = newCar};
             CarViewModels.Add(newCar);
             window.Show();
         }
@@ -92,8 +91,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public void UpdateCarWindow()
         {
             CarViewModel car = SelectedCar;
-            var window = new EntityCarWindow();
-            window.DataContext = car;
+            var window = new EntityCarWindow {DataContext = car};
             window.Show();
         }
         #endregion CRUD

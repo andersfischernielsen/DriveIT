@@ -83,8 +83,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public void CreateNewEmployeeWindow()
         {
             EmployeeViewModel newEmployee = new EmployeeViewModel();
-            var window = new EntityEmployeeWindow();
-            window.DataContext = newEmployee;
+            var window = new EntityEmployeeWindow {DataContext = newEmployee};
             EmployeeViewModels.Add(newEmployee);
             window.Show();
         }
@@ -92,8 +91,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public void UpdateEmployeeWindow()
         {
             EmployeeViewModel employee = SelectedEmployee;
-            var window = new EntityEmployeeWindow();
-            window.DataContext = employee;
+            var window = new EntityEmployeeWindow {DataContext = employee};
             window.Show();
         }
 
