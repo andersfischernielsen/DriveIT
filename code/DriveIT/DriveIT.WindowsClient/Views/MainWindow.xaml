@@ -348,7 +348,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                        	<xcdg:DataGridControl x:Name="RequestsDataGrid_Copy" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedSale, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding SaleViewModels}">
+                        	<xcdg:DataGridControl x:Name="SalesDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedSale, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding SaleViewModels}">
                         		<xcdg:DataGridControl.Resources>
                         			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
                         				<Setter Property="Background" Value="{DynamicResource OrdersDataGridHeaderBrush}"/>
@@ -373,7 +373,21 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding CustomerViewModels}"/>
+                        	<xcdg:DataGridControl x:Name="CustomersDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding CustomerViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource CustomersDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<xcdg:DataGridControl.Columns>
+                        			<xcdg:Column FieldName="CustomerId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+                        			<xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="Email" Title="Email"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                     <TabItem Header="EmployeesTabItem">
@@ -384,7 +398,20 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding EmployeeViewModels}"/>
+                        	<xcdg:DataGridControl x:Name="EmployeesDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding EmployeeViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource EmployeesDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<xcdg:DataGridControl.Columns>
+                        			<xcdg:Column FieldName="EmployeeId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+                        			<xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                 </TabControl>
