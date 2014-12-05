@@ -1,9 +1,10 @@
 \section{Subsystem Decomposition}
 We have defined the following subsystems:
 \begin{itemize}
-	\item Persistence subsystem: A Microsoft Database used for storing the data from the applications.
+	\item Persistence subsystem: This subsystem manages storing and retrieving Entities in a hosted Microsoft database using Entity Framework. This provides the rest of the system with data types, also called Entities. \\
+	The WebAPI (mentioned below) retrieves these Entities using the search functionality provided by this subsystem. The searches can happen on unique ids or by their relations to other Entities. 
 	\item WebAPI: The WebAPI is the only way to communicate with the persistence subsystem. This means that every table in the persistence module must be supported by the API. \\
-	The API is built out of two main halves; a module for storing and retrieving Entities in a hosted database using Entity Framework and modules for serialising the Entities into JSON (or XML) and transferring these via a REST interface. These modules are implemented using the MVC framework of .NET. \\
+	The API is built out of a series of modules for serialising the Model Entities into JSON (or XML) and transferring these via a REST interface. These modules are implemented using the MVC framework of .NET. \\
 	The API furthermore uses Authorization to decide if a given user has access to certain parts of the persistence module.
 	\item WindowsApp: Used by the employees to serve the customers. The Windows application can only be accessed by employees who will have to login at startup. The application is used to CRUD cars, orders, customers and employees (by the administrator account-type).
 	\item CarQuery: The CarQuery subsystem is a collection of classes that enable the system to fill out missing information about cars from the CarQuery API. \\
