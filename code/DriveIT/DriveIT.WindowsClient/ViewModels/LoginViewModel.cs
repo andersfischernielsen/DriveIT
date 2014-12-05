@@ -10,7 +10,7 @@ using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel : IViewModelBase
     {
         public Action CloseAction { get; set; }
 
@@ -70,7 +70,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception)
             {
-                Status = "Username or password is invalid. Try again";
+                Status = "Username or password was invalid. Try again...";
                 Password = "";
                 Username = "";
             }

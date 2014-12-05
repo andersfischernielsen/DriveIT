@@ -22,11 +22,11 @@ namespace DriveIT.WindowsClient.Views
     {
         public LoginWindow()
         {
-            //LoginViewModel vm = new LoginViewModel(); // this creates an instance of the ViewModel
-           // DataContext = vm; // this sets the newly created ViewModel as the DataContext for the View
-            //if (vm.CloseAction == null)
-           //     vm.CloseAction = new Action(() => this.Close());
             InitializeComponent();
+            LoginViewModel vm = new LoginViewModel(); // this creates an instance of the ViewModel
+            DataContext = vm; // this sets the newly created ViewModel as the DataContext for the View
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(() => this.Close());
         }
     }
 }
