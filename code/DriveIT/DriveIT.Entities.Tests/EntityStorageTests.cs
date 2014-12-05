@@ -161,7 +161,7 @@ namespace DriveIT.Entities.Tests
             mockSet.As<IQueryable<Car>>().Setup(m => m.ElementType).Returns(cars.ElementType);
             mockSet.As<IQueryable<Car>>().Setup(m => m.GetEnumerator()).Returns(cars.GetEnumerator());
 
-            mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(() => null);
+            mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(mockSet.Object.FindAsync(1));
 
             var mockContext = new Mock<DriveITContext>();
             mockContext.Setup(c => c.Cars).Returns(mockSet.Object);
