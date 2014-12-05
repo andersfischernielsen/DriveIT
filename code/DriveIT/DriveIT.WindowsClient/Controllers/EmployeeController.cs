@@ -11,7 +11,7 @@ namespace DriveIT.WindowsClient.Controllers
 
         }
 
-        public async void CreateEmployee(EmployeeDto employee)
+        public async Task CreateEmployee(EmployeeDto employee)
         {
             await DriveITWebAPI.Create("employees", employee);
         }   
@@ -25,11 +25,11 @@ namespace DriveIT.WindowsClient.Controllers
             var employees = await DriveITWebAPI.ReadList<EmployeeDto>("employees");
             return employees;
         }
-        public async void UpdateEmployee(EmployeeDto employee)
+        public async Task UpdateEmployee(EmployeeDto employee)
         {
             await DriveITWebAPI.Update("employees", employee, employee.Id.Value);
         }
-        public async void DeleteEmployee(EmployeeDto employee)
+        public async Task DeleteEmployee(EmployeeDto employee)
         {
             await DriveITWebAPI.Delete<EmployeeDto>("employees", employee.Id.Value);
         }

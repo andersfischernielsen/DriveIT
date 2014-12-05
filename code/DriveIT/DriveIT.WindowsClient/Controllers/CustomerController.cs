@@ -10,7 +10,7 @@ namespace DriveIT.WindowsClient.Controllers
         {
         }
 
-        public async void CreateCustomer(CustomerDto customer)
+        public async Task CreateCustomer(CustomerDto customer)
         {
             await DriveITWebAPI.Create("customers", customer);
         }
@@ -26,17 +26,17 @@ namespace DriveIT.WindowsClient.Controllers
             var customers = await DriveITWebAPI.ReadList<CustomerDto>("customers");
             return customers;
         }
-        public async void UpdateCustomer(CustomerDto customer)
+        public async Task UpdateCustomer(CustomerDto customer)
         {
             await DriveITWebAPI.Update("customers", customer, customer.Id.Value);
         }
 
-        public async void DeleteCustomer(CustomerDto customer)
+        public async Task DeleteCustomer(CustomerDto customer)
         {
             await DriveITWebAPI.Delete<CustomerDto>("customers", customer.Id.Value);
         }
 
-        public async void DeleteCustomer(int id)
+        public async Task DeleteCustomer(int id)
         {
             await DriveITWebAPI.Delete<CustomerDto>("customers", id);
         }
