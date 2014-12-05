@@ -410,7 +410,8 @@
                         		<xcdg:DataGridControl.Resources>
                         			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
                         				<Setter Property="Background" Value="{DynamicResource RequestsForContactDataGridHeaderBrush}"/>
-                        			</Style>
+                                        <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
+                                    </Style>
                         		</xcdg:DataGridControl.Resources>
                         		<i:Interaction.Triggers>
                         			<i:EventTrigger EventName="MouseDoubleClick">
@@ -438,7 +439,8 @@
                             <xcdg:DataGridControl x:Name="CarsDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedCar, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding CarViewModels}">
                                 <xcdg:DataGridControl.Resources>
                                     <Style TargetType="xcdg:HierarchicalGroupByControl">
-                                        <Setter Property="Background" Value="{DynamicResource CarsDataGridHeaderBrush}"></Setter>
+                                        <Setter Property="Background" Value="{DynamicResource CarsDataGridHeaderBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
                                     </Style>
                                 </xcdg:DataGridControl.Resources>
                             	<i:Interaction.Triggers>
@@ -468,6 +470,7 @@
                         		<xcdg:DataGridControl.Resources>
                         			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
                         				<Setter Property="Background" Value="{DynamicResource OrdersDataGridHeaderBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
                         			</Style>
                         		</xcdg:DataGridControl.Resources>
                         		<i:Interaction.Triggers>
@@ -498,6 +501,7 @@
                         		<xcdg:DataGridControl.Resources>
                         			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
                         				<Setter Property="Background" Value="{DynamicResource CustomersDataGridHeaderBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
                         			</Style>
                         		</xcdg:DataGridControl.Resources>
                         		<i:Interaction.Triggers>
@@ -528,6 +532,7 @@
                         		<xcdg:DataGridControl.Resources>
                         			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
                         				<Setter Property="Background" Value="{DynamicResource EmployeesDataGridHeaderBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
                         			</Style>
                         		</xcdg:DataGridControl.Resources>
                         		<i:Interaction.Triggers>
