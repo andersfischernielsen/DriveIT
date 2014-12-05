@@ -15,13 +15,13 @@ namespace DriveIT.WindowsClient.ViewModels
             InSystem
         }
 
-        public int? CustomerId
+        public string CustomerId
         {
             get
             {
                 try
                 {
-                    return _customerDto.Id.Value;
+                    return _customerDto.Id;
                 }
                 catch (Exception)
                 {
@@ -97,18 +97,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
             }
         }
-        public string Username
-        {
-            get
-            {
-                return _customerDto.Username;
-            }
-            set
-            {
-                _customerDto.Username = value;
-                NotifyPropertyChanged("Username");
-            }
-        }
+
         public string FirstName
         {
             get
