@@ -5,6 +5,7 @@ using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DriveIT.WebAPI.Controllers
 {
@@ -36,10 +37,9 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // POST: api/Comments
-        [AuthorizeRoles(Role.Customer, Role.Administrator)]
+        [AuthorizeRoles(Role.Customer)]
         public async Task<IHttpActionResult> Post([FromBody]CommentDto value)
         {
-            //Todo if customer, check that it is his own comment.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -48,15 +48,19 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest("Null value not allowed.");
             }
+            if (User.Identity.GetUserId() != value.CustomerId)
+            {
+                return BadRequest("CustomerId should be the same as the logged in user");
+            }
+
             var newCommentId = await _repo.CreateComment(value.ToEntity());
             return CreatedAtRoute("DefaultApi", new { id = newCommentId }, value);
         }
 
         // PUT: api/Comments/5
-        [AuthorizeRoles(Role.Customer, Role.Administrator)]
+        [AuthorizeRoles(Role.Customer)]
         public async Task<IHttpActionResult> Put(int id, [FromBody]CommentDto value)
         {
-            //Todo if customer, check that it is his own comment.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -65,6 +69,14 @@ namespace DriveIT.WebAPI.Controllers
             if (comment == null)
             {
                 return NotFound();
+            }
+            if (User.Identity.GetUserId() != comment.CustomerId)
+            {
+                return BadRequest("Customer cannot change other customers comments.");
+            }
+            if (User.Identity.GetUserId() != value.CustomerId)
+            {
+                return BadRequest("Customer cannot set author to another person.");
             }
             await _repo.UpdateComment(id, value.ToEntity());
             return Ok();
@@ -74,11 +86,14 @@ namespace DriveIT.WebAPI.Controllers
         [AuthorizeRoles(Role.Customer, Role.Administrator)]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            //Todo if customer check that it is his own comment.
             var comment = await _repo.GetCommentWithId(id);
             if (comment == null)
             {
                 return NotFound();
+            }
+            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != comment.CustomerId)
+            {
+                return BadRequest("Customer cannot delete others comments.");
             }
             await _repo.DeleteComment(id);
             return Ok();

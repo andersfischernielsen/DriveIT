@@ -56,7 +56,6 @@ namespace DriveIT.WebAPI.Controllers
         [AuthorizeRoles(Role.Customer)]
         public async Task<IHttpActionResult> Post([FromBody]ContactRequestDto value)
         {
-            //Todo make stuff valid for customer.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -64,6 +63,10 @@ namespace DriveIT.WebAPI.Controllers
             if (value == null)
             {
                 return BadRequest("Null value not allowed.");
+            }
+            if (User.Identity.GetUserId() != value.CustomerId)
+            {
+                return BadRequest("CustomerId must match the logged in user!");
             }
             var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity());
             value.Id = newContactRequestId;
@@ -91,11 +94,14 @@ namespace DriveIT.WebAPI.Controllers
         [AuthorizeRoles(Role.Customer, Role.Administrator, Role.Employee)]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            //Todo customer check.
             var contactRequest = await _repo.GetContactRequestWithId(id);
             if (contactRequest == null)
             {
                 return NotFound();
+            }
+            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != contactRequest.CustomerId)
+            {
+                return Unauthorized();
             }
             await _repo.DeleteContactRequest(id);
             return Ok();
