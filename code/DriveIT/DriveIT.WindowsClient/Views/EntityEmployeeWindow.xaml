@@ -60,12 +60,12 @@
             </Grid.ColumnDefinitions>
             <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="235" Margin="10,10,0,0" VerticalAlignment="Top" Width="384" Grid.RowSpan="2"/>
             <Label Content="Employee" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="139.5"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="Id" Height="28" Grid.Row="1"
-				Grid.Column="0" VerticalAlignment="Top" IsReadOnly="true" IsEnabled="False" Text="EmployeeId"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="UserName&#xD;&#xA;Username"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="Make" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="FirstName&#xD;&#xA;FirstName"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="Year" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="LastName"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,51,0" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="Phone"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="EmployeeId" Height="28" Grid.Row="1"
+				Grid.Column="0" VerticalAlignment="Top" IsReadOnly="true" IsEnabled="False" Text="{Binding EmployeeId}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="UserName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Username}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="FirstName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding FirstName}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="LastName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding LastName}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,51,0" Watermark="Phone" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Phone}"/>
             <Image Grid.Column="1" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="235" Width="384"/>
         </Grid>
     </Grid>
