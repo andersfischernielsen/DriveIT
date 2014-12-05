@@ -123,6 +123,9 @@
     <Compile Include="Views\EntityCarWindow.xaml.cs">
       <DependentUpon>EntityCarWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EntityEmployeeWindow.xaml.cs">
+      <DependentUpon>EntityEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EntityWindow.xaml.cs">
       <DependentUpon>EntityWindow.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
     <Page Include="Views\EntityCarWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EntityEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EntityWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
