@@ -81,11 +81,11 @@ namespace DriveIT.EntityFramework
             toChange.Year = toSetFrom.Year;
         }
 
-        public async Task<Employee> GetEmployeeWithId(int idToGet)
+        public async Task<Employee> GetEmployeeWithId(string idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return await context.Employees.FindAsync(idToGet);
+                return await context.Employees.SingleOrDefaultAsync(x => x.Id == idToGet);
             }
         }
 
@@ -97,32 +97,22 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateEmployee(Employee employeeToCreate)
+        public async Task<int> UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
-                context.Employees.Add(employeeToCreate);
-                await context.SaveChangesAsync();
-                return employeeToCreate.Id;
-            }
-        }
-
-        public async Task<int> UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith)
-        {
-            using (var context = new DriveITContext())
-            {
-                var oldEmployee = await context.Employees.FindAsync(idToUpdate);
+                var oldEmployee = await context.Employees.SingleOrDefaultAsync(x => x.Id == idToUpdate);
                 CopyEmployeeProperties(oldEmployee, employeeToReplaceWith);
 
                 return await context.SaveChangesAsync();
             }
         }
 
-        public async Task<int> DeleteEmployee(int idToDelete)
+        public async Task<int> DeleteEmployee(string idToDelete)
         {
             using (var context = new DriveITContext())
             {
-                context.Employees.Remove(await context.Employees.FindAsync(idToDelete));
+                context.Users.Remove(await context.Employees.SingleAsync(x => x.Id == idToDelete));
                 return await context.SaveChangesAsync();
             }
         }
@@ -135,11 +125,11 @@ namespace DriveIT.EntityFramework
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
         }
 
-        public async Task<Customer> GetCustomerWithId(int idToGet)
+        public async Task<Customer> GetCustomerWithId(string idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return await context.Customers.FindAsync(idToGet);
+                return await context.Customers.SingleOrDefaultAsync(x => x.Id == idToGet);
             }
         }
 
@@ -151,32 +141,22 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> CreateCustomer(Customer customerToCreate)
+        public async Task<int> UpdateCustomer(string idToUpdate, Customer customerToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
-                context.Customers.Add(customerToCreate);
-                await context.SaveChangesAsync();
-                return customerToCreate.Id;
-            }
-        }
-
-        public async Task<int> UpdateCustomer(int idToUpdate, Customer customerToReplaceWith)
-        {
-            using (var context = new DriveITContext())
-            {
-                var oldCustomer = await context.Customers.FindAsync(idToUpdate);
+                var oldCustomer = await context.Customers.SingleAsync(x => x.Id == idToUpdate);
                 CopyCustomerProperties(oldCustomer, customerToReplaceWith);
 
                 return await context.SaveChangesAsync();
             }
         }
 
-        public async Task<int> DeleteCustomer(int idToDelete)
+        public async Task<int> DeleteCustomer(string idToDelete)
         {
             using (var context = new DriveITContext())
             {
-                context.Customers.Remove(await context.Customers.FindAsync(idToDelete));
+                context.Users.Remove(await context.Customers.SingleAsync(x => x.Id == idToDelete));
                 return await context.SaveChangesAsync();
             }
         }
