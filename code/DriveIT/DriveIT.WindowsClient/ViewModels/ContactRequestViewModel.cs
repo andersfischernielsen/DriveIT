@@ -45,7 +45,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public ContactRequestViewModel()
         {
             _contactRequestDto = new ContactRequestDto();
-            Requested = DateTime.Now;
+            //Requested = DateTime.Now;
             ContactRequestState = ContactRequestEnum.NotInSystem;
         }
 
