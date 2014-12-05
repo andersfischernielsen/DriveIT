@@ -144,10 +144,10 @@
                 <TabItem Header="RequestsForContactPowerTabItem">
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="339,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="445.5,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="564,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="682.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="339,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="445.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="564,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="682.5,10,0,10"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="801,10,0,10"/>
                     </Grid>
                 </TabItem>
