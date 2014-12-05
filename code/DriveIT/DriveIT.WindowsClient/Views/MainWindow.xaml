@@ -157,7 +157,10 @@
                 <TabItem Header="CarsPowerTabItem">
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="CreateCar" HorizontalAlignment="Left" Margin="211,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="211,10,0,10">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Stretch="Uniform"/>
+                            </Button.Background>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="CreateNewCarWindow"/>
