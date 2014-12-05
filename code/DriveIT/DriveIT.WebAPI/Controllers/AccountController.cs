@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using DriveIT.Entities;
+using DriveIT.Models;
 using DriveIT.WebAPI.Models;
 using DriveIT.WebAPI.Providers;
 using DriveIT.WebAPI.Results;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DriveIT.WebAPI.Models
+namespace DriveIT.Models
 {
     // Models returned by AccountController actions.
 

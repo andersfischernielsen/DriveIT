@@ -1,6 +1,7 @@
 
 using System;
 using DriveIT.Entities;
+using DriveIT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 

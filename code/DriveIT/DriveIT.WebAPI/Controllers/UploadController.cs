@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Http;
 using DriveIT.Entities;
+using DriveIT.Models;
 
 namespace DriveIT.WebAPI.Controllers
 {

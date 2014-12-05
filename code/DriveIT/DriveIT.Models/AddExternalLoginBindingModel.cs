@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DriveIT.Entities;
 
-namespace DriveIT.WebAPI.Models
+namespace DriveIT.Models
 {
     // Models used as parameters to AccountController actions.
 

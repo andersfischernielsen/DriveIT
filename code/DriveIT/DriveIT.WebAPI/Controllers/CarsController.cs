@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -57,7 +58,7 @@ namespace DriveIT.WebAPI.Controllers
                       select car.ToDto());
         }
 
-        // Get: api/Cars?make=Opel
+        // Get: api/Cars?Model=Zafira
         public async Task<IHttpActionResult> GetCarsByModel(string model)
         {
             return Ok(from car in await _repo.GetAllCars()
@@ -90,7 +91,7 @@ namespace DriveIT.WebAPI.Controllers
             }
             var newCarId = await _repo.CreateCar(value.ToEntity());
             value.Id = newCarId;
-            return CreatedAtRoute("DefaultApi", new { id = newCarId }, value);
+            return CreatedAtRoute("DefaultApi", new Dictionary<string, object> { {"id", newCarId} }, value);
         }
 
         // PUT: api/Cars/5
