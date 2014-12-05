@@ -37,9 +37,9 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         public ContactRequestViewModel()
         {
-            
         }
 
+        
         #region ATTRIBUTES
         public DateTime Requested
         {

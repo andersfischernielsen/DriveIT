@@ -21,7 +21,7 @@ namespace DriveIT.CarQuery
             if (string.IsNullOrEmpty(model) || string.IsNullOrWhiteSpace(model))
                 throw new ArgumentNullException(carToFill.Model, "Model of the CarDto object must not be null.");
 
-            var query = "make=" + make + "&model=" + model;
+            var query = "make=" + make + "&model=" + model + "&fuel=" + carToFill.Fuel;
 
             if (carToFill.Year.HasValue)
             {

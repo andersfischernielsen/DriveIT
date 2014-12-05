@@ -7,6 +7,11 @@ namespace DriveIT.WindowsClient.ViewModels
 {
     public class EmployeeViewModel : IViewModelBase
     {
+        public enum EmployeeStateEnum
+        {
+            NotInSystem,
+            InSystem
+        }
         private EmployeeDto _employeeDto;
 
         public int? EmployeeId
@@ -35,15 +40,76 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
+            EmployeeState = EmployeeStateEnum.InSystem;
         }
 
         public EmployeeViewModel()
         {
-
+            _employeeDto = new EmployeeDto();
+            EmployeeState = EmployeeStateEnum.NotInSystem;
         }
 
 
         #region Attributes
+        private string _status = "";
+        public string Status
+        {
+            get
+            {
+                try
+                {
+                    return _status;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+
+            }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
+
+        private EmployeeStateEnum _actualEmployeeState = EmployeeStateEnum.InSystem;
+        public EmployeeStateEnum EmployeeState
+        {
+            get { return _actualEmployeeState; }
+            set
+            {
+                _actualEmployeeState = value;
+                NotifyPropertyChanged("CreateUpdateButtonText");
+            }
+        }
+        public string CreateUpdateButtonText
+        {
+            get
+            {
+                switch (EmployeeState)
+                {
+                    case EmployeeStateEnum.NotInSystem:
+                        return "Create";
+                    default:
+                        return "Update";
+                }
+            }
+        }
+        
+        public string Username
+        {
+            get
+            {
+                return _employeeDto.Username;
+            }
+            set
+            {
+                _employeeDto.Username = value;
+                NotifyPropertyChanged("Username");
+            }
+        }
 
         public string FirstName
         {
@@ -82,9 +148,24 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        
+
         #endregion Attributes
 
         #region CRUDS
+
+        public void SaveEmployee()
+        {
+            switch (EmployeeState)
+            {
+                case EmployeeStateEnum.NotInSystem:
+                    CreateEmployee();
+                    break;
+                default:
+                    UpdateEmployee();
+                    break;
+            }
+        }
 
         /// <summary>
         /// Gets called from the view
@@ -93,6 +174,8 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             var employeeController = new EmployeeController();
             employeeController.CreateEmployee(_employeeDto);
+            Status = "Employee Created";
+            EmployeeState = EmployeeStateEnum.InSystem;
         }
 
         /// <summary>
@@ -102,6 +185,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             var employeeController = new EmployeeController();
             employeeController.UpdateEmployee(_employeeDto);
+            Status = "Employee Updated";
         }
 
         /// <summary>
@@ -111,6 +195,9 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             var employeeController = new EmployeeController();
             employeeController.DeleteEmployee(_employeeDto);
+            EmployeeId = null;
+            Status = "Employee Deleted";
+            EmployeeState = EmployeeStateEnum.NotInSystem;
         }
 
         #endregion CRUDS

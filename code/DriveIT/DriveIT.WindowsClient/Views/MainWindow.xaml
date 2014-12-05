@@ -142,16 +142,13 @@
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                 </TabControl.Background>
                 <TabItem Header="RequestsForContactPowerTabItem">
-                    <TabItem.DataContext>
-                        <ViewModels:ContactRequestListViewModel/>
-                    </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="375,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="481,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="589,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="695,10,0,10"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="805,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="339,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="445.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="564,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="682.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="801,10,0,10"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
@@ -189,19 +186,23 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="OrdersPowerTabItem">
-                    <TabItem.DataContext>
-                        <ViewModels:SaleListViewModel/>
-                    </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="253.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="382.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="523.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="658.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="799.5,10,0,10"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
-                    <TabItem.DataContext>
-                        <ViewModels:CustomerListViewModel/>
-                    </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="253.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="376.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="502.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="630,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="765,10,0,10"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="EmployeesPowerTabItem">
@@ -210,6 +211,35 @@
                     </TabItem.DataContext>
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="375,10,0,10">
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="CreateNewEmployeeWindow"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
+                        </Button>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="481,10,0,10">
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="UpdateEmployeeWindow"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
+                        </Button>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="589,10,0,10">
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="DeleteEmployee"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
+                        </Button>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="695,10,0,10">
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="UpdateList"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
+                        </Button>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="805,10,0,10"/>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -304,11 +334,20 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding ContactRequestViewModels}">
-                                <DataGrid.DataContext>
-                                    <ViewModels:ContactRequestListViewModel/>
-                                </DataGrid.DataContext>
-                            </DataGrid>
+                        	<xcdg:DataGridControl x:Name="RequestsDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedRequest, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding ContactRequestViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource RequestsForContactDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<xcdg:DataGridControl.Columns>
+                                    <xcdg:Column FieldName="ContactRequestId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+									<xcdg:Column FieldName="Created" Title="Created"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                     <TabItem Header="CarsTabItem">
@@ -348,7 +387,21 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding SaleViewModels}"/>
+                        	<xcdg:DataGridControl x:Name="SalesDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedSale, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding SaleViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource OrdersDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<xcdg:DataGridControl.Columns>
+                        			<xcdg:Column FieldName="SaleId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+                        			<xcdg:Column FieldName="Price" Title="Created"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="Sold" Title="Sold"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
+									<xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                     <TabItem Header="CustomersTabItem">
@@ -359,7 +412,21 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding CustomerViewModels}"/>
+                        	<xcdg:DataGridControl x:Name="CustomersDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding CustomerViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource CustomersDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<xcdg:DataGridControl.Columns>
+                        			<xcdg:Column FieldName="CustomerId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+                        			<xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="Email" Title="Email"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                     <TabItem Header="EmployeesTabItem">
@@ -370,7 +437,25 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <DataGrid Style="{DynamicResource DatagridStyle}" Margin="10" ItemsSource="{Binding EmployeeViewModels}"/>
+                        	<xcdg:DataGridControl x:Name="EmployeesDataGrid" Style="{DynamicResource ExtendedDatagridStyle}" Margin="10" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" AutoCreateColumns="False" ItemsSource="{Binding EmployeeViewModels}">
+                        		<xcdg:DataGridControl.Resources>
+                        			<Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+                        				<Setter Property="Background" Value="{DynamicResource EmployeesDataGridHeaderBrush}"/>
+                        			</Style>
+                        		</xcdg:DataGridControl.Resources>
+                        		<i:Interaction.Triggers>
+                        			<i:EventTrigger EventName="MouseLeftButtonDown">
+                        				<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="UpdateEmployeeWindow"/>
+                        			</i:EventTrigger>
+                        		</i:Interaction.Triggers>
+                        		<xcdg:DataGridControl.Columns>
+                        			<xcdg:Column FieldName="EmployeeId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
+                        			<xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
+                        			<xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
+                        		</xcdg:DataGridControl.Columns>
+                        	</xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
                 </TabControl>
