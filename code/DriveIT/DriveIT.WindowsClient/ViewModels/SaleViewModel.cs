@@ -8,6 +8,11 @@ namespace DriveIT.WindowsClient.ViewModels
     public class SaleViewModel : IViewModelBase
     {
         private SaleDto _saleDto;
+        public enum SaleEnum
+        {
+            NotInSystem,
+            InSystem
+        }
 
         public int? SaleId
         {
@@ -35,13 +40,61 @@ namespace DriveIT.WindowsClient.ViewModels
         public SaleViewModel(SaleDto saleDto)
         {
             _saleDto = saleDto;
+            SaleState = SaleEnum.InSystem;
         }
         public SaleViewModel()
         {
-            
+            _saleDto = new SaleDto();
+            SaleState = SaleEnum.NotInSystem;
         }
 
         #region Attributes
+        private string _status = "";
+        public string Status
+        {
+            get
+            {
+                try
+                {
+                    return _status;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+
+            }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
+
+        private SaleEnum _actualSaleState;
+        public SaleEnum SaleState
+        {
+            get { return _actualSaleState; }
+            set
+            {
+                _actualSaleState = value;
+                NotifyPropertyChanged("CreateUpdateButtonText");
+            }
+        }
+        public string CreateUpdateButtonText
+        {
+            get
+            {
+                switch (SaleState)
+                {
+                    case SaleEnum.NotInSystem:
+                        return "Create";
+                    default:
+                        return "Update";
+                }
+            }
+        }
         public decimal Price
         {
             get
@@ -105,29 +158,50 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion Attributes
 
         #region CRUDS
-        /// <summary>
-        /// Gets called from the view
-        /// </summary>
-        public void CreateSale()
+        public void SaveSale()
         {
-            var saleController = new SaleController();
-            saleController.CreateSale(_saleDto);
+            switch (SaleState)
+            {
+                case SaleEnum.NotInSystem:
+                    CreateSale();
+                    break;
+                default:
+                    UpdateSale();
+                    break;
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateSale()
+        public async void CreateSale()
         {
             var saleController = new SaleController();
-            saleController.UpdateSale(_saleDto);
+            await saleController.CreateSale(_saleDto);
+            Status = "Sale Created";
+            SaleState = SaleEnum.InSystem;
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteSale()
+        public async void UpdateSale()
         {
             var saleController = new SaleController();
-            saleController.DeleteSale(_saleDto);
+            await saleController.UpdateSale(_saleDto);
+            Status = "Sale Updated";
+        }
+        /// <summary>
+        /// Gets called from the view
+        /// </summary>
+        public async void DeleteSale()
+        {
+            if (SaleState != SaleEnum.NotInSystem)
+            {
+                var saleController = new SaleController();
+                await saleController.DeleteSale(_saleDto);
+                SaleId = null;
+                Status = "Sale Deleted";
+                SaleState = SaleEnum.NotInSystem;
+            }
         }
         #endregion CRUDS
 

@@ -9,6 +9,12 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         private CustomerDto _customerDto;
 
+        public enum CustomerEnum
+        {
+            NotInSystem,
+            InSystem
+        }
+
         public int? CustomerId
         {
             get
@@ -34,13 +40,63 @@ namespace DriveIT.WindowsClient.ViewModels
         public CustomerViewModel(CustomerDto customerDto)
         {
             _customerDto = customerDto;
+            CustomerState = CustomerEnum.InSystem;
         }
         public CustomerViewModel()
         {
-            
+            _customerDto = new CustomerDto();
+            CustomerState = CustomerEnum.NotInSystem;
         }
 
         #region ATTRIBUTES
+        private string _status = "";
+        public string Status
+        {
+            get
+            {
+                try
+                {
+                    return _status;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+
+            }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
+
+
+
+        private CustomerEnum _actualCustomerState;
+        public CustomerEnum CustomerState
+        {
+            get { return _actualCustomerState; }
+            set
+            {
+                _actualCustomerState = value;
+                NotifyPropertyChanged("CreateUpdateButtonText");
+            }
+        }
+        public string CreateUpdateButtonText
+        {
+            get
+            {
+                switch (CustomerState)
+                {
+                    case CustomerEnum.NotInSystem:
+                        return "Create";
+                    default:
+                        return "Update";
+                }
+            }
+        }
         public string Username
         {
             get
@@ -102,31 +158,52 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion ATTRIBUTES
-
+        public void SaveCustomer()
+        {
+            switch (CustomerState)
+            {
+                case CustomerEnum.NotInSystem:
+                    CreateCustomer();
+                    break;
+                default:
+                    UpdateCustomer();
+                    break;
+            }
+        }
         #region CRUDS
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void CreateCustomer()
+        public async void CreateCustomer()
         {
             var customerController = new CustomerController();
-            customerController.CreateCustomer(_customerDto);
+            await customerController.CreateCustomer(_customerDto);
+            Status = "Customer Created";
+            CustomerState = CustomerEnum.InSystem;
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateCustomer()
+        public async void UpdateCustomer()
         {
             var customerController = new CustomerController();
-            customerController.UpdateCustomer(_customerDto);
+            await customerController.UpdateCustomer(_customerDto);
+            Status = "Customer Updated";
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteCustomer()
+        public async void DeleteCustomer()
         {
-            var customerController = new CustomerController();
-            customerController.DeleteCustomer(_customerDto);
+            if (CustomerState != CustomerEnum.NotInSystem)
+            {
+                var customerController = new CustomerController();
+                await customerController.DeleteCustomer(_customerDto);
+                CustomerId = null;
+                Status = "Customer Deleted";
+                CustomerState = CustomerEnum.NotInSystem;
+            }
+            
         }
         #endregion CRUDS
 
