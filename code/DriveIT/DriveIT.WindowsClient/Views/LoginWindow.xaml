@@ -28,6 +28,13 @@
                 </Button>
             </Border>
             <Label Style="{DynamicResource HeaderLabel}" Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="60" Content="Skip Login" Margin="0,10,129,0" Grid.Column="1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SkipLogin"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </Grid>
         <Grid Margin="0,80,0,0">
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,57,157,0" Watermark="Username" Height="28" VerticalAlignment="Top" Text="{Binding Username}"/>

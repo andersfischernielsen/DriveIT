@@ -76,6 +76,14 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        public void SkipLogin()
+        {
+            Status = "Login Skipped!";
+            var window = new MainWindow();
+            window.Show();
+            CloseAction.Invoke();
+        }
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
