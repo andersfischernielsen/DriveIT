@@ -68,7 +68,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public void CreateNewCarWindow()
+        public void CreateNewContactRequestWindow()
         {
             ContactRequestViewModel newContactRequest = new ContactRequestViewModel();
             var window = new EntityContactRequestWindow {DataContext = newContactRequest};
@@ -76,7 +76,7 @@ namespace DriveIT.WindowsClient.ViewModels
             window.Show();
         }
 
-        public void UpdateCarWindow()
+        public void UpdateContactRequestWindow()
         {
             ContactRequestViewModel contactRequest = SelectedRequest;
             var window = new EntityContactRequestWindow {DataContext = contactRequest};
