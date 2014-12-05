@@ -28,5 +28,7 @@ namespace DriveIT.MVC.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<DriveIT.Models.CarDto> CarDtoes { get; set; }
     }
 }
