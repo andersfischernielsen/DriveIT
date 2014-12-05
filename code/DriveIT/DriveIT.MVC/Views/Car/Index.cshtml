@@ -1,20 +1,22 @@
 ﻿@model IEnumerable<DriveIT.Models.CarDto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Car Search";
 }
 
 <br/>
 
 <h1>Car Search</h1>
-<text>In this window, you are able to search for cars, by giving, as input, the three following criteria: FuelType, Make and Model.</text>
+<p>In this window, you are able to search for cars, by giving, as input, the three following criteria: FuelType, Make and Model.</p>
 
 <br><br/>
 
 @using (Html.BeginForm("Index", "Car", FormMethod.Get))
 {
     <p>
-        Models: @Html.DropDownList("model", "---")
+        FuelType: @Html.DropDownList("fuelType", "---")
+        Make: @Html.DropDownList("make", "---")
+        Model: @Html.DropDownList("model", "---")
         <input type="submit" value="Search"/>
     </p>
 }
@@ -121,5 +123,4 @@
         </td>
     </tr>
 }
-
 </table>
