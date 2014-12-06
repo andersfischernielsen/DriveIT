@@ -34,8 +34,8 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                //TODO I don't think this should happen.. Probably the client should show some kind of error message instead. - Mikael.
                 _httpClient = new HttpClient();
+                throw;
             }
             
         }
