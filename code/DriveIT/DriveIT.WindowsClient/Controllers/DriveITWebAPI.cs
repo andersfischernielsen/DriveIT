@@ -9,10 +9,11 @@ using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
-    // ReSharper disable once InconsistentNaming
+// ReSharper disable once InconsistentNaming
     public class DriveITWebAPI
     {
         static private HttpClient _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
+
 
         public static async Task Login(string username, string password)
         {
@@ -32,7 +33,6 @@ namespace DriveIT.WindowsClient.Controllers
             {
                 throw new Exception("Customer cannot login to the client");
             }
-
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
@@ -52,7 +52,8 @@ namespace DriveIT.WindowsClient.Controllers
 
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
-            T[] objects;
+            // TODO FJERN INITIERINGEN new T[0]
+            T[] objects = new T[0];
             try
             {
                 var response = await _httpClient.GetAsync(uri);
@@ -62,7 +63,8 @@ namespace DriveIT.WindowsClient.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new NotImplementedException();
+                // TODO Håndter dette
+                //throw new NotImplementedException();
             }
             return objects.ToList();
         }
