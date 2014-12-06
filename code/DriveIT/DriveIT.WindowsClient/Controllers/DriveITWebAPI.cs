@@ -57,7 +57,8 @@ namespace DriveIT.WindowsClient.Controllers
 
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
-            T[] objects;
+            // TODO FJERN INITIERINGEN new T[0]
+            T[] objects = new T[0];
             try
             {
                 var response = await _httpClient.GetAsync(uri);
@@ -67,7 +68,8 @@ namespace DriveIT.WindowsClient.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new NotImplementedException();
+                // TODO Håndter dette
+                //throw new NotImplementedException();
             }
             return objects.ToList();
         }
