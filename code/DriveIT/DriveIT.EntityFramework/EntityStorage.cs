@@ -24,7 +24,7 @@ namespace DriveIT.EntityFramework
 
             using (optionalContext)
             {
-                return await optionalContext.Cars.Select(cars => cars).ToListAsync();
+                return await optionalContext.Cars.ToListAsync();
             }
         }
 
@@ -93,7 +93,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Employees.Select(empl => empl).ToListAsync();
+                return await context.Employees.ToListAsync();
             }
         }
 
@@ -137,7 +137,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Customers.Select(cust => cust).ToListAsync();
+                return await context.Customers.ToListAsync();
             }
         }
 
@@ -181,7 +181,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.ContactRequests.Select(req => req).ToListAsync();
+                return await context.ContactRequests.ToListAsync();
             }
         }
 
@@ -289,7 +289,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Sales.Select(req => req).ToListAsync();
+                return await context.Sales.ToListAsync();
             }
         }
 
