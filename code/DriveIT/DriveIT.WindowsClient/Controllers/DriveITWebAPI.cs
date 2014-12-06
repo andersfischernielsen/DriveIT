@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DriveIT.WindowsClient.Controllers
 {
+// ReSharper disable once InconsistentNaming
     public class DriveITWebAPI
     {
         static string apiUrl = @"http://localhost:5552/api/";
@@ -15,9 +16,7 @@ namespace DriveIT.WindowsClient.Controllers
 
         public static async Task Login(string username, string password)
         {
-            var handler = new HttpClientHandler();
-            handler.UseDefaultCredentials = true;
-            _httpClient = new HttpClient(handler);
+            _httpClient = new HttpClient();
 
             var dict = new Dictionary<string, string>
             {
@@ -28,13 +27,14 @@ namespace DriveIT.WindowsClient.Controllers
 
             var result = await _httpClient.PostAsync("http://localhost:5552/Token", new FormUrlEncodedContent(dict));
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            
+
             try
             {
                 result.EnsureSuccessStatusCode();
             }
             catch (Exception)
             {
+                //TODO I don't think this should happen.. Probably the client should show some kind of error message instead. - Mikael.
                 _httpClient = new HttpClient();
             }
             
