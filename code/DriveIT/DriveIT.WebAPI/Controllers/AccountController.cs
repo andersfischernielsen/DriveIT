@@ -396,6 +396,30 @@ namespace DriveIT.WebAPI.Controllers
             return Ok();
         }
 
+        [OverrideAuthentication]
+        [Route("IsAdministrator")]
+        [AuthorizeRoles(Role.Administrator)]
+        public IHttpActionResult GetIsAdministrator()
+        {
+            return Ok();
+        }
+
+        [OverrideAuthentication]
+        [Route("IsEmployee")]
+        [AuthorizeRoles(Role.Employee)]
+        public IHttpActionResult GetIsEmployee()
+        {
+            return Ok();
+        }
+
+        [OverrideAuthentication]
+        [Route("IsCustomer")]
+        [AuthorizeRoles(Role.Customer)]
+        public IHttpActionResult GetIsCustomer()
+        {
+            return Ok();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

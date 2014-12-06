@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
@@ -14,7 +16,7 @@ namespace DriveIT.WindowsClient.Controllers
 
         public static async Task Login(string username, string password)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/")};
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
 
             var dict = new Dictionary<string, string>
             {
@@ -26,15 +28,9 @@ namespace DriveIT.WindowsClient.Controllers
             var result = await _httpClient.PostAsync("Token", new FormUrlEncodedContent(dict));
             result.EnsureSuccessStatusCode();
 
-            try
+            if (await GetRole() == Role.Customer)
             {
-                // If these calls throws an exception, a customer has logged in (which is not allowed).
-                result = await _httpClient.GetAsync("customers");
-                result.EnsureSuccessStatusCode();
-            }
-            catch (HttpRequestException)
-            {
-                throw new ArgumentException(string.Format("{0} is not allowed to login to this client", username), "username");
+                throw new Exception("Customer cannot login to the client");
             }
 
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -110,6 +106,69 @@ namespace DriveIT.WindowsClient.Controllers
             catch (Exception)
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public async static Task CreateCustomer(string email, string firstName, string lastName, string password,
+            string confirmPassword, string phone, string confirmPhone)
+        {
+            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
+        }
+
+        public async static Task CreateEmployee(string email, string firstName, string lastName, string password,
+            string confirmPassword, string phone, string confirmPhone)
+        {
+            if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
+            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
+        }
+
+        public async static Task CreateAdministrator(string email, string firstName, string lastName, string password,
+            string confirmPassword, string phone, string confirmPhone)
+        {
+            if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
+            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
+        }
+
+        private static async Task<Role?> GetRole()
+        {
+            var result = await _httpClient.GetAsync("account/isadministrator");
+            if (result.IsSuccessStatusCode) return Role.Administrator;
+            result = await _httpClient.GetAsync("account/isemployee");
+            if (result.IsSuccessStatusCode) return Role.Employee;
+            result = await _httpClient.GetAsync("account/iscustomer");
+            if (result.IsSuccessStatusCode) return Role.Customer;
+            return null;
+        }
+
+        private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
+        {
+            HttpResponseMessage result;
+            var model = new RegisterBindingModel
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                Password = password,
+                ConfirmPassword = confirmPassword,
+                PhoneNumber = phone,
+                ConfirmPhoneNumber = confirmPhone,
+                Role = role
+            };
+            result = await _httpClient.PostAsJsonAsync("account/register", model);
+
+            try
+            {
+                result.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException)
+            {
+                if (result.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    //Maybe throw some special exception
+                    throw;
+                }
+                //else
+                throw;
             }
         }
     }
