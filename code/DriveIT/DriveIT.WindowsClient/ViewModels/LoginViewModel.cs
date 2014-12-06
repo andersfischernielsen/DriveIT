@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
 
@@ -76,12 +71,22 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public void SkipLogin()
+        public async void SkipLogin()
         {
-            Status = "Login Skipped!";
-            var window = new MainWindow();
-            window.Show();
-            CloseAction.Invoke();
+            try
+            {
+                await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
+                Status = "Login skipped!";
+                var window = new MainWindow();
+                window.Show();
+                CloseAction.Invoke();
+            }
+            catch (Exception)
+            {
+                Status = "Username or password was invalid. Try again...";
+                Password = "";
+                Username = "";
+            }
         }
 
         #region INotifyPropertyChanged
