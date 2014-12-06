@@ -44,7 +44,7 @@ namespace DriveIT.WindowsClient.Controllers
         {
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
+                    HttpResponseMessage response = await _httpClient.PostAsJsonAsync(apiUrl + uri, objectToCreate);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception ex)
@@ -59,7 +59,7 @@ namespace DriveIT.WindowsClient.Controllers
             T[] objects = null;
                     try
                     {
-                        HttpResponseMessage response = _httpClient.GetAsync(apiUrl+uri).Result;
+                        HttpResponseMessage response = _httpClient.GetAsync(apiUrl + uri).Result;
                         response.EnsureSuccessStatusCode();
                         objects = await response.Content.ReadAsAsync<T[]>();
                     }
@@ -76,7 +76,7 @@ namespace DriveIT.WindowsClient.Controllers
             T objectToRead;
                 try
                 {
-                    HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
+                    HttpResponseMessage response = _httpClient.GetAsync(apiUrl + uri).Result;
                     response.EnsureSuccessStatusCode();
                     objectToRead = await response.Content.ReadAsAsync<T>();
                 }
@@ -92,7 +92,7 @@ namespace DriveIT.WindowsClient.Controllers
         {
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.PutAsJsonAsync(uri, objectToUpdate);
+                    HttpResponseMessage response = await _httpClient.PutAsJsonAsync(apiUrl + uri, objectToUpdate);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception)
@@ -105,7 +105,7 @@ namespace DriveIT.WindowsClient.Controllers
         {
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
+                    HttpResponseMessage response = await _httpClient.DeleteAsync(apiUrl + uri);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception)
