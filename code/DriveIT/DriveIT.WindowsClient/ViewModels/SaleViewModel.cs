@@ -131,7 +131,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
-        public int CustomerId
+        public string CustomerId
         {
             get
             {
@@ -143,7 +143,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CustomerId");
             }
         }
-        public int EmployeeId
+        public string EmployeeId
         {
             get
             {

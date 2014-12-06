@@ -14,13 +14,13 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         private EmployeeDto _employeeDto;
 
-        public int? EmployeeId
+        public string EmployeeId
         {
             get
             {
                 try
                 {
-                    return _employeeDto.Id.Value;
+                    return _employeeDto.Id;
                 }
                 catch (Exception)
                 {
@@ -98,16 +98,16 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         
-        public string Username
+        public string Email
         {
             get
             {
-                return _employeeDto.Username;
+                return _employeeDto.Email;
             }
             set
             {
-                _employeeDto.Username = value;
-                NotifyPropertyChanged("Username");
+                _employeeDto.Email = value;
+                NotifyPropertyChanged("Email");
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DriveIT.WindowsClient.Controllers
@@ -11,28 +12,38 @@ namespace DriveIT.WindowsClient.Controllers
     {
         static string apiUrl = @"http://localhost:5552/api/";
         static private HttpClient _httpClient = new HttpClient();
-        // todo REMOVE BOOL WHEN LOGIN SCREEN IS DONE
-        static private bool test = false;
 
         public static async Task Login(string username, string password)
         {
+            var handler = new HttpClientHandler();
+            handler.UseDefaultCredentials = true;
+            _httpClient = new HttpClient(handler);
+
             var dict = new Dictionary<string, string>
             {
                 {"grant_type", "password"},
                 {"username", username},
                 {"password", password}
             };
-            var result = await _httpClient.PostAsync(@"http://localhost:5552/" + "Token", new FormUrlEncodedContent(dict));
-            _httpClient.BaseAddress = new Uri(apiUrl);
-            result.EnsureSuccessStatusCode();
+
+            var result = await _httpClient.PostAsync("http://localhost:5552/Token", new FormUrlEncodedContent(dict));
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            
+            try
+            {
+                result.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                _httpClient = new HttpClient();
+            }
+            
         }
 
         public async static Task Create<T>(string uri, T objectToCreate)
         {
                 try
                 {
-                    _httpClient.BaseAddress = new Uri(apiUrl);
-                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     HttpResponseMessage response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
                     response.EnsureSuccessStatusCode();
                 }
@@ -45,22 +56,16 @@ namespace DriveIT.WindowsClient.Controllers
 
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
-            if (!test)
-            {
-                // todo REMOVE WHEN LOGIN SCREEN IS DONE
-                _httpClient.BaseAddress = new Uri(apiUrl);
-                test = true;
-            }
             T[] objects = null;
                     try
                     {
-                        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
+                        HttpResponseMessage response = _httpClient.GetAsync(apiUrl+uri).Result;
                         response.EnsureSuccessStatusCode();
                         objects = await response.Content.ReadAsAsync<T[]>();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        Console.WriteLine(ex.Message);
                         throw new NotImplementedException();
                     } 
             return objects.ToList();
@@ -71,7 +76,6 @@ namespace DriveIT.WindowsClient.Controllers
             T objectToRead;
                 try
                 {
-                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
                     response.EnsureSuccessStatusCode();
                     objectToRead = await response.Content.ReadAsAsync<T>();
@@ -84,11 +88,11 @@ namespace DriveIT.WindowsClient.Controllers
         }
 
 
-        public async static Task Update<T>(string uri, T objectToUpdate, int id)
+        public async static Task Update<T>(string uri, T objectToUpdate)
         {
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.PutAsJsonAsync(uri + "/" + id, objectToUpdate);
+                    HttpResponseMessage response = await _httpClient.PutAsJsonAsync(uri, objectToUpdate);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception)
@@ -97,11 +101,11 @@ namespace DriveIT.WindowsClient.Controllers
                     throw new NotImplementedException();
                 }
         }
-        public async static Task Delete<T>(string uri, int id)
+        public async static Task Delete<T>(string uri)
         {
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.DeleteAsync(uri + "/" + id);
+                    HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
                     response.EnsureSuccessStatusCode();
                 }
                 catch (Exception)

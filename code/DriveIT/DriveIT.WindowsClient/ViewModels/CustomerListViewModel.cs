@@ -60,7 +60,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         public void DeleteCustomer()
         {
-            if (SelectedCustomer.CustomerId.HasValue) SelectedCustomer.DeleteCustomer();
+            if (!String.IsNullOrEmpty(SelectedCustomer.CustomerId)) SelectedCustomer.DeleteCustomer();
             else
             {
                 CustomerViewModels.Remove(SelectedCustomer);

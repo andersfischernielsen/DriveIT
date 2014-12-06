@@ -72,7 +72,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void DeleteEmployee()
         {
-            if(SelectedEmployee.EmployeeId.HasValue) SelectedEmployee.DeleteEmployee();
+            if(!String.IsNullOrEmpty(SelectedEmployee.EmployeeId)) SelectedEmployee.DeleteEmployee();
             else
             {
                 EmployeeViewModels.Remove(SelectedEmployee);

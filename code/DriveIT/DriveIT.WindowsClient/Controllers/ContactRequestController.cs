@@ -25,15 +25,15 @@ namespace DriveIT.WindowsClient.Controllers
         }
         public async Task UpdateContactRequest(ContactRequestDto contactRequest)
         {
-            await DriveITWebAPI.Update("contactRequests", contactRequest, contactRequest.Id.Value);
+            await DriveITWebAPI.Update("contactRequests/" + contactRequest.Id, contactRequest);
         }
         public async Task DeleteContactRequest(ContactRequestDto contactRequest)
         {
-            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests", contactRequest.Id.Value);
+            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests/" + contactRequest.Id);
         }
         public async Task DeleteContactRequest(int id)
         {
-            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests", id);
+            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests/" + id);
         }
     }
 }

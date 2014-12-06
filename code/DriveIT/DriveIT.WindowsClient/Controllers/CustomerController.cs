@@ -28,17 +28,17 @@ namespace DriveIT.WindowsClient.Controllers
         }
         public async Task UpdateCustomer(CustomerDto customer)
         {
-            await DriveITWebAPI.Update("customers", customer, customer.Id.Value);
+            await DriveITWebAPI.Update("customers/" + customer.Id, customer);
         }
 
         public async Task DeleteCustomer(CustomerDto customer)
         {
-            await DriveITWebAPI.Delete<CustomerDto>("customers", customer.Id.Value);
+            await DriveITWebAPI.Delete<CustomerDto>("customers/" + customer.Id);
         }
 
         public async Task DeleteCustomer(int id)
         {
-            await DriveITWebAPI.Delete<CustomerDto>("customers", id);
+            await DriveITWebAPI.Delete<CustomerDto>("customers/" + id);
         }
     }
 }

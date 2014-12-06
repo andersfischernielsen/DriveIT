@@ -26,15 +26,15 @@ namespace DriveIT.WindowsClient.Controllers
         }
         public async Task UpdateSale(SaleDto sale)
         {
-            await DriveITWebAPI.Update("sales", sale, sale.Id.Value);
+            await DriveITWebAPI.Update("sales/" + sale.Id, sale);
         }
         public async Task DeleteSale(SaleDto sale)
         {
-            await DriveITWebAPI.Delete<SaleDto>("sales", sale.Id.Value);
+            await DriveITWebAPI.Delete<SaleDto>("sales/" + sale.Id);
         }
         public async Task DeleteSale(int id)
         {
-            await DriveITWebAPI.Delete<SaleDto>("sales", id);
+            await DriveITWebAPI.Delete<SaleDto>("sales/" + id);
         }
     }
 }
