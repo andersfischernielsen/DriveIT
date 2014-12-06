@@ -8,7 +8,10 @@ namespace DriveIT.EntityFramework
 // ReSharper disable once InconsistentNaming
     public class DriveITContext : IdentityDbContext<DriveITUser>
     {
-        public DriveITContext() : base("DriveIT.EntityFramework.DriveITContext") { }
+        public DriveITContext() : base("DriveIT.EntityFramework.DriveITContext")
+        {
+            Database.CommandTimeout = 60;
+        }
 
         public virtual DbSet<Car> Cars { get; set; }
 
