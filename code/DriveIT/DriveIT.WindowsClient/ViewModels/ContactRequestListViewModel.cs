@@ -4,12 +4,24 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
     public class ContactRequestListViewModel : IViewModelBase
     {
         public ObservableCollection<ContactRequestViewModel> ContactRequestViewModels { get; set; }
+        private ContactRequestViewModel _selectedRequest;
+        public ContactRequestViewModel SelectedRequest
+        {
+            get { return _selectedRequest; }
+
+            set
+            {
+                _selectedRequest = value;
+                NotifyPropertyChanged("SelectedRequest");
+            }
+        }
 
         public ContactRequestListViewModel(IList<ContactRequestDto> contactRequestDtos)
         {
@@ -34,6 +46,41 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
             }
+        }
+
+        public async void UpdateList()
+        {
+            ContactRequestViewModels.Clear();
+            var contactRequestController = new ContactRequestController();
+            foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
+            {
+                ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
+            }
+        }
+
+        public void DeleteContactRequest()
+        {
+            if (SelectedRequest.ContactRequestId.HasValue) SelectedRequest.DeleteContactRequest();
+            else
+            {
+                ContactRequestViewModels.Remove(SelectedRequest);
+                SelectedRequest = null;
+            }
+        }
+
+        public void CreateNewContactRequestWindow()
+        {
+            var newContactRequest = new ContactRequestViewModel();
+            var window = new EntityContactRequestWindow {DataContext = newContactRequest};
+            ContactRequestViewModels.Add(newContactRequest);
+            window.Show();
+        }
+
+        public void UpdateContactRequestWindow()
+        {
+            ContactRequestViewModel contactRequest = SelectedRequest;
+            var window = new EntityContactRequestWindow {DataContext = contactRequest};
+            window.Show();
         }
 
         #endregion CRUD

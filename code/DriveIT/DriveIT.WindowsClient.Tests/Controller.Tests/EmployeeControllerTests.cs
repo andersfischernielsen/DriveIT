@@ -27,7 +27,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine(t.Count);
                 _employeeController.CreateEmployee(new EmployeeDto()
                 {
-                    Username = "sexydude123",
                     FirstName = "Mr Handsome",
                     LastName = "Cake"
                 });
@@ -39,7 +38,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine("Before update: " + _employeeController.ReadEmployee(t[t.Count - 1].Id.Value).Result.FirstName);
             _employeeController.UpdateEmployee(new EmployeeDto()
             {
-                Username = "sexydude123",
                 FirstName = "Mr Not So Handsome",
                 LastName = "Cookie",
                 Id = t[t.Count - 1].Id.Value

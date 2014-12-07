@@ -24,7 +24,7 @@ namespace DriveIT.EntityFramework
 
             using (optionalContext)
             {
-                return await optionalContext.Cars.Select(cars => cars).ToListAsync();
+                return await optionalContext.Cars.ToListAsync();
             }
         }
 
@@ -81,11 +81,11 @@ namespace DriveIT.EntityFramework
             toChange.Year = toSetFrom.Year;
         }
 
-        public async Task<Employee> GetEmployeeWithId(int idToGet)
+        public async Task<Employee> GetEmployeeWithId(string idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return await context.Employees.FindAsync(idToGet);
+                return await context.Employees.SingleOrDefaultAsync(x => x.Id == idToGet);
             }
         }
 
@@ -93,36 +93,26 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Employees.Select(empl => empl).ToListAsync();
+                return await context.Employees.ToListAsync();
             }
         }
 
-        public async Task<int> CreateEmployee(Employee employeeToCreate)
+        public async Task<int> UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
-                context.Employees.Add(employeeToCreate);
-                await context.SaveChangesAsync();
-                return employeeToCreate.Id;
-            }
-        }
-
-        public async Task<int> UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith)
-        {
-            using (var context = new DriveITContext())
-            {
-                var oldEmployee = await context.Employees.FindAsync(idToUpdate);
+                var oldEmployee = await context.Employees.SingleOrDefaultAsync(x => x.Id == idToUpdate);
                 CopyEmployeeProperties(oldEmployee, employeeToReplaceWith);
 
                 return await context.SaveChangesAsync();
             }
         }
 
-        public async Task<int> DeleteEmployee(int idToDelete)
+        public async Task<int> DeleteEmployee(string idToDelete)
         {
             using (var context = new DriveITContext())
             {
-                context.Employees.Remove(await context.Employees.FindAsync(idToDelete));
+                context.Users.Remove(await context.Employees.SingleAsync(x => x.Id == idToDelete));
                 return await context.SaveChangesAsync();
             }
         }
@@ -132,16 +122,14 @@ namespace DriveIT.EntityFramework
             toChange.Email = toSetFrom.Email;
             toChange.FirstName = toSetFrom.FirstName;
             toChange.LastName = toSetFrom.LastName;
-            toChange.Password = toSetFrom.Password;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
-            toChange.Username = toSetFrom.Username;
         }
 
-        public async Task<Customer> GetCustomerWithId(int idToGet)
+        public async Task<Customer> GetCustomerWithId(string idToGet)
         {
             using (var context = new DriveITContext())
             {
-                return await context.Customers.FindAsync(idToGet);
+                return await context.Customers.SingleOrDefaultAsync(x => x.Id == idToGet);
             }
         }
 
@@ -149,36 +137,26 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Customers.Select(cust => cust).ToListAsync();
+                return await context.Customers.ToListAsync();
             }
         }
 
-        public async Task<int> CreateCustomer(Customer customerToCreate)
+        public async Task<int> UpdateCustomer(string idToUpdate, Customer customerToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
-                context.Customers.Add(customerToCreate);
-                await context.SaveChangesAsync();
-                return customerToCreate.Id;
-            }
-        }
-
-        public async Task<int> UpdateCustomer(int idToUpdate, Customer customerToReplaceWith)
-        {
-            using (var context = new DriveITContext())
-            {
-                var oldCustomer = await context.Customers.FindAsync(idToUpdate);
+                var oldCustomer = await context.Customers.SingleAsync(x => x.Id == idToUpdate);
                 CopyCustomerProperties(oldCustomer, customerToReplaceWith);
 
                 return await context.SaveChangesAsync();
             }
         }
 
-        public async Task<int> DeleteCustomer(int idToDelete)
+        public async Task<int> DeleteCustomer(string idToDelete)
         {
             using (var context = new DriveITContext())
             {
-                context.Customers.Remove(await context.Customers.FindAsync(idToDelete));
+                context.Users.Remove(await context.Customers.SingleAsync(x => x.Id == idToDelete));
                 return await context.SaveChangesAsync();
             }
         }
@@ -188,9 +166,7 @@ namespace DriveIT.EntityFramework
             toChange.Email = toSetFrom.Email;
             toChange.FirstName = toSetFrom.FirstName;
             toChange.LastName = toSetFrom.LastName;
-            toChange.Password = toSetFrom.Password;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
-            toChange.Username = toSetFrom.Username;
         }
 
         public async Task<ContactRequest> GetContactRequestWithId(int idToGet)
@@ -205,7 +181,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.ContactRequests.Select(req => req).ToListAsync();
+                return await context.ContactRequests.ToListAsync();
             }
         }
 
@@ -240,9 +216,10 @@ namespace DriveIT.EntityFramework
         }
         private void CopyContactRequestProperties(ContactRequest toChange, ContactRequest toSetFrom)
         {
-            toChange.Car = toSetFrom.Car;
+            toChange.CarId = toSetFrom.CarId;
             toChange.Created = toSetFrom.Created;
-            toChange.Customer = toSetFrom.Customer;
+            toChange.CustomerId = toSetFrom.CustomerId;
+            toChange.EmployeeId = toSetFrom.EmployeeId;
         }
 
         public async Task<Comment> GetCommentWithId(int idToGet)
@@ -257,7 +234,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Comments.Where(c => c.Car.Id == carId).ToListAsync();
+                return await context.Comments.Where(c => c.CarId == carId).ToListAsync();
             }
         }
 
@@ -293,11 +270,11 @@ namespace DriveIT.EntityFramework
 
         private void CopyCommentProperties(Comment toChange, Comment toSetFrom)
         {
-            toChange.Car = toSetFrom.Car;
+            toChange.CarId = toSetFrom.CarId;
             toChange.DateCreated = toSetFrom.DateCreated;
             toChange.Description = toSetFrom.Description;
             toChange.Title = toSetFrom.Title;
-            toChange.Customer = toSetFrom.Customer;
+            toChange.CustomerId = toSetFrom.CustomerId;
         }
 
         public async Task<Sale> GetSaleWithId(int idToGet)
@@ -312,7 +289,7 @@ namespace DriveIT.EntityFramework
         {
             using (var context = new DriveITContext())
             {
-                return await context.Sales.Select(req => req).ToListAsync();
+                return await context.Sales.ToListAsync();
             }
         }
 
@@ -348,10 +325,10 @@ namespace DriveIT.EntityFramework
 
         private void CopySaleProperties(Sale toChange, Sale toSetFrom)
         {
-            toChange.Car = toSetFrom.Car;
-            toChange.Customer = toSetFrom.Customer;
+            toChange.CarId = toSetFrom.CarId;
+            toChange.CustomerId = toSetFrom.CustomerId;
             toChange.DateOfSale = toSetFrom.DateOfSale;
-            toChange.Employee = toSetFrom.Employee;
+            toChange.EmployeeId = toSetFrom.EmployeeId;
             toChange.Price = toSetFrom.Price;
         }
     }

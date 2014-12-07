@@ -29,6 +29,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
+            CarState = CarStateEnum.Initial;
         }
 
 
@@ -58,7 +59,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
 
 
-        private CarStateEnum _actualCarState = CarStateEnum.Initial;
+        private CarStateEnum _actualCarState;
         public  CarStateEnum CarState
         {
             get { return _actualCarState; }
@@ -245,7 +246,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Transmission");
             }
         }
-        public double TopSpeed
+        public float TopSpeed
         {
             get
             {
@@ -257,7 +258,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("TopSpeed");
             }
         }
-        public double NoughtTo100
+        public float NoughtTo100
         {
             get
             {
@@ -314,21 +315,21 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateCar()
+        public async void UpdateCar()
         {
             var carController = new CarController();
-            carController.UpdateCar(_carDto);
+            await carController.UpdateCar(_carDto);
             Status = "Car Updated";
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteCar()
+        public async void DeleteCar()
         {
             if (CarState != CarStateEnum.Initial)
             {
                 var carController = new CarController();
-                carController.DeleteCar(_carDto);
+                await carController.DeleteCar(_carDto);
                 CarId = null;
                 Status = "Car Deleted";
                 CarState = CarStateEnum.Initial;

@@ -16,12 +16,12 @@ namespace DriveIT.CarQuery
             var make = carToFill.Make;
 
             if (string.IsNullOrEmpty(make) || string.IsNullOrWhiteSpace(make))
-                throw new Exception("Make of the CarDto object must not be null.");
+                throw new ArgumentNullException(carToFill.Make, "Make of the CarDto object must not be null.");
 
             if (string.IsNullOrEmpty(model) || string.IsNullOrWhiteSpace(model))
-                throw new Exception("Model of the CarDto object must not be null.");
+                throw new ArgumentNullException(carToFill.Model, "Model of the CarDto object must not be null.");
 
-            var query = "make=" + make + "&model=" + model;
+            var query = "make=" + make + "&model=" + model + "&fuel=" + carToFill.Fuel;
 
             if (carToFill.Year.HasValue)
             {
@@ -39,14 +39,14 @@ namespace DriveIT.CarQuery
             {
                 if (result == null) result = await JSONWrapper.Read<TrimArray>(query);
                 if (result.Trims[0].model_0_to_100_kph.HasValue) 
-                    carToFill.NoughtTo100 = result.Trims[0].model_0_to_100_kph.Value;
+                    carToFill.NoughtTo100 = (float)result.Trims[0].model_0_to_100_kph.Value;
             }
 
             if (carToFill.TopSpeed == 0)
             {
                 if (result == null) result = await JSONWrapper.Read<TrimArray>(query);
                 if (result.Trims[0].model_top_speed_kph.HasValue) 
-                    carToFill.TopSpeed = result.Trims[0].model_top_speed_kph.Value;
+                    carToFill.TopSpeed = (float)result.Trims[0].model_top_speed_kph.Value;
             }
 
             if (string.IsNullOrEmpty(carToFill.Transmission) || string.IsNullOrWhiteSpace(carToFill.Transmission))

@@ -9,13 +9,19 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         private CustomerDto _customerDto;
 
-        public int? CustomerId
+        public enum CustomerEnum
+        {
+            NotInSystem,
+            InSystem
+        }
+
+        public string CustomerId
         {
             get
             {
                 try
                 {
-                    return _customerDto.Id.Value;
+                    return _customerDto.Id;
                 }
                 catch (Exception)
                 {
@@ -34,25 +40,64 @@ namespace DriveIT.WindowsClient.ViewModels
         public CustomerViewModel(CustomerDto customerDto)
         {
             _customerDto = customerDto;
+            CustomerState = CustomerEnum.InSystem;
         }
         public CustomerViewModel()
         {
-            
+            _customerDto = new CustomerDto();
+            CustomerState = CustomerEnum.NotInSystem;
         }
 
         #region ATTRIBUTES
-        public string Username
+        private string _status = "";
+        public string Status
         {
             get
             {
-                return _customerDto.Username;
+                try
+                {
+                    return _status;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+
             }
             set
             {
-                _customerDto.Username = value;
-                NotifyPropertyChanged("Username");
+                _status = value;
+                NotifyPropertyChanged("Status");
             }
         }
+
+
+
+        private CustomerEnum _actualCustomerState;
+        public CustomerEnum CustomerState
+        {
+            get { return _actualCustomerState; }
+            set
+            {
+                _actualCustomerState = value;
+                NotifyPropertyChanged("CreateUpdateButtonText");
+            }
+        }
+        public string CreateUpdateButtonText
+        {
+            get
+            {
+                switch (CustomerState)
+                {
+                    case CustomerEnum.NotInSystem:
+                        return "Create";
+                    default:
+                        return "Update";
+                }
+            }
+        }
+
         public string FirstName
         {
             get
@@ -104,29 +149,52 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion ATTRIBUTES
 
         #region CRUDS
+        public void SaveCustomer()
+        {
+            switch (CustomerState)
+            {
+                case CustomerEnum.NotInSystem:
+                    CreateCustomer();
+                    break;
+                default:
+                    UpdateCustomer();
+                    break;
+            }
+        }
+        
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void CreateCustomer()
+        public async void CreateCustomer()
         {
             var customerController = new CustomerController();
-            customerController.CreateCustomer(_customerDto);
+            await customerController.CreateCustomer(_customerDto);
+            Status = "Customer Created";
+            CustomerState = CustomerEnum.InSystem;
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateCustomer()
+        public async void UpdateCustomer()
         {
             var customerController = new CustomerController();
-            customerController.UpdateCustomer(_customerDto);
+            await customerController.UpdateCustomer(_customerDto);
+            Status = "Customer Updated";
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteCustomer()
+        public async void DeleteCustomer()
         {
-            var customerController = new CustomerController();
-            customerController.DeleteCustomer(_customerDto);
+            if (CustomerState != CustomerEnum.NotInSystem)
+            {
+                var customerController = new CustomerController();
+                await customerController.DeleteCustomer(_customerDto);
+                CustomerId = null;
+                Status = "Customer Deleted";
+                CustomerState = CustomerEnum.NotInSystem;
+            }
+            
         }
         #endregion CRUDS
 

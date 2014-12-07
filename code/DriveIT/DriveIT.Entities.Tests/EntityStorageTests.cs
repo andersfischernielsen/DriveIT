@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using DriveIT.EntityFramework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
@@ -164,7 +161,7 @@ namespace DriveIT.Entities.Tests
             mockSet.As<IQueryable<Car>>().Setup(m => m.ElementType).Returns(cars.ElementType);
             mockSet.As<IQueryable<Car>>().Setup(m => m.GetEnumerator()).Returns(cars.GetEnumerator());
 
-            mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(() => null);
+            mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(mockSet.Object.FindAsync(1));
 
             var mockContext = new Mock<DriveITContext>();
             mockContext.Setup(c => c.Cars).Returns(mockSet.Object);

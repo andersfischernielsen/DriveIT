@@ -10,14 +10,15 @@ namespace DriveIT.WindowsClient.Controllers
         {
         }
 
-        public async void CreateCustomer(CustomerDto customer)
+        public async Task CreateCustomer(CustomerDto customer)
         {
             await DriveITWebAPI.Create("customers", customer);
         }
 
-        public async Task<CustomerDto> ReadCustomer(int id)
+        public async Task<CustomerDto> ReadCustomer(string email)
         {
-            var customerToReturn = await DriveITWebAPI.Read<CustomerDto>("customers/" + id);
+            string search = "?id=" + email;
+            var customerToReturn = await DriveITWebAPI.Read<CustomerDto>("customers/" + search);
             return customerToReturn;
         }
 
@@ -26,19 +27,22 @@ namespace DriveIT.WindowsClient.Controllers
             var customers = await DriveITWebAPI.ReadList<CustomerDto>("customers");
             return customers;
         }
-        public async void UpdateCustomer(CustomerDto customer)
+        public async Task UpdateCustomer(CustomerDto customer)
         {
-            await DriveITWebAPI.Update("customers", customer, customer.Id.Value);
+            string search = "?id=" + customer.Email;
+            await DriveITWebAPI.Update("customers/" + search, customer);
         }
 
-        public async void DeleteCustomer(CustomerDto customer)
+        public async Task DeleteCustomer(CustomerDto customer)
         {
-            await DriveITWebAPI.Delete<CustomerDto>("customers", customer.Id.Value);
+            string search = "?id=" + customer.Email;
+            await DriveITWebAPI.Delete<CustomerDto>("customers/" + search);
         }
 
-        public async void DeleteCustomer(int id)
+        public async Task DeleteCustomer(int email)
         {
-            await DriveITWebAPI.Delete<CustomerDto>("customers", id);
+            string search = "?id=" + email;
+            await DriveITWebAPI.Delete<CustomerDto>("customers/" + search);
         }
     }
 }

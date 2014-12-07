@@ -24,19 +24,19 @@ namespace DriveIT.WindowsClient.Controllers
         {
             return await DriveITWebAPI.ReadList<CarDto>("cars");
         }
-        public async void UpdateCar(CarDto car)
+        public async Task UpdateCar(CarDto car)
         {
-            await DriveITWebAPI.Update("cars", car, car.Id.Value);
+            await DriveITWebAPI.Update("cars/" + car.Id, car);
         }
 
-        public async void DeleteCar(CarDto car)
+        public async Task DeleteCar(CarDto car)
         {
-            await DriveITWebAPI.Delete<CarDto>("cars", car.Id.Value);
+            await DriveITWebAPI.Delete<CarDto>("cars/" + car.Id);
         }
 
-        public async void DeleteCar(int id)
+        public async Task DeleteCar(int id)
         {
-            await DriveITWebAPI.Delete<CarDto>("cars", id);
+            await DriveITWebAPI.Delete<CarDto>("cars/" + id);
         }
     }
 }
