@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,18 +16,50 @@ namespace DriveIT.MVC.Controllers
 
         private CommentsController controller = new CommentsController();
 
-        public ActionResult Create(int carId)
+        public async Task<ActionResult> Index(int carId, int customerId)
+        {
+            ViewBag.carId = carId;
+            ViewBag.customerId = customerId;
+            var comments = await controller.Get(carId) as OkNegotiatedContentResult<List<CommentDto>>;
+            return View(comments.Content);
+        }
+
+        [HttpGet]
+        public ActionResult Create(int carId, int customerId)
         {
             var newComment = new CommentDto();
             newComment.CarId = carId;
+            newComment.CustomerId = customerId;
             return View(newComment);
         }
 
-        public async Task<ActionResult> Get()
+        [HttpPost]
+        public async Task<ActionResult> Create(CommentDto comment)
         {
-            var carId = 1;
-            var comments = await controller.Get(carId) as OkNegotiatedContentResult<IList<CommentDto>>;
-            return View(comments.Content);
+            comment.Date = DateTime.Now;
+            var commentToPost = await controller.Post(comment) as CreatedAtRouteNegotiatedContentResult<CommentDto>;
+            return RedirectToAction("Index", commentToPost.Content);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(int commentId)
+        {
+            var comment = await controller.Get(commentId) as OkNegotiatedContentResult<CommentDto>;
+            return View(comment.Content);
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult> Edit(CommentDto comment)
+        {
+            await controller.Put(comment.Id.Value, comment);
+            var updatedComment = await controller.Get(comment.Id.Value) as OkNegotiatedContentResult<CommentDto>;
+            return RedirectToAction("Index", updatedComment.Content);
+        }
+
+        public async Task<ActionResult> Delete(int id)
+        {
+            await controller.Delete(id);
+            return RedirectToAction("Index");
         }
 
         //public async Task<IList<CommentDto>> GetComments(int carId)
