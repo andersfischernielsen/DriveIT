@@ -9,7 +9,7 @@ namespace DriveIT.WindowsClient.Controllers
         public ContactRequestController()
         {
         }
-        public async void CreateContactRequest(ContactRequestDto contactRequest)
+        public async Task CreateContactRequest(ContactRequestDto contactRequest)
         {
             await DriveITWebAPI.Create("contactRequests", contactRequest);
         }
@@ -23,17 +23,17 @@ namespace DriveIT.WindowsClient.Controllers
             var contactRequests = await DriveITWebAPI.ReadList<ContactRequestDto>("contactRequests");
             return contactRequests;
         }
-        public async void UpdateContactRequest(ContactRequestDto contactRequest)
+        public async Task UpdateContactRequest(ContactRequestDto contactRequest)
         {
-            await DriveITWebAPI.Update("contactRequests", contactRequest, contactRequest.Id.Value);
+            await DriveITWebAPI.Update("contactRequests/" + contactRequest.Id, contactRequest);
         }
-        public async void DeleteContactRequest(ContactRequestDto contactRequest)
+        public async Task DeleteContactRequest(ContactRequestDto contactRequest)
         {
-            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests", contactRequest.Id.Value);
+            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests/" + contactRequest.Id);
         }
-        public async void DeleteContactRequest(int id)
+        public async Task DeleteContactRequest(int id)
         {
-            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests", id);
+            await DriveITWebAPI.Delete<ContactRequestDto>("contactRequests/" + id);
         }
     }
 }

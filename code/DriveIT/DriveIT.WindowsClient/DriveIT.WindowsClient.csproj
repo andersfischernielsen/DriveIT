@@ -112,19 +112,32 @@
     <Compile Include="ViewModels\CarViewModel.cs" />
     <Compile Include="ViewModels\CustomerListViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeDetailsViewModel.cs" />
     <Compile Include="ViewModels\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\SaleListViewModel.cs" />
     <Compile Include="ViewModels\SaleViewModel.cs" />
     <Compile Include="ViewModels\ContactRequestListViewModel.cs" />
     <Compile Include="ViewModels\ContactRequestViewModel.cs" />
     <Compile Include="ViewModels\IViewModelBase.cs" />
-    <Compile Include="ViewModels\UserControlWithViewModelModel.cs" />
     <Compile Include="Views\EntityCarWindow.xaml.cs">
       <DependentUpon>EntityCarWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EntityWindow.xaml.cs">
-      <DependentUpon>EntityWindow.xaml</DependentUpon>
+    <Compile Include="Views\EntityContactRequestWindow.xaml.cs">
+      <DependentUpon>EntityContactRequestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EntityCustomerWindow.xaml.cs">
+      <DependentUpon>EntityCustomerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EntityEmployeeWindow.xaml.cs">
+      <DependentUpon>EntityEmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EntitySaleWindow.xaml.cs">
+      <DependentUpon>EntitySaleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -142,9 +155,6 @@
     <Compile Include="Views\UserControls\MainViewPowerToolBarUC.xaml.cs">
       <DependentUpon>MainViewPowerToolBarUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControlWithViewModel.xaml.cs">
-      <DependentUpon>UserControlWithViewModel.xaml</DependentUpon>
-    </Compile>
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -153,9 +163,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EntityWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\EntityContactRequestWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EntityCustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EntityEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EntitySaleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -166,10 +192,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControls\MainViewPowerToolBarUC.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UserControlWithViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

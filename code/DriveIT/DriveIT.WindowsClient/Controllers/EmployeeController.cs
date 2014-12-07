@@ -11,13 +11,14 @@ namespace DriveIT.WindowsClient.Controllers
 
         }
 
-        public async void CreateEmployee(EmployeeDto employee)
+        public async Task CreateEmployee(EmployeeDto employee)
         {
             await DriveITWebAPI.Create("employees", employee);
         }   
-        public async Task<EmployeeDto> ReadEmployee(int id)
+        public async Task<EmployeeDto> ReadEmployee(string email)
         {
-            var employeeToReturn = await DriveITWebAPI.Read<EmployeeDto>("employees/" + id);
+            string search = "?id=" + email;
+            var employeeToReturn = await DriveITWebAPI.Read<EmployeeDto>("employees/" + search);
             return employeeToReturn;
         }
         public async Task<IList<EmployeeDto>> ReadEmployeeList()
@@ -25,17 +26,20 @@ namespace DriveIT.WindowsClient.Controllers
             var employees = await DriveITWebAPI.ReadList<EmployeeDto>("employees");
             return employees;
         }
-        public async void UpdateEmployee(EmployeeDto employee)
+        public async Task UpdateEmployee(EmployeeDto employee)
         {
-            await DriveITWebAPI.Update("employees", employee, employee.Id.Value);
+            string search = "?id=" + employee.Email;
+            await DriveITWebAPI.Update("employees/" + search, employee);
         }
-        public async void DeleteEmployee(EmployeeDto employee)
+        public async Task DeleteEmployee(EmployeeDto employee)
         {
-            await DriveITWebAPI.Delete<EmployeeDto>("employees", employee.Id.Value);
+            string search = "?id=" + employee.Email;
+            await DriveITWebAPI.Delete<EmployeeDto>("employees/" + search);
         }
-        public async void DeleteEmployee(int id)
+        public async void DeleteEmployee(int email)
         {
-            await DriveITWebAPI.Delete<EmployeeDto>("employees", id);
+            string search = "?id=" + email;
+            await DriveITWebAPI.Delete<EmployeeDto>("employees/" + search);
         }
     }
 }

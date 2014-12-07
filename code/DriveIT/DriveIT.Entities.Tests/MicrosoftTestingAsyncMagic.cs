@@ -5,6 +5,9 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
+// This class was copied from a MSDN article regarding testing of Entity Framework and Mocking using the Moq framework.
+// Its methods are necessary to have to test using Moq asynchronously since EF has synchronous implementation of some 
+// of its query handling, as far as I understood it. 
 namespace DriveIT.Entities.Tests
 {
     public class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider
