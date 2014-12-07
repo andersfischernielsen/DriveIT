@@ -82,7 +82,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CommentsControllerTests.cs" />
     <Compile Include="CarsControllerTests.cs" />
+    <Compile Include="ContactRequestsControllerTests.cs" />
+    <Compile Include="CustomersControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
