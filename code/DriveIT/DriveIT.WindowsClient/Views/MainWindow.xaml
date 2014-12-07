@@ -8,6 +8,9 @@
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
         Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <ViewModels:MainViewViewModel/>
+    </Window.DataContext>
     <Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger>
@@ -127,7 +130,7 @@
                 <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,147,10"/>
                 <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,29,10"/>
             </Grid>
-            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0" BorderThickness="1,0">
+            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0" BorderThickness="1,0" SelectedIndex="{Binding TabIndex}">
                 <TabControl.Resources>
                     <!-- Remove the headers by overriding the header style -->
                     <Style TargetType="{x:Type TabItem}">
@@ -330,51 +333,60 @@
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                 </Grid.Background>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="-5,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070" BorderThickness="0">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="-5,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" BorderBrush="#FF707070" BorderThickness="0">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                     </Button.Background>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="RequestForContactBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="-5,115,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="-5,115,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CarBarState"/>
                             <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="1"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="-5,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="-5,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="OrdersBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="2"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=SalesDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="-5,295,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CustomersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="-5,295,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CustomerBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="3"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CustomersDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="-5,385,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="-5,385,0,0" VerticalAlignment="Top" Height="80" FontSize="18" RenderTransformOrigin="0.676,0.36">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="EmployeeBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="4"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
@@ -384,7 +396,7 @@
                 <Rectangle x:Name="rectangle" Fill="#FF4F5A5B" HorizontalAlignment="Right" Height="80" Margin="187,0,0,0" VerticalAlignment="Top" Width="6"/>
             </Grid>
             <Grid Grid.Column="1" Margin="10">
-                <TabControl x:Name="EntitiesTabControl">
+                <TabControl x:Name="EntitiesTabControl" SelectedIndex="{Binding TabIndex}">
                     <TabControl.Resources>
                         <!-- Remove the headers by overriding the header style -->
                         <Style TargetType="{x:Type TabItem}">
