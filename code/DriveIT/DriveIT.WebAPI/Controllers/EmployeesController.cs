@@ -22,9 +22,7 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Employees
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(
-                from employee in await _repo.GetAllEmployees()
-                select employee.ToDto());
+            return Ok((await _repo.GetAllEmployees()).Select(employee => employee.ToDto()).ToList());
         }
 
         // GET: api/Employees/5
