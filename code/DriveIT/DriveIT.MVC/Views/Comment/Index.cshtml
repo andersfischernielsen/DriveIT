@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DriveIT.Models.CommentDto>
+
+<h1>Car Comments</h1>
+<p>These are the comments for the specified car that you choose.
+    You are able to create a new comment below.</p>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new {ViewBag.carId, ViewBag.customerId})
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { commentId = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { commentId = item.Id })
+        </td>
+    </tr>
+}
+</table>
