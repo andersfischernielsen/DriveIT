@@ -36,6 +36,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -60,6 +66,10 @@
     <ProjectReference Include="..\DriveIT.Entities\DriveIT.Entities.csproj">
       <Project>{16C04BA6-6FE0-4986-B33A-DB39A723E02E}</Project>
       <Name>DriveIT.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
+      <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
+      <Name>DriveIT.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

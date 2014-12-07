@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,14 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddExternalLoginBindingModel.cs" />
     <Compile Include="CarDto.cs" />
+    <Compile Include="ChangePasswordBindingModel.cs" />
     <Compile Include="ContactRequestDto.cs" />
     <Compile Include="CommentDto.cs" />
     <Compile Include="CustomerDto.cs" />
     <Compile Include="EmployeeDto.cs" />
+    <Compile Include="ExternalLoginViewModel.cs" />
     <Compile Include="FuelType.cs" />
+    <Compile Include="ManageInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterBindingModel.cs" />
+    <Compile Include="RegisterExternalBindingModel.cs" />
+    <Compile Include="RemoveLoginBindingModel.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="SaleDto.cs" />
+    <Compile Include="SetPasswordBindingModel.cs" />
+    <Compile Include="UserInfoViewModel.cs" />
+    <Compile Include="UserLoginInfoViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

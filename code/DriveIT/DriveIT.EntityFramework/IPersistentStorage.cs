@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DriveIT.Entities;
 
@@ -21,25 +17,21 @@ namespace DriveIT.EntityFramework
 
         Task<int> DeleteCar(int id, DriveITContext optionalContext = null);
 
-        Task<Employee> GetEmployeeWithId(int idToGet);
+        Task<Employee> GetEmployeeWithId(string idToGet);
 
         Task<List<Employee>> GetAllEmployees();
 
-        Task<int> CreateEmployee(Employee employeeToCreate);
+        Task<int> UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith);
 
-        Task<int> UpdateEmployee(int idToUpdate, Employee employeeToReplaceWith);
+        Task<int> DeleteEmployee(string idToDelete);
 
-        Task<int> DeleteEmployee(int idToDelete);
-
-        Task<Customer> GetCustomerWithId(int idToGet);
+        Task<Customer> GetCustomerWithId(string idToGet);
 
         Task<List<Customer>> GetAllCustomers();
 
-        Task<int> CreateCustomer(Customer customerToCreate);
+        Task<int> UpdateCustomer(string idToUpdate, Customer customerToReplaceWith);
 
-        Task<int> UpdateCustomer(int idToUpdate, Customer customerToReplaceWith);
-
-        Task<int> DeleteCustomer(int idToDelete);
+        Task<int> DeleteCustomer(string idToDelete);
 
         Task<ContactRequest> GetContactRequestWithId(int idToGet);
 

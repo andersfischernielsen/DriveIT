@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DriveIT.WebAPI.Controllers
 {
@@ -19,6 +21,7 @@ namespace DriveIT.WebAPI.Controllers
         public CustomersController() : this(new EntityStorage()) { }
 
         // GET: api/Customers
+        [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
@@ -26,9 +29,14 @@ namespace DriveIT.WebAPI.Controllers
                 select customer.ToDto()).ToList());
         }
 
-        // GET: api/Customers/5
-        public async Task<IHttpActionResult> Get(int id)
+        // GET: api/Customers/?id=mlin@itu.dk
+        [Authorize]
+        public async Task<IHttpActionResult> Get(string id)
         {
+            if (User.IsInRole("Customer") && User.Identity.GetUserId() != id)
+            {
+                return Unauthorized();
+            }
             var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
@@ -37,25 +45,11 @@ namespace DriveIT.WebAPI.Controllers
             return Ok(customer.ToDto());
         }
 
-        // POST: api/Customers
-        public async Task<IHttpActionResult> Post([FromBody]CustomerDto value)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (value == null)
-            {
-                return BadRequest("Null value not allowed.");
-            }
-            var newCustomerId = await _repo.CreateCustomer(value.ToEntity());
-            value.Id = newCustomerId;
-            return CreatedAtRoute("DefaultApi", new { id = newCustomerId }, value);
-        }
-
         // PUT: api/Customers/5
-        public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerDto value)
+        [AuthorizeRoles(Role.Administrator, Role.Employee)]
+        public async Task<IHttpActionResult> Put(string id, [FromBody]CustomerDto value)
         {
+            //Todo check user is changing himself!
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -70,8 +64,10 @@ namespace DriveIT.WebAPI.Controllers
         }
 
         // DELETE: api/Customers/5
-        public async Task<IHttpActionResult> Delete(int id)
+        [AuthorizeRoles(Role.Administrator, Role.Customer)]
+        public async Task<IHttpActionResult> Delete(string id)
         {
+            //Todo check that user can only delete himself.
             var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {

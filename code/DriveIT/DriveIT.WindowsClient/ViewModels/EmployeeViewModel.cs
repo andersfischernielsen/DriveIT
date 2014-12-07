@@ -7,15 +7,20 @@ namespace DriveIT.WindowsClient.ViewModels
 {
     public class EmployeeViewModel : IViewModelBase
     {
+        public enum EmployeeStateEnum
+        {
+            NotInSystem,
+            InSystem
+        }
         private EmployeeDto _employeeDto;
 
-        public int? EmployeeId
+        public string EmployeeId
         {
             get
             {
                 try
                 {
-                    return _employeeDto.Id.Value;
+                    return _employeeDto.Id;
                 }
                 catch (Exception)
                 {
@@ -35,27 +40,77 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
+            EmployeeState = EmployeeStateEnum.InSystem;
         }
 
         public EmployeeViewModel()
         {
-
+            _employeeDto = new EmployeeDto();
+            EmployeeState = EmployeeStateEnum.NotInSystem;
         }
 
 
         #region Attributes
-        public string Username
+        private string _status = "";
+        public string Status
         {
             get
             {
-                return _employeeDto.Username;
+                try
+                {
+                    return _status;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+
             }
             set
             {
-                _employeeDto.Username = value;
-                NotifyPropertyChanged("Username");
+                _status = value;
+                NotifyPropertyChanged("Status");
             }
         }
+
+        private EmployeeStateEnum _actualEmployeeState = EmployeeStateEnum.InSystem;
+        public EmployeeStateEnum EmployeeState
+        {
+            get { return _actualEmployeeState; }
+            set
+            {
+                _actualEmployeeState = value;
+                NotifyPropertyChanged("CreateUpdateButtonText");
+            }
+        }
+        public string CreateUpdateButtonText
+        {
+            get
+            {
+                switch (EmployeeState)
+                {
+                    case EmployeeStateEnum.NotInSystem:
+                        return "Create";
+                    default:
+                        return "Update";
+                }
+            }
+        }
+        
+        public string Email
+        {
+            get
+            {
+                return _employeeDto.Email;
+            }
+            set
+            {
+                _employeeDto.Email = value;
+                NotifyPropertyChanged("Email");
+            }
+        }
+
         public string FirstName
         {
             get
@@ -93,35 +148,59 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        
+
         #endregion Attributes
 
         #region CRUDS
 
-        /// <summary>
-        /// Gets called from the view
-        /// </summary>
-        public void CreateEmployee()
+        public void SaveEmployee()
         {
-            var employeeController = new EmployeeController();
-            employeeController.CreateEmployee(_employeeDto);
+            switch (EmployeeState)
+            {
+                case EmployeeStateEnum.NotInSystem:
+                    CreateEmployee();
+                    break;
+                default:
+                    UpdateEmployee();
+                    break;
+            }
         }
 
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void UpdateEmployee()
+        public async void CreateEmployee()
         {
             var employeeController = new EmployeeController();
-            employeeController.UpdateEmployee(_employeeDto);
+            await employeeController.CreateEmployee(_employeeDto);
+            Status = "Employee Created";
+            EmployeeState = EmployeeStateEnum.InSystem;
         }
 
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public void DeleteEmployee()
+        public async void UpdateEmployee()
         {
             var employeeController = new EmployeeController();
-            employeeController.DeleteEmployee(_employeeDto);
+            await employeeController.UpdateEmployee(_employeeDto);
+            Status = "Employee Updated";
+        }
+
+        /// <summary>
+        /// Gets called from the view
+        /// </summary>
+        public async void DeleteEmployee()
+        {
+            if (EmployeeState != EmployeeStateEnum.NotInSystem)
+            {
+                var employeeController = new EmployeeController();
+                await employeeController.DeleteEmployee(_employeeDto);
+                EmployeeId = null;
+                Status = "Employee Deleted";
+                EmployeeState = EmployeeStateEnum.NotInSystem;
+            }
         }
 
         #endregion CRUDS

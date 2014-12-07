@@ -13,9 +13,11 @@ namespace DriveIT.Entities
         public DateTime DateCreated { get; set; }
         [ForeignKey("Car")]
         public int CarId { get; set; }
+
         public virtual Car Car { get; set; }
         [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
+
         public virtual Customer Customer { get; set; }
     }
 }

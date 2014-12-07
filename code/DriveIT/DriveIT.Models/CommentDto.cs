@@ -9,6 +9,6 @@ namespace DriveIT.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public int CarId { get; set; }
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
     }
 }

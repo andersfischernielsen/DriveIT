@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
-             StartupUri="Views/MainWindow.xaml">
+             StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
          
     	<ResourceDictionary>
@@ -18,6 +18,8 @@
             <Color x:Key="TextBoxBackgroundColor"   A="255" R="193" G="197" B="207"></Color>
             <Color x:Key="TextBoxTextColor"         A="255" R="44" G="62" B="80"></Color>
             <Color x:Key="StatusLabelColor"         A="255" R="4" G="7" B="25"></Color>
+            <Color x:Key="WhiteTextColor"           A="255" R="250" G="235" B="215"></Color>
+            <SolidColorBrush x:Key="WhiteTextColorBrush" Color="{DynamicResource WhiteTextColor}"></SolidColorBrush>
             <!-- http://www.flatuicolorpicker.com/ -->
             <Color x:Key="RequestsForContactBarColor">#26A65B</Color>
             <Color x:Key="RequestsForContactBarGridColor">#3FC380</Color>
@@ -62,7 +64,7 @@
             <Style x:Key="HeaderLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="32"/>
                 <Setter Property="FontFamily" Value="Segoe UI Light"/>
-                <Setter Property="Foreground" Value="AntiqueWhite"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
             </Style>
 
             <Style x:Key="EntityWindowHeaderLabel" TargetType="Label">
@@ -92,7 +94,7 @@
 
 
             <Style x:Key="MenuBarButtonStyle" TargetType="Button">
-                <Setter Property="Foreground" Value="AntiqueWhite"/>
+                <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
                 <Setter Property="FontFamily" Value="Segoe UI" />
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 <Setter Property="Template">
