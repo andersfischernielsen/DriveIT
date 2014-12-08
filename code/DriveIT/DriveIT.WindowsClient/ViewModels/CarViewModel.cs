@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using DriveIT.Models;
@@ -9,7 +11,6 @@ namespace DriveIT.WindowsClient.ViewModels
     public class CarViewModel : IViewModelBase
     {
         private CarDto _carDto;
-
         public enum CarStateEnum
         {
             Initial,
@@ -18,17 +19,41 @@ namespace DriveIT.WindowsClient.ViewModels
             Sold,
         }
 
+        public static List<string> FueltypeStrings
+        {
+            get
+            {
+                // todo get from enum instead. VERY BAD CODE
+                return new List<string>()
+                {
+                    FuelType.Gasoline.ToString(),
+                    FuelType.Diesel.ToString(),
+                    FuelType.Electric.ToString(),
+                };
+            }
+            set { }
+        }
+
         // todo ; til at notifie at alt er updated.
 
         public CarViewModel(CarDto carDto)
         {
             _carDto = carDto;
             CarState = CarStateEnum.ForSale;
+            if (_carDto.ImagePaths != null)
+            {
+                ImageViewModel = new ImageViewModel(_carDto.ImagePaths[0]);
+            }
+            else
+            {
+                ImageViewModel = new ImageViewModel();
+            }
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
+            ImageViewModel = new ImageViewModel();
             CarState = CarStateEnum.Initial;
         }
 
@@ -57,7 +82,16 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-
+        private ImageViewModel _imageViewModel;
+        public ImageViewModel ImageViewModel
+        {
+            get { return _imageViewModel; }
+            set
+            {
+                _imageViewModel = value;
+                NotifyPropertyChanged("ImageViewModel");
+            }
+        }
 
         private CarStateEnum _actualCarState;
         public  CarStateEnum CarState
@@ -103,7 +137,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
-
         public string CarModel
         {
             get { return _carDto.Model; }
@@ -125,7 +158,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarMake");
             }
         }
-
         public int Year
         {
             get

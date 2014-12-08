@@ -18,8 +18,15 @@
             <Grid.Background>
                 <SolidColorBrush Color="{DynamicResource CarsBarGridColor}"/>
             </Grid.Background>
-            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="60" Content="Login" Margin="0,10,10,0">
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF797777">
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource PowerToolButtonStyle}" Margin="0,10,10,0" >
+                    <StackPanel>
+                        <Image Source="/DriveIT.WindowsClient;component/Image/icons/users/login.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                        <TextBlock Text="Login" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                    </StackPanel>
+                    <Button.Background>
+                        <SolidColorBrush Color="#FF353535"/>
+                    </Button.Background>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="Login"/>
@@ -28,7 +35,10 @@
                 </Button>
             </Border>
             <Label Style="{DynamicResource HeaderLabel}" Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="60" Content="Skip Login" Margin="0,10,129,0" Grid.Column="1">
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="60" Content="Skip Login" Margin="0,10,100,0" Grid.Column="1" Foreground="White">
+                <Button.Background>
+                    <SolidColorBrush Color="#FF353535"/>
+                </Button.Background>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SkipLogin"/>
