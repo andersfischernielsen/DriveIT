@@ -178,33 +178,45 @@
                 <TabItem Header="CarsPowerTabItem">
                     <Grid Margin="-2">
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="CreateCar" HorizontalAlignment="Left" Margin="211,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="211,10,0,10">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Stretch="Uniform"/>
+                            </Button.Background>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="CreateNewCarWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="323,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="323,10,0,10">
+                        	<Button.Background>
+                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Stretch="Uniform"/>
+                            </Button.Background>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateCarWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="441,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="441,10,0,10">
+                        	<Button.Background>
+                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Stretch="Uniform"/>
+                            </Button.Background>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="DeleteCar"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="563,10,0,10">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="563,10,0,10">
+                        	<Button.Background>
+                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Stretch="Uniform"/>
+                            </Button.Background>
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="Click">
+                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="687,10,0,10"/>
                     </Grid>
