@@ -175,11 +175,21 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+<<<<<<< HEAD
         private static void ErrorMessagePopUp()
         {
 
             var response = MessageBox.Show("There was an error processing your request...", "Error!",
                 MessageBoxButton.OK, MessageBoxImage.Exclamation);
+=======
+
+        public static async Task<String> UploadImage(byte[] imageData)
+        {
+            var content = new MultipartFormDataContent {new ByteArrayContent(imageData)};
+            var message = await _httpClient.PostAsync("upload", content);
+            message.EnsureSuccessStatusCode();
+            return (await message.Content.ReadAsAsync<List<String>>()).SingleOrDefault();
+>>>>>>> 4ade2d64af66893d85c8d410cea7a300d910fdfe
         }
     }
 }

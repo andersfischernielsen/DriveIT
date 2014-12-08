@@ -175,7 +175,7 @@
                     </StackPanel>
                 </Button>
             </Grid>
-            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0" BorderThickness="1,0" SelectedIndex="{Binding TabIndex}">
+            <TabControl x:Name="PowerToolsbarTabControl" BorderThickness="1,0" SelectedIndex="{Binding TabIndex}" Margin="0,-4.5,0,0">
                 <TabControl.Resources>
                     <!-- Remove the headers by overriding the header style -->
                     <Style TargetType="{x:Type TabItem}">
@@ -200,7 +200,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Contact Requests" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="53" Width="294"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10.333,10,0,9.667" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -214,7 +214,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -228,7 +228,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -242,7 +242,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -256,7 +256,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bib bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bib bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -274,7 +274,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -288,7 +288,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -302,7 +302,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -316,7 +316,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -330,7 +330,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -348,7 +348,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -362,7 +362,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -376,7 +376,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -390,7 +390,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -404,7 +404,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -422,7 +422,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -436,7 +436,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -450,7 +450,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -464,7 +464,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -478,7 +478,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -499,7 +499,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -513,7 +513,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -527,7 +527,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -541,7 +541,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -555,7 +555,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
