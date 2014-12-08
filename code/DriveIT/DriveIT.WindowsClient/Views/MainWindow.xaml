@@ -203,7 +203,10 @@
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
-                            <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Add" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="CreateNewContactRequestWindow"/>
@@ -214,7 +217,10 @@
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
-                            <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="UpdateContactRequestWindow"/>
@@ -225,7 +231,10 @@
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
-                            <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="DeleteContactRequest"/>
@@ -236,14 +245,17 @@
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
-                            <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Merge error" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bib bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
