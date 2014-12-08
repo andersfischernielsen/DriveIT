@@ -187,7 +187,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Merge error" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
