@@ -25,7 +25,10 @@ namespace DriveIT.WebAPI.Controllers
         [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get()
         {
-            return Ok((await _repo.GetAllContactRequests()).Select(contactRequest => contactRequest.ToDto()).ToList());
+            return Ok(
+                (await _repo.GetAllContactRequests())
+                .Select(contactRequest => contactRequest.ToDto())
+                .ToList());
         }
 
         // GET: api/ContactRequests/5
@@ -47,13 +50,17 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return Unauthorized();
             }
-            var requests = (await _repo.GetAllContactRequests()).Where(request => request.CustomerId == userId);
+            var requests = (await _repo.GetAllContactRequests())
+                .Where(request => request.CustomerId == userId);
             var usersRequests = requests as IList<ContactRequest> ?? requests.ToList();
             if (!usersRequests.Any())
             {
                 return NotFound();
             }
-            return Ok(usersRequests.Select(request => request.ToDto()).ToList());
+            return Ok(
+                usersRequests
+                .Select(request => request.ToDto())
+                .ToList());
         }
 
         // POST: api/ContactRequests

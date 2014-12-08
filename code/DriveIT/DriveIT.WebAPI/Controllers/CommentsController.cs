@@ -31,7 +31,10 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(comments.Select(comment => comment.ToDto()).ToList());
+            return Ok(
+                comments
+                .Select(comment => comment.ToDto())
+                .ToList());
         }
 
         // POST: api/Comments
