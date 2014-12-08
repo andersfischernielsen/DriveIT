@@ -25,63 +25,50 @@ namespace DriveIT.MVC.Controllers
     {
         private ApplicationUserManager _userManager;
 
-        //public AccountController()
-        //{
-        //}
+        public AccountController()
+        {
+        }
 
-        //public AccountController(ApplicationUserManager userManager)
-        //{
-        //    UserManager = userManager;
-        //}
+        public AccountController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
 
-        //public ApplicationUserManager UserManager {
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    }
-        //    private set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
+        public ApplicationUserManager UserManager {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         private AccountController controller = new AccountController();
 
-        ////
-        //// GET: /Account/Login
-        //[AllowAnonymous]
-        //public ActionResult Login()
-        //{
-        //    return View();
-        //}
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
 
-        ////
-        //// POST: /Account/Login
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await UserManager.FindAsync(model.Email, model.Password);
-        //        if (user != null)
-        //        {
-        //            await SignInAsync(user, model.RememberMe);
-        //            return RedirectToLocal(returnUrl);
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Invalid username or password.");
-        //        }
-        //    }
-
-        //    // If we got this far, something failed, redisplay form
-        //    return View(model);
-        //}
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(string email, string password)
+        {
+            
+            return View(model);
+        }
 
         //
         // GET: /Account/Register
-        [System.Web.Mvc.AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -89,7 +76,7 @@ namespace DriveIT.MVC.Controllers
 
         //
         // POST: /Account/Register
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterBindingModel model)
         {
