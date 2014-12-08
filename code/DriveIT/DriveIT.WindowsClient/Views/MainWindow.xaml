@@ -158,7 +158,7 @@
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="53" Width="294"/>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Contact Requests" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="53" Width="294"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
