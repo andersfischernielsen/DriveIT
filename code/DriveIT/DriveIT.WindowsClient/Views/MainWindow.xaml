@@ -577,7 +577,7 @@
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                 </Grid.Background>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="-5,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" BorderBrush="#FF707070" BorderThickness="0">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Contact Requests" Margin="-5,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" BorderBrush="#FF707070" BorderThickness="0">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                     </Button.Background>
