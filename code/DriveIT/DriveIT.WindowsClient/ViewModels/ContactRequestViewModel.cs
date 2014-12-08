@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Documents;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 
@@ -14,6 +17,8 @@ namespace DriveIT.WindowsClient.ViewModels
             NotInSystem,
             InSystem
         }
+
+        public IList<string> CarToChooseFrom { get; set; }
 
         public int? ContactRequestId
         {
@@ -47,6 +52,11 @@ namespace DriveIT.WindowsClient.ViewModels
             _contactRequestDto = new ContactRequestDto();
             //Requested = DateTime.Now;
             ContactRequestState = ContactRequestEnum.NotInSystem;
+        }
+
+        private void InitiateForeignLists()
+        {
+            CarToChooseFrom = new CarController().ReadCarList().Result.OrderBy(i => i.Make).ToList().Select(i => "ID: " + i.Id + "Make: " + i.Make).ToList();
         }
 
         

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using DriveIT.Models;
@@ -9,13 +11,27 @@ namespace DriveIT.WindowsClient.ViewModels
     public class CarViewModel : IViewModelBase
     {
         private CarDto _carDto;
-
         public enum CarStateEnum
         {
             Initial,
             ForSale,
             Advertised,
             Sold,
+        }
+
+        public static List<string> FueltypeStrings
+        {
+            get
+            {
+                // todo get from enum instead. VERY BAD CODE
+                return new List<string>()
+                {
+                    FuelType.Gasoline.ToString(),
+                    FuelType.Diesel.ToString(),
+                    FuelType.Electric.ToString(),
+                };
+            }
+            set { }
         }
 
         // todo ; til at notifie at alt er updated.
