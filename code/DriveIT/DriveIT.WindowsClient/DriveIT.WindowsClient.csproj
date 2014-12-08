@@ -215,7 +215,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Image\icons\shared\add.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -261,6 +260,30 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\CarImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\shared\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\shared\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\shared\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\shared\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\shared\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\shared\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\shared\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icons\cars\carquery.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
