@@ -94,8 +94,8 @@
                 <Setter Property="HorizontalContentAlignment" Value="Right"/>
             </Style>
 
-            <Style x:Key="PowerToolButtonStyle">
-                <Setter Property="FrameworkElement.Width" Value="80"/>
+            <Style x:Key="PowerToolButtonStyle" TargetType="Button">
+                <Setter Property="Width" Value="80"/>
             </Style>
 
 

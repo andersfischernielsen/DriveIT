@@ -649,14 +649,7 @@
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                     </Border.BorderBrush>
                 </Border>
-                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260">
-                    <Image.OpacityMask>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="Black" Offset="0"/>
-                            <GradientStop Color="White" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Image.OpacityMask>
-                </Image>
+                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260"/>
                 <Label Margin="10,73,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
                 <Label Margin="10,119,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
                 <Label Margin="10,211,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
