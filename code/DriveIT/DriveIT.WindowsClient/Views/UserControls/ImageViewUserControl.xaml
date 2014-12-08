@@ -9,18 +9,18 @@
 	xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 	x:Class="DriveIT.WindowsClient.Views.UserControls.ImageViewUserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-    <UserControl.Resources>
-        <viewModels:ImageViewModel x:Key="ImageViewModelDataSource" />
-    </UserControl.Resources>
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource ImageViewModelDataSource}}">
+    <Grid x:Name="LayoutRoot">
+        <Grid.DataContext>
+            <viewModels:ImageViewModel/>
+        </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="48"/>
         </Grid.RowDefinitions>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource BackgroundColor}"/>
         </Grid.Background>
         <Image x:Name="ChoosenImage" Margin="10,11" Source="{Binding Text, ElementName=ImagePathTextBox}"/>
-        <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" x:Name="ImagePathTextBox" Height="30" Margin="10,10,10,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Watermark="Image Path - Copy Paste from explorer here" Text="{Binding ImagePath}"/>
+        <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" x:Name="ImagePathTextBox" Height="28" Margin="10,10,10,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Watermark="Image Path - Copy Paste from explorer here" Text="{Binding ImagePath}"/>
     </Grid>
 </UserControl>

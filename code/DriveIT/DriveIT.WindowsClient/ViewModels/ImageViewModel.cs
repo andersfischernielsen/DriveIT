@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,17 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion
 
-        private string _imagePath;
+        public ImageViewModel()
+        {
+        }
 
+        public ImageViewModel(string imagePath)
+        {
+            ImagePath = imagePath;
+        }
+
+        #region Properties
+        private string _imagePath;
         public string ImagePath
         {
             get { return _imagePath; }
@@ -32,5 +42,16 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Status");
             }
         }
+        //private Image _image;
+        //public Image Image
+        //{
+        //    get { return _image; }
+        //    set
+        //    {
+        //        _image = value;
+        //        NotifyPropertyChanged("Image");
+        //    }
+        //}
+        #endregion Properties
     }
 }
