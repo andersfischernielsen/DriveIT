@@ -151,6 +151,9 @@
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\ContactRequestController.cs" />
+    <Compile Include="Views\UserControls\ImageViewUserControl.xaml.cs">
+      <DependentUpon>ImageViewUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\MainViewEntitiesUC.xaml.cs">
       <DependentUpon>MainViewEntitiesUC.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\ImageViewUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
