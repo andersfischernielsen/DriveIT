@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,21 @@ namespace DriveIT.WindowsClient.Views
             DataContext = vm; // this sets the newly created ViewModel as the DataContext for the View
             if (vm.CloseAction == null)
                 vm.CloseAction = new Action(() => this.Close());
+        }
+        private void CloseWindowPopUp(object sender, CancelEventArgs e)
+        {
+            if (Visibility != Visibility.Visible) return;
+
+            var response = MessageBox.Show("Do you really want to exit?", "Exiting...",
+                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (response == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }
