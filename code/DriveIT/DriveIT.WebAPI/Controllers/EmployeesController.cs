@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
@@ -23,8 +22,9 @@ namespace DriveIT.WebAPI.Controllers
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
-                from employee in await _repo.GetAllEmployees()
-                select employee.ToDto());
+                (await _repo.GetAllEmployees())
+                .Select(employee => employee.ToDto())
+                .ToList());
         }
 
         // GET: api/Employees/5

@@ -12,26 +12,26 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateCar(Car carToCreate, DriveITContext optionalContext = null);
 
-        Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith,
+        Task UpdateCar(int idToUpdate, Car carToReplaceWith,
             DriveITContext optionalContext = null);
 
-        Task<int> DeleteCar(int id, DriveITContext optionalContext = null);
+        Task DeleteCar(int id, DriveITContext optionalContext = null);
 
         Task<Employee> GetEmployeeWithId(string idToGet);
 
         Task<List<Employee>> GetAllEmployees();
 
-        Task<int> UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith);
+        Task UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith);
 
-        Task<int> DeleteEmployee(string idToDelete);
+        Task DeleteEmployee(string idToDelete);
 
         Task<Customer> GetCustomerWithId(string idToGet);
 
         Task<List<Customer>> GetAllCustomers();
 
-        Task<int> UpdateCustomer(string idToUpdate, Customer customerToReplaceWith);
+        Task UpdateCustomer(string idToUpdate, Customer customerToReplaceWith);
 
-        Task<int> DeleteCustomer(string idToDelete);
+        Task DeleteCustomer(string idToDelete);
 
         Task<ContactRequest> GetContactRequestWithId(int idToGet);
 
@@ -39,10 +39,10 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateContactRequest(ContactRequest contactRequestToCreate);
 
-        Task<int> UpdateContactRequest(int idToUpdate,
+        Task UpdateContactRequest(int idToUpdate,
             ContactRequest contactRequestToReplaceWith);
 
-        Task<int> DeleteContactRequest(int idToDelete);
+        Task DeleteContactRequest(int idToDelete);
 
         Task<Comment> GetCommentWithId(int idToGet);
 
@@ -50,9 +50,9 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateComment(Comment commentToCreate);
 
-        Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith);
+        Task UpdateComment(int idToUpdate, Comment commentToReplaceWith);
 
-        Task<int> DeleteComment(int idToDelete);
+        Task DeleteComment(int idToDelete);
 
         Task<Sale> GetSaleWithId(int idToGet);
 
@@ -60,8 +60,8 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateSale(Sale saleToCreate);
 
-        Task<int> UpdateSale(int idToUpdate, Sale saleToReplaceWith);
+        Task UpdateSale(int idToUpdate, Sale saleToReplaceWith);
 
-        Task<int> DeleteSale(int idToDelete);
+        Task DeleteSale(int idToDelete);
     }
 }
