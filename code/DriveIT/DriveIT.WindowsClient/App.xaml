@@ -124,9 +124,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <BitmapImage x:Key="TestEmployeeMainPic" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\User (D)\Programmering\DriveITGithub\code\DriveIT\DriveIT.WindowsClient\Image\EmployeeTemplatePic.jpg"/>
-            <BitmapImage x:Key="CarViewTestImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\User (D)\Programmering\DriveITGithub\code\DriveIT\DriveIT.WindowsClient\Image\CarImage.jpg"/>
-
         </ResourceDictionary>
 
     </Application.Resources>
