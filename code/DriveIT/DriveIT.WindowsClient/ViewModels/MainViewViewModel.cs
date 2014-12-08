@@ -36,5 +36,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("TabIndex");
             }
         }
+
     }
 }
