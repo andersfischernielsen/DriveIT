@@ -41,10 +41,10 @@
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,115,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -63,10 +63,10 @@
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,25,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -85,10 +85,10 @@
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,205,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -107,10 +107,10 @@
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,295,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -129,10 +129,10 @@
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,385,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
-                        	<EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -274,6 +274,9 @@
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Create Car" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -285,6 +288,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -296,6 +302,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -307,6 +316,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -317,7 +329,11 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="OrdersPowerTabItem">
@@ -332,6 +348,9 @@
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Create Order" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -343,6 +362,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -354,7 +376,10 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
-                             <StackPanel>
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                             </StackPanel>
@@ -365,6 +390,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -375,7 +403,11 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
@@ -390,6 +422,9 @@
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Create Customer" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -401,6 +436,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -412,6 +450,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -423,6 +464,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -433,7 +477,11 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="EmployeesPowerTabItem">
@@ -451,6 +499,9 @@
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Create Employee" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -462,6 +513,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -473,6 +527,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -484,6 +541,9 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
                                 <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
@@ -494,7 +554,11 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
             </TabControl>
