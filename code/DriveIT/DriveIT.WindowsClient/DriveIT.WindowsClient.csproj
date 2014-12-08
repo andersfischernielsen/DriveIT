@@ -215,6 +215,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Image\icons\shared\add.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -260,6 +261,26 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\CarImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Image\icons\cars\car.svg" />
+    <Resource Include="Image\icons\shared\help.png" />
+    <Resource Include="Image\icons\cars\carquery.png" />
+    <Content Include="Image\icons\cars\carquery1.svg" />
+    <Content Include="Image\icons\cars\carquery2.svg" />
+    <Resource Include="Image\icons\shared\add.png" />
+    <Content Include="Image\icons\shared\add.svg" />
+    <Resource Include="Image\icons\shared\cancel.png" />
+    <Content Include="Image\icons\shared\cancel.svg" />
+    <Resource Include="Image\icons\shared\delete.png" />
+    <Content Include="Image\icons\shared\delete.svg" />
+    <Resource Include="Image\icons\shared\info.png" />
+    <Content Include="Image\icons\shared\info.svg" />
+    <Resource Include="Image\icons\shared\refresh.png" />
+    <Content Include="Image\icons\shared\refresh.svg" />
+    <Resource Include="Image\icons\shared\settings.png" />
+    <Content Include="Image\icons\shared\settings.svg" />
+    <Content Include="Image\icons\users\user.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
