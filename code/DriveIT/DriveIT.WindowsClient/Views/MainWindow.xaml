@@ -159,7 +159,11 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Contact Requests" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="53" Width="294"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10.333,10,0,9.667" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
+                            </Button.Background>
+                            <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="CreateNewContactRequestWindow"/>
