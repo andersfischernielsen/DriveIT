@@ -80,13 +80,13 @@
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,241,51,0" Watermark="Milage" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Mileage}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,274,51,0" Watermark="Color" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Color}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,307,51,0" Watermark="DistanceDriven" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding DistanceDriven}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,175,70,0" Watermark="Fuel" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding Fuel}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,208,70,0" Watermark="Drive" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding Drive}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,241,70,0" Watermark="Transmission" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding Transmission}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,274,70,0" Watermark="TopSpeed" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding TopSpeed}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,307,70,0" Watermark="NoughtTo100" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding NoughtTo100}"/>
             <Image Grid.Column="1" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="235" Width="384"/>
             <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="114,10,10,0" VerticalAlignment="Top" Width="264" Height="35" Content="{Binding Status}"/>
+            <ComboBox Style="{DynamicResource FillComboBoxkStyle}" Text="Fueltype" Grid.Column="1" HorizontalAlignment="Left" Margin="10,175,0,0" Grid.Row="1" VerticalAlignment="Top" Width="355" Height="28" ItemsSource="{Binding FueltypeStrings}" SelectedValue="{Binding Fuel}" IsEditable="True" IsReadOnly="True" />
         </Grid>
     </Grid>
 </Window>
