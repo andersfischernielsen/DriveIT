@@ -41,29 +41,21 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _imagePath = value;
-                NotifyPropertyChanged("Status");
+                NotifyPropertyChanged("ImagePath");
             }
         }
-
-
+        #endregion Properties
         public async void ChooseFile()
         {
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.Filter = "Image files (*.jpg)|*.jpeg|*.gif|*.png|All files (*.*)|*.*";
-            //if (openFileDialog.ShowDialog() == true)
-            //    ImagePath = File.ReadAllText(openFileDialog.FileName);
-            Console.WriteLine();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ImagePath = openFileDialog.FileName;
+                //ImagePath = File.ReadAllText(@openFileDialog.FileName);
+            }
+
+
         }
-        //private Image _image;
-        //public Image Image
-        //{
-        //    get { return _image; }
-        //    set
-        //    {
-        //        _image = value;
-        //        NotifyPropertyChanged("Image");
-        //    }
-        //}
-        #endregion Properties
     }
 }
