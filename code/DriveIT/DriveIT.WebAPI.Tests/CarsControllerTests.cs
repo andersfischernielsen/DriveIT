@@ -137,16 +137,15 @@ namespace DriveIT.WebAPI.Tests
         [TestMethod]
         public async Task GetCarsByFuelType_Result()
         {
-            var message = await _controller.GetCarsByFuelType("Gasoline") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
+            var message = await _controller.GetCarsByFuelType("Gasoline") as OkNegotiatedContentResult<List<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            var carDtos = content as IList<CarDto> ?? content.ToList();
-            Assert.AreEqual(1, carDtos.Count());
-            Assert.AreEqual(FuelType.Gasoline, carDtos.First().Fuel);
+            Assert.AreEqual(1, content.Count());
+            Assert.AreEqual(FuelType.Gasoline, content.First().Fuel);
 
-            message = await _controller.GetCarsByFuelType("Diesel") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
+            message = await _controller.GetCarsByFuelType("Diesel") as OkNegotiatedContentResult<List<CarDto>>;
             Assert.IsNotNull(message);
 
             content = message.Content;
@@ -158,7 +157,7 @@ namespace DriveIT.WebAPI.Tests
         [TestMethod]
         public async Task GetCarsByFuelType_NoResult()
         {
-            var message = await _controller.GetCarsByFuelType("Electric") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
+            var message = await _controller.GetCarsByFuelType("Electric") as OkNegotiatedContentResult<List<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
@@ -169,21 +168,20 @@ namespace DriveIT.WebAPI.Tests
         [TestMethod]
         public async Task GetCarsByMake_Result()
         {
-            var message = await _controller.GetCarsByMake("Suzuki") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
+            var message = await _controller.GetCarsByMake("Suzuki") as OkNegotiatedContentResult<List<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            var carDtos = content as CarDto[] ?? content.ToArray();
-            Assert.AreNotEqual(0, carDtos.Count());
-            Assert.AreEqual("Suzuki", carDtos.First().Make);
+            Assert.AreNotEqual(0, content.Count());
+            Assert.AreEqual("Suzuki", content.First().Make);
         }
 
         [TestMethod]
         public async Task GetCarsByMake_NoResult()
         {
             var message =
-                await _controller.GetCarsByMake("I'm not a make") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
+                await _controller.GetCarsByMake("I'm not a make") as OkNegotiatedContentResult<List<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
