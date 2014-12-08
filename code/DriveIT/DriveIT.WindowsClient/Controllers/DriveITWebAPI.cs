@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Windows;
 using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
@@ -31,7 +33,7 @@ namespace DriveIT.WindowsClient.Controllers
 
             if (await GetRole() == Role.Customer)
             {
-                throw new Exception("Customer cannot login to the client");
+                throw new Exception("An error occurred while logging into the client...");
             }
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -45,8 +47,8 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw new NotImplementedException();
+                //Console.WriteLine(ex.Message);
+                ErrorMessagePopUp();
             }
         }
 
@@ -62,9 +64,9 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 // TODO Håndter dette
-                //throw new NotImplementedException();
+                ErrorMessagePopUp();
             }
             return objects.ToList();
         }
@@ -80,7 +82,7 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
+                ErrorMessagePopUp();
             }
             return objectToRead;
         }
@@ -95,7 +97,7 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
+                ErrorMessagePopUp();
             }
         }
         public async static Task Delete<T>(string uri)
@@ -107,7 +109,7 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
+                ErrorMessagePopUp();
             }
         }
 
@@ -173,6 +175,12 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+        private static void ErrorMessagePopUp()
+        {
+
+            var response = MessageBox.Show("There was an error processing your request...", "Error!",
+                MessageBoxButton.OK, MessageBoxImage.Exclamation);
+}
 
         public static async Task<String> UploadImage(byte[] imageData)
         {
