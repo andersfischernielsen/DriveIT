@@ -205,7 +205,7 @@
                             </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                                <TextBlock Text="Add" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                             </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
@@ -279,7 +279,7 @@
                             </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                                <TextBlock Text="Create Car" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                             </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
@@ -353,7 +353,7 @@
                             </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                                <TextBlock Text="Create Order" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                             </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
@@ -427,7 +427,7 @@
                             </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                                <TextBlock Text="Create Customer" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                             </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
@@ -504,7 +504,7 @@
                             </Button.Background>
                             <StackPanel>
                                 <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                                <TextBlock Text="Create Employee" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                             </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
