@@ -25,6 +25,11 @@ namespace DriveIT.WindowsClient.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Used to send the user to his/her browser on the link in e.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
