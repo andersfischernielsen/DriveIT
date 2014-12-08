@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -41,6 +43,16 @@ namespace DriveIT.WindowsClient.ViewModels
                 _imagePath = value;
                 NotifyPropertyChanged("Status");
             }
+        }
+
+
+        public async void ChooseFile()
+        {
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.Filter = "Image files (*.jpg)|*.jpeg|*.gif|*.png|All files (*.*)|*.*";
+            //if (openFileDialog.ShowDialog() == true)
+            //    ImagePath = File.ReadAllText(openFileDialog.FileName);
+            Console.WriteLine();
         }
         //private Image _image;
         //public Image Image
