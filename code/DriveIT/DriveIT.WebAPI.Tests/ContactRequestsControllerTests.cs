@@ -8,18 +8,18 @@ using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Controllers;
 using DriveIT.WebAPI.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 
 namespace DriveIT.WebAPI.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class ContactRequestsControllerTests
     {
         private ContactRequestsController _controller;
         private ContactRequest _contactRequest3;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             var contactRequests = new List<ContactRequest>
@@ -59,14 +59,14 @@ namespace DriveIT.WebAPI.Tests
             _controller = new ContactRequestsController(mockRepo.Object);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             _controller.Dispose();
         }
 
-        [TestMethod]
-        public async Task Get_ReturnsListOfContactRequestDto_Count2()
+        [Test]
+        public async Task Get_Count2()
         {
             var message = await _controller.Get() as OkNegotiatedContentResult<List<ContactRequestDto>>;
             // assert
@@ -74,15 +74,15 @@ namespace DriveIT.WebAPI.Tests
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            Assert.IsInstanceOfType(content, typeof(IEnumerable<ContactRequestDto>));
+            Assert.IsInstanceOf<List<ContactRequestDto>>(content);
             var contactRequestDtos = content as IList<ContactRequestDto>;
             Assert.AreEqual(2, contactRequestDtos.Count());
             Assert.AreEqual(1, contactRequestDtos.First().Id);
             Assert.AreEqual(2, contactRequestDtos.Skip(1).First().Id);
         }
 
-        [TestMethod]
-        public async Task Get_NoResult_MultipleCalls()
+        [Test]
+        public async Task Get_MultipleParameters_NotFoundResult()
         {
             var message = await _controller.Get(6) as NotFoundResult;
             Assert.IsNotNull(message);
@@ -94,7 +94,7 @@ namespace DriveIT.WebAPI.Tests
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetByUserId_Success()
         {
             var message =
@@ -108,7 +108,7 @@ namespace DriveIT.WebAPI.Tests
             Assert.AreEqual(1, message.Content.Count);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetByUserId_NotFound()
         {
             var message =
@@ -116,7 +116,7 @@ namespace DriveIT.WebAPI.Tests
             Assert.IsNotNull(message, _controller.GetByUserId("notacust@driveit.dk").GetType().ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task Post_Returns3()
         {
             var message = await _controller.Post(_contactRequest3.ToDto()) as CreatedAtRouteNegotiatedContentResult<ContactRequestDto>;
@@ -128,7 +128,7 @@ namespace DriveIT.WebAPI.Tests
             Assert.AreEqual(3, message.RouteValues["id"]);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Post_BadRequest()
         {
             var message = await _controller.Post(null) as BadRequestErrorMessageResult;
@@ -136,28 +136,28 @@ namespace DriveIT.WebAPI.Tests
             Assert.AreEqual("Null value not allowed.", message.Message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Put_Success()
         {
             var message = await _controller.Put(2, _contactRequest3.ToDto()) as OkResult;
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Put_NotFound()
         {
             var message = await _controller.Put(29141, _contactRequest3.ToDto()) as NotFoundResult;
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Delete_Ok()
         {
             var message = await _controller.Delete(2) as OkResult;
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Delete_NotFound()
         {
             var message = await _controller.Delete(8) as NotFoundResult;

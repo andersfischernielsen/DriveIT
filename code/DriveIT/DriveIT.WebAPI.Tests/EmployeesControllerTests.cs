@@ -7,18 +7,18 @@ using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Controllers;
 using DriveIT.WebAPI.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 
 namespace DriveIT.WebAPI.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class EmployeesControllerTests
     {
         private EmployeesController _controller;
         private Employee _employee3;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             var employeeList = new List<Employee>
@@ -48,13 +48,13 @@ namespace DriveIT.WebAPI.Tests
             _controller = new EmployeesController(mockRepo.Object);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             _controller.Dispose();
         }
 
-        [TestMethod]
+        [Test]
         public async Task Get_ReturnsListOfCustomerDto_Count2()
         {
             var message = await _controller.Get() as OkNegotiatedContentResult<List<EmployeeDto>>;
@@ -63,42 +63,42 @@ namespace DriveIT.WebAPI.Tests
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            Assert.IsInstanceOfType(content, typeof(IEnumerable<EmployeeDto>));
+            Assert.IsInstanceOf<List<EmployeeDto>>(content);
             var employeeDtos = content as IList<EmployeeDto>;
             Assert.AreEqual(2, employeeDtos.Count());
             Assert.AreEqual("mlin@itu.dk", employeeDtos.First().Id);
             Assert.AreEqual("afin@itu.dk", employeeDtos.Skip(1).First().Id);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Get_NoResult_MultipleCalls()
         {
             var message = await _controller.Get("notanemp@driveit.dk") as NotFoundResult;
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Put_Success()
         {
             var message = await _controller.Put("mlin@itu.dk", _employee3.ToDto()) as OkResult;
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Put_NotFound()
         {
             var message = await _controller.Put("notanemp@driveit.dk", _employee3.ToDto()) as NotFoundResult;
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Delete_Ok()
         {
             var message = await _controller.Delete("mlin@itu.dk") as OkResult;
             Assert.IsNotNull(message);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Delete_NotFound()
         {
             var message = await _controller.Delete("notanemp@driveit.dk") as NotFoundResult;
