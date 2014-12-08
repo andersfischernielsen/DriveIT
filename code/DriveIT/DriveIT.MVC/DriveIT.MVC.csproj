@@ -233,6 +233,7 @@
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -243,8 +244,8 @@
     <Content Include="Views\Car\Index.cshtml" />
     <Content Include="Views\Car\Details.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
-    <Content Include="Views\Comment\Get.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Employee\Index.cshtml" />

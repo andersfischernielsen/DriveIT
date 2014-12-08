@@ -134,9 +134,11 @@
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index")
+    <br/>
+    <br/>
+    <a href=@Url.Action("Index", "Comment", new {carId = Model.Id, customerId = 1})>Comments for this car</a>
 </p>
 
 @{
-    Html.RenderAction("Create", "Comment", new {carId = Model.Id});
-    //Html.RenderAction("Get", "Comment");
+    
 }
