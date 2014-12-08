@@ -73,7 +73,16 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-
+        private ImageViewModel _imageViewModel;
+        public ImageViewModel ImageViewModel
+        {
+            get { return _imageViewModel; }
+            set
+            {
+                _imageViewModel = value;
+                NotifyPropertyChanged("ImageViewModel");
+            }
+        }
 
         private CarStateEnum _actualCarState;
         public  CarStateEnum CarState
@@ -119,7 +128,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
-
         public string CarModel
         {
             get { return _carDto.Model; }
@@ -141,7 +149,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarMake");
             }
         }
-
         public int Year
         {
             get

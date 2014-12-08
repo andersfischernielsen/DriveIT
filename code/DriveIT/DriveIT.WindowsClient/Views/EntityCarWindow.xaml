@@ -6,10 +6,11 @@
 	xmlns:local="clr-namespace:DriveIT.WindowsClient"
 	xmlns:viewModels="clr-namespace:DriveIT.WindowsClient.ViewModels"
 	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	xmlns:UserControls="clr-namespace:DriveIT.WindowsClient.Views.UserControls"
 	x:Class="DriveIT.WindowsClient.Views.EntityCarWindow"
 	x:Name="Window"
 	Title="EntityCarWindow"
-	Width="853" Height="553" Background="#FFE9EFF3">
+	Width="853" Height="544.799" Background="#FFE9EFF3">
     <Window.DataContext>
         <viewModels:CarViewModel/>
     </Window.DataContext>
@@ -32,43 +33,43 @@
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                 </Button.Background>
-                <StackPanel>
-                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                    <TextBlock Text="{Binding CreateUpdateButtonText, Mode=OneWay}" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                </StackPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SaveCar"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="{Binding CreateUpdateButtonText, Mode=OneWay}" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
             </Button>
             <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                 </Button.Background>
-                <StackPanel>
-                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                    <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                </StackPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="DeleteCar"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
             </Button>
             <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                 </Button.Background>
-                <StackPanel>
-                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/cars/carquery.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                    <TextBlock Text="Get CarQuery" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                </StackPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="ImportCarQueryData"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/cars/carquery.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="Get CarQuery" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
             </Button>
             <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="3">
                 <Button.Background>
@@ -104,7 +105,7 @@
                 <StackPanel>
                     <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/settings.png" Style="{DynamicResource PowerToolIconStyle}"/>
                     <TextBlock Text="Settings" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                </StackPanel>    
+                </StackPanel>
             </Button>
         </Grid>
         <Grid Margin="10,85,10,10">
@@ -116,7 +117,6 @@
                 <ColumnDefinition Width="388*"/>
                 <ColumnDefinition Width="435*"/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="235" Margin="10,10,0,0" VerticalAlignment="Top" Width="384" Grid.RowSpan="2"/>
             <Label Content="Car" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="99"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="Id" Height="28" Grid.Row="1"
 				Grid.Column="0" VerticalAlignment="Top" Text="{Binding CarId}" IsReadOnly="true" IsEnabled="False"/>
@@ -137,9 +137,9 @@
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,241,70,0" Watermark="Transmission" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding Transmission}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,274,70,0" Watermark="TopSpeed" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding TopSpeed}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,307,70,0" Watermark="NoughtTo100" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding NoughtTo100}"/>
-            <Image Grid.Column="1" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="235" Width="384"/>
             <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="114,10,10,0" VerticalAlignment="Top" Width="264" Height="35" Content="{Binding Status}"/>
             <ComboBox Style="{DynamicResource FillComboBoxkStyle}" Text="Fueltype" Grid.Column="1" Margin="10,175,70,0" Grid.Row="1" VerticalAlignment="Top" Height="28" ItemsSource="{Binding FueltypeStrings}" SelectedValue="{Binding Fuel}" IsEditable="True" IsReadOnly="True" />
+            <UserControls:ImageViewUserControl HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="235" Width="415" Grid.Column="1" DataContext="{Binding ImageViewModel}" Grid.RowSpan="2"/>
         </Grid>
     </Grid>
 </Window>
