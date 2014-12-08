@@ -97,6 +97,7 @@
             <Style x:Key="PowerToolButtonStyle" TargetType="Button">
                 <Setter Property="Width" Value="80"/>
                 <Setter Property="Foreground" Value="{DynamicResource WhiteTextColorBrush}"/>
+                <Setter Property="Background" Value="BurlyWood"/>
                 <Setter Property="Margin" Value="0,10,110,10"/>
             </Style>
             
