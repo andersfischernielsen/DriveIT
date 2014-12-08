@@ -79,12 +79,13 @@ namespace DriveIT.WindowsClient.Controllers
                 HttpResponseMessage response = await _httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 objectToRead = await response.Content.ReadAsAsync<T>();
+                return objectToRead;
             }
             catch (Exception)
             {
                 ErrorMessagePopUp();
+                throw;
             }
-            return objectToRead;
         }
 
 
