@@ -173,5 +173,13 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+
+        public static async Task<String> UploadImage(byte[] imageData)
+        {
+            var content = new MultipartFormDataContent {new ByteArrayContent(imageData)};
+            var message = await _httpClient.PostAsync("upload", content);
+            message.EnsureSuccessStatusCode();
+            return (await message.Content.ReadAsAsync<List<String>>()).SingleOrDefault();
+        }
     }
 }
