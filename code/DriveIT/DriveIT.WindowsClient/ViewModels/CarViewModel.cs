@@ -40,12 +40,20 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _carDto = carDto;
             CarState = CarStateEnum.ForSale;
-            if (_carDto.ImagePaths != null) ImageViewModel = new ImageViewModel(_carDto.ImagePaths[0]);
+            if (_carDto.ImagePaths != null)
+            {
+                ImageViewModel = new ImageViewModel(_carDto.ImagePaths[0]);
+            }
+            else
+            {
+                ImageViewModel = new ImageViewModel();
+            }
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
+            ImageViewModel = new ImageViewModel();
             CarState = CarStateEnum.Initial;
         }
 

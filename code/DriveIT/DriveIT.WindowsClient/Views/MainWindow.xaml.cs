@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Navigation;
 using DriveIT.Models;
 using DriveIT.WindowsClient.ViewModels;
+using System.Windows;
 
 namespace DriveIT.WindowsClient.Views
 {
@@ -24,10 +25,30 @@ namespace DriveIT.WindowsClient.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Used to send the user to his/her browser on the link in e.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+        private void CloseWindowPopUp(object sender, CancelEventArgs e)
+        {
+            if (Visibility != Visibility.Visible) return;
+
+            var response = MessageBox.Show("Do you really want to exit?", "Exiting...",
+                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (response == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
@@ -24,10 +23,10 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
         {
-            var cars = (from car in await _repo.GetAllCars()
-                       select car.ToDto()).ToList();
-
-            return Ok(cars.ToList());
+            return Ok(
+                (await _repo.GetAllCars())
+                .Select(car => car.ToDto())
+                .ToList());
         }
 
         // GET: api/Cars/5
@@ -44,37 +43,42 @@ namespace DriveIT.WebAPI.Controllers
         // GET: api/Cars?fuelType=Diesel
         public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
         {
-            var cars = from car in await _repo.GetAllCars()
-                       where string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase)
-                       select car.ToDto();
-            return Ok(cars);
+            return Ok(
+                (await _repo.GetAllCars())
+                .Where(car => string.Equals(car.Fuel, fuelType, StringComparison.OrdinalIgnoreCase))
+                .Select(car => car.ToDto())
+                .ToList());
         }
 
         // Get: api/Cars?make=Opel
         public async Task<IHttpActionResult> GetCarsByMake(string make)
         {
-            return Ok(from car in await _repo.GetAllCars()
-                      where string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
-                      select car.ToDto());
+            return Ok(
+                (await _repo.GetAllCars())
+                .Where(car => string.Equals(car.Make, make, StringComparison.OrdinalIgnoreCase))
+                .Select(car => car.ToDto())
+                .ToList());
         }
 
         // Get: api/Cars?Model=Zafira
         public async Task<IHttpActionResult> GetCarsByModel(string model)
         {
-            return Ok(from car in await _repo.GetAllCars()
-                      where string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase)
-                      select car.ToDto());
+            return Ok(
+                (await _repo.GetAllCars())
+                .Where(car => string.Equals(car.Model, model, StringComparison.OrdinalIgnoreCase))
+                .Select(car => car.ToDto())
+                .ToList());
         }
 
         // Get: api/Cars?make=Opel&model=Zafira
         public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
         {
-            return
-                Ok(
-                    from car in await _repo.GetAllCars()
-                    where string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase) &&
-                          string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase)
-                    select car.ToDto());
+            return Ok((await _repo.GetAllCars())
+                .Where(car =>
+                    string.Equals(car.Make, make, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(car.Model, model, StringComparison.OrdinalIgnoreCase))
+                .Select(car => car.ToDto())
+                .ToList());
         }
 
         // POST: api/Cars
@@ -91,7 +95,7 @@ namespace DriveIT.WebAPI.Controllers
             }
             var newCarId = await _repo.CreateCar(value.ToEntity());
             value.Id = newCarId;
-            return CreatedAtRoute("DefaultApi", new Dictionary<string, object> { {"id", newCarId} }, value);
+            return CreatedAtRoute("DefaultApi", new Dictionary<string, object> { { "id", newCarId } }, value);
         }
 
         // PUT: api/Cars/5

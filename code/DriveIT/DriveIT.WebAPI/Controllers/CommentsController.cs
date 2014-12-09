@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Models;
@@ -27,13 +26,15 @@ namespace DriveIT.WebAPI.Controllers
         {
             // Remember: It is a car-id. Not commentId.
             var carId = id;
-            var comments = (from comment in await _repo.GetAllCommentsForCar(carId)
-                            select comment.ToDto()).ToList();
-            if (!comments.Any())
+            var comments = await _repo.GetAllCommentsForCar(carId);
+            if (comments == null || !comments.Any())
             {
                 return NotFound();
             }
-            return Ok(comments);
+            return Ok(
+                comments
+                .Select(comment => comment.ToDto())
+                .ToList());
         }
 
         // POST: api/Comments
@@ -48,7 +49,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest("Null value not allowed.");
             }
-            if (User.Identity.GetUserId() != value.CustomerId)
+            if (User.IsInRole("Customer") && User.Identity.GetUserId() != value.CustomerId)
             {
                 return BadRequest("CustomerId should be the same as the logged in user");
             }
@@ -70,11 +71,11 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return NotFound();
             }
-            if (User.Identity.GetUserId() != comment.CustomerId)
+            if (User.IsInRole("Customer") && User.Identity.GetUserId() != comment.CustomerId)
             {
                 return BadRequest("Customer cannot change other customers comments.");
             }
-            if (User.Identity.GetUserId() != value.CustomerId)
+            if (User.IsInRole("Customer") && User.Identity.GetUserId() != value.CustomerId)
             {
                 return BadRequest("Customer cannot set author to another person.");
             }
