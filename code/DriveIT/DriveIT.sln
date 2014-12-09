@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.CarQuery", "DriveIT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.CarQuery.Tests", "DriveIT.CarQuery.Tests\DriveIT.CarQuery.Tests.csproj", "{5649925B-E84F-4BED-9780-527D07EB8773}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Web", "DriveIT.Web\DriveIT.Web.csproj", "{4673C784-66A6-47AF-8F06-5E603A7CC30D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,16 @@ Global
 		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|ARM.ActiveCfg = Release|Any CPU
 		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|x64.ActiveCfg = Release|Any CPU
 		{5649925B-E84F-4BED-9780-527D07EB8773}.Release|x86.ActiveCfg = Release|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Release|x64.ActiveCfg = Release|Any CPU
+		{4673C784-66A6-47AF-8F06-5E603A7CC30D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
