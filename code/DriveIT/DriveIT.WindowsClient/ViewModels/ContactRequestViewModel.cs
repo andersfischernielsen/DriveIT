@@ -45,12 +45,28 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _contactRequestDto = contactRequestDto;
             ContactRequestState = ContactRequestEnum.InSystem;
+            UpdateForeignKeyLists();
         }
         public ContactRequestViewModel()
         {
             _contactRequestDto = new ContactRequestDto();
             //Requested = DateTime.Now;
             ContactRequestState = ContactRequestEnum.NotInSystem;
+            UpdateForeignKeyLists();
+        }
+
+        public async void UpdateForeignKeyLists()
+        {
+            try
+            {
+                CustomerIdsList = (await new CustomerController().ReadCustomerList()).Select(i => i.Email).ToList();
+                EmployeeIdsList = (await new EmployeeController().ReadEmployeeList()).Select(i => i.Email).ToList();
+            }
+            catch (Exception)
+            {
+                CustomerIdsList = new List<string>();
+                EmployeeIdsList = new List<string>();
+            }
         }
 
         
@@ -113,6 +129,8 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Requested");
             }
         }
+
+        public static List<string> CustomerIdsList { get; set; } 
         public string CustomerId
         {
             get
@@ -137,6 +155,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
+        public static List<string> EmployeeIdsList { get; set; } 
         public string EmployeeId
         {
             get

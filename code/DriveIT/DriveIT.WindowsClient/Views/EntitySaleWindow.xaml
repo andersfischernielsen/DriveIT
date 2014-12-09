@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntitySaleWindow"
 	x:Name= "SaleWindow"
 	Title="EntitySaleWindow"
-	Width="780.36" Height="454.585" Background="#FFE9EFF3">
+	Width="780.36" Height="492.077" Background="#FFE9EFF3">
     <Window.DataContext>
         <viewModels:SaleViewModel/>
     </Window.DataContext>
@@ -56,7 +56,12 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
+            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update&#x0a;Lists" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
+            	<i:Interaction.Triggers>
+            		<i:EventTrigger EventName="Click">
+            			<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="UpdateForeignKeyLists"/>
+            		</i:EventTrigger>
+            	</i:Interaction.Triggers>
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                 </Button.Background>
@@ -107,14 +112,14 @@
 				Grid.Column="0" VerticalAlignment="Top" IsReadOnly="true" IsEnabled="False" Text="{Binding SaleId}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,265,0" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Price}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,265,0" Watermark="CarId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarId}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,265,0" Watermark="CustomerId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CustomerId}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,175,265,0" Watermark="EmployeeId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding EmployeeId}"/>
             <DatePicker Padding="6,2" Margin="10,76,265,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Sold" Height="28" FontSize="16" Grid.Row="1" DisplayDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Long" SelectedDate="{Binding Sold}" Text="Monday, January 01, 2014">
                 <DatePicker.Background>
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
                 </DatePicker.Background>
             </DatePicker>
             <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="84,10,10,0" VerticalAlignment="Top" Height="35" Content="{Binding Status}" />
+            <ComboBox Style="{DynamicResource FillComboBoxkStyle}" Text="Customers" Margin="10,142,265,0" Grid.Row="1" VerticalAlignment="Top" Height="28" ItemsSource="{Binding CustomerIdsList}" SelectedValue="{Binding CustomerId, Mode=TwoWay}" IsEditable="True" IsReadOnly="True" />
+            <ComboBox Style="{DynamicResource FillComboBoxkStyle}" Text="Employees" Margin="10,175,265,0" Grid.Row="1" VerticalAlignment="Top" Height="28" ItemsSource="{Binding EmployeeIdsList}" SelectedValue="{Binding EmployeeId, Mode=TwoWay}" IsEditable="True" IsReadOnly="True" />
         </Grid>
     </Grid>
 </Window>
