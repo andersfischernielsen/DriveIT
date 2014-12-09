@@ -6,8 +6,21 @@ using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
 {
+    /// <summary>
+    /// EntityStorage is a class for communicating with and underlying SQL database. 
+    /// The class enables CRUD functionality of the Entities found in the DriveIT.Entities project.
+    /// The documentation for other methods than the Car-related methods has been omitted due to 
+    /// the similarity of their functionality and time pressure.
+    /// </summary>
     public class EntityStorage : IPersistentStorage
     {
+        /// <summary>
+        /// Retrieve a Car entity with a specific ID. 
+        /// Optionally use a specified DriveITContext for fetching the entity.
+        /// </summary>
+        /// <param name="idToGet">The ID of the wanted Car.</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
+        /// <returns>A Car entity with the specific ID.</returns>
         public async Task<Car> GetCarWithId(int idToGet, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -18,6 +31,12 @@ namespace DriveIT.EntityFramework
             }
         }
 
+        /// <summary>
+        /// Retrieve a List of all Car entities. 
+        /// Optionally use a specified DriveITContext for fetching the entities.
+        /// </summary>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entities.</param>
+        /// <returns>A List of all Car entities.</returns>
         public async Task<List<Car>> GetAllCars(DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -28,6 +47,13 @@ namespace DriveIT.EntityFramework
             }
         }
 
+        /// <summary>
+        /// Save a Car entity.
+        /// Optionally use a specified DriveITContext for saving the entity.
+        /// </summary>
+        /// <param name="carToCreate">The Car to save.</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for saving the entity.</param>
+        /// <returns>An integer of entities changed in the database.</returns>
         public async Task<int> CreateCar(Car carToCreate, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -40,7 +66,15 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task UpdateCar(int idToUpdate, Car carToReplaceWith, DriveITContext optionalContext = null)
+        /// <summary>
+        /// Update a Car entity with a specific ID. 
+        /// Optionally use a specified DriveITContext for updating the entity.
+        /// </summary>
+        /// <param name="idToUpdate">The ID of the wanted Car.</param>
+        /// <param name="carToReplaceWith">The Car entity to use for updating (by overwriting).</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
+        /// <returns>A Car entity with the specific ID.</returns>
+        public async Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
 
@@ -49,11 +83,18 @@ namespace DriveIT.EntityFramework
                 var oldCar = await optionalContext.Cars.FindAsync(idToUpdate);
                 CopyCarProperties(oldCar, carToReplaceWith);
 
-                await optionalContext.SaveChangesAsync();
+                return await optionalContext.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteCar(int id, DriveITContext optionalContext = null)
+        /// <summary>
+        /// Delete a Car entity with a specific ID. 
+        /// Optionally use a specified DriveITContext for deleting the entity.
+        /// </summary>
+        /// <param name="id">The ID of the Car to delete.</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
+        /// <returns>A Car entity with the specific ID.</returns>
+        public async Task<int> DeleteCar(int id, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
 
@@ -61,10 +102,15 @@ namespace DriveIT.EntityFramework
             {
                 var toRemove = await optionalContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
                 optionalContext.Cars.Remove(toRemove);
-                await optionalContext.SaveChangesAsync();
+                return await optionalContext.SaveChangesAsync();
             }
         }
 
+        /// <summary>
+        /// A method for replacing the properties of one Car entity with the properties of another Car entity.
+        /// </summary>
+        /// <param name="toChange">The Car entity whose properties will be replaced.</param>
+        /// <param name="toSetFrom">The Car entity whose properties will be used for replacing.</param>
         private void CopyCarProperties(Car toChange, Car toSetFrom)
         {
             toChange.Color = toSetFrom.Color;
@@ -97,23 +143,23 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith)
+        public async Task<int> UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldEmployee = await context.Employees.SingleOrDefaultAsync(x => x.Id == idToUpdate);
                 CopyEmployeeProperties(oldEmployee, employeeToReplaceWith);
 
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteEmployee(string idToDelete)
+        public async Task<int> DeleteEmployee(string idToDelete)
         {
             using (var context = new DriveITContext())
             {
                 context.Users.Remove(await context.Employees.SingleAsync(x => x.Id == idToDelete));
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
@@ -141,23 +187,23 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task UpdateCustomer(string idToUpdate, Customer customerToReplaceWith)
+        public async Task<int> UpdateCustomer(string idToUpdate, Customer customerToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldCustomer = await context.Customers.SingleAsync(x => x.Id == idToUpdate);
                 CopyCustomerProperties(oldCustomer, customerToReplaceWith);
 
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteCustomer(string idToDelete)
+        public async Task<int> DeleteCustomer(string idToDelete)
         {
             using (var context = new DriveITContext())
             {
                 context.Users.Remove(await context.Customers.SingleAsync(x => x.Id == idToDelete));
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
@@ -195,23 +241,23 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith)
+        public async Task<int> UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldRequest = await context.ContactRequests.FindAsync(idToUpdate);
                 CopyContactRequestProperties(oldRequest, contactRequestToReplaceWith);
 
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteContactRequest(int idToDelete)
+        public async Task<int> DeleteContactRequest(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
                 context.ContactRequests.Remove(await context.ContactRequests.FindAsync(idToDelete));
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
         private void CopyContactRequestProperties(ContactRequest toChange, ContactRequest toSetFrom)
@@ -248,23 +294,23 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task UpdateComment(int idToUpdate, Comment commentToReplaceWith)
+        public async Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldComment = await context.Comments.FindAsync(idToUpdate);
                 CopyCommentProperties(oldComment, commentToReplaceWith);
 
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteComment(int idToDelete)
+        public async Task<int> DeleteComment(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
                 context.Comments.Remove(await context.Comments.FindAsync(idToDelete));
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
@@ -303,23 +349,23 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task UpdateSale(int idToUpdate, Sale saleToReplaceWith)
+        public async Task<int> UpdateSale(int idToUpdate, Sale saleToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldSale = await context.Sales.FindAsync(idToUpdate);
                 CopySaleProperties(oldSale, saleToReplaceWith);
 
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteSale(int idToDelete)
+        public async Task<int> DeleteSale(int idToDelete)
         {
             using (var context = new DriveITContext())
             {
                 context.Sales.Remove(await context.Sales.FindAsync(idToDelete));
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 

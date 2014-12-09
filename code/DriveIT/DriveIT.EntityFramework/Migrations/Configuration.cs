@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using DriveIT.Entities;
 using DriveIT.Models;
 using Microsoft.AspNet.Identity;
@@ -6,19 +9,23 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DriveIT.EntityFramework.Migrations
 {
+    using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DriveITContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DriveIT.EntityFramework.DriveITContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DriveITContext context)
+        protected override void Seed(DriveIT.EntityFramework.DriveITContext context)
         {
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
+
             foreach (Role role in Enum.GetValues(typeof(Role)))
             {
                 if (!roleManager.RoleExists(role.ToString()))
@@ -29,21 +36,34 @@ namespace DriveIT.EntityFramework.Migrations
 
             var userStore = new UserStore<DriveITUser>(context);
             var userManager = new UserManager<DriveITUser>(userStore);
-            var employee = (Employee)userManager.FindById("mlin@itu.dk");
+
+            SeedAdminUser(userManager);
+            SeedCustomerUser(userManager);
+
+            SeedCars(context);
+            SeedComments(context);
+            SeedContactRequests(context);
+            SeedSales(context);
+        }
+
+        private void SeedAdminUser(UserManager<DriveITUser> userManager)
+        {
+            var employee = (Employee)userManager.FindById("admin@driveit.dk");
             if (employee == null)
             {
                 employee = new Employee
                 {
-                    Id = "mlin@itu.dk",
-                    UserName = "mlin@itu.dk",
-                    Email = "mlin@itu.dk",
-                    FirstName = "Mikael",
-                    LastName = "Jepsen",
-                    PhoneNumber = "12345678",
+                    Id = "admin@driveit.dk",
+                    UserName = "admin@driveit.dk",
+                    Email = "admin@driveit.dk",
+                    FirstName = "DriveIT",
+                    LastName = "Adminson",
+                    PhoneNumber = "88888888",
                 };
 
-                CheckResult(userManager.Create(employee, "N0t_Really_a_password"));
+                CheckResult(userManager.Create(employee, "4dminPassword"));
             }
+
             foreach (Role role in Enum.GetValues(typeof(Role)))
             {
                 if (userManager.IsInRole(employee.Id, role.ToString()))
@@ -53,8 +73,11 @@ namespace DriveIT.EntityFramework.Migrations
             }
 
             userManager.AddToRoles(employee.Id, Role.Administrator.ToString(), Role.Employee.ToString());
-
+        }
+        private void SeedCustomerUser(UserManager<DriveITUser> userManager)
+        {
             var customer = (Customer)userManager.FindById("cust@driveit.dk");
+
             if (customer == null)
             {
                 customer = new Customer
@@ -62,12 +85,12 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = "cust@driveit.dk",
                     UserName = "cust@driveit.dk",
                     Email = "cust@driveit.dk",
-                    FirstName = "Cu",
-                    LastName = "St",
-                    PhoneNumber = "98765432",
+                    FirstName = "Cust",
+                    LastName = "Omer",
+                    PhoneNumber = "11221144",
                 };
 
-                CheckResult(userManager.Create(customer, "N1t_Really_a_password"));
+                CheckResult(userManager.Create(customer, "Cust0merPassword"));
             }
             foreach (Role role in Enum.GetValues(typeof(Role)))
             {
@@ -78,63 +101,162 @@ namespace DriveIT.EntityFramework.Migrations
             }
 
             userManager.AddToRoles(customer.Id, Role.Customer.ToString());
+        }
 
-            var car = new Car
+        private void SeedSales(DriveITContext context)
+        {
+            var sales = new List<Sale>
             {
-                Id = 1,
-                Make = "Ford",
-                Model = "Focus",
-                Fuel = "Gasoline",
-                Color = "Black",
-                Created = new DateTime(2014, 12, 01),
-                DistanceDriven = 10000,
-                Drive = "FWD",
-                Mileage = 17.0f,
-                Price = 100000,
-                Sold = false,
-                Transmission = "Manual",
-                Year = 2008
-            };
-
-            var comment = new Comment
-            {
-                Id = 1,
-                CarId = 1,
-                CustomerId = "cust@driveit.dk",
-                DateCreated = new DateTime(2014, 12, 1),
-                Title = "Bad Car",
-                Description = "I think it's a bad color",
-            };
-            var contactRequest = new ContactRequest
-            {
-                Id = 1,
-                CarId = 1,
-                CustomerId = "cust@driveit.dk",
-                Created = new DateTime(2014, 12, 1),
-                EmployeeId = "mlin@itu.dk"
-            };
-            var sale = new Sale
-            {
-                Id = 1,
-                CarId = 1,
-                CustomerId = "cust@driveit.dk",
-                EmployeeId = "mlin@itu.dk",
-                Price = 1000,
-                DateOfSale = new DateTime(2014, 12, 1)
+                new Sale
+                {
+                    Id = 1,
+                    CarId = 1,
+                    CustomerId = "cust@driveit.dk",
+                    EmployeeId = "mlin@itu.dk",
+                    Price = 1000000,
+                    DateOfSale = DateTime.Now
+                },
+                new Sale
+                {
+                    Id = 2,
+                    CarId = 2,
+                    CustomerId = "cust@driveit.dk",
+                    EmployeeId = "mlin@itu.dk",
+                    Price = 400000,
+                    DateOfSale = DateTime.Now
+                },
             };
 
-            context.Cars.AddOrUpdate(
-                c => c.Id,
-                car);
-            context.Comments.AddOrUpdate(
-                c => c.Id,
-                comment);
-            context.ContactRequests.AddOrUpdate(
-                c => c.Id,
-                contactRequest);
-            context.Sales.AddOrUpdate(
-                s => s.Id,
-                sale);
+            foreach (var sale in sales)
+            {
+                context.Sales.AddOrUpdate(sale);
+            }
+        }
+
+        private void SeedContactRequests(DriveITContext context)
+        {
+            var requests = new List<ContactRequest>
+            {
+                new ContactRequest
+                {
+                    Id = 1,
+                    CarId = 1,
+                    CustomerId = "cust@driveit.dk",
+                    Created = DateTime.Now,
+                    EmployeeId = "mlin@itu.dk"
+                }
+            };
+
+            foreach (var request in requests)
+            {
+                context.ContactRequests.AddOrUpdate(request);
+            }
+        }
+
+        private void SeedComments(DriveITContext context)
+        {
+            var comments = new List<Comment>
+            {
+                new Comment
+                {
+                    Id = 1,
+                    CarId = 1,
+                    CustomerId = "cust@driveit.dk",
+                    DateCreated = new DateTime(2014, 12, 1),
+                    Title = "Bad Color",
+                    Description = "I think it's a hideous color!",
+                }, 
+                new Comment
+                {
+                    Id = 2,
+                    CarId = 3,
+                    CustomerId = "cust@driveit.dk",
+                    DateCreated = new DateTime(2014, 12, 1),
+                    Title = "Bad Car",
+                    Description = "I think it's a disgusting car! Why would anyone buy this?",
+                }
+            };
+
+            foreach (var comment in comments)
+            {
+                context.Comments.AddOrUpdate(comment);
+            }
+        }
+
+        private static void SeedCars(DriveITContext context)
+        {
+            var cars = new List<Car>
+            {
+                new Car
+                {
+                    Id = 1,
+                    Make = "Ford",
+                    Model = "Focus",
+                    Fuel = "Gasoline",
+                    Color = "Black",
+                    Created = DateTime.Now,
+                    DistanceDriven = 10000,
+                    Drive = "FWD",
+                    Mileage = 20,
+                    Price = 10000,
+                    Sold = false,
+                    Transmission = "Manual",
+                    Year = 2008
+                },
+                new Car
+                {
+                    Id = 2,
+                    Make = "Ford",
+                    Model = "Fiesta",
+                    Fuel = "Gasoline",
+                    Color = "Dark Green",
+                    Created = DateTime.Now,
+                    DistanceDriven = 20000,
+                    Drive = "FWD",
+                    Mileage = 15,
+                    Price = 50000,
+                    Sold = false,
+                    Transmission = "Manual",
+                    Year = 2005
+                },
+                new Car
+                {
+                    Id = 3,
+                    Make = "Audi",
+                    Model = "A4",
+                    Fuel = "Diesel",
+                    Color = "Dark Blue",
+                    Created = DateTime.Now,
+                    DistanceDriven = 80000,
+                    Drive = "FWD",
+                    Mileage = 10,
+                    Price = 100000,
+                    Sold = false,
+                    Transmission = "Automatic",
+                    Year = 2008
+                },
+                new Car
+                {
+                    Id = 4,
+                    Make = "Audi",
+                    Model = "R8",
+                    Fuel = "Gasoline",
+                    Color = "Red",
+                    Created = DateTime.Now,
+                    DistanceDriven = 100000,
+                    Drive = "RWD",
+                    Mileage = 10,
+                    Price = 500000,
+                    Sold = false,
+                    Transmission = "Manual",
+                    Year = 2010
+                }
+            };
+
+            foreach (var car in cars)
+            {
+                context.Cars.AddOrUpdate(car);
+            }
         }
 
         private void CheckResult(IdentityResult result)
@@ -145,6 +267,4 @@ namespace DriveIT.EntityFramework.Migrations
             }
         }
     }
-
-
 }

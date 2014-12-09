@@ -28,10 +28,18 @@ namespace DriveIT.CarQuery
                 query += "&year=" + carToFill.Year.Value;
             }
 
+
             TrimArray result = null;
-            if (carToFill.Drive == null)
+
+            if (carToFill.Mileage == 0)
             {
                 result = await JSONWrapper.Read<TrimArray>(query);
+                carToFill.Drive = result.Trims[0].model_lkm_mixed;
+            }
+
+            if (string.IsNullOrEmpty(carToFill.Drive) || string.IsNullOrWhiteSpace(carToFill.Drive))
+            {
+                if (result == null) result = await JSONWrapper.Read<TrimArray>(query);
                 carToFill.Drive = result.Trims[0].model_drive;
             }
 
