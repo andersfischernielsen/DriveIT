@@ -30,7 +30,7 @@
 				<ColumnDefinition Width="160*"/>
 			</Grid.ColumnDefinitions>
 			<xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" x:Name="ImagePathTextBox" Height="28" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Watermark="Image Path" Text="{Binding ImagePath}"/>
-			<Button Style="{DynamicResource PowerToolButtonStyle}" Content="Choose File" Margin="10,10,10,0" VerticalAlignment="Top" Width="Auto" Height="28" Grid.Column="1" DataContext="{Binding Mode=OneWay}">
+			<Button Style="{DynamicResource SmallButtonStyle}" Content="Choose File" Margin="10,10,10,0" VerticalAlignment="Top" Width="Auto" Height="28" Grid.Column="1" DataContext="{Binding Mode=OneWay}">
 				<i:Interaction.Triggers>
 					<i:EventTrigger EventName="Click">
 						<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="ChooseFile"/>

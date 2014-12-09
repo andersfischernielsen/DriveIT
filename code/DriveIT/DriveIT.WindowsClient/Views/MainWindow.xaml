@@ -814,8 +814,8 @@
                     <ViewModels:EmployeeDetailsViewModel/>
                 </Grid.DataContext>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="279*"/>
                     <RowDefinition Height="311*"/>
-                    <RowDefinition Height="439*"/>
                 </Grid.RowDefinitions>
                 <Grid.Background>
                     <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
@@ -825,7 +825,7 @@
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                     </Border.BorderBrush>
                 </Border>
-                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="{Binding GravatarLink}"/>
+                <Image HorizontalAlignment="Left" Height="259" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="{Binding GravatarLink}"/>
                 <Label Margin="10,73,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
                 <Label Margin="10,119,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
                 <Label Margin="10,211,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
