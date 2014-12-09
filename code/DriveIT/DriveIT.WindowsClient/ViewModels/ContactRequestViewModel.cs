@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Documents;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -195,6 +196,18 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Contact Request Deleted";
                 ContactRequestState = ContactRequestEnum.NotInSystem;
             }
+        }
+
+        public void CreateSaleFromRequest()
+        {
+            var newSale = new SaleViewModel(new SaleDto())
+            {
+                CarId = CarId,
+                EmployeeId = EmployeeId,
+                CustomerId = CustomerId,
+            };
+            var window = new EntitySaleWindow { DataContext = newSale };
+            window.Show();
         }
         #endregion CRUDS
 

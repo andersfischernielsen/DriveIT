@@ -56,7 +56,12 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
+            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Make Into&#x0a;Sale" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80" Height="60" Grid.Column="2">
+            	<i:Interaction.Triggers>
+            		<i:EventTrigger EventName="Click">
+            			<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="CreateSaleFromRequest"/>
+            		</i:EventTrigger>
+            	</i:Interaction.Triggers>
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                 </Button.Background>
