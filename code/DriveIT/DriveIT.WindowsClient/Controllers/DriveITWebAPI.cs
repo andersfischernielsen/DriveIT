@@ -181,13 +181,13 @@ namespace DriveIT.WindowsClient.Controllers
 
             var response = MessageBox.Show("There was an error processing your request...", "Error!",
                 MessageBoxButton.OK, MessageBoxImage.Exclamation);
-}
+        }
 
-        public static async Task<String> UploadImage(byte[] imageData)
+        public static async Task<String> UploadImage(byte[] imageData, MediaTypeHeaderValue type)
         {
             var content = new MultipartFormDataContent();
             var b = new ByteArrayContent(imageData);
-            b.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+            b.Headers.ContentType = type;
             content.Add(b);
             
             var message = await _httpClient.PostAsync("upload", content);
