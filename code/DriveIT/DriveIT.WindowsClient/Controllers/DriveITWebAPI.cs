@@ -48,7 +48,8 @@ namespace DriveIT.WindowsClient.Controllers
             catch (Exception ex)
             {
                 //Console.WriteLine(ex.Message);
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
         }
 
@@ -66,7 +67,8 @@ namespace DriveIT.WindowsClient.Controllers
             {
                 //Console.WriteLine(ex.Message);
                 // TODO Håndter dette
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
             return objects.ToList();
         }
@@ -83,7 +85,7 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
                 throw;
             }
         }
@@ -110,7 +112,8 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
         }
 
