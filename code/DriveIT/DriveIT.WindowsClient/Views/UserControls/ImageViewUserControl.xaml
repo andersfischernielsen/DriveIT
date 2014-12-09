@@ -17,10 +17,7 @@
 			<RowDefinition/>
 			<RowDefinition Height="48"/>
 		</Grid.RowDefinitions>
-		<Grid.Background>
-			<SolidColorBrush Color="{DynamicResource BackgroundColor}"/>
-		</Grid.Background>
-		<Grid Margin="10">
+        <Grid Margin="10">
 			<Border BorderBrush="Black" BorderThickness="1" Margin="0"/>
 			<Image x:Name="ChoosenImage" Margin="0" Source="{Binding Text, ElementName=ImagePathTextBox}"/>
 		</Grid>

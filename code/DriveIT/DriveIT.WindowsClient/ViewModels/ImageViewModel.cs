@@ -26,18 +26,14 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public ImageViewModel()
         {
-            ImagePaths = new List<string>();
         }
 
         public ImageViewModel(string imagePath)
         {
-            ImagePaths = new List<string>();
-            ImagePaths.Add(imagePath);
             ImagePath = imagePath;
         }
 
         #region Properties
-        public List<string> ImagePaths { get; set; }
 
         private string _imagePath;
         public string ImagePath
@@ -50,7 +46,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion Properties
-        public async void ChooseFile()
+        public void ChooseFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
