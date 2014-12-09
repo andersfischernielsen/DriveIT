@@ -52,6 +52,7 @@ namespace DriveIT.Web.MvcControllers
 
         //
         // POST: /Account/Register
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterBindingModel model)

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using DriveIT.Entities;
+using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.Web.Providers;
 using DriveIT.Web.Results;
@@ -29,6 +30,7 @@ namespace DriveIT.Web.ApiControllers
 
         public AccountController()
         {
+            _userManager = new ApplicationUserManager(new UserStore<DriveITUser>(new DriveITContext()));
         }
 
         public AccountController(ApplicationUserManager userManager,

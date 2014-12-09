@@ -34,7 +34,7 @@ namespace DriveIT.Models
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Confirm phone number")]
-        [Compare("Phone Number", ErrorMessage = "The phone number and confirmation phone number do not match.")]
+        [Compare("PhoneNumber", ErrorMessage = "The phone number and confirmation phone number do not match.")]
         public string ConfirmPhoneNumber { get; set; }
 
         public Role? Role { get; set; }
