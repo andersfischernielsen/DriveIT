@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityContactRequestWindow"
 	x:Name="ContactRequestWindow"
 	Title="EntityContactRequestWindow"
-	Width="940.39" Height="534.864" Background="#FFE9EFF3">
+	Width="782.837" Height="534.864" Background="#FFE9EFF3">
     <Window.DataContext>
         <viewModels:ContactRequestViewModel/>
     </Window.DataContext>
@@ -100,23 +100,20 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="87*"/>
-                <ColumnDefinition Width="67*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="235" Margin="10,10,0,0" VerticalAlignment="Top" Width="384" Grid.RowSpan="2"/>
-            <Label Content="Contact Request" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="232.037"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="ContactRequestId" Height="28" Grid.Row="1"
+            <Label Content="Contact Request" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="232"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,251,0" Watermark="ContactRequestId" Height="28" Grid.Row="1"
 				Grid.Column="0" VerticalAlignment="Top" IsReadOnly="true" IsEnabled="False" Text="{Binding ContactRequestId}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="CustomerId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CustomerId}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="CarId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarId}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,51,0" Watermark="EmployeeId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding EmployeeId}"/>
-            <Image Grid.Column="1" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="235" Width="384"/>
-            <DatePicker Padding="6,2" Margin="10,43,51,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Requested" Height="28" FontSize="16" Grid.Row="1" DisplayDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Long" SelectedDate="{Binding Requested}" Text="Monday, January 01, 2014">
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,251,0" Watermark="CustomerId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CustomerId}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,251,0" Watermark="CarId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarId}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,251,0" Watermark="EmployeeId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding EmployeeId}"/>
+            <DatePicker Padding="6,2" Margin="10,43,251,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Requested" Height="28" FontSize="16" Grid.Row="1" DisplayDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Long" SelectedDate="{Binding Requested}" Text="Monday, January 01, 2014">
                 <DatePicker.Background>
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
                 </DatePicker.Background>
             </DatePicker>
-            <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="247.037,10,10,0" VerticalAlignment="Top" Height="35" Content="{Binding Status}"/>
+            <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="247,10,10,0" VerticalAlignment="Top" Height="35" Content="{Binding Status}"/>
         </Grid>
     </Grid>
 </Window>
