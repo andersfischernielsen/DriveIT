@@ -15,9 +15,10 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     {
         private ContactRequestController _requestForContactController;
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             _requestForContactController = new ContactRequestController();
+            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]

@@ -15,9 +15,10 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     {
         private SaleController _orderController;
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             _orderController = new SaleController();
+            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]

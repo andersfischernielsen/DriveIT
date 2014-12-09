@@ -15,9 +15,10 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     {
         private EmployeeController _employeeController;
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             _employeeController = new EmployeeController();
+            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]

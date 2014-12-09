@@ -13,9 +13,10 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     {
         private CarController _carController;
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             _carController = new CarController();
+            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]
