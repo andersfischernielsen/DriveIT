@@ -6,8 +6,21 @@ using DriveIT.Entities;
 
 namespace DriveIT.EntityFramework
 {
+    /// <summary>
+    /// EntityStorage is a class for communicating with and underlying SQL database. 
+    /// The class enables CRUD functionality of the Entities found in the DriveIT.Entities project.
+    /// The documentation for other methods than the Car-related methods has been omitted due to 
+    /// the similarity of their functionality and time pressure.
+    /// </summary>
     public class EntityStorage : IPersistentStorage
     {
+        /// <summary>
+        /// Retrieve a Car entity with a specific ID. 
+        /// Optionally use a specified DriveITContext for fetching the entity.
+        /// </summary>
+        /// <param name="idToGet">The ID of the wanted Car.</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
+        /// <returns>A Car entity with the specific ID.</returns>
         public async Task<Car> GetCarWithId(int idToGet, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -18,6 +31,12 @@ namespace DriveIT.EntityFramework
             }
         }
 
+        /// <summary>
+        /// Retrieve a List of all Car entities. 
+        /// Optionally use a specified DriveITContext for fetching the entities.
+        /// </summary>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entities.</param>
+        /// <returns>A List of all Car entities.</returns>
         public async Task<List<Car>> GetAllCars(DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -28,6 +47,13 @@ namespace DriveIT.EntityFramework
             }
         }
 
+        /// <summary>
+        /// Save a Car entity.
+        /// Optionally use a specified DriveITContext for saving the entity.
+        /// </summary>
+        /// <param name="carToCreate">The Car to save.</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for saving the entity.</param>
+        /// <returns>An integer of entities changed in the database.</returns>
         public async Task<int> CreateCar(Car carToCreate, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -40,6 +66,14 @@ namespace DriveIT.EntityFramework
             }
         }
 
+        /// <summary>
+        /// Update a Car entity with a specific ID. 
+        /// Optionally use a specified DriveITContext for updating the entity.
+        /// </summary>
+        /// <param name="idToUpdate">The ID of the wanted Car.</param>
+        /// <param name="carToReplaceWith">The Car entity to use for updating (by overwriting).</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
+        /// <returns>A Car entity with the specific ID.</returns>
         public async Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -53,6 +87,13 @@ namespace DriveIT.EntityFramework
             }
         }
 
+        /// <summary>
+        /// Delete a Car entity with a specific ID. 
+        /// Optionally use a specified DriveITContext for deleting the entity.
+        /// </summary>
+        /// <param name="id">The ID of the Car to delete.</param>
+        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
+        /// <returns>A Car entity with the specific ID.</returns>
         public async Task<int> DeleteCar(int id, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
@@ -65,6 +106,11 @@ namespace DriveIT.EntityFramework
             }
         }
 
+        /// <summary>
+        /// A method for replacing the properties of one Car entity with the properties of another Car entity.
+        /// </summary>
+        /// <param name="toChange">The Car entity whose properties will be replaced.</param>
+        /// <param name="toSetFrom">The Car entity whose properties will be used for replacing.</param>
         private void CopyCarProperties(Car toChange, Car toSetFrom)
         {
             toChange.Color = toSetFrom.Color;
