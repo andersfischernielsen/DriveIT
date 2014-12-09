@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\GravatarController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
