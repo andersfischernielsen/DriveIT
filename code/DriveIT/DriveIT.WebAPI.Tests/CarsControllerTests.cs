@@ -8,18 +8,18 @@ using DriveIT.EntityFramework;
 using DriveIT.Models;
 using DriveIT.WebAPI.Controllers;
 using DriveIT.WebAPI.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NUnit.Framework;
 
 namespace DriveIT.WebAPI.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class CarsControllerTests
     {
         private CarsController _controller;
         private Car _car3;
 
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             var carList = new List<Car>
@@ -85,14 +85,14 @@ namespace DriveIT.WebAPI.Tests
             _controller = new CarsController(mockRepo.Object);
         }
 
-        [TearDown]
+        [TestCleanup]
         public void TearDown()
         {
             _controller.Dispose();
         }
 
-        [Test]
-        public async Task Get_Result_Count2()
+        [TestMethod]
+        public async Task Get_NoParameters_ReturnsListOfCarDto_Count3()
         {
             var message = await _controller.Get() as OkNegotiatedContentResult<List<CarDto>>;
             // assert
@@ -100,7 +100,7 @@ namespace DriveIT.WebAPI.Tests
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            Assert.IsInstanceOf<List<CarDto>>(content);
+            Assert.IsInstanceOfType(content, typeof(IEnumerable<CarDto>));
             var carDtos = content as IList<CarDto>;
             Assert.AreEqual(2, carDtos.Count());
             Assert.AreEqual(1, carDtos.First().Id);
@@ -109,7 +109,7 @@ namespace DriveIT.WebAPI.Tests
             Assert.AreEqual("Touran", carDtos.Skip(1).First().Model);
         }
 
-        [Test]
+        [TestMethod]
         public async Task Get_2_Result()
         {
             var message = await _controller.Get(2) as OkNegotiatedContentResult<CarDto>;
@@ -117,12 +117,12 @@ namespace DriveIT.WebAPI.Tests
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            Assert.IsInstanceOf<CarDto>(content);
+            Assert.IsInstanceOfType(content, typeof(CarDto));
             Assert.AreEqual("Volkswagen", content.Make);
         }
 
-        [Test]
-        public async Task Get_MultipleParameters_NotFoundResult()
+        [TestMethod]
+        public async Task Get_NoResult_MultipleCalls()
         {
             var message = await _controller.Get(6) as NotFoundResult;
             Assert.IsNotNull(message);
@@ -134,18 +134,19 @@ namespace DriveIT.WebAPI.Tests
             Assert.IsNotNull(message);
         }
 
-        [Test]
-        public async Task GetCarsByFuelType_GasolineAndDiesel_Result()
+        [TestMethod]
+        public async Task GetCarsByFuelType_Result()
         {
-            var message = await _controller.GetCarsByFuelType("Gasoline") as OkNegotiatedContentResult<List<CarDto>>;
+            var message = await _controller.GetCarsByFuelType("Gasoline") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            Assert.AreEqual(1, content.Count());
-            Assert.AreEqual(FuelType.Gasoline, content.First().Fuel);
+            var carDtos = content as IList<CarDto> ?? content.ToList();
+            Assert.AreEqual(1, carDtos.Count());
+            Assert.AreEqual(FuelType.Gasoline, carDtos.First().Fuel);
 
-            message = await _controller.GetCarsByFuelType("Diesel") as OkNegotiatedContentResult<List<CarDto>>;
+            message = await _controller.GetCarsByFuelType("Diesel") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
             Assert.IsNotNull(message);
 
             content = message.Content;
@@ -154,10 +155,10 @@ namespace DriveIT.WebAPI.Tests
             Assert.AreEqual(FuelType.Diesel, content.First().Fuel);
         }
 
-        [Test]
-        public async Task GetCarsByFuelType_Electric_NoResult()
+        [TestMethod]
+        public async Task GetCarsByFuelType_NoResult()
         {
-            var message = await _controller.GetCarsByFuelType("Electric") as OkNegotiatedContentResult<List<CarDto>>;
+            var message = await _controller.GetCarsByFuelType("Electric") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
@@ -165,23 +166,24 @@ namespace DriveIT.WebAPI.Tests
             Assert.AreEqual(0, content.Count());
         }
 
-        [Test]
+        [TestMethod]
         public async Task GetCarsByMake_Result()
         {
-            var message = await _controller.GetCarsByMake("Suzuki") as OkNegotiatedContentResult<List<CarDto>>;
+            var message = await _controller.GetCarsByMake("Suzuki") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
             Assert.IsNotNull(content);
-            Assert.AreNotEqual(0, content.Count());
-            Assert.AreEqual("Suzuki", content.First().Make);
+            var carDtos = content as CarDto[] ?? content.ToArray();
+            Assert.AreNotEqual(0, carDtos.Count());
+            Assert.AreEqual("Suzuki", carDtos.First().Make);
         }
 
-        [Test]
+        [TestMethod]
         public async Task GetCarsByMake_NoResult()
         {
             var message =
-                await _controller.GetCarsByMake("I'm not a make") as OkNegotiatedContentResult<List<CarDto>>;
+                await _controller.GetCarsByMake("I'm not a make") as OkNegotiatedContentResult<IEnumerable<CarDto>>;
             Assert.IsNotNull(message);
 
             var content = message.Content;
@@ -189,8 +191,8 @@ namespace DriveIT.WebAPI.Tests
             Assert.IsFalse(content.Any());
         }
 
-        [Test]
-        public async Task Post_ReturnsId3()
+        [TestMethod]
+        public async Task Post_Returns3()
         {
             var message = await _controller.Post(_car3.ToDto()) as CreatedAtRouteNegotiatedContentResult<CarDto>;
 
@@ -201,37 +203,39 @@ namespace DriveIT.WebAPI.Tests
             Assert.AreEqual(3, message.RouteValues["id"]);
         }
 
-        [Test]
+        [TestMethod]
         public async Task Post_BadRequest()
         {
             var message = await _controller.Post(null) as BadRequestErrorMessageResult;
             Assert.IsNotNull(message);
             Assert.AreEqual("Null value not allowed.", message.Message);
+
+            //TODO Model state cannot be tested without running the api.
         }
 
-        [Test]
+        [TestMethod]
         public async Task Put_Success()
         {
             var message = await _controller.Put(2, _car3.ToDto()) as OkResult;
             Assert.IsNotNull(message);
         }
 
-        [Test]
+        [TestMethod]
         public async Task Put_NotFound()
         {
             var message = await _controller.Put(29141, _car3.ToDto()) as NotFoundResult;
             Assert.IsNotNull(message);
         }
 
-        [Test]
+        [TestMethod]
         public async Task Delete_Ok()
         {
             var message = await _controller.Delete(2) as OkResult;
             Assert.IsNotNull(message);
         }
 
-        [Test]
-        public async Task Delete_NotFound()
+        [TestMethod]
+        public async Task NotFound()
         {
             var message = await _controller.Delete(8) as NotFoundResult;
             Assert.IsNotNull(message);

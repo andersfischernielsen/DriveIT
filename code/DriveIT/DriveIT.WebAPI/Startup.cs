@@ -2,7 +2,7 @@
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Startup))]
+//[assembly: OwinStartup(typeof(Startup))]
 
 namespace DriveIT.WebAPI
 {

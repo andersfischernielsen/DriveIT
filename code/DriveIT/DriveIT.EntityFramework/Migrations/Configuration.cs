@@ -9,16 +9,19 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DriveIT.EntityFramework.Migrations
 {
+    using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DriveITContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DriveIT.EntityFramework.DriveITContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DriveITContext context)
+        protected override void Seed(DriveIT.EntityFramework.DriveITContext context)
         {
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
@@ -264,6 +267,4 @@ namespace DriveIT.EntityFramework.Migrations
             }
         }
     }
-
-
 }

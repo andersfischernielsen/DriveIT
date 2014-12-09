@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.Entities;
@@ -25,10 +24,8 @@ namespace DriveIT.WebAPI.Controllers
         [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(
-                (await _repo.GetAllContactRequests())
-                .Select(contactRequest => contactRequest.ToDto())
-                .ToList());
+            return Ok((from contactRequest in await _repo.GetAllContactRequests()
+                      select contactRequest.ToDto()).ToList());
         }
 
         // GET: api/ContactRequests/5
@@ -50,17 +47,9 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return Unauthorized();
             }
-            var requests = (await _repo.GetAllContactRequests())
-                .Where(request => request.CustomerId == userId);
-            var usersRequests = requests as IList<ContactRequest> ?? requests.ToList();
-            if (!usersRequests.Any())
-            {
-                return NotFound();
-            }
-            return Ok(
-                usersRequests
-                .Select(request => request.ToDto())
-                .ToList());
+            return Ok((from contactRequest in await _repo.GetAllContactRequests()
+                where contactRequest.CustomerId == userId
+                select contactRequest.ToDto()).ToList());
         }
 
         // POST: api/ContactRequests
@@ -75,7 +64,7 @@ namespace DriveIT.WebAPI.Controllers
             {
                 return BadRequest("Null value not allowed.");
             }
-            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != value.CustomerId)
+            if (User.Identity.GetUserId() != value.CustomerId)
             {
                 return BadRequest("CustomerId must match the logged in user!");
             }

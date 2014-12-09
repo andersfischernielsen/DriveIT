@@ -1,11 +1,11 @@
 ﻿@model DriveIT.Models.CarDto
 
 @{
-    ViewBag.Title = "Show";
+    ViewBag.Title = "Car Details";
 }
 
-<h2>Car Detail</h2>
-<text>In this window, car information of the choosen car, from the previous page, will be shown.</text>
+<h2>Car Details</h2>
+<p>In this window, car information of the choosen car, from the previous page, will be shown.</p>
 
 <div>
     <hr />
@@ -134,4 +134,11 @@
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index")
+    <br/>
+    <br/>
+    <a href=@Url.Action("Index", "Comment", new {carId = Model.Id, customerId = 1})>Comments for this car</a>
 </p>
+
+@{
+    
+}

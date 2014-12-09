@@ -1,40 +1,86 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using DriveIT.Models;
+using DriveIT.WebAPI.Controllers;
 
 namespace DriveIT.MVC.Controllers
 {
     public class CommentController : AsyncController
     {
-        // GET: Comment
-        public ActionResult CommentView()
+
+        private CommentsController controller = new CommentsController();
+
+        public async Task<ActionResult> Index(int carId, int customerId)
         {
-            return View();
+            ViewBag.carId = carId;
+            ViewBag.customerId = customerId;
+            var comments = await controller.Get(carId) as OkNegotiatedContentResult<List<CommentDto>>;
+            return View(comments.Content);
         }
 
-        public async Task<IList<CommentDto>> GetComments(int carId)
+        [HttpGet]
+        public ActionResult Create(int carId, int customerId)
         {
-            var commentsToReturn = await DriveITWebAPI.ReadList<CommentDto>("Comments/" + carId);
-            return commentsToReturn;
+            var newComment = new CommentDto();
+            newComment.CarId = carId;
+            newComment.CustomerId = customerId;
+            return View(newComment);
         }
 
-        public async Task UpdateComment(CommentDto value)
+        [HttpPost]
+        public async Task<ActionResult> Create(CommentDto comment)
         {
-            await DriveITWebAPI.Update("Comments", value, value.Id.Value);
+            comment.Date = DateTime.Now;
+            var commentToPost = await controller.Post(comment) as CreatedAtRouteNegotiatedContentResult<CommentDto>;
+            return RedirectToAction("Index", commentToPost.Content);
         }
 
-        public async Task CreateComment(int carId, CommentDto value)
+        [HttpGet]
+        public async Task<ActionResult> Edit(int commentId)
         {
-            await DriveITWebAPI.Create("Comments/" + carId, value);
+            var comment = await controller.Get(commentId) as OkNegotiatedContentResult<CommentDto>;
+            return View(comment.Content);
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult> Edit(CommentDto comment)
+        {
+            await controller.Put(comment.Id.Value, comment);
+            var updatedComment = await controller.Get(comment.Id.Value) as OkNegotiatedContentResult<CommentDto>;
+            return RedirectToAction("Index", updatedComment.Content);
         }
 
-        public async Task DeleteComment(int CarId, int CommentId)
+        public async Task<ActionResult> Delete(int id)
         {
-            await DriveITWebAPI.Delete<CommentDto>("Comments/" + CarId, CommentId);
+            await controller.Delete(id);
+            return RedirectToAction("Index");
         }
+
+        //public async Task<IList<CommentDto>> GetComments(int carId)
+        //{
+        //    var commentsToReturn = await DriveITWebAPI.ReadList<CommentDto>("Comments/" + carId);
+        //    return commentsToReturn;
+        //}
+
+        //public async Task UpdateComment(CommentDto value)
+        //{
+        //    await DriveITWebAPI.Update("Comments", value, value.Id.Value);
+        //}
+
+        //public async Task CreateComment(int carId, CommentDto value)
+        //{
+        //    await DriveITWebAPI.Create("Comments/" + carId, value);
+        //}
+
+        //public async Task DeleteComment(int CarId, int CommentId)
+        //{
+        //    await DriveITWebAPI.Delete<CommentDto>("Comments/" + CarId, CommentId);
+        //}
     }
 }
