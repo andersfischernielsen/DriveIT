@@ -176,7 +176,11 @@ namespace DriveIT.WindowsClient.Controllers
 
         public static async Task<String> UploadImage(byte[] imageData)
         {
-            var content = new MultipartFormDataContent {new ByteArrayContent(imageData)};
+            var content = new MultipartFormDataContent();
+            var b = new ByteArrayContent(imageData);
+            b.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+            content.Add(b);
+            
             var message = await _httpClient.PostAsync("upload", content);
             message.EnsureSuccessStatusCode();
             return (await message.Content.ReadAsAsync<List<String>>()).SingleOrDefault();
