@@ -53,7 +53,7 @@ namespace DriveIT.EntityFramework.Migrations
             {
                 employee = new Employee
                 {
-                    Id = "admin@drive.dk",
+                    Id = "admin@driveit.dk",
                     UserName = "admin@driveit.dk",
                     Email = "admin@driveit.dk",
                     FirstName = "DriveIT",
@@ -86,7 +86,7 @@ namespace DriveIT.EntityFramework.Migrations
                     UserName = "cust@driveit.dk",
                     Email = "cust@driveit.dk",
                     FirstName = "Cust",
-                    LastName = "Stomer",
+                    LastName = "Omer",
                     PhoneNumber = "11221144",
                 };
 
