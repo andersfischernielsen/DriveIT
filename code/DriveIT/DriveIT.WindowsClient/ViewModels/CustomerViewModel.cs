@@ -41,6 +41,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _customerDto = customerDto;
             CustomerState = CustomerEnum.InSystem;
+            GravatarLink = GravatarController.CreateGravatarLink(_customerDto.Email);
         }
         public CustomerViewModel()
         {
@@ -72,7 +73,16 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-
+        private string _gravatarLink;
+        public string GravatarLink
+        {
+            get { return _gravatarLink; }
+            set
+            {
+                _gravatarLink = value;
+                NotifyPropertyChanged("GravatarLink");
+            }
+        }
 
         private CustomerEnum _actualCustomerState;
         public CustomerEnum CustomerState
@@ -143,6 +153,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _customerDto.Email = value;
+                GravatarLink = GravatarController.CreateGravatarLink(_customerDto.Email);
                 NotifyPropertyChanged("Email");
             }
         }

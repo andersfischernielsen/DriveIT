@@ -35,12 +35,22 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("EmployeeId");
             }
         }
-
+        private string _gravatarLink;
+        public string GravatarLink
+        {
+            get { return _gravatarLink; }
+            set
+            {
+                _gravatarLink = value;
+                NotifyPropertyChanged("GravatarLink");
+            }
+        }
 
         public EmployeeViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
             EmployeeState = EmployeeStateEnum.InSystem;
+            GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
 
         public EmployeeViewModel()
@@ -107,6 +117,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _employeeDto.Email = value;
+                GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
                 NotifyPropertyChanged("Email");
             }
         }
