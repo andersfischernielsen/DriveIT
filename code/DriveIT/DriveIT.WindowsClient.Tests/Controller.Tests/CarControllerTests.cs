@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using NUnit.Framework;
@@ -18,11 +19,11 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         }
 
         [Test]
-        public void TestAllMethods()
+        public async Task TestAllMethods()
         {
             var t = _carController.ReadCarList().Result;
             Console.WriteLine(t.Count);
-                _carController.CreateCar(new CarDto()
+                await _carController.CreateCar(new CarDto()
                 {
                     Color = "Red",
                     Created = DateTime.Now,
@@ -37,7 +38,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
 
             Console.WriteLine("Before update: " + _carController.ReadCar(t[t.Count - 1].Id.Value).Result.Color);
-            _carController.UpdateCar(new CarDto()
+            await _carController.UpdateCar(new CarDto()
             {
                 Color = "Silver",
                 Created = DateTime.Now.AddDays(1),
@@ -52,7 +53,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine(t.Count);
             Console.WriteLine("After update: " + _carController.ReadCar(t[t.Count - 1].Id.Value).Result.Color);
 
-            _carController.DeleteCar(t[t.Count - 1].Id.Value);
+            await _carController.DeleteCar(t[t.Count - 1].Id.Value);
             Thread.Sleep(2000);
             t = _carController.ReadCarList().Result;
             Console.WriteLine(t.Count);

@@ -21,11 +21,11 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         }
 
         [Test]
-        public void TestAllMethods()
+        public async Task TestAllMethods()
         {
             var t = _employeeController.ReadEmployeeList().Result;
             Console.WriteLine(t.Count);
-                _employeeController.CreateEmployee(new EmployeeDto()
+                await _employeeController.CreateEmployee(new EmployeeDto()
                 {
                     FirstName = "Mr Handsome",
                     LastName = "Cake"
@@ -35,19 +35,19 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine(t.Count);
 
 
-            Console.WriteLine("Before update: " + _employeeController.ReadEmployee(t[t.Count - 1].Id.Value).Result.FirstName);
-            _employeeController.UpdateEmployee(new EmployeeDto()
+            Console.WriteLine("Before update: " + _employeeController.ReadEmployee(t[t.Count - 1].Email).Result.FirstName);
+            await _employeeController.UpdateEmployee(new EmployeeDto()
             {
                 FirstName = "Mr Not So Handsome",
                 LastName = "Cookie",
-                Id = t[t.Count - 1].Id.Value
+                Id = t[t.Count - 1].Email
             });
             Thread.Sleep(2000);
             t = _employeeController.ReadEmployeeList().Result;
             Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + _employeeController.ReadEmployee(t[t.Count - 1].Id.Value).Result.FirstName);
+            Console.WriteLine("After update: " + _employeeController.ReadEmployee(t[t.Count - 1].Email).Result.FirstName);
 
-            _employeeController.DeleteEmployee(t[t.Count - 1].Id.Value);
+            await _employeeController.DeleteEmployee(t[t.Count - 1]);
             Thread.Sleep(2000);
             t = _employeeController.ReadEmployeeList().Result;
             Console.WriteLine(t.Count);
