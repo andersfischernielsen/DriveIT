@@ -172,7 +172,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccntController.cs" />
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\ContactRequestController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -232,20 +232,19 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Accnt\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Accnt\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Accnt\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Accnt\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Accnt\ConfirmEmail.cshtml" />
+    <Content Include="Views\Accnt\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Accnt\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Accnt\ForgotPassword.cshtml" />
+    <Content Include="Views\Accnt\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Accnt\Manage.cshtml" />
+    <Content Include="Views\Accnt\Register.cshtml" />
+    <Content Include="Views\Accnt\ResetPassword.cshtml" />
+    <Content Include="Views\Accnt\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Show.cshtml" />
@@ -256,6 +255,7 @@
     <Content Include="Views\Comment\Create.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Accnt\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Employee\Index.cshtml" />
