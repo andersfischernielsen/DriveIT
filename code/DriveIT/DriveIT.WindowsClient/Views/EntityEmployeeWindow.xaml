@@ -16,32 +16,83 @@
     <Grid Margin="0,0,2,1.084">
         <Grid Height="80" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="208.667"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <Grid.Background>
                 <SolidColorBrush Color="{DynamicResource EmployeesBarGridColor}"/>
             </Grid.Background>
-            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-            <Button  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Content="{Binding CreateUpdateButtonText, Mode=OneWay}">
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="7"/>
+            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="{Binding CreateUpdateButtonText, Mode=OneWay}" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SaveEmployee"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Delete" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
+            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="DeleteEmployee"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="210.5,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Button Content="Cancel" HorizontalAlignment="Left" Margin="423.333,10,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
-            <Button Content="Help" HorizontalAlignment="Right" Margin="0,10,111.333,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
-            <Button Content="Settings" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="1"/>
+            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                </Button.Background>
+            </Button>
+            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="3">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                </Button.Background>
+            </Button>
+            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="4">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/cancel.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="Cancel" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="5">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/help.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="Help" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="6">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/settings.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="Settings" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                </StackPanel>
+            </Button>
         </Grid>
         <Grid Margin="10,85,10,10">
             <Grid.RowDefinitions>

@@ -7,7 +7,11 @@
     mc:Ignorable="d"
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
         Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Closing="CloseWindowPopUp">
+    <Window.DataContext>
+        <ViewModels:MainViewViewModel/>
+    </Window.DataContext>
     <Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger>
@@ -37,6 +41,12 @@
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,115,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CarsBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="RequestForContactBarState">
@@ -53,6 +63,12 @@
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,25,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource RequestsForContactBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="OrdersBarState">
@@ -69,6 +85,12 @@
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,205,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource OrdersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="CustomerBarState">
@@ -85,6 +107,12 @@
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,295,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource CustomersBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="EmployeeBarState">
@@ -101,6 +129,12 @@
                         <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rectangle">
                             <EasingThicknessKeyFrame KeyTime="0" Value="0,385,0,0"/>
                         </ThicknessAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HelpButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="SettingsButton">
+                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EmployeesBarColor}"/>
+                        </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -121,13 +155,27 @@
                 <ColumnDefinition Width="259"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="PowerToolsBarGeneral" Grid.Column="1" Height="80" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130*"/>
+                    <ColumnDefinition Width="129*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                 </Grid.Background>
-                <Button Content="Help" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,147,10"/>
-                <Button Content="Settings" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,29,10"/>
+                <Button x:Name="HelpButton" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,110,10" Grid.ColumnSpan="2">
+                    <StackPanel>
+                        <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/help.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                        <TextBlock Text="Help" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="SettingsButton" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,10" Grid.Column="1">
+                    <StackPanel>
+                        <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/settings.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                        <TextBlock Text="Settings" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                    </StackPanel>
+                </Button>
             </Grid>
-            <TabControl x:Name="PowerToolsbarTabControl" Margin="0,-3,0,0" BorderThickness="1,0">
+            <TabControl x:Name="PowerToolsbarTabControl" BorderThickness="1,0" SelectedIndex="{Binding TabIndex}" Margin="0,-4.5,0,0">
                 <TabControl.Resources>
                     <!-- Remove the headers by overriding the header style -->
                     <Style TargetType="{x:Type TabItem}">
@@ -143,150 +191,298 @@
                 </TabControl.Background>
                 <TabItem Header="RequestsForContactPowerTabItem">
                     <Grid Margin="-2">
-                        <Label Style="{DynamicResource HeaderLabel}" Content="Requests For Contact" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="339,10,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="315"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Contact Requests" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="53" Width="294"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="CreateNewContactRequestWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="445.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="UpdateContactRequestWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="564,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="DeleteContactRequest"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="682.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="801,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bib bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
                     <Grid Margin="-2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="315"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="211,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
                             <Button.Background>
-                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Stretch="Uniform"/>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="CreateNewCarWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="323,10,0,10">
-                        	<Button.Background>
-                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Stretch="Uniform"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateCarWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="441,10,0,10">
-                        	<Button.Background>
-                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Stretch="Uniform"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="DeleteCar"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="" HorizontalAlignment="Left" Margin="563,10,0,10">
-                        	<Button.Background>
-                                <ImageBrush ImageSource="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Stretch="Uniform"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
-                        	<i:Interaction.Triggers>
-                        		<i:EventTrigger EventName="Click">
-                        			<ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
-                        		</i:EventTrigger>
-                        	</i:Interaction.Triggers>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="687,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="OrdersPowerTabItem">
                     <Grid Margin="-2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="315"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="253.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=SalesDataGrid}" MethodName="CreateNewSaleWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See info" HorizontalAlignment="Left" Margin="382.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=SalesDataGrid}" MethodName="UpdateSaleWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="523.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=SalesDataGrid}" MethodName="DeleteSale"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="658.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=SalesDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="799.5,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
                     <Grid Margin="-2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="315"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="253.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CustomersDataGrid}" MethodName="CreateNewCustomerWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="376.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CustomersDataGrid}" MethodName="UpdateCustomerWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="502.5,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CustomersDataGrid}" MethodName="DeleteCustomer"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="630,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CustomersDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="765,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="EmployeesPowerTabItem">
@@ -294,36 +490,76 @@
                         <ViewModels:EmployeeListViewModel/>
                     </TabItem.DataContext>
                     <Grid Margin="-2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="315"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Create" HorizontalAlignment="Left" Margin="375,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="CreateNewEmployeeWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="See Info" HorizontalAlignment="Left" Margin="481,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/info.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Details" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="UpdateEmployeeWindow"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Delete" HorizontalAlignment="Left" Margin="589,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/delete.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Delete" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="DeleteEmployee"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update List" HorizontalAlignment="Left" Margin="695,10,0,10">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Refresh" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="805,10,0,10"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -342,51 +578,60 @@
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                 </Grid.Background>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Requests for &#xA;contact" Margin="-5,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="RequestsForContactsClick" BorderBrush="#FF707070" BorderThickness="0">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Contact Requests" Margin="-5,25,0,0" VerticalAlignment="Top" Height="80" FontSize="18" BorderBrush="#FF707070" BorderThickness="0">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                     </Button.Background>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="RequestForContactBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="-5,115,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CarsClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Cars" Margin="-5,115,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CarBarState"/>
                             <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="1"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="-5,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="OrdersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="-5,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="OrdersBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="2"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=SalesDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="-5,295,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="CustomersClick">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Customers" Margin="-5,295,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="CustomerBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="3"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CustomersDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="-5,385,0,0" VerticalAlignment="Top" Height="80" FontSize="18" Click="EmployeesClick" RenderTransformOrigin="0.676,0.36">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Employees" Margin="-5,385,0,0" VerticalAlignment="Top" Height="80" FontSize="18" RenderTransformOrigin="0.676,0.36">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="EmployeeBarState"/>
+                            <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="TabIndex" Value="4"/>
+                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="UpdateList"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Button.Background>
@@ -396,7 +641,7 @@
                 <Rectangle x:Name="rectangle" Fill="#FF4F5A5B" HorizontalAlignment="Right" Height="80" Margin="187,0,0,0" VerticalAlignment="Top" Width="6"/>
             </Grid>
             <Grid Grid.Column="1" Margin="10">
-                <TabControl x:Name="EntitiesTabControl">
+                <TabControl x:Name="EntitiesTabControl" SelectedIndex="{Binding TabIndex}">
                     <TabControl.Resources>
                         <!-- Remove the headers by overriding the header style -->
                         <Style TargetType="{x:Type TabItem}">
@@ -580,14 +825,7 @@
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                     </Border.BorderBrush>
                 </Border>
-                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="Image/EmployeeTemplatePic.jpg">
-                    <Image.OpacityMask>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="Black" Offset="0"/>
-                            <GradientStop Color="White" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Image.OpacityMask>
-                </Image>
+                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260"/>
                 <Label Margin="10,73,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
                 <Label Margin="10,119,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
                 <Label Margin="10,211,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
