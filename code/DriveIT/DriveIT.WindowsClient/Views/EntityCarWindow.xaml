@@ -139,12 +139,12 @@
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,373,21,0" Watermark="NoughtTo100" Height="28" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" Text="{Binding NoughtTo100}"/>
             <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="114,10,10,0" VerticalAlignment="Top" Width="264" Height="35" Content="{Binding Status}"/>
             <ComboBox Style="{DynamicResource FillComboBoxkStyle}" Text="Fueltype" Margin="10,340,51,0" Grid.Row="1" VerticalAlignment="Top" Height="28" ItemsSource="{Binding FueltypeStrings}" SelectedValue="{Binding Fuel}" IsEditable="True" IsReadOnly="True" />
-            <UserControls:ImageViewUserControl Margin="0,10,10,0" VerticalAlignment="Top" Height="329" Width="Auto" Grid.Column="1" DataContext="{Binding ImageViewModel}" Grid.RowSpan="2"/>
+            <UserControls:ImageViewUserControl Margin="0,10,10,0" VerticalAlignment="Top" Height="324" Width="Auto" Grid.Column="1" DataContext="{Binding SelectedImageViewModel}" Grid.RowSpan="2"/>
 
-            <Button Content="Previous" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,264,0,0" Grid.Row="1" VerticalAlignment="Top" Width="86" Height="38"/>
-            <Button Content="Next" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="122,264,0,0" Grid.Row="1" VerticalAlignment="Top" Width="86" Height="38"/>
-            <Button Content="Delete" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="230,264,0,0" Grid.Row="1" VerticalAlignment="Top" Width="86" Height="38"/>
-            <Button Content="Add" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="334,264,0,0" Grid.Row="1" VerticalAlignment="Top" Width="86" Height="38" RenderTransformOrigin="0.512,1.158"/>
+            <Button Content="Previous" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,259,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="28"/>
+            <Button Content="Next" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Margin="110,259,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="28"/>
+            <Button Content="Delete" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Right" Margin="0,259,121,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="28"/>
+            <Button Content="Add" Style="{DynamicResource SmallButtonStyle}" Grid.Column="1" HorizontalAlignment="Right" Margin="0,259,21,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="28" RenderTransformOrigin="0.512,1.158"/>
         </Grid>
     </Grid>
 </Window>

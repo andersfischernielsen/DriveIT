@@ -42,18 +42,18 @@ namespace DriveIT.WindowsClient.ViewModels
             CarState = CarStateEnum.ForSale;
             if (_carDto.ImagePaths != null)
             {
-                ImageViewModel = new ImageViewModel(_carDto.ImagePaths[0]);
+                SelectedImageViewModel = new ImageViewModel(_carDto.ImagePaths[0]);
             }
             else
             {
-                ImageViewModel = new ImageViewModel();
+                SelectedImageViewModel = new ImageViewModel();
             }
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
-            ImageViewModel = new ImageViewModel();
+            SelectedImageViewModel = new ImageViewModel();
             CarState = CarStateEnum.Initial;
         }
 
@@ -82,14 +82,14 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        private ImageViewModel _imageViewModel;
-        public ImageViewModel ImageViewModel
+        private ImageViewModel _selectedImageViewModel;
+        public ImageViewModel SelectedImageViewModel
         {
-            get { return _imageViewModel; }
+            get { return _selectedImageViewModel; }
             set
             {
-                _imageViewModel = value;
-                NotifyPropertyChanged("ImageViewModel");
+                _selectedImageViewModel = value;
+                NotifyPropertyChanged("SelectedImageViewModel");
             }
         }
 
