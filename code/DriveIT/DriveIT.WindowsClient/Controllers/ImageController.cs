@@ -1,41 +1,46 @@
 ﻿using System;
 using System.IO;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using DriveIT.WindowsClient.ViewModels;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace DriveIT.WindowsClient.Controllers
 {
-    class ImageController
+    public class ImageController
     {
-        public async Task<string> UploadImage(string image)
+        public static async Task<String> UploadImage(int id, string filepath)
         {
-            var data = File.ReadAllBytes(image);
+            // Retrieve storage account from connection string.
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
-            MediaTypeHeaderValue type;
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-            var extension = Path.GetExtension(image).ToLower();
-            switch (extension)
+            // Retrieve reference to a previously created container.
+            CloudBlobContainer container = blobClient.GetContainerReference("car" + id);
+
+            // Create the container if it doesn't already exist.
+            container.CreateIfNotExists();
+
+            container.SetPermissions(
+                new BlobContainerPermissions
+                {
+                    PublicAccess = BlobContainerPublicAccessType.Blob
+                });
+
+
+            // Retrieve reference to a blob named "myblob".
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(Path.GetFileName(filepath));
+
+            // Create or overwrite the "myblob" blob with contents from a local file.
+            using (var fileStream = File.OpenRead(filepath))
             {
-                case ".png":
-                    type = new MediaTypeHeaderValue("image/png");
-                    break;
-                case ".bmp":
-                    type = new MediaTypeHeaderValue("image/bmp");
-                    break;
-                case ".jpg":
-                    type = new MediaTypeHeaderValue("image/jpeg");
-                    break;
-                case ".gif":
-                    type = new MediaTypeHeaderValue("image/gif");
-                    break;
-                default:
-                    throw new Exception();
+                await blockBlob.UploadFromStreamAsync(fileStream);
             }
-            
-            var s = await DriveITWebAPI.UploadImage(data, type);
 
-            return s;
+            return string.Format("https://driveit.blob.core.windows.net/{0}/{1}", id, Path.GetFileName(filepath));
         }
     }
 }

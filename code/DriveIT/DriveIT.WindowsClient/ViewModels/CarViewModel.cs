@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -42,28 +44,14 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _carDto = carDto;
             CarState = CarStateEnum.ForSale;
-            ImageGallery = new List<ImageViewModel>();
-            if (_carDto.ImagePaths != null)
-            {
-                foreach (var imagePath in _carDto.ImagePaths)
-                {
-                    ImageGallery.Add(new ImageViewModel(imagePath));
-                }
-                SelectedImageViewModel = ImageGallery[0];
-                ImageAmtString = "Image 1 of " + ImageGallery.Count;
-            }
-            else
-            {
-                ImageGallery.Add(new ImageViewModel());
-                SelectedImageViewModel = ImageGallery[0];
-            }
+            CreateImageViewModels();
+
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
-            ImageGallery = new List<ImageViewModel> {new ImageViewModel()};
-            SelectedImageViewModel = ImageGallery[0];
+            CreateImageViewModels();
 
             CarState = CarStateEnum.Initial;
         }
@@ -317,7 +305,25 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        private string _imageAmtString = "Image 1 of 1";
+        private void CreateImageViewModels()
+        {
+            ImageGallery = new List<ImageViewModel>();
+            if (_carDto.ImagePaths != null)
+            {
+                foreach (var imagePath in _carDto.ImagePaths)
+                {
+                    ImageGallery.Add(new ImageViewModel(imagePath));
+                }
+            }
+            else
+            {
+                ImageGallery.Add(new ImageViewModel());
+            }
+            SelectedImageViewModel = ImageGallery[0];
+            ImageAmtString = "Image 1 of " + ImageGallery.Count;
+        }
+
+        private string _imageAmtString;
         public string ImageAmtString
         {
             get { return _imageAmtString; }
@@ -411,28 +417,37 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateCar()
         {
-            UploadImages();
+            await UploadImages();
             var carController = new CarController();
             await carController.CreateCar(_carDto);
             Status = "Car Created";
             CarState = CarStateEnum.ForSale;
         }
 
-        private async void UploadImages()
+        private async Task UploadImages()
         {
-            var imageController = new ImageController();
+            var newPaths = new List<string>();
             foreach (var imagePath in _carDto.ImagePaths)
             {
-                _carDto.ImagePaths.Add(await imageController.UploadImage(imagePath));
-                _carDto.ImagePaths.Remove(imagePath);
+                var uri = new Uri(imagePath);
+                if (uri.IsFile)
+                {
+                    newPaths.Add(await ImageController.UploadImage(_carDto.Id.Value, imagePath));
+                }
+                else
+                {
+                    newPaths.Add(imagePath);
+                }
             }
+            _carDto.ImagePaths = newPaths;
+            CreateImageViewModels();
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateCar()
         {
-            UploadImages();
+            await UploadImages();
             var carController = new CarController();
             await carController.UpdateCar(_carDto);
             Status = "Car Updated";
@@ -455,9 +470,9 @@ namespace DriveIT.WindowsClient.ViewModels
         public void CreateImagePathStrings()
         {
             _carDto.ImagePaths = ImageGallery.Select(i => i.ImagePath).ToList();
-            foreach (var imagePath in _carDto.ImagePaths)
+            for (int i = 0; i < _carDto.ImagePaths.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(imagePath)) _carDto.ImagePaths.Remove(imagePath);
+                if (string.IsNullOrWhiteSpace(_carDto.ImagePaths[i])) _carDto.ImagePaths.RemoveAt(i);
             }
         }
         #endregion CRUDS
