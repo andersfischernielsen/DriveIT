@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -42,45 +43,59 @@ namespace DriveIT.Web.ApiControllers
             return Ok(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
         }
 
-        //// GET: api/Cars?fuelType=Diesel
-        //public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
-        //{
-        //    return Ok(
-        //        (await _repo.GetAllCars())
-        //        .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase))
-        //        .Select(car => car.ToDto())
-        //        .ToList());
-        //}
+        // GET: api/Cars?fuelType=Diesel
+        public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
+        {
+            var cars =
+                (await _repo.GetAllCars())
+                .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
+        }
 
-        //// Get: api/Cars?make=Opel
-        //public async Task<IHttpActionResult> GetCarsByMake(string make)
-        //{
-        //    return Ok(
-        //        (await _repo.GetAllCars())
-        //        .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase))
-        //        .Select(car => car.ToDto())
-        //        .ToList());
-        //}
+        // Get: api/Cars?make=Opel
+        public async Task<IHttpActionResult> GetCarsByMake(string make)
+        {
+            var cars = (await _repo.GetAllCars())
+                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
+        }
 
-        //// Get: api/Cars?Model=Zafira
-        //public async Task<IHttpActionResult> GetCarsByModel(string model)
-        //{
-        //    return Ok(
-        //        (await _repo.GetAllCars())
-        //        .Where(car => string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-        //        .Select(car => car.ToDto())
-        //        .ToList());
-        //}
+        // Get: api/Cars?Model=Zafira
+        public async Task<IHttpActionResult> GetCarsByModel(string model)
+        {
+            var cars = (await _repo.GetAllCars())
+                .Where(car => string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
+        }
 
-        //// Get: api/Cars?make=Opel&model=Zafira
-        //public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
-        //{
-        //    return Ok(
-        //        (await _repo.GetAllCars())
-        //        .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
-        //            && string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-        //        .Select(car => car.ToDto()));
-        //}
+        // Get: api/Cars?make=Opel&model=Zafira
+        public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
+        {
+            var cars = (await _repo.GetAllCars())
+                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
+        }
 
         // POST: api/Cars
         [AuthorizeRoles(Role.Administrator, Role.Employee)]
