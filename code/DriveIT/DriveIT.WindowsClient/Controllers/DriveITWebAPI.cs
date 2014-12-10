@@ -14,12 +14,12 @@ namespace DriveIT.WindowsClient.Controllers
 // ReSharper disable once InconsistentNaming
     public class DriveITWebAPI
     {
-        static private HttpClient _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
+        static private HttpClient _httpClient;
 
 
         public static async Task Login(string username, string password)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://driveit.azurewebsites.net/api/") };
 
             var dict = new Dictionary<string, string>
             {

@@ -832,7 +832,7 @@
                 <TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="29" Width="270" FontStyle="Italic" TextAlignment="Center" Grid.Row="1">
                     <TextBlock.Background>
                         <SolidColorBrush Color="Black" Opacity="0.15"/>
-                    </TextBlock.Background><Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
+                    </TextBlock.Background><Hyperlink NavigateUri="http://driveit.azurewebsites.net" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
                 <Label Margin="10,165,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding LastName}"/>
                 <Label Margin="10,10,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Logged in as:"/>
             </Grid>
