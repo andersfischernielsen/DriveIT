@@ -12,6 +12,7 @@ namespace DriveIT.EntityFramework
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<ContactRequest> ContactRequests { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<ImagePath> ImagePaths { get; set; }
         public IQueryable<Employee> Employees
         {
             get

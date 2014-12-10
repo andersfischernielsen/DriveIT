@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -25,7 +24,7 @@ namespace DriveIT.Web.ApiControllers
         {
             return Ok(
                 (await _repo.GetAllCars())
-                .Select(car => car.ToDto())
+                .Select(async car => car.ToDto(await _repo.GetImagePathsForCar(car.Id)))
                 .ToList());
         }
 
@@ -37,48 +36,48 @@ namespace DriveIT.Web.ApiControllers
             {
                 return NotFound();
             }
-            return Ok(car.ToDto());
+            return Ok(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
         }
 
-        // GET: api/Cars?fuelType=Diesel
-        public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
-        {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
-        }
+        //// GET: api/Cars?fuelType=Diesel
+        //public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
+        //{
+        //    return Ok(
+        //        (await _repo.GetAllCars())
+        //        .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase))
+        //        .Select(car => car.ToDto())
+        //        .ToList());
+        //}
 
-        // Get: api/Cars?make=Opel
-        public async Task<IHttpActionResult> GetCarsByMake(string make)
-        {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
-        }
+        //// Get: api/Cars?make=Opel
+        //public async Task<IHttpActionResult> GetCarsByMake(string make)
+        //{
+        //    return Ok(
+        //        (await _repo.GetAllCars())
+        //        .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase))
+        //        .Select(car => car.ToDto())
+        //        .ToList());
+        //}
 
-        // Get: api/Cars?Model=Zafira
-        public async Task<IHttpActionResult> GetCarsByModel(string model)
-        {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
-        }
+        //// Get: api/Cars?Model=Zafira
+        //public async Task<IHttpActionResult> GetCarsByModel(string model)
+        //{
+        //    return Ok(
+        //        (await _repo.GetAllCars())
+        //        .Where(car => string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
+        //        .Select(car => car.ToDto())
+        //        .ToList());
+        //}
 
-        // Get: api/Cars?make=Opel&model=Zafira
-        public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
-        {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto()));
-        }
+        //// Get: api/Cars?make=Opel&model=Zafira
+        //public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
+        //{
+        //    return Ok(
+        //        (await _repo.GetAllCars())
+        //        .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
+        //            && string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
+        //        .Select(car => car.ToDto()));
+        //}
 
         // POST: api/Cars
         [AuthorizeRoles(Role.Administrator, Role.Employee)]
@@ -94,6 +93,10 @@ namespace DriveIT.Web.ApiControllers
             }
             var newCarId = await _repo.CreateCar(value.ToEntity());
             value.Id = newCarId;
+            foreach (var imagePath in value.ToImagePaths())
+            {
+                await _repo.CreateImagePath(imagePath);
+            }
             return CreatedAtRoute("DefaultApi", new Dictionary<string, object> { { "id", newCarId } }, value);
         }
 
@@ -111,6 +114,16 @@ namespace DriveIT.Web.ApiControllers
                 return NotFound();
             }
             await _repo.UpdateCar(id, value.ToEntity());
+            // Remove all imagePaths.
+            foreach (var imagePath in await _repo.GetImagePathsForCar(id))
+            {
+                await _repo.RemoveImagePath(imagePath.Id);
+            }
+            // Add new/updated imagePaths.
+            foreach (var imagePath in value.ToImagePaths())
+            {
+                await _repo.CreateImagePath(imagePath);
+            }
             return Ok();
         }
 

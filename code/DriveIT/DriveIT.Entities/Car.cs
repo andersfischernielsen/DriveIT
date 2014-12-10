@@ -22,6 +22,6 @@ namespace DriveIT.Entities
         public string Transmission { get; set; }
         public float TopSpeed { get; set; }
         public float NoughtTo100 { get; set; }
-        public List<string> ImagePaths { get; set; }
+        public List<ImagePath> ImagePaths { get; set; }
     }
 }
