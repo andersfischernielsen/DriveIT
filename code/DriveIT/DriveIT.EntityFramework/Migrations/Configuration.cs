@@ -56,7 +56,7 @@ namespace DriveIT.EntityFramework.Migrations
                     PhoneNumber = "88888888",
                 };
 
-                CheckResult(userManager.Create(employee, "4dminPassword"));
+                CheckResult(userManager.Create(employee, "4dmin_Password"));
             }
 
             foreach (Role role in Enum.GetValues(typeof(Role)))
@@ -85,7 +85,7 @@ namespace DriveIT.EntityFramework.Migrations
                     PhoneNumber = "11221144",
                 };
 
-                CheckResult(userManager.Create(customer, "Cust0merPassword"));
+                CheckResult(userManager.Create(customer, "Cust0mer_Password"));
             }
             foreach (Role role in Enum.GetValues(typeof(Role)))
             {
@@ -138,7 +138,7 @@ namespace DriveIT.EntityFramework.Migrations
                     CarId = 1,
                     CustomerId = "cust@driveit.dk",
                     Created = DateTime.Now,
-                    EmployeeId = "mlin@itu.dk"
+                    EmployeeId = "admin@driveit.dk"
                 }
             };
 
