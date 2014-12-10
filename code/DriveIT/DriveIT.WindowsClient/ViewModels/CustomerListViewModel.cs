@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
@@ -12,13 +13,11 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         public ObservableCollection<CustomerViewModel> CustomerViewModels { get; set; }
 
-        public CustomerListViewModel(IList<CustomerDto> customerDtos)
+        public CustomerListViewModel(IEnumerable<CustomerDto> customerDtos)
         {
-            CustomerViewModels = new ObservableCollection<CustomerViewModel>();
-            foreach (CustomerDto customerDto in customerDtos)
-            {
-                CustomerViewModels.Add(new CustomerViewModel(customerDto));
-            }
+            CustomerViewModels = 
+                new ObservableCollection<CustomerViewModel>(customerDtos
+                .Select(customerDto => new CustomerViewModel(customerDto)));
         }
 
         public CustomerListViewModel()
