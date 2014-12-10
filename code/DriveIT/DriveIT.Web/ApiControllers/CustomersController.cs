@@ -24,8 +24,9 @@ namespace DriveIT.Web.ApiControllers
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
-                (from customer in await _repo.GetAllCustomers()
-                select customer.ToDto()).ToList());
+                (await _repo.GetAllCustomers())
+                .Select(customer => customer.ToDto())
+                .ToList());
         }
 
         // GET: api/Customers/?id=mlin@itu.dk

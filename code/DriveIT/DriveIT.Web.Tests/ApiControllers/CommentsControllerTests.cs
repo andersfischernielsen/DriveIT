@@ -59,6 +59,9 @@ namespace DriveIT.Web.Tests.ApiControllers
             mockRepo.Setup(x => x.GetAllCommentsForCar(1)).Returns(Task.Run(() => commentsList.Where(c => c.CarId == 1).ToList()));
             mockRepo.Setup(x => x.GetCommentWithId(1)).Returns(Task.Run(() => commentsList.Find(c => c.Id == 1)));
             mockRepo.Setup(x => x.GetCommentWithId(2)).Returns(Task.Run(() => commentsList.Find(c => c.Id == 2)));
+            
+            mockRepo.Setup(x => x.GetAllCommentsForCar(It.IsAny<int>())).Returns(Task.Run(() => commentsList.Where(c => c.CarId == It.IsAny<int>()).ToList()));
+            mockRepo.Setup(x => x.GetAllCommentsForCar(1)).Returns(Task.Run(() => commentsList.Where(c => c.CarId == 1).ToList()));
 
             mockRepo.Setup(x => x.CreateComment(It.IsAny<Comment>())).Returns(Task.Run(() => commentsList.Max(x => x.Id) + 1));
 
@@ -81,19 +84,18 @@ namespace DriveIT.Web.Tests.ApiControllers
             var content = message.Content;
             Assert.IsNotNull(content);
             Assert.IsInstanceOf<List<CommentDto>>(content);
-            var commentDtos = content as IList<CommentDto>;
-            Assert.AreEqual(2, commentDtos.Count());
-            Assert.AreEqual(1, commentDtos.First().Id);
-            Assert.AreEqual("Nice!", commentDtos.First().Title);
-            Assert.AreEqual(2, commentDtos.Skip(1).First().Id);
-            Assert.AreEqual("Bad", commentDtos.Skip(1).First().Title);
+            Assert.AreEqual(2, content.Count());
+            Assert.AreEqual(1, content.First().Id);
+            Assert.AreEqual("Nice!", content.First().Title);
+            Assert.AreEqual(2, content.Skip(1).First().Id);
+            Assert.AreEqual("Bad", content.Skip(1).First().Title);
         }
 
         [Test]
         public async Task GetByCarId_MultipleParameters_NotFoundResult()
         {
             var message = await _controller.GetByCarId(6) as NotFoundResult;
-            Assert.IsNotNull(message);
+            Assert.IsNotNull(message, (await _controller.GetByCarId(6)).GetType().ToString());
 
             message = await _controller.GetByCarId(0) as NotFoundResult;
             Assert.IsNotNull(message);
@@ -108,7 +110,7 @@ namespace DriveIT.Web.Tests.ApiControllers
             var message = await _controller.Post(_comment3.ToDto()) as CreatedAtRouteNegotiatedContentResult<CommentDto>;
 
             // Assert
-            Assert.IsNotNull(message);
+            Assert.IsNotNull(message, (await _controller.Post(_comment3.ToDto())).GetType().ToString());
             Assert.AreEqual("DefaultApi", message.RouteName);
             Assert.IsTrue(message.RouteValues.ContainsKey("id"));
             Assert.AreEqual(3, message.RouteValues["id"]);
@@ -126,7 +128,7 @@ namespace DriveIT.Web.Tests.ApiControllers
         public async Task Put_Success()
         {
             var message = await _controller.Put(2, _comment3.ToDto()) as OkResult;
-            Assert.IsNotNull(message);
+            Assert.IsNotNull(message, (await _controller.Put(2, _comment3.ToDto())).GetType().ToString());
         }
 
         [Test]

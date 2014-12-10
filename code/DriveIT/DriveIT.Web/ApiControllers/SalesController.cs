@@ -24,8 +24,9 @@ namespace DriveIT.Web.ApiControllers
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
-                from sale in await _repo.GetAllSales()
-                select sale.ToDto());
+                (await _repo.GetAllSales())
+                .Select(sale => sale.ToDto())
+                .ToList());
         }
 
         // GET: api/Sales/5
@@ -47,9 +48,11 @@ namespace DriveIT.Web.ApiControllers
             {
                 return Unauthorized();
             }
-            return Ok((from sale in await _repo.GetAllSales()
-                       where sale.CustomerId == userId
-                       select sale.ToDto()).ToList());
+            return Ok(
+                (await _repo.GetAllSales())
+                .Where(sale => sale.CustomerId == userId)
+                .Select(sale => sale.ToDto())
+                .ToList());
         }
 
         // POST: api/Sales
@@ -59,6 +62,10 @@ namespace DriveIT.Web.ApiControllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+            if (value == null)
+            {
+                return BadRequest("Null value not allowed.");
             }
             var newSaleId = await _repo.CreateSale(value.ToEntity());
             value.Id = newSaleId;

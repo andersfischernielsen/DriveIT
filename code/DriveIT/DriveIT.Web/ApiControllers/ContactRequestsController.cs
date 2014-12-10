@@ -23,8 +23,10 @@ namespace DriveIT.Web.ApiControllers
         [AuthorizeRoles(Role.Employee, Role.Administrator)]
         public async Task<IHttpActionResult> Get()
         {
-            return Ok((from contactRequest in await _repo.GetAllContactRequests()
-                      select contactRequest.ToDto()).ToList());
+            return Ok(
+                (await _repo.GetAllContactRequests())
+                .Select(contactRequest => contactRequest.ToDto())
+                .ToList());
         }
 
         // GET: api/ContactRequests/5
@@ -46,9 +48,15 @@ namespace DriveIT.Web.ApiControllers
             {
                 return Unauthorized();
             }
-            return Ok((from contactRequest in await _repo.GetAllContactRequests()
-                where contactRequest.CustomerId == userId
-                select contactRequest.ToDto()).ToList());
+            var contactRequests = (await _repo.GetAllContactRequests())
+                .Where(contactRequest => contactRequest.CustomerId == userId)
+                .Select(contactRequest => contactRequest.ToDto())
+                .ToList();
+            if (!contactRequests.Any())
+            {
+                return NotFound();
+            }
+            return Ok(contactRequests);
         }
 
         // POST: api/ContactRequests
@@ -63,7 +71,7 @@ namespace DriveIT.Web.ApiControllers
             {
                 return BadRequest("Null value not allowed.");
             }
-            if (User.Identity.GetUserId() != value.CustomerId)
+            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != value.CustomerId)
             {
                 return BadRequest("CustomerId must match the logged in user!");
             }

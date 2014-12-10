@@ -22,8 +22,9 @@ namespace DriveIT.Web.ApiControllers
         public async Task<IHttpActionResult> Get()
         {
             return Ok(
-                from employee in await _repo.GetAllEmployees()
-                select employee.ToDto());
+                (await _repo.GetAllEmployees())
+                .Select(employee => employee.ToDto())
+                .ToList());
         }
 
         // GET: api/Employees/5
