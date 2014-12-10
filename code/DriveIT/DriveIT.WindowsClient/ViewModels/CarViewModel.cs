@@ -421,11 +421,7 @@ namespace DriveIT.WindowsClient.ViewModels
         private async void UploadImages()
         {
             var imageController = new ImageController();
-            foreach (var imagePath in _carDto.ImagePaths)
-            {
-                _carDto.ImagePaths.Add(await imageController.UploadImage(imagePath));
-                _carDto.ImagePaths.Remove(imagePath);
-            }
+            _carDto.ImagePaths = await imageController.UploadImages(_carDto);
         }
         /// <summary>
         /// Gets called from the view
