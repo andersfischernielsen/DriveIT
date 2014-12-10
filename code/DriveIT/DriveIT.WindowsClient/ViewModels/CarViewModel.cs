@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -416,7 +417,7 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateCar()
         {
-            UploadImages();
+            await UploadImages();
             var carController = new CarController();
             await carController.CreateCar(_carDto);
             Status = "Car Created";
@@ -425,7 +426,20 @@ namespace DriveIT.WindowsClient.ViewModels
 
         private async Task UploadImages()
         {
-            _carDto.ImagePaths = await ImageController.UploadImages(_carDto);
+            var newPaths = new List<string>();
+            foreach (var imagePath in _carDto.ImagePaths)
+            {
+                var uri = new Uri(imagePath);
+                if (uri.IsFile)
+                {
+                    newPaths.Add(await ImageController.UploadImage(_carDto.Id.Value, imagePath));
+                }
+                else
+                {
+                    newPaths.Add(imagePath);
+                }
+            }
+            _carDto.ImagePaths = newPaths;
             CreateImageViewModels();
         }
         /// <summary>
