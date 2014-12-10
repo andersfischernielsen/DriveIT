@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using DriveIT.Models;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace DriveIT.WindowsClient.Controllers
 {
-    class ImageController
+    public class ImageController
     {
-        public static async Task<List<String>> UploadImages(CarDto dto)
+        public static async Task<String> UploadImage(int id, string filepath)
         {
             // Retrieve storage account from connection string.
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
@@ -21,7 +19,7 @@ namespace DriveIT.WindowsClient.Controllers
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
             // Retrieve reference to a previously created container.
-            CloudBlobContainer container = blobClient.GetContainerReference("car" + dto.Id);
+            CloudBlobContainer container = blobClient.GetContainerReference("car" + id);
 
             // Create the container if it doesn't already exist.
             container.CreateIfNotExists();
@@ -32,21 +30,17 @@ namespace DriveIT.WindowsClient.Controllers
                     PublicAccess = BlobContainerPublicAccessType.Blob
                 });
 
-            var blobPaths = new List<string>();
 
-            foreach (var imagePath in dto.ImagePaths)
+            // Retrieve reference to a blob named "myblob".
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(Path.GetFileName(filepath));
+
+            // Create or overwrite the "myblob" blob with contents from a local file.
+            using (var fileStream = File.OpenRead(filepath))
             {
-                // Retrieve reference to a blob named "myblob".
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(Path.GetFileName(imagePath));
-
-                // Create or overwrite the "myblob" blob with contents from a local file.
-                using (var fileStream = File.OpenRead(imagePath))
-                {
-                    await blockBlob.UploadFromStreamAsync(fileStream);
-                }
-                blobPaths.Add(string.Format("https://driveit.blob.core.windows.net/{0}/{1}", dto.Id, Path.GetFileName(imagePath)));
+                await blockBlob.UploadFromStreamAsync(fileStream);
             }
-            return blobPaths;
+
+            return string.Format("https://driveit.blob.core.windows.net/{0}/{1}", id, Path.GetFileName(filepath));
         }
     }
 }

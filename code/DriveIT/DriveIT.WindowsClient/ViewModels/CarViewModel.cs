@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -411,24 +413,36 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateCar()
         {
-            UploadImages();
+            await UploadImages();
             var carController = new CarController();
             await carController.CreateCar(_carDto);
             Status = "Car Created";
             CarState = CarStateEnum.ForSale;
         }
 
-        private async void UploadImages()
+        private async Task UploadImages()
         {
-            var imageController = new ImageController();
-            _carDto.ImagePaths = await imageController.UploadImages(_carDto);
+            var newPaths = new List<string>();
+            foreach (var imagePath in _carDto.ImagePaths)
+            {
+                var uri = new Uri(imagePath);
+                if (uri.IsFile)
+                {
+                    newPaths.Add(await ImageController.UploadImage(_carDto.Id.Value, imagePath));
+                }
+                else
+                {
+                    newPaths.Add(imagePath);
+                }
+            }
+            _carDto.ImagePaths = newPaths;
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateCar()
         {
-            UploadImages();
+            await UploadImages();
             var carController = new CarController();
             await carController.UpdateCar(_carDto);
             Status = "Car Updated";
