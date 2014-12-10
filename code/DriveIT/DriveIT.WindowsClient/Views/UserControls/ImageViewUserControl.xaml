@@ -18,8 +18,8 @@
             <RowDefinition Height="48"/>
         </Grid.RowDefinitions>
         <Grid Margin="10">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0"/>
             <Image x:Name="ChoosenImage" Margin="0" Source="{Binding Text, ElementName=ImagePathTextBox}"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0"/>
         </Grid>
         <Grid Height="48" Grid.Row="1">
             <Grid.ColumnDefinitions>

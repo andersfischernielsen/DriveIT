@@ -386,6 +386,7 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 case CarStateEnum.Initial:
                     CreateCar();
+                    //todo Fix the problem with IDs and images.
                     break;
                 default:
                     UpdateCar();
