@@ -57,7 +57,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             try
             {
-                Status = "Login in...";
+                Status = "Logging in...";
                 await DriveITWebAPI.Login(Username, Password);
                 Status = "Login successful!";
                 var window = new MainWindow(await new EmployeeController().ReadEmployee(Username));
