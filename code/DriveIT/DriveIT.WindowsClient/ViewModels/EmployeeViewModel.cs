@@ -12,22 +12,13 @@ namespace DriveIT.WindowsClient.ViewModels
             NotInSystem,
             InSystem
         }
-        private EmployeeDto _employeeDto;
+        private readonly EmployeeDto _employeeDto;
 
         public string EmployeeId
         {
             get
             {
-                try
-                {
-                    return _employeeDto.Id;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
+                return _employeeDto.Id;
             }
             set
             {
@@ -107,7 +98,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
             }
         }
-        
+
         public string Email
         {
             get
@@ -159,7 +150,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        
+
 
         #endregion Attributes
 

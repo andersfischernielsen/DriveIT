@@ -7,7 +7,7 @@ namespace DriveIT.WindowsClient.ViewModels
 {
     public class CustomerViewModel : IViewModelBase
     {
-        private CustomerDto _customerDto;
+        private readonly CustomerDto _customerDto;
 
         public enum CustomerEnum
         {
@@ -19,16 +19,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
-                    return _customerDto.Id;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
+                return _customerDto.Id;
             }
             set
             {
@@ -172,7 +163,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     break;
             }
         }
-        
+
         /// <summary>
         /// Gets called from the view
         /// </summary>
@@ -205,7 +196,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Customer Deleted";
                 CustomerState = CustomerEnum.NotInSystem;
             }
-            
+
         }
         #endregion CRUDS
 
