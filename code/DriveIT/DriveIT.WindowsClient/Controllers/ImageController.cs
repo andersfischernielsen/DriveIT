@@ -40,7 +40,7 @@ namespace DriveIT.WindowsClient.Controllers
                 await blockBlob.UploadFromStreamAsync(fileStream);
             }
 
-            return string.Format("https://driveit.blob.core.windows.net/{0}/{1}", id, Path.GetFileName(filepath));
+            return string.Format("https://driveit.blob.core.windows.net/car{0}/{1}", id, Path.GetFileName(filepath));
         }
     }
 }
