@@ -107,7 +107,7 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = 1,
                     CarId = 1,
                     CustomerId = "cust@driveit.dk",
-                    EmployeeId = "mlin@itu.dk",
+                    EmployeeId = "admin@driveit.dk",
                     Price = 1000000,
                     DateOfSale = DateTime.Now
                 },
@@ -116,7 +116,7 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = 2,
                     CarId = 2,
                     CustomerId = "cust@driveit.dk",
-                    EmployeeId = "mlin@itu.dk",
+                    EmployeeId = "admin@driveit.dk",
                     Price = 400000,
                     DateOfSale = DateTime.Now
                 },

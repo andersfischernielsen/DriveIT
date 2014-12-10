@@ -16,16 +16,12 @@ using Microsoft.Owin.Security;
 namespace DriveIT.Web.MvcControllers
 {
     [Authorize]
-    public class AccountController : AsyncController
+    public class AccountController : Controller
     {
         private DriveITSignInManager _signInManager;
         private DriveITUserManager _userManager;
 
-        public AccountController()
-        {
-            //UserManager = DriveITUserManager.Create(null, HttpContext.GetOwinContext());
-            //SignInManager = DriveITSignInManager.Create(null, HttpContext.GetOwinContext());
-        }
+        public AccountController() {}
 
         public AccountController(DriveITUserManager userManager, DriveITSignInManager signInManager)
         {
