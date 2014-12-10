@@ -109,6 +109,7 @@
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DriveITWebAPI.cs" />
+    <Compile Include="Controllers\Token.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\CarListViewModel.cs" />
     <Compile Include="ViewModels\CarViewModel.cs" />
