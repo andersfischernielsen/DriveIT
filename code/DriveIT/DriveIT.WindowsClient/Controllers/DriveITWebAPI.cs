@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,7 +10,7 @@ using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
-// ReSharper disable once InconsistentNaming
+    // ReSharper disable once InconsistentNaming
     public class DriveITWebAPI
     {
         static private HttpClient _httpClient;
@@ -188,18 +187,6 @@ namespace DriveIT.WindowsClient.Controllers
 
             var response = MessageBox.Show("There was an error processing your request...", "Error!",
                 MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-
-        public static async Task<String> UploadImage(byte[] imageData, MediaTypeHeaderValue type)
-        {
-            var content = new MultipartFormDataContent();
-            var b = new ByteArrayContent(imageData);
-            b.Headers.ContentType = type;
-            content.Add(b);
-            
-            var message = await _httpClient.PostAsync("upload", content);
-            message.EnsureSuccessStatusCode();
-            return (await message.Content.ReadAsAsync<List<String>>()).SingleOrDefault();
         }
     }
 }
