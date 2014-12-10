@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -394,6 +395,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void SaveCar()
         {
+            CreateImagePathStrings();
             switch (CarState)
             {
                 case CarStateEnum.Initial:
@@ -435,6 +437,15 @@ namespace DriveIT.WindowsClient.ViewModels
                 CarId = null;
                 Status = "Car Deleted";
                 CarState = CarStateEnum.Initial;
+            }
+        }
+
+        public void CreateImagePathStrings()
+        {
+            _carDto.ImagePaths = ImageGallery.Select(i => i.ImagePath).ToList();
+            foreach (var imagePath in _carDto.ImagePaths)
+            {
+                if (string.IsNullOrWhiteSpace(imagePath)) _carDto.ImagePaths.Remove(imagePath);
             }
         }
         #endregion CRUDS
