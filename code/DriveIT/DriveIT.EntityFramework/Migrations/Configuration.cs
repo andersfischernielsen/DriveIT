@@ -250,7 +250,7 @@ namespace DriveIT.EntityFramework.Migrations
 
             foreach (var car in cars)
             {
-                context.Cars.AddOrUpdate(car);
+                context.Cars.AddOrUpdate(c => c.Id, car);
             }
         }
 

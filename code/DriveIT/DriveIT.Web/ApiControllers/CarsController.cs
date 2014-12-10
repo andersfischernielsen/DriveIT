@@ -22,10 +22,13 @@ namespace DriveIT.Web.ApiControllers
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Select(async car => car.ToDto(await _repo.GetImagePathsForCar(car.Id)))
-                .ToList());
+            var cars = await _repo.GetAllCars();
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
         }
 
         // GET: api/Cars/5
