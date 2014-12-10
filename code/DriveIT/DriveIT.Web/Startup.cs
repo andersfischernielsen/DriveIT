@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(DriveIT.Web.Startup))]
+[assembly: OwinStartupAttribute(typeof(DriveIT.Web.Startup))]
 
 namespace DriveIT.Web
 {

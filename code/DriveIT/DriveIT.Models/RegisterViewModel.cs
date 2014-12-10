@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DriveIT.Models
 {
-    public class RegisterBindingModel
+    public class RegisterViewModel
     {
         [Required]
         [Display(Name = "Email")]
