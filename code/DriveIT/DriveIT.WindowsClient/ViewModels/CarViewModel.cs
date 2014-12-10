@@ -44,28 +44,14 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _carDto = carDto;
             CarState = CarStateEnum.ForSale;
-            ImageGallery = new List<ImageViewModel>();
-            if (_carDto.ImagePaths != null)
-            {
-                foreach (var imagePath in _carDto.ImagePaths)
-                {
-                    ImageGallery.Add(new ImageViewModel(imagePath));
-                }
-                SelectedImageViewModel = ImageGallery[0];
-                ImageAmtString = "Image 1 of " + ImageGallery.Count;
-            }
-            else
-            {
-                ImageGallery.Add(new ImageViewModel());
-                SelectedImageViewModel = ImageGallery[0];
-            }
+            CreateImageViewModels();
+
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
-            ImageGallery = new List<ImageViewModel> {new ImageViewModel()};
-            SelectedImageViewModel = ImageGallery[0];
+            CreateImageViewModels();
 
             CarState = CarStateEnum.Initial;
         }
@@ -319,7 +305,25 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        private string _imageAmtString = "Image 1 of 1";
+        private void CreateImageViewModels()
+        {
+            ImageGallery = new List<ImageViewModel>();
+            if (_carDto.ImagePaths != null)
+            {
+                foreach (var imagePath in _carDto.ImagePaths)
+                {
+                    ImageGallery.Add(new ImageViewModel(imagePath));
+                }
+            }
+            else
+            {
+                ImageGallery.Add(new ImageViewModel());
+            }
+            SelectedImageViewModel = ImageGallery[0];
+            ImageAmtString = "Image 1 of " + ImageGallery.Count;
+        }
+
+        private string _imageAmtString;
         public string ImageAmtString
         {
             get { return _imageAmtString; }
@@ -436,6 +440,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
             }
             _carDto.ImagePaths = newPaths;
+            CreateImageViewModels();
         }
         /// <summary>
         /// Gets called from the view
@@ -465,9 +470,9 @@ namespace DriveIT.WindowsClient.ViewModels
         public void CreateImagePathStrings()
         {
             _carDto.ImagePaths = ImageGallery.Select(i => i.ImagePath).ToList();
-            foreach (var imagePath in _carDto.ImagePaths)
+            for (int i = 0; i < _carDto.ImagePaths.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(imagePath)) _carDto.ImagePaths.Remove(imagePath);
+                if (string.IsNullOrWhiteSpace(_carDto.ImagePaths[i])) _carDto.ImagePaths.RemoveAt(i);
             }
         }
         #endregion CRUDS
