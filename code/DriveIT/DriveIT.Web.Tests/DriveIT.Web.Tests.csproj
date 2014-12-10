@@ -104,7 +104,6 @@
     <Compile Include="ApiControllers\CommentsControllerTests.cs" />
     <Compile Include="ApiControllers\ContactRequestsControllerTests.cs" />
     <Compile Include="ApiControllers\CustomersControllerTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
