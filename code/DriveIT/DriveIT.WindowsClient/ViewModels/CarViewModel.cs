@@ -23,7 +23,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                return new List<string>(Enum.GetNames(typeof (FuelType)));
+                return new List<string>(Enum.GetNames(typeof(FuelType)));
             }
         }
 
@@ -71,7 +71,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         private CarStateEnum _actualCarState;
-        public  CarStateEnum CarState
+        public CarStateEnum CarState
         {
             get { return _actualCarState; }
             set
@@ -97,16 +97,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
-                    return _carDto.Id.Value;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
+                return _carDto.Id;
             }
             set
             {
@@ -326,7 +317,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public void NextImage()
         {
             int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
-            int nextIndex = currentIndex+1;
+            int nextIndex = currentIndex + 1;
             if (nextIndex == ImageGallery.Count)
             {
                 nextIndex = 0;
@@ -337,13 +328,13 @@ namespace DriveIT.WindowsClient.ViewModels
         public void PreviousImage()
         {
             int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
-            int nextIndex = currentIndex-1;
+            int nextIndex = currentIndex - 1;
             if (nextIndex <= -1)
             {
-                nextIndex = ImageGallery.Count-1;
+                nextIndex = ImageGallery.Count - 1;
             }
             SelectedImageViewModel = ImageGallery[nextIndex];
-            ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel)+1) + " of " + ImageGallery.Count;
+            ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel) + 1) + " of " + ImageGallery.Count;
         }
         public void DeleteImage()
         {
@@ -383,7 +374,7 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 Status = "Failed to import from CarQuery";
             }
-            
+
         }
 
         #region CRUDS
@@ -396,10 +387,10 @@ namespace DriveIT.WindowsClient.ViewModels
                 case CarStateEnum.Initial:
                     CreateCar();
                     break;
-                default: 
+                default:
                     UpdateCar();
                     break;
-            }            
+            }
         }
         /// <summary>
         /// Gets called from the view
