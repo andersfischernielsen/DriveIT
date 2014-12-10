@@ -45,7 +45,7 @@ namespace DriveIT.WindowsClient.Controllers
                 var response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Console.WriteLine(ex.Message);
                 ErrorMessagePopUp();
@@ -148,7 +148,7 @@ namespace DriveIT.WindowsClient.Controllers
         private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
         {
             HttpResponseMessage result;
-            var model = new RegisterBindingModel
+            var model = new RegisterViewModel
             {
                 FirstName = firstName,
                 LastName = lastName,

@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using DriveIT.Models;
 using DriveIT.WindowsClient.ViewModels;
-using System.Windows;
 
 namespace DriveIT.WindowsClient.Views
 {
