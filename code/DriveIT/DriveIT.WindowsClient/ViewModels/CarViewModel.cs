@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -40,20 +41,29 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _carDto = carDto;
             CarState = CarStateEnum.ForSale;
+            ImageGallery = new List<ImageViewModel>();
             if (_carDto.ImagePaths != null)
             {
-                SelectedImageViewModel = new ImageViewModel(_carDto.ImagePaths[0]);
+                foreach (var imagePath in _carDto.ImagePaths)
+                {
+                    ImageGallery.Add(new ImageViewModel(imagePath));
+                }
+                SelectedImageViewModel = ImageGallery[0];
+                ImageAmtString = "Image 1 of " + ImageGallery.Count;
             }
             else
             {
-                SelectedImageViewModel = new ImageViewModel();
+                ImageGallery.Add(new ImageViewModel());
+                SelectedImageViewModel = ImageGallery[0];
             }
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
-            SelectedImageViewModel = new ImageViewModel();
+            ImageGallery = new List<ImageViewModel> {new ImageViewModel()};
+            SelectedImageViewModel = ImageGallery[0];
+
             CarState = CarStateEnum.Initial;
         }
 
@@ -79,17 +89,6 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 _status = value;
                 NotifyPropertyChanged("Status");
-            }
-        }
-
-        private ImageViewModel _selectedImageViewModel;
-        public ImageViewModel SelectedImageViewModel
-        {
-            get { return _selectedImageViewModel; }
-            set
-            {
-                _selectedImageViewModel = value;
-                NotifyPropertyChanged("SelectedImageViewModel");
             }
         }
 
@@ -303,6 +302,77 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion Attributes
+
+        #region ImageGallery
+        public List<ImageViewModel> ImageGallery { get; set; }
+        private ImageViewModel _selectedImageViewModel;
+        public ImageViewModel SelectedImageViewModel
+        {
+            get { return _selectedImageViewModel; }
+            set
+            {
+                _selectedImageViewModel = value;
+                NotifyPropertyChanged("SelectedImageViewModel");
+            }
+        }
+
+        private string _imageAmtString = "Image 1 of 1";
+        public string ImageAmtString
+        {
+            get { return _imageAmtString; }
+            set
+            {
+                _imageAmtString = value;
+                NotifyPropertyChanged("ImageAmtString");
+            }
+        }
+
+        public void NextImage()
+        {
+            int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
+            int nextIndex = currentIndex+1;
+            if (nextIndex == ImageGallery.Count)
+            {
+                nextIndex = 0;
+            }
+            SelectedImageViewModel = ImageGallery[nextIndex];
+            ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel) + 1) + " of " + ImageGallery.Count;
+        }
+        public void PreviousImage()
+        {
+            int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
+            int nextIndex = currentIndex-1;
+            if (nextIndex <= -1)
+            {
+                nextIndex = ImageGallery.Count-1;
+            }
+            SelectedImageViewModel = ImageGallery[nextIndex];
+            ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel)+1) + " of " + ImageGallery.Count;
+        }
+        public void DeleteImage()
+        {
+            if (ImageGallery.Count == 1)
+            {
+                ImageGallery[0] = new ImageViewModel();
+                SelectedImageViewModel = ImageGallery[0];
+            }
+            else
+            {
+                ImageGallery.Remove(SelectedImageViewModel);
+                PreviousImage();
+            }
+        }
+        public void AddImage()
+        {
+            if (!SelectedImageViewModel.IsEmpty())
+            {
+                ImageGallery.Add(new ImageViewModel());
+                SelectedImageViewModel = ImageGallery[ImageGallery.Count - 1];
+                ImageAmtString = "Image " + ImageGallery.Count + " of " + ImageGallery.Count;
+            }
+        }
+
+        #endregion ImageGallery
 
         public async void ImportCarQueryData()
         {

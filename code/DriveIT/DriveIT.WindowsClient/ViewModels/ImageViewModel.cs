@@ -45,6 +45,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("ImagePath");
             }
         }
+
         #endregion Properties
         public void ChooseFile()
         {
@@ -57,6 +58,12 @@ namespace DriveIT.WindowsClient.ViewModels
             }
 
 
+        }
+
+        public bool IsEmpty()
+        {
+            if (string.IsNullOrWhiteSpace(ImagePath)) return true;
+            return false;
         }
     }
 }
