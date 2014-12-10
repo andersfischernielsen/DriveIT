@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 
@@ -27,15 +23,8 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                // todo get from enum instead. VERY BAD CODE
-                return new List<string>()
-                {
-                    FuelType.Gasoline.ToString(),
-                    FuelType.Diesel.ToString(),
-                    FuelType.Electric.ToString(),
-                };
+                return new List<string>(Enum.GetNames(typeof (FuelType)));
             }
-            set { }
         }
 
         // todo ; til at notifie at alt er updated.
