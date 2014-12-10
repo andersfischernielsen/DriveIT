@@ -100,7 +100,8 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
         }
         public async static Task Delete<T>(string uri)
