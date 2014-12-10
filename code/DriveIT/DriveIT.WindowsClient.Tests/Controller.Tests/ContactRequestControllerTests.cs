@@ -15,22 +15,23 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     {
         private ContactRequestController _requestForContactController;
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             _requestForContactController = new ContactRequestController();
+            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]
-        public void TestAllMethods()
+        public async Task TestAllMethods()
         {
             var t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
-                _requestForContactController.CreateContactRequest(new ContactRequestDto()
+                await _requestForContactController.CreateContactRequest(new ContactRequestDto()
                 {
                     Requested = DateTime.Now,
                     CarId = 1,
-                    CustomerId = 1,
-                    EmployeeId = 1,
+                    CustomerId = "cust@driveit.dk",
+                    EmployeeId = "mlin@itu.dk",
                 });
             Thread.Sleep(5000);
             t = _requestForContactController.ReadContactRequests().Result;
@@ -38,12 +39,12 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
 
             Console.WriteLine("Before update: " + _requestForContactController.ReadContactRequest(t[t.Count - 1].Id.Value).Result.Requested);
-            _requestForContactController.UpdateContactRequest(new ContactRequestDto()
+            await _requestForContactController.UpdateContactRequest(new ContactRequestDto()
             {
-                EmployeeId = 1,
                 Requested = DateTime.Now.AddDays(1),
                 CarId = 1,
-                CustomerId = 1,
+                CustomerId = "cust@driveit.dk",
+                EmployeeId = "mlin@itu.dk",
                 Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(5000);
@@ -51,7 +52,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine(t.Count);
             Console.WriteLine("After update: " + _requestForContactController.ReadContactRequest(t[t.Count - 1].Id.Value).Result.Requested);
 
-            _requestForContactController.DeleteContactRequest(t[t.Count - 1].Id.Value);
+            await _requestForContactController.DeleteContactRequest(t[t.Count - 1].Id.Value);
             Thread.Sleep(5000);
             t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);

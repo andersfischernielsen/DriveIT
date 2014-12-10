@@ -6,7 +6,7 @@
     xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
     mc:Ignorable="d"
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
-        Title="MainWindow" Height="900" Width="1600" Background="#FFEDF1F3"
+        Title="MainWindow" Height="720" Width="1366" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen"
         Closing="CloseWindowPopUp">
     <Window.DataContext>
@@ -825,7 +825,7 @@
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                     </Border.BorderBrush>
                 </Border>
-                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260"/>
+                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="{Binding GravatarLink}"/>
                 <Label Margin="10,73,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
                 <Label Margin="10,119,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
                 <Label Margin="10,211,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>

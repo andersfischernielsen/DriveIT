@@ -16,17 +16,18 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             
         private CustomerController _customerController;
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             _customerController = new CustomerController();
+            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]
-        public void TestAllMethods()
+        public async Task TestAllMethods()
         {
             var t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);
-                _customerController.CreateCustomer(new CustomerDto()
+                await _customerController.CreateCustomer(new CustomerDto()
                 {
                     Email = "jajaja@itu.dk",
                     FirstName = "Mr Handsome",
@@ -37,20 +38,20 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine(t.Count);
 
 
-            Console.WriteLine("Before update: " + _customerController.ReadCustomer(t[t.Count - 1].Id.Value).Result.FirstName);
-            _customerController.UpdateCustomer(new CustomerDto()
+            Console.WriteLine("Before update: " + _customerController.ReadCustomer(t[t.Count - 1].Email).Result.FirstName);
+            await _customerController.UpdateCustomer(new CustomerDto()
             {
                 Email = "jajaja@itu.dk",
                 FirstName = "Mr Not So Handsome",
                 LastName = "Cookie",
-                Id = t[t.Count - 1].Id.Value
+                Id = t[t.Count - 1].Id
             });
             Thread.Sleep(2000);
             t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + _customerController.ReadCustomer(t[t.Count - 1].Id.Value).Result.FirstName);
+            Console.WriteLine("After update: " + _customerController.ReadCustomer(t[t.Count - 1].Email).Result.FirstName);
 
-            _customerController.DeleteCustomer(t[t.Count - 1].Id.Value);
+            await _customerController.DeleteCustomer(t[t.Count - 1]);
             Thread.Sleep(2000);
             t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);

@@ -15,23 +15,24 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     {
         private SaleController _orderController;
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             _orderController = new SaleController();
+            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]
-        public void TestAllMethods()
+        public async Task TestAllMethods()
         {
             var t = _orderController.ReadSaleList().Result;
             Console.WriteLine(t.Count);
-                _orderController.CreateSale(new SaleDto()
+                await _orderController.CreateSale(new SaleDto()
                 {
                     Price = 1000,
                     Sold = DateTime.Now,
                     CarId = 1,
-                    CustomerId = 1,
-                    EmployeeId = 1
+                    CustomerId = "cust@driveit.dk",
+                    EmployeeId = "mlin@itu.dk",
                 });
 
             Thread.Sleep(2000);
@@ -41,13 +42,13 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
             Console.WriteLine("Before update: " + _orderController.ReadSale(t[t.Count - 1].Id.Value).Result.Price);
             int id = t[0].Id.Value;
-            _orderController.UpdateSale(new SaleDto()
+            await _orderController.UpdateSale(new SaleDto()
             {
                 Price = 9999,
                 Sold = DateTime.Now,
                 CarId = 1,
-                CustomerId = 1,
-                EmployeeId = 1,
+                CustomerId = "cust@driveit.dk",
+                EmployeeId = "mlin@itu.dk",
                 Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(2000);
@@ -55,7 +56,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Console.WriteLine(t.Count);
             Console.WriteLine("After update: " + _orderController.ReadSale(t[t.Count - 1].Id.Value).Result.Price);
 
-            _orderController.DeleteSale(t[t.Count - 1].Id.Value);
+            await _orderController.DeleteSale(t[t.Count - 1]);
             Thread.Sleep(2000);
             t = _orderController.ReadSaleList().Result;
             Console.WriteLine(t.Count);
