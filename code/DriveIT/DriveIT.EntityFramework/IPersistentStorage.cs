@@ -12,7 +12,7 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateCar(Car carToCreate, DriveITContext optionalContext = null);
 
-        Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith,
+        Task UpdateCar(int idToUpdate, Car carToReplaceWith,
             DriveITContext optionalContext = null);
 
         Task<int> DeleteCar(int id, DriveITContext optionalContext = null);
@@ -21,7 +21,7 @@ namespace DriveIT.EntityFramework
 
         Task<List<Employee>> GetAllEmployees();
 
-        Task<int> UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith);
+        Task UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith);
 
         Task<int> DeleteEmployee(string idToDelete);
 
@@ -29,7 +29,7 @@ namespace DriveIT.EntityFramework
 
         Task<List<Customer>> GetAllCustomers();
 
-        Task<int> UpdateCustomer(string idToUpdate, Customer customerToReplaceWith);
+        Task UpdateCustomer(string idToUpdate, Customer customerToReplaceWith);
 
         Task<int> DeleteCustomer(string idToDelete);
 
@@ -39,7 +39,7 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateContactRequest(ContactRequest contactRequestToCreate);
 
-        Task<int> UpdateContactRequest(int idToUpdate,
+        Task UpdateContactRequest(int idToUpdate,
             ContactRequest contactRequestToReplaceWith);
 
         Task<int> DeleteContactRequest(int idToDelete);
@@ -50,7 +50,7 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateComment(Comment commentToCreate);
 
-        Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith);
+        Task UpdateComment(int idToUpdate, Comment commentToReplaceWith);
 
         Task<int> DeleteComment(int idToDelete);
 
@@ -60,7 +60,7 @@ namespace DriveIT.EntityFramework
 
         Task<int> CreateSale(Sale saleToCreate);
 
-        Task<int> UpdateSale(int idToUpdate, Sale saleToReplaceWith);
+        Task UpdateSale(int idToUpdate, Sale saleToReplaceWith);
 
         Task<int> DeleteSale(int idToDelete);
     }

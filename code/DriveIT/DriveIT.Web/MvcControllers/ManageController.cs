@@ -12,24 +12,24 @@ namespace DriveIT.Web.MvcControllers
     [Authorize]
     public class ManageController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private DriveITSignInManager _signInManager;
+        private DriveITUserManager _userManager;
 
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(DriveITUserManager userManager, DriveITSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
+        public DriveITSignInManager SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return _signInManager ?? HttpContext.GetOwinContext().Get<DriveITSignInManager>();
             }
             private set
             {
@@ -37,11 +37,11 @@ namespace DriveIT.Web.MvcControllers
             }
         }
 
-        public ApplicationUserManager UserManager
+        public DriveITUserManager UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<DriveITUserManager>();
             }
             private set
             {

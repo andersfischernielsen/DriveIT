@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -16,25 +18,26 @@ namespace DriveIT.Web.MvcControllers
     [Authorize]
     public class AccountController : AsyncController
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private DriveITSignInManager _signInManager;
+        private DriveITUserManager _userManager;
 
         public AccountController()
         {
-            
+            //UserManager = DriveITUserManager.Create(null, HttpContext.GetOwinContext());
+            //SignInManager = DriveITSignInManager.Create(null, HttpContext.GetOwinContext());
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(DriveITUserManager userManager, DriveITSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
+        public DriveITSignInManager SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return _signInManager ?? HttpContext.GetOwinContext().Get<DriveITSignInManager>();
             }
             private set
             {
@@ -42,11 +45,11 @@ namespace DriveIT.Web.MvcControllers
             }
         }
 
-        public ApplicationUserManager UserManager
+        public DriveITUserManager UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<DriveITUserManager>();
             }
             private set
             {
@@ -77,6 +80,8 @@ namespace DriveIT.Web.MvcControllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+            if (Request.GetOwinContext() == null) throw new Exception("Badass Exception");
+            if (HttpContext.GetOwinContext() == null) throw new Exception("Badass Exception");
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -156,7 +161,7 @@ namespace DriveIT.Web.MvcControllers
                 var user = new Customer
                 {
                     Id = model.Email,
-                    UserName = model.Email, 
+                    UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,

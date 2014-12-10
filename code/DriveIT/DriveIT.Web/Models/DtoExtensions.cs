@@ -1,9 +1,8 @@
 ﻿using System;
 using DriveIT.Entities;
 using DriveIT.Models;
-using _repo = DriveIT.EntityFramework.EntityStorage;
 
-namespace DriveIT.WebAPI.Models
+namespace DriveIT.Web.Models
 {
     public static class DtoExtensions
     {

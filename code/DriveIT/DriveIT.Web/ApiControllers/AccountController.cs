@@ -26,25 +26,25 @@ namespace DriveIT.Web.ApiControllers
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private ApplicationUserManager _userManager;
+        private DriveITUserManager _userManager;
 
         public AccountController()
         {
-            _userManager = new ApplicationUserManager(new UserStore<DriveITUser>(new DriveITContext()));
+            _userManager = new DriveITUserManager(new UserStore<DriveITUser>(new DriveITContext()));
         }
 
-        public AccountController(ApplicationUserManager userManager,
+        public AccountController(DriveITUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
-        public ApplicationUserManager UserManager
+        public DriveITUserManager UserManager
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? Request.GetOwinContext().GetUserManager<DriveITUserManager>();
             }
             private set
             {

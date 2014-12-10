@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
 using DriveIT.Models;
-using DriveIT.WebAPI.Models;
+using DriveIT.Web.Models;
 using Microsoft.AspNet.Identity;
 
 namespace DriveIT.Web.ApiControllers

@@ -13,17 +13,18 @@ namespace DriveIT.Web
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
-    public class ApplicationUserManager : UserManager<DriveITUser>
+// ReSharper disable once InconsistentNaming
+    public class DriveITUserManager : UserManager<DriveITUser>
     {
-        public ApplicationUserManager(IUserStore<DriveITUser> store)
+        public DriveITUserManager(IUserStore<DriveITUser> store)
             : base(store)
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
+        public static DriveITUserManager Create(IdentityFactoryOptions<DriveITUserManager> options,
             IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<DriveITUser>(context.Get<DriveITContext>()));
+            var manager = new DriveITUserManager(new UserStore<DriveITUser>(context.Get<DriveITContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<DriveITUser>(manager)
             {
@@ -50,21 +51,22 @@ namespace DriveIT.Web
     }
 
     // Configure the application sign-in manager which is used in this application.
-    public class ApplicationSignInManager : SignInManager<DriveITUser, string>
+// ReSharper disable once InconsistentNaming
+    public class DriveITSignInManager : SignInManager<DriveITUser, string>
     {
-        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
+        public DriveITSignInManager(DriveITUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(DriveITUser user)
         {
-            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager, CookieAuthenticationDefaults.AuthenticationType);
+            return user.GenerateUserIdentityAsync((DriveITUserManager)UserManager, CookieAuthenticationDefaults.AuthenticationType);
         }
 
-        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
+        public static DriveITSignInManager Create(IdentityFactoryOptions<DriveITSignInManager> options, IOwinContext context)
         {
-            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+            return new DriveITSignInManager(context.GetUserManager<DriveITUserManager>(), context.Authentication);
         }
     }
 }
