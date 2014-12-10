@@ -1,0 +1,126 @@
+﻿@model IEnumerable<DriveIT.Models.CarDto>
+
+@{
+    ViewBag.Title = "Car Search";
+}
+
+<br/>
+
+<h1>Car Search</h1>
+<p>In this window, you are able to search for cars, by giving, as input, the three following criteria: FuelType, Make and Model.</p>
+
+<br><br/>
+
+@using (Html.BeginForm("Index", "Car", FormMethod.Get))
+{
+    <p>
+        FuelType: @Html.DropDownList("fuelType", "---")
+        Make: @Html.DropDownList("make", "---")
+        Model: @Html.DropDownList("model", "---")
+        <input type="submit" value="Search"/>
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistanceDriven)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fuel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Drive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transmission)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopSpeed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoughtTo100)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagePaths)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mileage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistanceDriven)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fuel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Drive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transmission)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TopSpeed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoughtTo100)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImagePaths)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { carId=item.Id})
+        </td>
+    </tr>
+}
+</table>

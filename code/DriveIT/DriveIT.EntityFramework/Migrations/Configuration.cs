@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Data.Entity.Migrations;
 using DriveIT.Entities;
 using DriveIT.Models;
 using Microsoft.AspNet.Identity;
@@ -9,19 +8,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DriveIT.EntityFramework.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DriveIT.EntityFramework.DriveITContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DriveITContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DriveIT.EntityFramework.DriveITContext context)
+        protected override void Seed(DriveITContext context)
         {
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
@@ -112,7 +107,7 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = 1,
                     CarId = 1,
                     CustomerId = "cust@driveit.dk",
-                    EmployeeId = "mlin@itu.dk",
+                    EmployeeId = "admin@driveit.dk",
                     Price = 1000000,
                     DateOfSale = DateTime.Now
                 },
@@ -121,7 +116,7 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = 2,
                     CarId = 2,
                     CustomerId = "cust@driveit.dk",
-                    EmployeeId = "mlin@itu.dk",
+                    EmployeeId = "admin@driveit.dk",
                     Price = 400000,
                     DateOfSale = DateTime.Now
                 },
