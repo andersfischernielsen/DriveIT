@@ -411,16 +411,28 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateCar()
         {
+            UploadImages();
             var carController = new CarController();
             await carController.CreateCar(_carDto);
             Status = "Car Created";
             CarState = CarStateEnum.ForSale;
+        }
+
+        private async void UploadImages()
+        {
+            var imageController = new ImageController();
+            foreach (var imagePath in _carDto.ImagePaths)
+            {
+                _carDto.ImagePaths.Add(await imageController.UploadImage(imagePath));
+                _carDto.ImagePaths.Remove(imagePath);
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateCar()
         {
+            UploadImages();
             var carController = new CarController();
             await carController.UpdateCar(_carDto);
             Status = "Car Updated";

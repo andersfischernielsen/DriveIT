@@ -8,24 +8,25 @@ namespace DriveIT.WindowsClient.Controllers
 {
     class ImageController
     {
-        public async Task<string> UploadImage(ImageViewModel image)
+        public async Task<string> UploadImage(string image)
         {
-            var data = File.ReadAllBytes(image.ImagePath);
+            var data = File.ReadAllBytes(image);
 
             MediaTypeHeaderValue type;
 
-            switch (Path.GetExtension(image.ImagePath))
+            var extension = Path.GetExtension(image).ToLower();
+            switch (extension)
             {
-                case "png":
+                case ".png":
                     type = new MediaTypeHeaderValue("image/png");
                     break;
-                case "bmp":
+                case ".bmp":
                     type = new MediaTypeHeaderValue("image/bmp");
                     break;
-                case "jpg":
+                case ".jpg":
                     type = new MediaTypeHeaderValue("image/jpeg");
                     break;
-                case "gif":
+                case ".gif":
                     type = new MediaTypeHeaderValue("image/gif");
                     break;
                 default:
