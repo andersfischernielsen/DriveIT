@@ -308,7 +308,7 @@ namespace DriveIT.WindowsClient.ViewModels
         private void CreateImageViewModels()
         {
             ImageGallery = new List<ImageViewModel>();
-            if (_carDto.ImagePaths != null)
+            if (_carDto.ImagePaths != null && _carDto.ImagePaths.Any())
             {
                 foreach (var imagePath in _carDto.ImagePaths)
                 {
