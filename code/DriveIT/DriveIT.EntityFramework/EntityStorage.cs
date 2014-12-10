@@ -377,5 +377,32 @@ namespace DriveIT.EntityFramework
             toChange.EmployeeId = toSetFrom.EmployeeId;
             toChange.Price = toSetFrom.Price;
         }
+
+        public async Task<List<ImagePath>> GetImagePathsForCar(int carId)
+        {
+            using (var context = new DriveITContext())
+            {
+                return await context.ImagePaths.Where(imagePath => imagePath.CarId == carId).ToListAsync();
+            }
+        }
+
+        public async Task<int> CreateImagePath(ImagePath imagePath)
+        {
+            using (var context = new DriveITContext())
+            {
+                context.ImagePaths.Add(imagePath);
+                await context.SaveChangesAsync();
+                return imagePath.Id;
+            }
+        }
+
+        public async Task RemoveImagePath(int idToDelete)
+        {
+            using (var context = new DriveITContext())
+            {
+                context.ImagePaths.Remove(await context.ImagePaths.FindAsync(idToDelete));
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

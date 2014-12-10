@@ -63,5 +63,11 @@ namespace DriveIT.EntityFramework
         Task UpdateSale(int idToUpdate, Sale saleToReplaceWith);
 
         Task<int> DeleteSale(int idToDelete);
+
+        Task<List<ImagePath>> GetImagePathsForCar(int carId);
+
+        Task<int> CreateImagePath(ImagePath imagePath);
+
+        Task RemoveImagePath(int idToDelete);
     }
 }

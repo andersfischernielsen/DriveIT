@@ -196,7 +196,7 @@ namespace DriveIT.EntityFramework.Migrations
                     Price = 10000,
                     Sold = false,
                     Transmission = "Manual",
-                    Year = 2008
+                    Year = 2008,
                 },
                 new Car
                 {
@@ -250,7 +250,7 @@ namespace DriveIT.EntityFramework.Migrations
 
             foreach (var car in cars)
             {
-                context.Cars.AddOrUpdate(car);
+                context.Cars.AddOrUpdate(c => c.Id, car);
             }
         }
 
