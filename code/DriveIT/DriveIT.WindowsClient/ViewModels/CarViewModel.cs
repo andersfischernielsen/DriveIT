@@ -469,11 +469,10 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void CreateImagePathStrings()
         {
-            _carDto.ImagePaths = ImageGallery.Select(i => i.ImagePath).ToList();
-            for (int i = 0; i < _carDto.ImagePaths.Count; i++)
-            {
-                if (string.IsNullOrWhiteSpace(_carDto.ImagePaths[i])) _carDto.ImagePaths.RemoveAt(i);
-            }
+            _carDto.ImagePaths = ImageGallery
+                .Where(i => !string.IsNullOrWhiteSpace(i.ImagePath))
+                .Select(i => i.ImagePath)
+                .ToList();
         }
         #endregion CRUDS
 
