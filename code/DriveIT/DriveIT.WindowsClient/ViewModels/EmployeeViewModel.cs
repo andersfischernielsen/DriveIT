@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -184,11 +185,23 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             try
             {
-                throw new NotImplementedException("Fix password thingy");
-                var employeeController = new EmployeeController();
-                await employeeController.CreateEmployee(_employeeDto, "",Role.Employee);
-                Status = "Employee Created";
-                EmployeeState = EmployeeStateEnum.InSystem;
+                if (!string.IsNullOrWhiteSpace(Email))
+                {
+                    var passwordViewModel = new PasswordCreationViewModel(_employeeDto);
+                    var window = new PasswordCreationView(passwordViewModel);
+                    window.ShowDialog();
+                    {
+                        if (passwordViewModel.ProfileCreated)
+                        {
+                            Status = "Employee created";
+                            EmployeeState = EmployeeStateEnum.InSystem;
+                        }
+                        else
+                        {
+                            Status = "Did not create employee";
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {

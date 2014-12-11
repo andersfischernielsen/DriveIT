@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -179,11 +180,23 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             try
             {
-                throw new NotImplementedException("Fix password thingy");
-                var customerController = new CustomerController();
-                await customerController.CreateCustomer(_customerDto,"");
-                Status = "Customer Created";
-                CustomerState = CustomerEnum.InSystem;
+                if (!string.IsNullOrWhiteSpace(Email))
+                {
+                    var passwordViewModel = new PasswordCreationViewModel(_customerDto);
+                    var window = new PasswordCreationView(passwordViewModel);
+                    window.ShowDialog();
+                    {
+                        if (passwordViewModel.ProfileCreated)
+                        {
+                            Status = "Customer Created";
+                            CustomerState = CustomerEnum.InSystem;
+                        }
+                        else
+                        {
+                            Status = "Did not create customer";
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
