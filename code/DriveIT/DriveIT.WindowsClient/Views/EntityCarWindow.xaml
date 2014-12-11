@@ -10,7 +10,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityCarWindow"
 	x:Name="Window"
 	Title="EntityCarWindow"
-	Width="1087" Height="625.799" Background="#FFE9EFF3">
+	Width="1087" Height="625.799" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:CarViewModel/>
     </Window.DataContext>

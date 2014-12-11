@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityCustomerWindow"
 	x:Name="CustomerWindow"
 	Title="EntityCustomerWindow"
-	Width="853" Height="553" Background="#FFE9EFF3">
+	Width="853" Height="553" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:CustomerViewModel/>
     </Window.DataContext>

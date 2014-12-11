@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityEmployeeWindow"
 	x:Name="EmployeeWindow"
 	Title="EntityEmployeeWindow"
-	Width="889.958" Height="591.175" Background="#FFE9EFF3">
+	Width="889.958" Height="591.175" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:EmployeeViewModel/>
     </Window.DataContext>

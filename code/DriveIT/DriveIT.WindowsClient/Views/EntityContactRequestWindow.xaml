@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityContactRequestWindow"
 	x:Name="ContactRequestWindow"
 	Title="EntityContactRequestWindow"
-	Width="782.837" Height="534.864" Background="#FFE9EFF3">
+	Width="782.837" Height="534.864" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:ContactRequestViewModel/>
     </Window.DataContext>

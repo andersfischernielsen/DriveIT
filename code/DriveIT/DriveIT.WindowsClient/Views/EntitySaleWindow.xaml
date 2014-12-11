@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntitySaleWindow"
 	x:Name= "SaleWindow"
 	Title="EntitySaleWindow"
-	Width="780.36" Height="492.077" Background="#FFE9EFF3">
+	Width="780.36" Height="492.077" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:SaleViewModel/>
     </Window.DataContext>

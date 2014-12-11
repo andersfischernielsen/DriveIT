@@ -19,6 +19,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public PasswordCreationViewModel()
         {
+            Roletypes = new[] { Role.Customer, Role.Employee, Role.Administrator};
         }
 
         public PasswordCreationViewModel(CustomerDto customerDto)
