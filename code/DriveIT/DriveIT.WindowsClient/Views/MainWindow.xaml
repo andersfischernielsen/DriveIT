@@ -7,8 +7,7 @@
     mc:Ignorable="d"
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
         Title="MainWindow" Height="720" Width="1366" Background="#FFEDF1F3"
-        WindowStartupLocation="CenterScreen"
-        Closing="CloseWindowPopUp">
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainViewViewModel/>
     </Window.DataContext>
