@@ -399,7 +399,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsAdministrator")]
         [AuthorizeRoles(Role.Administrator)]
         public IHttpActionResult GetIsAdministrator()
@@ -407,7 +406,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsEmployee")]
         [AuthorizeRoles(Role.Employee)]
         public IHttpActionResult GetIsEmployee()
@@ -415,7 +413,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsCustomer")]
         [AuthorizeRoles(Role.Customer)]
         public IHttpActionResult GetIsCustomer()
