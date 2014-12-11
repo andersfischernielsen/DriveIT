@@ -33,8 +33,8 @@ namespace DriveIT.WindowsClient.Controllers
 
             var token = await result.Content.ReadAsAsync<Token>();
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.access_token);
-
-            if (await GetRole() == Role.Customer)
+            var role = await GetRole();
+            if (role == Role.Customer)
             {
                 throw new Exception("An error occurred while logging into the client...");
             }
