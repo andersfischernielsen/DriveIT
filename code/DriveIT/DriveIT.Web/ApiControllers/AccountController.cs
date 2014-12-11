@@ -343,6 +343,8 @@ namespace DriveIT.Web.ApiControllers
                         }
                         result = await UserManager.AddToRoleAsync(employee.Id, Role.Employee.ToString());
                         break;
+                    default:
+                        return BadRequest("Error defining role!");
                 }
             }
             else
