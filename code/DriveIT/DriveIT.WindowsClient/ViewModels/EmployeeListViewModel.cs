@@ -49,7 +49,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion
 
-        #region CRUD
+        #region CRUDS
         public async void ReadList()
         {
             var employeeController = new EmployeeController();
@@ -94,6 +94,6 @@ namespace DriveIT.WindowsClient.ViewModels
             window.Show();
         }
 
-        #endregion CRUD
+        #endregion CRUDS
     }
 }
