@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
@@ -49,7 +50,6 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception e)
             {
-                //Console.WriteLine(e.Message);
                 throw;
             }
         }
@@ -66,7 +66,6 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception e)
             {
-                //Console.WriteLine(e.Message);
                 // TODO Håndter dette
                 throw;
             }
@@ -99,7 +98,6 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                //ErrorMessagePopUp();
                 throw;
             }
         }
@@ -119,32 +117,64 @@ namespace DriveIT.WindowsClient.Controllers
         public async static Task CreateCustomer(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
-            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
+            try
+            {
+                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public async static Task CreateEmployee(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
-            if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
+            try
+            {
+                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
+                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public async static Task CreateAdministrator(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
-            if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
+            try
+            {
+                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
+                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         private static async Task<Role?> GetRole()
         {
-            var result = await _httpClient.GetAsync("account/isadministrator");
-            if (result.IsSuccessStatusCode) return Role.Administrator;
-            result = await _httpClient.GetAsync("account/isemployee");
-            if (result.IsSuccessStatusCode) return Role.Employee;
-            result = await _httpClient.GetAsync("account/iscustomer");
-            if (result.IsSuccessStatusCode) return Role.Customer;
-            return null;
+            try
+            {
+                var result = await _httpClient.GetAsync("account/isadministrator");
+                if (result.IsSuccessStatusCode) return Role.Administrator;
+                result = await _httpClient.GetAsync("account/isemployee");
+                if (result.IsSuccessStatusCode) return Role.Employee;
+                result = await _httpClient.GetAsync("account/iscustomer");
+                if (result.IsSuccessStatusCode) return Role.Customer;
+                return null;
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
