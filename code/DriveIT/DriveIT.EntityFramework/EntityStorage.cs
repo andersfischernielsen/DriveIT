@@ -125,6 +125,8 @@ namespace DriveIT.EntityFramework
             toChange.Price = toSetFrom.Price;
             toChange.Transmission = toSetFrom.Transmission;
             toChange.Year = toSetFrom.Year;
+            toChange.TopSpeed = toSetFrom.TopSpeed;
+            toChange.NoughtTo100 = toSetFrom.NoughtTo100;
         }
         #endregion
         #region Employee
