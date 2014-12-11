@@ -186,9 +186,11 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     case SaleEnum.NotInSystem:
                         CreateSale();
+                        Status = "Sale Saved";
                         break;
                     default:
                         UpdateSale();
+                        Status = "Sale Saved";
                         break;
                 }
             }
