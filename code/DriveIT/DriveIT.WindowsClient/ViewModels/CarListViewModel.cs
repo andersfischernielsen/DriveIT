@@ -48,50 +48,90 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion
 
-        #region CRUD
+        #region CRUDS
         public async void ReadList()
         {
-            var carController = new CarController();
-            foreach (CarDto carDto in await carController.ReadCarList())
+            try
             {
-                CarViewModels.Add(new CarViewModel(carDto));
+                var carController = new CarController();
+                foreach (CarDto carDto in await carController.ReadCarList())
+                {
+                    CarViewModels.Add(new CarViewModel(carDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public async void UpdateList()
         {
-            CarViewModels.Clear();
-            var carController = new CarController();
-            foreach (CarDto carDto in await carController.ReadCarList())
+            try
             {
-                CarViewModels.Add(new CarViewModel(carDto));
+                CarViewModels.Clear();
+                var carController = new CarController();
+                foreach (CarDto carDto in await carController.ReadCarList())
+                {
+                    CarViewModels.Add(new CarViewModel(carDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void DeleteCar()
         {
-            if(SelectedCar.CarId.HasValue) SelectedCar.DeleteCar();
-            else
+            try
             {
-                CarViewModels.Remove(SelectedCar);
-                SelectedCar = null;
+                if (SelectedCar.CarId.HasValue) SelectedCar.DeleteCar();
+                else
+                {
+                    CarViewModels.Remove(SelectedCar);
+                    SelectedCar = null;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void CreateNewCarWindow()
         {
-            var newCar = new CarViewModel();
-            var window = new EntityCarWindow {DataContext = newCar};
-            CarViewModels.Add(newCar);
-            window.Show();
+            try
+            {
+                var newCar = new CarViewModel();
+                var window = new EntityCarWindow { DataContext = newCar };
+                CarViewModels.Add(newCar);
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public void UpdateCarWindow()
         {
-            CarViewModel car = SelectedCar;
-            var window = new EntityCarWindow {DataContext = car};
-            window.Show();
+            try
+            {
+                CarViewModel car = SelectedCar;
+                var window = new EntityCarWindow { DataContext = car };
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
-        #endregion CRUD
+        #endregion CRUDS
     }
 }
