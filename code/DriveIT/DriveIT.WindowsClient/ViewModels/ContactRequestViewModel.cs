@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Documents;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -44,12 +45,28 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _contactRequestDto = contactRequestDto;
             ContactRequestState = ContactRequestEnum.InSystem;
+            UpdateForeignKeyLists();
         }
         public ContactRequestViewModel()
         {
             _contactRequestDto = new ContactRequestDto();
             //Requested = DateTime.Now;
             ContactRequestState = ContactRequestEnum.NotInSystem;
+            UpdateForeignKeyLists();
+        }
+
+        public async void UpdateForeignKeyLists()
+        {
+            try
+            {
+                CustomerIdsList = (await new CustomerController().ReadCustomerList()).Select(i => i.Email).ToList();
+                EmployeeIdsList = (await new EmployeeController().ReadEmployeeList()).Select(i => i.Email).ToList();
+            }
+            catch (Exception)
+            {
+                CustomerIdsList = new List<string>();
+                EmployeeIdsList = new List<string>();
+            }
         }
 
         
@@ -112,6 +129,8 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Requested");
             }
         }
+
+        public static List<string> CustomerIdsList { get; set; } 
         public string CustomerId
         {
             get
@@ -136,6 +155,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
+        public static List<string> EmployeeIdsList { get; set; } 
         public string EmployeeId
         {
             get
@@ -195,6 +215,18 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Contact Request Deleted";
                 ContactRequestState = ContactRequestEnum.NotInSystem;
             }
+        }
+
+        public void CreateSaleFromRequest()
+        {
+            var newSale = new SaleViewModel(new SaleDto())
+            {
+                CarId = CarId,
+                EmployeeId = EmployeeId,
+                CustomerId = CustomerId,
+            };
+            var window = new EntitySaleWindow { DataContext = newSale };
+            window.Show();
         }
         #endregion CRUDS
 

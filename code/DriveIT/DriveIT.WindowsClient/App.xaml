@@ -56,6 +56,8 @@
             <Style x:Key="ExtendedDatagridGroupStyle" TargetType="{x:Type xcdg:GroupByControl}"/>
 
             <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"/>
+            <SolidColorBrush x:Key="PowerButtonBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"/>
+            <SolidColorBrush x:Key="SmallButtonBackgroundColorBrush" Color="{DynamicResource TextBoxBackgroundColor}"/>
             <SolidColorBrush x:Key="TextBoxTextColorBrush" Color="{DynamicResource TextBoxTextColor}"/>
             <SolidColorBrush x:Key="StatusLabelColorBrush" Color="{DynamicResource StatusLabelColor}" Opacity="75"/>
             <SolidColorBrush x:Key="OverlayComponentsBorderColorBrush" Color="{DynamicResource OverlayComponentsBorderColor}"/>
@@ -99,8 +101,15 @@
                 <Setter Property="Height" Value="60"/>
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{DynamicResource PowerButtonBackgroundColorBrush}"/>
             </Style>
-            
+
+            <Style x:Key="SmallButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource SmallButtonBackgroundColorBrush}"/>
+            </Style>
+
             <Style x:Key="PowerToolTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="Margin" Value="0,-8.5,0,0"/> 
                 <Setter Property="TextAlignment" Value="Center"/> 

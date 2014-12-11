@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,15 +10,15 @@ using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
-// ReSharper disable once InconsistentNaming
+    // ReSharper disable once InconsistentNaming
     public class DriveITWebAPI
     {
-        static private HttpClient _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
+        static private HttpClient _httpClient;
 
 
         public static async Task Login(string username, string password)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://driveit.azurewebsites.net/api/") };
 
             var dict = new Dictionary<string, string>
             {
@@ -30,6 +29,9 @@ namespace DriveIT.WindowsClient.Controllers
 
             var result = await _httpClient.PostAsync("Token", new FormUrlEncodedContent(dict));
             result.EnsureSuccessStatusCode();
+
+            var token = await result.Content.ReadAsAsync<Token>();
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.access_token);
 
             if (await GetRole() == Role.Customer)
             {
@@ -45,10 +47,11 @@ namespace DriveIT.WindowsClient.Controllers
                 var response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Console.WriteLine(ex.Message);
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
         }
 
@@ -66,7 +69,8 @@ namespace DriveIT.WindowsClient.Controllers
             {
                 //Console.WriteLine(ex.Message);
                 // TODO Håndter dette
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
             return objects.ToList();
         }
@@ -83,7 +87,7 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
                 throw;
             }
         }
@@ -98,7 +102,8 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
         }
         public async static Task Delete<T>(string uri)
@@ -110,7 +115,8 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
             }
         }
 
@@ -148,7 +154,7 @@ namespace DriveIT.WindowsClient.Controllers
         private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
         {
             HttpResponseMessage result;
-            var model = new RegisterBindingModel
+            var model = new RegisterViewModel
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -181,18 +187,6 @@ namespace DriveIT.WindowsClient.Controllers
 
             var response = MessageBox.Show("There was an error processing your request...", "Error!",
                 MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-
-        public static async Task<String> UploadImage(byte[] imageData, MediaTypeHeaderValue type)
-        {
-            var content = new MultipartFormDataContent();
-            var b = new ByteArrayContent(imageData);
-            b.Headers.ContentType = type;
-            content.Add(b);
-            
-            var message = await _httpClient.PostAsync("upload", content);
-            message.EnsureSuccessStatusCode();
-            return (await message.Content.ReadAsAsync<List<String>>()).SingleOrDefault();
         }
     }
 }

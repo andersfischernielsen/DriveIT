@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Controls;
+using System.Linq;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
@@ -24,13 +24,11 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public CarListViewModel(IList<CarDto> carDtos)
+        public CarListViewModel(IEnumerable<CarDto> carDtos)
         {
-            CarViewModels = new ObservableCollection<CarViewModel>();
-            foreach (CarDto carDto in carDtos)
-            {
-                CarViewModels.Add(new CarViewModel(carDto));
-            }
+            CarViewModels = new ObservableCollection<CarViewModel>(
+                carDtos
+                .Select(carDto => new CarViewModel(carDto)));
         }
         public CarListViewModel()
         {

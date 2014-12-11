@@ -7,7 +7,7 @@ namespace DriveIT.WindowsClient.ViewModels
 {
     public class CustomerViewModel : IViewModelBase
     {
-        private CustomerDto _customerDto;
+        private readonly CustomerDto _customerDto;
 
         public enum CustomerEnum
         {
@@ -19,16 +19,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
-                    return _customerDto.Id;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
+                return _customerDto.Id;
             }
             set
             {
@@ -41,6 +32,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _customerDto = customerDto;
             CustomerState = CustomerEnum.InSystem;
+            GravatarLink = GravatarController.CreateGravatarLink(_customerDto.Email);
         }
         public CustomerViewModel()
         {
@@ -72,7 +64,16 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-
+        private string _gravatarLink;
+        public string GravatarLink
+        {
+            get { return _gravatarLink; }
+            set
+            {
+                _gravatarLink = value;
+                NotifyPropertyChanged("GravatarLink");
+            }
+        }
 
         private CustomerEnum _actualCustomerState;
         public CustomerEnum CustomerState
@@ -143,6 +144,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _customerDto.Email = value;
+                GravatarLink = GravatarController.CreateGravatarLink(_customerDto.Email);
                 NotifyPropertyChanged("Email");
             }
         }
@@ -161,7 +163,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     break;
             }
         }
-        
+
         /// <summary>
         /// Gets called from the view
         /// </summary>
@@ -194,7 +196,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Customer Deleted";
                 CustomerState = CustomerEnum.NotInSystem;
             }
-            
+
         }
         #endregion CRUDS
 

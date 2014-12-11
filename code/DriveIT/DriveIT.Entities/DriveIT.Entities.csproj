@@ -62,6 +62,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="DriveItUser.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="ImagePath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs" />
   </ItemGroup>

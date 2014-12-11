@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 
@@ -41,11 +43,27 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _saleDto = saleDto;
             SaleState = SaleEnum.InSystem;
+            UpdateForeignKeyLists();
         }
         public SaleViewModel()
         {
             _saleDto = new SaleDto();
             SaleState = SaleEnum.NotInSystem;
+            UpdateForeignKeyLists();
+        }
+
+        public async void UpdateForeignKeyLists()
+        {
+            try
+            {
+                CustomerIdsList = (await new CustomerController().ReadCustomerList()).Select(i => i.Email).ToList();
+                EmployeeIdsList = (await new EmployeeController().ReadEmployeeList()).Select(i => i.Email).ToList();
+            }
+            catch (Exception)
+            {
+                CustomerIdsList = new List<string>();
+                EmployeeIdsList = new List<string>();
+            }
         }
 
         #region Attributes
@@ -131,6 +149,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
+        public static List<string> CustomerIdsList { get; set; }
         public string CustomerId
         {
             get
@@ -143,6 +162,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CustomerId");
             }
         }
+        public static List<string> EmployeeIdsList { get; set; }
         public string EmployeeId
         {
             get

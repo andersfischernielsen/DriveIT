@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
@@ -23,13 +24,11 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public ContactRequestListViewModel(IList<ContactRequestDto> contactRequestDtos)
+        public ContactRequestListViewModel(IEnumerable<ContactRequestDto> contactRequestDtos)
         {
-            ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>();
-            foreach (ContactRequestDto contactRequestDto in contactRequestDtos)
-            {
-                ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
-            }
+            ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>(
+                contactRequestDtos
+                .Select(contactRequest => new ContactRequestViewModel(contactRequest)));
         }
         public ContactRequestListViewModel()
         {

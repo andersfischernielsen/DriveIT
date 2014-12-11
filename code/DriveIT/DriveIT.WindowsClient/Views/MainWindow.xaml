@@ -347,7 +347,7 @@
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label Style="{DynamicResource HeaderLabel}" Content="Orders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Label Style="{DynamicResource HeaderLabel}" Content="Sales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                         <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
@@ -814,8 +814,8 @@
                     <ViewModels:EmployeeDetailsViewModel/>
                 </Grid.DataContext>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="279*"/>
                     <RowDefinition Height="311*"/>
-                    <RowDefinition Height="439*"/>
                 </Grid.RowDefinitions>
                 <Grid.Background>
                     <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
@@ -825,14 +825,14 @@
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                     </Border.BorderBrush>
                 </Border>
-                <Image HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="{Binding GravatarLink}"/>
+                <Image HorizontalAlignment="Left" Height="259" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="{Binding GravatarLink}"/>
                 <Label Margin="10,73,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
                 <Label Margin="10,119,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
                 <Label Margin="10,211,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
                 <TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="29" Width="270" FontStyle="Italic" TextAlignment="Center" Grid.Row="1">
                     <TextBlock.Background>
                         <SolidColorBrush Color="Black" Opacity="0.15"/>
-                    </TextBlock.Background><Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
+                    </TextBlock.Background><Hyperlink NavigateUri="http://driveit.azurewebsites.net" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
                 <Label Margin="10,165,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding LastName}"/>
                 <Label Margin="10,10,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Logged in as:"/>
             </Grid>

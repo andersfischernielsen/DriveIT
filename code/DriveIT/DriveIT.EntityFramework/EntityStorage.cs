@@ -74,7 +74,7 @@ namespace DriveIT.EntityFramework
         /// <param name="carToReplaceWith">The Car entity to use for updating (by overwriting).</param>
         /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
         /// <returns>A Car entity with the specific ID.</returns>
-        public async Task<int> UpdateCar(int idToUpdate, Car carToReplaceWith, DriveITContext optionalContext = null)
+        public async Task UpdateCar(int idToUpdate, Car carToReplaceWith, DriveITContext optionalContext = null)
         {
             if (optionalContext == null) optionalContext = new DriveITContext();
 
@@ -83,7 +83,7 @@ namespace DriveIT.EntityFramework
                 var oldCar = await optionalContext.Cars.FindAsync(idToUpdate);
                 CopyCarProperties(oldCar, carToReplaceWith);
 
-                return await optionalContext.SaveChangesAsync();
+                await optionalContext.SaveChangesAsync();
             }
         }
 
@@ -143,14 +143,14 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith)
+        public async Task UpdateEmployee(string idToUpdate, Employee employeeToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldEmployee = await context.Employees.SingleOrDefaultAsync(x => x.Id == idToUpdate);
                 CopyEmployeeProperties(oldEmployee, employeeToReplaceWith);
 
-                return await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -187,14 +187,14 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateCustomer(string idToUpdate, Customer customerToReplaceWith)
+        public async Task UpdateCustomer(string idToUpdate, Customer customerToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldCustomer = await context.Customers.SingleAsync(x => x.Id == idToUpdate);
                 CopyCustomerProperties(oldCustomer, customerToReplaceWith);
 
-                return await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -241,14 +241,14 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith)
+        public async Task UpdateContactRequest(int idToUpdate, ContactRequest contactRequestToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldRequest = await context.ContactRequests.FindAsync(idToUpdate);
                 CopyContactRequestProperties(oldRequest, contactRequestToReplaceWith);
 
-                return await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -294,14 +294,14 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateComment(int idToUpdate, Comment commentToReplaceWith)
+        public async Task UpdateComment(int idToUpdate, Comment commentToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldComment = await context.Comments.FindAsync(idToUpdate);
                 CopyCommentProperties(oldComment, commentToReplaceWith);
 
-                return await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -349,14 +349,14 @@ namespace DriveIT.EntityFramework
             }
         }
 
-        public async Task<int> UpdateSale(int idToUpdate, Sale saleToReplaceWith)
+        public async Task UpdateSale(int idToUpdate, Sale saleToReplaceWith)
         {
             using (var context = new DriveITContext())
             {
                 var oldSale = await context.Sales.FindAsync(idToUpdate);
                 CopySaleProperties(oldSale, saleToReplaceWith);
 
-                return await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -376,6 +376,33 @@ namespace DriveIT.EntityFramework
             toChange.DateOfSale = toSetFrom.DateOfSale;
             toChange.EmployeeId = toSetFrom.EmployeeId;
             toChange.Price = toSetFrom.Price;
+        }
+
+        public async Task<List<ImagePath>> GetImagePathsForCar(int carId)
+        {
+            using (var context = new DriveITContext())
+            {
+                return await context.ImagePaths.Where(imagePath => imagePath.CarId == carId).ToListAsync();
+            }
+        }
+
+        public async Task<int> CreateImagePath(ImagePath imagePath)
+        {
+            using (var context = new DriveITContext())
+            {
+                context.ImagePaths.Add(imagePath);
+                await context.SaveChangesAsync();
+                return imagePath.Id;
+            }
+        }
+
+        public async Task RemoveImagePath(int idToDelete)
+        {
+            using (var context = new DriveITContext())
+            {
+                context.ImagePaths.Remove(await context.ImagePaths.FindAsync(idToDelete));
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
