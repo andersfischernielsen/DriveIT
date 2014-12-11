@@ -50,7 +50,7 @@ namespace DriveIT.Web.ApiControllers
         {
             var cars =
                 (await _repo.GetAllCars())
-                .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase));
+                .Where(car => string.Equals(fuelType, car.Fuel.ToString(), StringComparison.OrdinalIgnoreCase));
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
