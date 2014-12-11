@@ -172,8 +172,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to save employee!";
             }
         }
 
