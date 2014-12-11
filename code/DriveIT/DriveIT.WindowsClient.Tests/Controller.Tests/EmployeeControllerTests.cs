@@ -30,7 +30,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 {
                     FirstName = "Mr Handsome",
                     LastName = "Cake"
-                });
+                },"testPassword123",Role.Employee);
             Thread.Sleep(2000);
             t = _employeeController.ReadEmployeeList().Result;
             Console.WriteLine(t.Count);
