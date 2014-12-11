@@ -173,14 +173,22 @@ namespace DriveIT.WindowsClient.ViewModels
         #region CRUDS
         public void SaveContactRequest()
         {
-            switch (ContactRequestState)
+            try
             {
-                case ContactRequestEnum.NotInSystem:
-                    CreateContactRequest();
-                    break;
-                default:
-                    UpdateContactRequest();
-                    break;
+                switch (ContactRequestState)
+                {
+                    case ContactRequestEnum.NotInSystem:
+                        CreateContactRequest();
+                        break;
+                    default:
+                        UpdateContactRequest();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to save contact request!";
             }
         }
         /// <summary>
@@ -188,45 +196,79 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateContactRequest()
         {
-            var contactRequestController = new ContactRequestController();
-            await contactRequestController.CreateContactRequest(_contactRequestDto);
-            Status = "Contact Request Created";
-            ContactRequestState = ContactRequestEnum.InSystem;
+            try
+            {
+                var contactRequestController = new ContactRequestController();
+                await contactRequestController.CreateContactRequest(_contactRequestDto);
+                Status = "Contact Request Created";
+                ContactRequestState = ContactRequestEnum.InSystem;
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to create contact request!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateContactRequest()
         {
-            var contactRequestController = new ContactRequestController();
-            await contactRequestController.UpdateContactRequest(_contactRequestDto);
-            Status = "Contact Request Updated";
+            try
+            {
+                var contactRequestController = new ContactRequestController();
+                await contactRequestController.UpdateContactRequest(_contactRequestDto);
+                Status = "Contact Request Updated";
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to update contact request!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void DeleteContactRequest()
         {
-            if (ContactRequestState != ContactRequestEnum.NotInSystem)
+            try
             {
-                var contactRequestController = new ContactRequestController();
-                await contactRequestController.DeleteContactRequest(_contactRequestDto);
-                ContactRequestId = null;
-                Status = "Contact Request Deleted";
-                ContactRequestState = ContactRequestEnum.NotInSystem;
+                if (ContactRequestState != ContactRequestEnum.NotInSystem)
+                {
+                    var contactRequestController = new ContactRequestController();
+                    await contactRequestController.DeleteContactRequest(_contactRequestDto);
+                    ContactRequestId = null;
+                    Status = "Contact Request Deleted";
+                    ContactRequestState = ContactRequestEnum.NotInSystem;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to delete contact request!";
             }
         }
 
         public void CreateSaleFromRequest()
         {
-            var newSale = new SaleViewModel(new SaleDto())
+            try
             {
-                CarId = CarId,
-                EmployeeId = EmployeeId,
-                CustomerId = CustomerId,
-            };
-            var window = new EntitySaleWindow { DataContext = newSale };
-            window.Show();
+                var newSale = new SaleViewModel(new SaleDto())
+                {
+                    CarId = CarId,
+                    EmployeeId = EmployeeId,
+                    CustomerId = CustomerId,
+                };
+                var window = new EntitySaleWindow { DataContext = newSale };
+                window.Show();
+                Status = "Created Sale from Contact Request";
+                //Dunno if above should be moved or be there at all!
+            }
+            catch (Exception)
+            {
+                
+                Status = "Failed to create sale from request!";
+            }
         }
         #endregion CRUDS
 
