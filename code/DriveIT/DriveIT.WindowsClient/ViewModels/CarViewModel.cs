@@ -381,16 +381,24 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void SaveCar()
         {
-            CreateImagePathStrings();
-            switch (CarState)
+            try
             {
-                case CarStateEnum.Initial:
-                    CreateCar();
-                    //todo Fix the problem with IDs and images.
-                    break;
-                default:
-                    UpdateCar();
-                    break;
+                CreateImagePathStrings();
+                switch (CarState)
+                {
+                    case CarStateEnum.Initial:
+                        CreateCar();
+                        //todo Fix the problem with IDs and images.
+                        break;
+                    default:
+                        UpdateCar();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to save car!";
             }
         }
         /// <summary>
@@ -398,62 +406,102 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateCar()
         {
-            await UploadImages();
-            var carController = new CarController();
-            await carController.CreateCar(_carDto);
-            Status = "Car Created";
-            CarState = CarStateEnum.ForSale;
+            try
+            {
+                await UploadImages();
+                var carController = new CarController();
+                await carController.CreateCar(_carDto);
+                Status = "Car Created";
+                CarState = CarStateEnum.ForSale;
+            }
+            catch (Exception)
+            {
+                
+                Status = "Failed to create car!";
+            }
         }
 
         private async Task UploadImages()
         {
-            var newPaths = new List<string>();
-            foreach (var imagePath in _carDto.ImagePaths)
+            try
             {
-                var uri = new Uri(imagePath);
-                if (uri.IsFile)
+                var newPaths = new List<string>();
+                foreach (var imagePath in _carDto.ImagePaths)
                 {
-                    newPaths.Add(await ImageController.UploadImage(_carDto.Id.Value, imagePath));
+                    var uri = new Uri(imagePath);
+                    if (uri.IsFile)
+                    {
+                        newPaths.Add(await ImageController.UploadImage(_carDto.Id.Value, imagePath));
+                    }
+                    else
+                    {
+                        newPaths.Add(imagePath);
+                    }
                 }
-                else
-                {
-                    newPaths.Add(imagePath);
-                }
+                _carDto.ImagePaths = newPaths;
+                CreateImageViewModels();
             }
-            _carDto.ImagePaths = newPaths;
-            CreateImageViewModels();
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateCar()
         {
-            await UploadImages();
-            var carController = new CarController();
-            await carController.UpdateCar(_carDto);
-            Status = "Car Updated";
+            try
+            {
+                await UploadImages();
+                var carController = new CarController();
+                await carController.UpdateCar(_carDto);
+                Status = "Car Updated";
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to update car!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void DeleteCar()
         {
-            if (CarState != CarStateEnum.Initial)
+            try
             {
-                var carController = new CarController();
-                await carController.DeleteCar(_carDto);
-                CarId = null;
-                Status = "Car Deleted";
-                CarState = CarStateEnum.Initial;
+                if (CarState != CarStateEnum.Initial)
+                {
+                    var carController = new CarController();
+                    await carController.DeleteCar(_carDto);
+                    CarId = null;
+                    Status = "Car Deleted";
+                    CarState = CarStateEnum.Initial;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to delete car!";
             }
         }
 
         public void CreateImagePathStrings()
         {
-            _carDto.ImagePaths = ImageGallery
+            try
+            {
+                _carDto.ImagePaths = ImageGallery
                 .Where(i => !string.IsNullOrWhiteSpace(i.ImagePath))
                 .Select(i => i.ImagePath)
                 .ToList();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
         #endregion CRUDS
 
