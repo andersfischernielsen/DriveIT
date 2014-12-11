@@ -253,12 +253,11 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             try
             {
-                var newSale = new SaleViewModel(new SaleDto())
-                {
-                    CarId = CarId,
-                    EmployeeId = EmployeeId,
-                    CustomerId = CustomerId,
-                };
+                var newSale = new SaleViewModel();
+                // This must be done to ensure that the Sale is in the correct SaleState.
+                newSale.CarId = CarId;
+                newSale.CustomerId = CustomerId;
+                newSale.EmployeeId = EmployeeId;
                 var window = new EntitySaleWindow { DataContext = newSale };
                 window.Show();
                 Status = "Created Sale from Contact Request";
