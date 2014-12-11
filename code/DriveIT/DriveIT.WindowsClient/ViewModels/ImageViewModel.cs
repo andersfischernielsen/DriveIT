@@ -49,15 +49,21 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion Properties
         public void ChooseFile()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
+            try
             {
-                ImagePath = openFileDialog.FileName;
-                //ImagePath = File.ReadAllText(@openFileDialog.FileName);
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    ImagePath = openFileDialog.FileName;
+                    //ImagePath = File.ReadAllText(@openFileDialog.FileName);
+                }
             }
-
-
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public bool IsEmpty()
