@@ -27,7 +27,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
-                car.Sold = _repo.GetSaleByCarId(car.Id) != null;
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -41,6 +41,7 @@ namespace DriveIT.Web.ApiControllers
             {
                 return NotFound();
             }
+            car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
             return Ok(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
         }
 
@@ -53,6 +54,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -66,6 +68,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -79,6 +82,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -93,6 +97,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
