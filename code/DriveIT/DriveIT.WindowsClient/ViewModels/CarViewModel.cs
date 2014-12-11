@@ -52,16 +52,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
                     return _status;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
             }
             set
             {
