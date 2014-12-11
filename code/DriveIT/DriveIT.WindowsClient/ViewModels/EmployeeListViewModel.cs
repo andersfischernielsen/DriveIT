@@ -52,46 +52,86 @@ namespace DriveIT.WindowsClient.ViewModels
         #region CRUDS
         public async void ReadList()
         {
-            var employeeController = new EmployeeController();
-            foreach (EmployeeDto employeeDto in await employeeController.ReadEmployeeList())
+            try
             {
-                EmployeeViewModels.Add(new EmployeeViewModel(employeeDto));
+                var employeeController = new EmployeeController();
+                foreach (EmployeeDto employeeDto in await employeeController.ReadEmployeeList())
+                {
+                    EmployeeViewModels.Add(new EmployeeViewModel(employeeDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public async void UpdateList()
         {
-            EmployeeViewModels.Clear();
-            var employeeController = new EmployeeController();
-            foreach (EmployeeDto employeeDtoDto in await employeeController.ReadEmployeeList())
+            try
             {
-                EmployeeViewModels.Add(new EmployeeViewModel(employeeDtoDto));
+                EmployeeViewModels.Clear();
+                var employeeController = new EmployeeController();
+                foreach (EmployeeDto employeeDtoDto in await employeeController.ReadEmployeeList())
+                {
+                    EmployeeViewModels.Add(new EmployeeViewModel(employeeDtoDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void DeleteEmployee()
         {
-            if(!String.IsNullOrEmpty(SelectedEmployee.EmployeeId)) SelectedEmployee.DeleteEmployee();
-            else
+            try
             {
-                EmployeeViewModels.Remove(SelectedEmployee);
-                SelectedEmployee = null;
+                if (!String.IsNullOrEmpty(SelectedEmployee.EmployeeId)) SelectedEmployee.DeleteEmployee();
+                else
+                {
+                    EmployeeViewModels.Remove(SelectedEmployee);
+                    SelectedEmployee = null;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void CreateNewEmployeeWindow()
         {
-            var newEmployee = new EmployeeViewModel();
-            var window = new EntityEmployeeWindow {DataContext = newEmployee};
-            EmployeeViewModels.Add(newEmployee);
-            window.Show();
+            try
+            {
+                var newEmployee = new EmployeeViewModel();
+                var window = new EntityEmployeeWindow { DataContext = newEmployee };
+                EmployeeViewModels.Add(newEmployee);
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public void UpdateEmployeeWindow()
         {
-            EmployeeViewModel employee = SelectedEmployee;
-            var window = new EntityEmployeeWindow {DataContext = employee};
-            window.Show();
+            try
+            {
+                EmployeeViewModel employee = SelectedEmployee;
+                var window = new EntityEmployeeWindow { DataContext = employee };
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         #endregion CRUDS
