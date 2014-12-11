@@ -175,7 +175,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public async void CreateEmployee()
         {
             var employeeController = new EmployeeController();
-            await employeeController.CreateEmployee(_employeeDto);
+            await employeeController.CreateEmployee(_employeeDto, password);
             Status = "Employee Created";
             EmployeeState = EmployeeStateEnum.InSystem;
         }

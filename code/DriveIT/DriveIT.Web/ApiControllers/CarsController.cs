@@ -45,6 +45,22 @@ namespace DriveIT.Web.ApiControllers
             return Ok(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
         }
 
+        internal async Task<List<CarDto>> WebCarList()
+        {
+            var cars = await _repo.GetAllCars();
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                var sale = await _repo.GetSaleByCarId(car.Id);
+                if (sale == null || DateTime.Now.Subtract(sale.DateOfSale).Days < 5)
+                {
+                    car.Sold = sale != null;
+                    dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+                }
+            }
+            return dtos;
+        }
+
         // GET: api/Cars?fuelType=Diesel
         public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
         {
