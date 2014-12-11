@@ -122,15 +122,14 @@
             @Html.DisplayFor(model => model.NoughtTo100)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
+           
 
     </dl>
+    <p>Images:</p>
+    @foreach (var path in Model.ImagePaths)
+    {
+        <img src=@path alt="Image of car"/><br/>
+    }
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index")

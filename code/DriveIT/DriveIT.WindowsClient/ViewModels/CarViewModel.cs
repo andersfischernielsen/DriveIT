@@ -19,11 +19,11 @@ namespace DriveIT.WindowsClient.ViewModels
             Sold,
         }
 
-        public static List<string> FueltypeStrings
+        public static FuelType[] FueltypeStrings
         {
             get
             {
-                return new List<string>(Enum.GetNames(typeof(FuelType)));
+                return (FuelType[]) Enum.GetValues(typeof(FuelType));
             }
         }
 

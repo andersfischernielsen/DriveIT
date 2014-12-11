@@ -10,9 +10,9 @@ namespace DriveIT.WindowsClient.Controllers
         {
         }
 
-        public async Task CreateCustomer(CustomerDto customer)
+        public async Task CreateCustomer(CustomerDto customer, string password)
         {
-            await DriveITWebAPI.Create("customers", customer);
+            await DriveITWebAPI.Create("account/register", customer, password);
         }
 
         public async Task<CustomerDto> ReadCustomer(string email)
