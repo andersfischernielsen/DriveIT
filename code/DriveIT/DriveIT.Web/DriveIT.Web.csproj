@@ -268,6 +268,9 @@
     <None Include="Properties\PublishProfiles\driveit %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\driveit %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\driveit %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\driveit %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\driveit %287%29.pubxml" />
+    <None Include="Properties\PublishProfiles\driveit %288%29.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
