@@ -4,7 +4,7 @@ We have defined the following subsystems:
 	\item \textbf{Persistence subsystem (EntityFramework):} This sub system manages storing and retrieving Entity objects using the Entity Framework and its serialisation functionality.\\
 	The serialised Entities are stored in a Microsoft SQL database which is hosted on Microsoft Azure. The sub system provides the \texttt{DriveIT Web API} (mentioned below) deserialised Entities, which retrieves uses these to provide the backend for other sub systems using the API.\\
 	The subsystem supports retrieving all Entities of a given type, a specific Entity using its unique ID and retrieving an Entity on its relation to other Entities. 
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.30]{Figures/EntityFrameworkSubsystemDecomposition}
 		% place the figure in the Figures folder (located with the main file)
@@ -20,7 +20,7 @@ We have defined the following subsystems:
 	\item \textbf{CarQuery:} This subsystem is a collection of classes that enable the rest of the \texttt{DriveIT System} to fill out missing information about cars from the CarQuery API.\\
 	The sub system is used by an employee when creating a new car. The subsystem mainly consists of a \texttt{JSON} deserialiser that communicates with the \texttt{CarQuery REST API} and another class that receives a Car object and fills out the missing attributes using the deserialised JSON data. \\
 	The employee fills out the information he/she knows about the car and the system then narrows its information search against the \texttt{CarQuery REST API}.
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.30]{Figures/CarQuerySubsystemDecomposition}\\
 		% place the figure in the Figures folder (located with the main file)
