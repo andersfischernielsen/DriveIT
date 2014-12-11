@@ -38,51 +38,91 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        #region CRUD
+        #region CRUDS
 
         public async void ReadList()
         {
-            var customerController = new CustomerController();
-            foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
+            try
             {
-                CustomerViewModels.Add(new CustomerViewModel(customerDto));
+                var customerController = new CustomerController();
+                foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
+                {
+                    CustomerViewModels.Add(new CustomerViewModel(customerDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
         public async void UpdateList()
         {
-            CustomerViewModels.Clear();
-            var customerController = new CustomerController();
-            foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
+            try
             {
-                CustomerViewModels.Add(new CustomerViewModel(customerDto));
+                CustomerViewModels.Clear();
+                var customerController = new CustomerController();
+                foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
+                {
+                    CustomerViewModels.Add(new CustomerViewModel(customerDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
         public void DeleteCustomer()
         {
-            if (!String.IsNullOrEmpty(SelectedCustomer.CustomerId)) SelectedCustomer.DeleteCustomer();
-            else
+            try
             {
-                CustomerViewModels.Remove(SelectedCustomer);
-                SelectedCustomer = null;
+                if (!String.IsNullOrEmpty(SelectedCustomer.CustomerId)) SelectedCustomer.DeleteCustomer();
+                else
+                {
+                    CustomerViewModels.Remove(SelectedCustomer);
+                    SelectedCustomer = null;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void CreateNewCustomerWindow()
         {
-            var newCustomer = new CustomerViewModel();
-            var window = new EntityCustomerWindow { DataContext = newCustomer };
-            CustomerViewModels.Add(newCustomer);
-            window.Show();
+            try
+            {
+                var newCustomer = new CustomerViewModel();
+                var window = new EntityCustomerWindow { DataContext = newCustomer };
+                CustomerViewModels.Add(newCustomer);
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public void UpdateCustomerWindow()
         {
-            CustomerViewModel customer = SelectedCustomer;
-            var window = new EntityCustomerWindow { DataContext = customer };
-            window.Show();
+            try
+            {
+                CustomerViewModel customer = SelectedCustomer;
+                var window = new EntityCustomerWindow { DataContext = customer };
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
-        #endregion CRUD
+        #endregion CRUDS
 
         #region INotifyPropertyChanged
 
