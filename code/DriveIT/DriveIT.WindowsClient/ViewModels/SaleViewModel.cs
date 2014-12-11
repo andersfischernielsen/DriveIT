@@ -186,11 +186,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     case SaleEnum.NotInSystem:
                         CreateSale();
-                        Status = "Sale Saved";
                         break;
                     default:
                         UpdateSale();
-                        Status = "Sale Saved";
                         break;
                 }
             }
@@ -205,9 +203,9 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateSale()
         {
-            var saleController = new SaleController();
             try
             {
+                var saleController = new SaleController();
                 await saleController.CreateSale(_saleDto);
                 Status = "Sale Created";
                 SaleState = SaleEnum.InSystem;
@@ -223,9 +221,9 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void UpdateSale()
         {
-            var saleController = new SaleController();
             try
             {
+                var saleController = new SaleController();
                 await saleController.UpdateSale(_saleDto);
                 Status = "Sale Updated";
             }
@@ -239,9 +237,9 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void DeleteSale()
         {
-            var saleController = new SaleController();
             try
             {
+                var saleController = new SaleController();
                 if (SaleState != SaleEnum.NotInSystem)
                 {
                     await saleController.DeleteSale(_saleDto);
