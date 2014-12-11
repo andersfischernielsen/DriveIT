@@ -181,7 +181,7 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 throw new NotImplementedException("Fix password thingy");
                 var customerController = new CustomerController();
-                await customerController.CreateCustomer(_customerDto);
+                await customerController.CreateCustomer(_customerDto,"");
                 Status = "Customer Created";
                 CustomerState = CustomerEnum.InSystem;
             }

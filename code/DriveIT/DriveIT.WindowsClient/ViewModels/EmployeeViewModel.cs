@@ -186,7 +186,7 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 throw new NotImplementedException("Fix password thingy");
                 var employeeController = new EmployeeController();
-                await employeeController.CreateEmployee(_employeeDto);
+                await employeeController.CreateEmployee(_employeeDto, "",Role.Employee);
                 Status = "Employee Created";
                 EmployeeState = EmployeeStateEnum.InSystem;
             }
