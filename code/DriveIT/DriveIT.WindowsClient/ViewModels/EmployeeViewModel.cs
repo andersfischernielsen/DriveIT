@@ -158,14 +158,22 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void SaveEmployee()
         {
-            switch (EmployeeState)
+            try
             {
-                case EmployeeStateEnum.NotInSystem:
-                    CreateEmployee();
-                    break;
-                default:
-                    UpdateEmployee();
-                    break;
+                switch (EmployeeState)
+                {
+                    case EmployeeStateEnum.NotInSystem:
+                        CreateEmployee();
+                        break;
+                    default:
+                        UpdateEmployee();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
@@ -174,10 +182,18 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateEmployee()
         {
-            var employeeController = new EmployeeController();
-            await employeeController.CreateEmployee(_employeeDto);
-            Status = "Employee Created";
-            EmployeeState = EmployeeStateEnum.InSystem;
+            try
+            {
+                var employeeController = new EmployeeController();
+                await employeeController.CreateEmployee(_employeeDto);
+                Status = "Employee Created";
+                EmployeeState = EmployeeStateEnum.InSystem;
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to create employee!";
+            }
         }
 
         /// <summary>
@@ -185,9 +201,17 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void UpdateEmployee()
         {
-            var employeeController = new EmployeeController();
-            await employeeController.UpdateEmployee(_employeeDto);
-            Status = "Employee Updated";
+            try
+            {
+                var employeeController = new EmployeeController();
+                await employeeController.UpdateEmployee(_employeeDto);
+                Status = "Employee Updated";
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to update employee!";
+            }
         }
 
         /// <summary>
@@ -195,13 +219,21 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void DeleteEmployee()
         {
-            if (EmployeeState != EmployeeStateEnum.NotInSystem)
+            try
             {
-                var employeeController = new EmployeeController();
-                await employeeController.DeleteEmployee(_employeeDto);
-                EmployeeId = null;
-                Status = "Employee Deleted";
-                EmployeeState = EmployeeStateEnum.NotInSystem;
+                if (EmployeeState != EmployeeStateEnum.NotInSystem)
+                {
+                    var employeeController = new EmployeeController();
+                    await employeeController.DeleteEmployee(_employeeDto);
+                    EmployeeId = null;
+                    Status = "Employee Deleted";
+                    EmployeeState = EmployeeStateEnum.NotInSystem;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to delete employee!";
             }
         }
 
