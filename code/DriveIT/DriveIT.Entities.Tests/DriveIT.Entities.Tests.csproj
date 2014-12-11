@@ -99,6 +99,10 @@
       <Project>{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}</Project>
       <Name>DriveIT.EntityFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
+      <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
+      <Name>DriveIT.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

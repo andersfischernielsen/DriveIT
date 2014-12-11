@@ -27,6 +27,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -40,7 +41,24 @@ namespace DriveIT.Web.ApiControllers
             {
                 return NotFound();
             }
+            car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
             return Ok(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+        }
+
+        internal async Task<List<CarDto>> WebCarList()
+        {
+            var cars = await _repo.GetAllCars();
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                var sale = await _repo.GetSaleByCarId(car.Id);
+                if (sale == null || DateTime.Now.Subtract(sale.DateOfSale).Days < 5)
+                {
+                    car.Sold = sale != null;
+                    dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+                }
+            }
+            return dtos;
         }
 
         // GET: api/Cars?fuelType=Diesel
@@ -48,10 +66,11 @@ namespace DriveIT.Web.ApiControllers
         {
             var cars =
                 (await _repo.GetAllCars())
-                .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase));
+                .Where(car => string.Equals(fuelType, car.Fuel.ToString(), StringComparison.OrdinalIgnoreCase));
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -65,6 +84,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -78,6 +98,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
@@ -92,6 +113,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);

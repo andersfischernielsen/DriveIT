@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using DriveIT.Models;
 
 namespace DriveIT.Entities
 {
@@ -13,11 +15,13 @@ namespace DriveIT.Entities
         public int Year { get; set; }
         public decimal Price { get; set; }
         public DateTime Created { get; set; }
+
+        [NotMapped]
         public bool Sold { get; set; }
         public float Mileage { get; set; }
         public string Color { get; set; }
         public int DistanceDriven { get; set; }
-        public string Fuel { get; set; }
+        public FuelType Fuel { get; set; }
         public string Drive { get; set; }
         public string Transmission { get; set; }
         public float TopSpeed { get; set; }

@@ -54,6 +54,59 @@ namespace DriveIT.WindowsClient.Controllers
             }
         }
 
+        public async static Task Create(string uri, CustomerDto objectToCreate, string password)
+        {
+            try
+            {
+                var registerModel = new RegisterViewModel
+                {
+                    Email = objectToCreate.Email,
+                    FirstName = objectToCreate.FirstName,
+                    LastName = objectToCreate.LastName,
+                    PhoneNumber = objectToCreate.Phone,
+                    ConfirmPhoneNumber = objectToCreate.Phone,
+                    Password = password,
+                    ConfirmPassword = password,
+                    Role = Role.Customer
+                };
+                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                //Console.WriteLine(ex.Message);
+                //ErrorMessagePopUp();
+                throw;
+            }
+        }
+
+        public async static Task Create(string uri, EmployeeDto objectToCreate, string password, Role role)
+        {
+            if (role == Role.Customer) throw new ArgumentException("Cannot be Customer.", "role");
+            try
+            {
+                var registerModel = new RegisterViewModel
+                {
+                    Email = objectToCreate.Email,
+                    FirstName = objectToCreate.FirstName,
+                    LastName = objectToCreate.LastName,
+                    PhoneNumber = objectToCreate.Phone,
+                    ConfirmPhoneNumber = objectToCreate.Phone,
+                    Password = password,
+                    ConfirmPassword = password,
+                    Role = role
+                };
+                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                //Console.WriteLine(ex.Message);
+                //ErrorMessagePopUp();
+                throw;
+            }
+        }
+
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
             // TODO FJERN INITIERINGEN new T[0]
