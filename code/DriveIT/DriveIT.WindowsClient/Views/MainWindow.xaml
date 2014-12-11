@@ -256,11 +256,6 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bib bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
-                            </Button.Background>
-                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
@@ -329,11 +324,6 @@
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CarsDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                        </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
-                            </Button.Background>
                         </Button>
                     </Grid>
                 </TabItem>
@@ -404,11 +394,6 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
-                            </Button.Background>
-                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
@@ -477,11 +462,6 @@
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=CustomersDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                        </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
-                            </Button.Background>
                         </Button>
                     </Grid>
                 </TabItem>
@@ -554,11 +534,6 @@
                                     <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="UpdateList"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                        </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bip bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
-                            </Button.Background>
                         </Button>
                     </Grid>
                 </TabItem>

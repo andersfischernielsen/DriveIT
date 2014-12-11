@@ -56,29 +56,19 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Update&#x0a;Lists" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
-            	<i:Interaction.Triggers>
-            		<i:EventTrigger EventName="Click">
-            			<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="UpdateForeignKeyLists"/>
-            		</i:EventTrigger>
-            	</i:Interaction.Triggers>
-                <Button.Background>
-                    <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
-                </Button.Background>
-            </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="3">
-                <Button.Background>
-                    <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
-                </Button.Background>
-            </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="4">
+            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                 </Button.Background>
                 <StackPanel>
-                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/cancel.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                    <TextBlock Text="Cancel" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/refresh.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <TextBlock Text="Refresh Fields" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                 </StackPanel>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="UpdateForeignKeyLists"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </Button>
             <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="5">
                 <Button.Background>
