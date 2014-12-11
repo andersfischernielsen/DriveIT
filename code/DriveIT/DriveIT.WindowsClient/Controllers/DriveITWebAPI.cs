@@ -47,10 +47,9 @@ namespace DriveIT.WindowsClient.Controllers
                 var response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //Console.WriteLine(ex.Message);
-                //ErrorMessagePopUp();
+                //Console.WriteLine(e.Message);
                 throw;
             }
         }
@@ -65,11 +64,10 @@ namespace DriveIT.WindowsClient.Controllers
                 response.EnsureSuccessStatusCode();
                 objects = await response.Content.ReadAsAsync<T[]>();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                //Console.WriteLine(ex.Message);
+                //Console.WriteLine(e.Message);
                 // TODO Håndter dette
-                //ErrorMessagePopUp();
                 throw;
             }
             return objects.ToList();
@@ -85,9 +83,8 @@ namespace DriveIT.WindowsClient.Controllers
                 objectToRead = await response.Content.ReadAsAsync<T>();
                 return objectToRead;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //ErrorMessagePopUp();
                 throw;
             }
         }
@@ -113,9 +110,8 @@ namespace DriveIT.WindowsClient.Controllers
                 var response = await _httpClient.DeleteAsync(uri);
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //ErrorMessagePopUp();
                 throw;
             }
         }
@@ -181,12 +177,6 @@ namespace DriveIT.WindowsClient.Controllers
                 //else
                 throw;
             }
-        }
-        private static void ErrorMessagePopUp()
-        {
-
-            var response = MessageBox.Show("There was an error processing your request...", "Error!",
-                MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
     }
 }
