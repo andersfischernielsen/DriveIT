@@ -14,6 +14,7 @@ namespace DriveIT.EntityFramework
     /// </summary>
     public class EntityStorage : IPersistentStorage
     {
+        #region Car
         /// <summary>
         /// Retrieve a Car entity with a specific ID. 
         /// Optionally use a specified DriveITContext for fetching the entity.
@@ -122,11 +123,11 @@ namespace DriveIT.EntityFramework
             toChange.Mileage = toSetFrom.Mileage;
             toChange.Model = toSetFrom.Model;
             toChange.Price = toSetFrom.Price;
-            toChange.Sold = toSetFrom.Sold;
             toChange.Transmission = toSetFrom.Transmission;
             toChange.Year = toSetFrom.Year;
         }
-
+        #endregion
+        #region Employee
         public async Task<Employee> GetEmployeeWithId(string idToGet)
         {
             using (var context = new DriveITContext())
@@ -170,7 +171,8 @@ namespace DriveIT.EntityFramework
             toChange.LastName = toSetFrom.LastName;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
         }
-
+        #endregion
+        #region Customer
         public async Task<Customer> GetCustomerWithId(string idToGet)
         {
             using (var context = new DriveITContext())
@@ -214,7 +216,8 @@ namespace DriveIT.EntityFramework
             toChange.LastName = toSetFrom.LastName;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
         }
-
+        #endregion
+        #region ContactRequest
         public async Task<ContactRequest> GetContactRequestWithId(int idToGet)
         {
             using (var context = new DriveITContext())
@@ -267,7 +270,8 @@ namespace DriveIT.EntityFramework
             toChange.CustomerId = toSetFrom.CustomerId;
             toChange.EmployeeId = toSetFrom.EmployeeId;
         }
-
+        #endregion
+        #region Comment
         public async Task<Comment> GetCommentWithId(int idToGet)
         {
             using (var context = new DriveITContext())
@@ -322,7 +326,8 @@ namespace DriveIT.EntityFramework
             toChange.Title = toSetFrom.Title;
             toChange.CustomerId = toSetFrom.CustomerId;
         }
-
+        #endregion
+        #region Sale
         public async Task<Sale> GetSaleWithId(int idToGet)
         {
             using (var context = new DriveITContext())
@@ -336,6 +341,14 @@ namespace DriveIT.EntityFramework
             using (var context = new DriveITContext())
             {
                 return await context.Sales.ToListAsync();
+            }
+        }
+
+        public async Task<Sale> GetSaleByCarId(int carId)
+        {
+            using (var context = new DriveITContext())
+            {
+                return await context.Sales.SingleOrDefaultAsync(sale => sale.CarId == carId);
             }
         }
 
@@ -377,7 +390,8 @@ namespace DriveIT.EntityFramework
             toChange.EmployeeId = toSetFrom.EmployeeId;
             toChange.Price = toSetFrom.Price;
         }
-
+        #endregion
+        #region ImagePath
         public async Task<List<ImagePath>> GetImagePathsForCar(int carId)
         {
             using (var context = new DriveITContext())
@@ -404,5 +418,6 @@ namespace DriveIT.EntityFramework
                 await context.SaveChangesAsync();
             }
         }
+        #endregion
     }
 }

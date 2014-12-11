@@ -194,7 +194,6 @@ namespace DriveIT.EntityFramework.Migrations
                     Drive = "FWD",
                     Mileage = 20,
                     Price = 10000,
-                    Sold = false,
                     Transmission = "Manual",
                     Year = 2008,
                 },
@@ -210,7 +209,6 @@ namespace DriveIT.EntityFramework.Migrations
                     Drive = "FWD",
                     Mileage = 15,
                     Price = 50000,
-                    Sold = false,
                     Transmission = "Manual",
                     Year = 2005
                 },
@@ -226,7 +224,6 @@ namespace DriveIT.EntityFramework.Migrations
                     Drive = "FWD",
                     Mileage = 10,
                     Price = 100000,
-                    Sold = false,
                     Transmission = "Automatic",
                     Year = 2008
                 },
@@ -242,7 +239,6 @@ namespace DriveIT.EntityFramework.Migrations
                     Drive = "RWD",
                     Mileage = 10,
                     Price = 500000,
-                    Sold = false,
                     Transmission = "Manual",
                     Year = 2010
                 }

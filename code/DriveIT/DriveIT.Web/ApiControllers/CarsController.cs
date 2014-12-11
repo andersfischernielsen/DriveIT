@@ -27,6 +27,7 @@ namespace DriveIT.Web.ApiControllers
             var dtos = new List<CarDto>();
             foreach (var car in cars)
             {
+                car.Sold = _repo.GetSaleByCarId(car.Id) != null;
                 dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
             }
             return Ok(dtos);
