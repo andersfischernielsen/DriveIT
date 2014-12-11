@@ -84,15 +84,6 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="4">
-                <Button.Background>
-                    <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
-                </Button.Background>
-                <StackPanel>
-                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/cancel.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                    <TextBlock Text="Cancel" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                </StackPanel>
-            </Button>
             <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="5">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>

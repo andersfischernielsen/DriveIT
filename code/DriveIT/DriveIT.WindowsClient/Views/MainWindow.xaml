@@ -256,11 +256,6 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Bib bop" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="5">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
-                            </Button.Background>
-                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
