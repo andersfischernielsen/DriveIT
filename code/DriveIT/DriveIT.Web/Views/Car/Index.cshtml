@@ -9,8 +9,6 @@
 <h1>Car Search</h1>
 <p>In this window, you are able to search for cars, by giving, as input, the three following criteria: FuelType, Make and Model.</p>
 
-<br><br/>
-
 @using (Html.BeginForm("Index", "Car", FormMethod.Get))
 {
     <p>
@@ -64,7 +62,7 @@
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
             <td>
-                @if (item.Sold == true)
+                @if (item.Sold)
                 {
                     <strong style="color: red">SOLD</strong>
 
@@ -77,7 +75,7 @@
             <td>
                 @if (item.ImagePaths.Count != 0)
                 {
-                    <img src=@item.ImagePaths.First() />
+                    <img src=@item.ImagePaths.First() height="200" width="200"/>
                 }
                 else
                 {
