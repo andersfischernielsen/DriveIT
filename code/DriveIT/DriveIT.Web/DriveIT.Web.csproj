@@ -302,7 +302,6 @@
     <Content Include="Views\Comment\Create.cshtml" />
     <Content Include="Views\Comment\Edit.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
-    <Content Include="Views\ContactRequest\Details.cshtml" />
     <Content Include="Views\ContactRequest\Index.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
