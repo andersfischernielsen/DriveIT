@@ -17,9 +17,14 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeListViewModel()
         {
             EmployeeViewModels = new ObservableCollection<EmployeeViewModel>();
+            SetCorrectDeletePermission();
+            UpdateList();
+        }
+
+        private void SetCorrectDeletePermission()
+        {
             if (EmployeeDetailsViewModel.LoggedInRole == Role.Administrator) CanDelete = true;
             else CanDelete = false;
-            UpdateList();
         }
 
         #region Properties
@@ -99,16 +104,19 @@ namespace DriveIT.WindowsClient.ViewModels
                 if (EmployeeViewModels.Count >= 1)
                 {
                     SelectedEmployee = EmployeeViewModels[0];
+                    SetCorrectDeletePermission();
                     CanUpdate = true;
                 }
                 else
                 {
                     CanUpdate = false;
+                    CanDelete = false;
                 }
             }
             catch (Exception e)
             {
                 CanUpdate = false;
+                CanDelete = false;
                 Status = "Failed to update the list!";
             }
         }
@@ -124,11 +132,13 @@ namespace DriveIT.WindowsClient.ViewModels
                     if (EmployeeViewModels.Count >= 1)
                     {
                         SelectedEmployee = EmployeeViewModels[0];
+                        SetCorrectDeletePermission();
                         CanUpdate = true;
                     }
                     else
                     {
                         CanUpdate = false;
+                        CanDelete = false;
                     }
                 }
                 Status = "";
