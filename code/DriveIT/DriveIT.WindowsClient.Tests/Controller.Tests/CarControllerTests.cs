@@ -12,11 +12,12 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     public class CarControllerTests
     {
         private CarController _carController;
-        [SetUp]
-        public async Task Setup()
+
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
         {
+            DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
             _carController = new CarController();
-            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
         }
 
         [Test]
@@ -27,11 +28,11 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 await _carController.CreateCar(new CarDto()
                 {
                     Color = "Red",
-                    Created = DateTime.Now,
                     DistanceDriven = 10000,
                     Model = "A8",
                     Make = "Audi",
-                    Price = 200000
+                    Price = 200000,
+                    Fuel = FuelType.Gasoline
                 });
             Thread.Sleep(2000);
             t = _carController.ReadCarList().Result;
@@ -47,6 +48,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Model = "Swhifts",
                 Make = "Suzuki",
                 Price = 10000,
+                Fuel = FuelType.Gasoline,
                 Id = t[t.Count - 1].Id.Value
             });
             Thread.Sleep(2000);

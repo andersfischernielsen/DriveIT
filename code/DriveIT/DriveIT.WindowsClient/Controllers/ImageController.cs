@@ -7,6 +7,9 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace DriveIT.WindowsClient.Controllers
 {
+    /// <summary>
+    /// A controller for uploading images at a given uri to the server at driveit.blob.core.windows.net
+    /// </summary>
     public class ImageController
     {
         /// <summary>
