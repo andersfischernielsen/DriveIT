@@ -15,3 +15,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.navbar-collapse, .navbar-header {
+    font-weight: bold;
+}
+
+.navbar-right {
+    font-weight: lighter;
+}
