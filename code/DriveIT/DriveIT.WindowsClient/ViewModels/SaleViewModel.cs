@@ -73,16 +73,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
                     return _status;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
             }
             set
             {
@@ -114,15 +105,16 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
             }
         }
-        public decimal Price
+        public decimal? Price
         {
             get
             {
+                if (_saleDto.Price == 0) return null;
                 return _saleDto.Price;
             }
             set
             {
-                _saleDto.Price = value;
+                _saleDto.Price = value.GetValueOrDefault();
                 NotifyPropertyChanged("Price");
             }
         }
@@ -138,15 +130,16 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Sold");
             }
         }
-        public int CarId
+        public int? CarId
         {
             get
             {
+                if (_saleDto.CarId == 0) return null;
                 return _saleDto.CarId;
             }
             set
             {
-                _saleDto.CarId = value;
+                _saleDto.CarId = value.GetValueOrDefault();
                 NotifyPropertyChanged("CarId");
             }
         }

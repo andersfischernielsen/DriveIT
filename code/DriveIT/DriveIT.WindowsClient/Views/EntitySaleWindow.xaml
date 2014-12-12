@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntitySaleWindow"
 	x:Name= "SaleWindow"
 	Title="EntitySaleWindow"
-	Width="780.36" Height="492.077" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
+	Width="780.36" Height="454.552" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:SaleViewModel/>
     </Window.DataContext>
@@ -98,10 +98,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Content="Sale" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="69"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,265,0" Watermark="SaleId" Height="28" Grid.Row="1"
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,265,0" Watermark="" Height="28" Grid.Row="1"
 				Grid.Column="0" VerticalAlignment="Top" IsReadOnly="true" IsEnabled="False" Text="{Binding SaleId}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,265,0" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Price}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,265,0" Watermark="CarId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarId}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,265,0" Watermark="" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Price}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,265,0" Watermark="" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarId}"/>
             <DatePicker IsEnabled="False" Padding="6,2" Margin="10,76,265,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Sold" Height="28" FontSize="16" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="{Binding Sold}" Text="Monday, January 01, 2014">
                 <DatePicker.Background>
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
@@ -110,6 +110,9 @@
             <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="84,10,10,0" VerticalAlignment="Top" Height="35" Content="{Binding Status}" />
             <ComboBox Style="{DynamicResource FillComboBoxkStyle}" Text="Customers" Margin="10,142,265,0" Grid.Row="1" VerticalAlignment="Top" Height="28" ItemsSource="{Binding CustomerIdsList}" SelectedValue="{Binding CustomerId, Mode=TwoWay}" IsEditable="True" IsReadOnly="True" />
             <ComboBox Style="{DynamicResource FillComboBoxkStyle}" Text="Employees" Margin="10,175,265,0" Grid.Row="1" VerticalAlignment="Top" Height="28" ItemsSource="{Binding EmployeeIdsList}" SelectedValue="{Binding EmployeeId, Mode=TwoWay}" IsEditable="True" IsReadOnly="True" />
+            <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Car Id" Margin="0,111,265,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>
+            <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Final Price" Margin="0,43,265,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>
+            <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Sale Id" Margin="0,12,265,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>
         </Grid>
     </Grid>
 </Window>
