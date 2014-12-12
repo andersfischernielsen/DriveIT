@@ -178,6 +178,7 @@ namespace DriveIT.EntityFramework
             toChange.FirstName = toSetFrom.FirstName;
             toChange.LastName = toSetFrom.LastName;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
+            toChange.JobTitle = toSetFrom.JobTitle;
         }
         #endregion
         #region Customer
