@@ -1,1 +1,19 @@
 \section{Object Design}
+
+\subsection{Reuse}
+\subsubsection{XXX}
+
+\subsection{Inheritance}
+\subsubsection{XXX}
+
+\subsection{Encapsulation}
+Encapsulation has been a high priority during development of the \texttt{DriveIT System}. 
+
+Keeping functionality of different sub systems encapsulated has helped debugging and refactoring. Extensibility is also made easier in the future.
+
+\subsubsection{PersistentStorage}
+Encapsulation has been used in the \texttt{Persistent Storage} system in methods dealing with retreiving, editing and deleting entities. Methods generally have few side effects and only do not keep references to others classes after performing their task.
+
+A design choice in implementing the methods were to only keep a \texttt{DriveITContext} (which inherits from \texttt{DbContext}) in memory for a short amount of time to ensure that the context only fulfilled its purpose in dealing with the entities and then was discarded.
+
+Updating entities requires copying all attributes of the entity which is done in separate methods without side effects.
