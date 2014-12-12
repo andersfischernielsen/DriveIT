@@ -51,13 +51,15 @@ namespace DriveIT.WindowsClient.Controllers
             }
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
         /// <summary>
         /// Creates a Post httprequest with the generic T to the webAPI at the url BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
         /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
-        /// <param name="uri"></param>
-        /// <param name="objectToCreate"></param>
-        /// <returns></returns>
+        /// <param name="uri">The uri of the api where T objects are stored</param>
+        /// <param name="objectToCreate"> the object to create at the APi</param>
+        /// <returns>The object which was created at the API</returns>
         public async static Task<T> Create<T>(string uri, T objectToCreate)
         {
             try
@@ -73,11 +75,12 @@ namespace DriveIT.WindowsClient.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Reads all the objects of type T at the webAPI on the string BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <returns></returns>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
+        /// <param name="uri">The uri of the api where T objects are stored</param>
+        /// <returns>All T objects in the API using the URI</returns>
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
             T[] objects;
@@ -94,11 +97,12 @@ namespace DriveIT.WindowsClient.Controllers
             return objects.ToList();
         }
         /// <summary>
-        /// 
+        /// Reads the object of type T at the webAPI on the string BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <returns></returns>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
+        /// <param name="uri">The uri of the api where a single T object is stored</param>
+        /// <returns>An T object in the API using the URI</returns>
         public async static Task<T> Read<T>(string uri)
         {
             try
@@ -113,13 +117,15 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+
         /// <summary>
-        /// 
+        /// Creates a Put httprequest with the generic T to the webAPI at the url BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <param name="objectToUpdate"></param>
-        /// <returns></returns>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
+        /// <param name="uri">The uri of the api where T objects are stored</param>
+        /// <param name="objectToCreate"> the object to update at the APi with an ID</param>
+        /// <returns>A Task to await</returns>
         public async static Task Update<T>(string uri, T objectToUpdate)
         {
             try
@@ -133,11 +139,10 @@ namespace DriveIT.WindowsClient.Controllers
             }
         }
         /// <summary>
-        /// 
+        /// Creates a Delete httprequest to the webAPI at the url BaseAddress + uri. 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <returns></returns>
+        /// <param name="uri">The uri of the API indicating a single object</param>
+        /// <returns>A Task to await</returns>
         public async static Task Delete<T>(string uri)
         {
             try
@@ -152,9 +157,10 @@ namespace DriveIT.WindowsClient.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Calls the API and finds out what role the logged in user is.
+        /// This must be called after the Login method.  
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The role which is matches the logged in user</returns>
         private static async Task<Role?> GetRole()
         {
             try
