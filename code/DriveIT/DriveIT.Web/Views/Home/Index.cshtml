@@ -15,9 +15,14 @@
     <div class="col-md-3"></div>
 </div>
 
-<h3>Newest cars</h3>
-<table class="table table-striped">
+<br />
+<h2>Newest Cars For Sale:</h2>
+<br />
+<table class="table">
     <tr>
+        <th>
+
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Model)
         </th>
@@ -33,48 +38,42 @@
         <th>
             @Html.DisplayNameFor(model => model.Created)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sold)
-        </th>
-
-        <th></th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Model)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Make)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @if (item.Sold == true)
-            {
-                <strong style="color: red">SOLD</strong>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.Sold == true)
+                {
+                    <strong style="color: red">SOLD</strong>
 
-            }
-            else
-            {
-                <strong style="color: green">FOR SALE</strong>
-            }
-        </td>
-        <td>
-
-        <td>
-            @Html.ActionLink("Details", "Details", "Car", new { id=item.Id }, null)
-        </td>
-    </tr>
-}
+                }
+                else
+                {
+                    <strong style="color: green">FOR SALE</strong>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Car", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
 
 </table>
