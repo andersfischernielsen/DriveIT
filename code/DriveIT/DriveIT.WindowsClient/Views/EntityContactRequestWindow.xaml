@@ -28,7 +28,7 @@
                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarGridColor}"/>
             </Grid.Background>
             <Border BorderBrush="Black" BorderThickness="0,0,0,1" Height="80" VerticalAlignment="Top" Grid.ColumnSpan="7"/>
-            <Button  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60">
+            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                 </Button.Background>

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using DriveIT.Models;
+using DriveIT.WindowsClient.ViewModels;
 
 namespace DriveIT.WindowsClient.Controllers
 {
@@ -221,9 +222,17 @@ namespace DriveIT.WindowsClient.Controllers
             try
             {
                 var result = await _httpClient.GetAsync("account/isadministrator");
-                if (result.IsSuccessStatusCode) return Role.Administrator;
+                if (result.IsSuccessStatusCode)
+                {
+                    EmployeeDetailsViewModel.LoggedInRole = Role.Administrator;
+                    return Role.Administrator;
+                }
                 result = await _httpClient.GetAsync("account/isemployee");
-                if (result.IsSuccessStatusCode) return Role.Employee;
+                if (result.IsSuccessStatusCode)
+                {
+                    EmployeeDetailsViewModel.LoggedInRole = Role.Employee;
+                    return Role.Employee;
+                }
                 result = await _httpClient.GetAsync("account/iscustomer");
                 if (result.IsSuccessStatusCode) return Role.Customer;
                 return null;

@@ -114,7 +114,7 @@ namespace DriveIT.Web.Tests.ApiControllers
         [Test]
         public async Task GetFromUserId_Result()
         {
-            var message = await _controller.GetFromUserId("cust@driveit.dk") as OkNegotiatedContentResult<List<SaleDto>>;
+            var message = await _controller.GetFromCustomerId("cust@driveit.dk") as OkNegotiatedContentResult<List<SaleDto>>;
             Assert.IsNotNull(message);
         }
 

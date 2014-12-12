@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using DriveIT.Models;
 using DriveIT.Web.ApiControllers;
+using Microsoft.AspNet.Identity;
 
 namespace DriveIT.Web.MvcControllers
 {
@@ -12,40 +14,26 @@ namespace DriveIT.Web.MvcControllers
         private ContactRequestsController controller = new ContactRequestsController();
         
         // GET: ContactRequest
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string email)
         {
-            var requests = await controller.Get() as OkNegotiatedContentResult<List<ContactRequestDto>>;
+            var requests = await controller.GetByUserId(email) as OkNegotiatedContentResult<List<ContactRequestDto>>;
             return View(requests.Content);
         }
 
-        // GET: ContactRequest/Details/5
-        public async Task<ActionResult> Details(int id)
-        {
-            var request = await controller.Get(id) as OkNegotiatedContentResult<ContactRequestDto>;
-            return View(request.Content);
+        [AuthorizeRoles(Role.Customer)]
+        [HttpPost]
+        public async Task<ActionResult> Create(int id)
+        {            
+            var contactRequestDto = new ContactRequestDto
+            {
+                CarId = id,
+                CustomerId = User.Identity.GetUserId(),
+                Requested = DateTime.Now
+            };
+            controller.Post(contactRequestDto);
+
+            return RedirectToAction("Details", "Car", id);
         }
-
-        //// GET: ContactRequest/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: ContactRequest/Create
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
         // GET: ContactRequest/Delete/5
         public async Task<ActionResult> Delete(int id)
