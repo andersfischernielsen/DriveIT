@@ -1,4 +1,4 @@
-﻿@model DriveIT.Models.CarDto
+﻿@model DriveIT.Web.Models.CarCommentViewModel
 
 @{
     ViewBag.Title = "Car Details";
@@ -11,133 +11,125 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.DisplayNameFor(model => model.Car.Model)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model)
+            @Html.DisplayFor(model => model.Car.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Make)
+            @Html.DisplayNameFor(model => model.Car.Make)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Make)
+            @Html.DisplayFor(model => model.Car.Make)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Year)
+            @Html.DisplayNameFor(model => model.Car.Year)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Year)
+            @Html.DisplayFor(model => model.Car.Year)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Car.Price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Car.Price)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Created)
+            @Html.DisplayNameFor(model => model.Car.Created)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Created)
+            @Html.DisplayFor(model => model.Car.Created)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Sold)
+            @Html.DisplayNameFor(model => model.Car.Sold)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Sold)
+            @Html.DisplayFor(model => model.Car.Sold)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Mileage)
+            @Html.DisplayNameFor(model => model.Car.Mileage)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Mileage)
+            @Html.DisplayFor(model => model.Car.Mileage)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Color)
+            @Html.DisplayNameFor(model => model.Car.Color)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Color)
+            @Html.DisplayFor(model => model.Car.Color)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DistanceDriven)
+            @Html.DisplayNameFor(model => model.Car.DistanceDriven)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DistanceDriven)
+            @Html.DisplayFor(model => model.Car.DistanceDriven)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fuel)
+            @Html.DisplayNameFor(model => model.Car.Fuel)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fuel)
+            @Html.DisplayFor(model => model.Car.Fuel)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Drive)
+            @Html.DisplayNameFor(model => model.Car.Drive)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Drive)
+            @Html.DisplayFor(model => model.Car.Drive)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Transmission)
+            @Html.DisplayNameFor(model => model.Car.Transmission)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Transmission)
+            @Html.DisplayFor(model => model.Car.Transmission)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TopSpeed)
+            @Html.DisplayNameFor(model => model.Car.TopSpeed)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TopSpeed)
+            @Html.DisplayFor(model => model.Car.TopSpeed)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NoughtTo100)
+            @Html.DisplayNameFor(model => model.Car.NoughtTo100)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NoughtTo100)
+            @Html.DisplayFor(model => model.Car.NoughtTo100)
         </dd>
-
-           
 
     </dl>
     <p>Images:</p>
-    @foreach (var path in Model.ImagePaths)
+    @foreach (var path in Model.Car.ImagePaths)
     {
         <img src=@path alt="Image of car"/><br/>
     }
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-    <br/>
-    <br/>
-    <a href=@Url.Action("Index", "Comment", new {carId = Model.Id, customerId = 1})>Comments for this car</a>
-</p>
 
 @{
-    
+    Html.RenderPartial("~/Views/Comment/Index.cshtml", Model);
 }
