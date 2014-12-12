@@ -409,7 +409,11 @@ namespace DriveIT.WindowsClient.ViewModels
             try
             {
                 var carController = new CarController();
-                await carController.CreateCar(_carDto);
+                var carInDB = await carController.CreateCar(_carDto);
+
+                _carDto = carInDB;
+                NotifyPropertyChanged("");
+
                 Status = "Car Created";
                 CarState = CarStateEnum.ForSale;
             }

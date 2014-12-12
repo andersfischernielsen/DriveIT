@@ -206,7 +206,11 @@ namespace DriveIT.WindowsClient.ViewModels
             try
             {
                 var saleController = new SaleController();
-                await saleController.CreateSale(_saleDto);
+                var saleInDB = await saleController.CreateSale(_saleDto);
+
+                _saleDto = saleInDB;
+                NotifyPropertyChanged("");
+
                 Status = "Sale Created";
                 SaleState = SaleEnum.InSystem;
             }
