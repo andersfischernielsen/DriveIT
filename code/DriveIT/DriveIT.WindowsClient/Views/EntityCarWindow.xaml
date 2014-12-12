@@ -120,7 +120,6 @@
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
                 </DatePicker.Background>
             </DatePicker>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,208,51,0" Watermark="Sold" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Sold}" IsEnabled="False"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,241,51,0" Watermark="Milage" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Mileage}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,274,51,0" Watermark="Color" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Color}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,307,51,0" Watermark="DistanceDriven" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding DistanceDriven}"/>
@@ -161,6 +160,7 @@
                 </i:Interaction.Triggers>
             </Button>
             <Label Style="{DynamicResource StatusLabelStyle}" Content="{Binding ImageAmtString}" Grid.Column="1" HorizontalAlignment="Center" Margin="215,259,226,0" Grid.Row="1" VerticalAlignment="Top" Height="28"/>
+            <CheckBox Content="Sold" IsEnabled="False" HorizontalAlignment="Left" Margin="10,208,0,0" Grid.Row="1" VerticalAlignment="Top" Height="28" Width="437" IsChecked="{Binding Sold}"/>
         </Grid>
     </Grid>
 </Window>
