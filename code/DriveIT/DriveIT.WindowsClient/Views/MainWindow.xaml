@@ -174,7 +174,7 @@
                     </StackPanel>
                 </Button>
             </Grid>
-            <TabControl x:Name="PowerToolsbarTabControl" BorderThickness="1,0" SelectedIndex="{Binding TabIndex}" Margin="0,-4.5,0,0">
+            <TabControl x:Name="PowerToolsbarTabControl" BorderThickness="0,0" SelectedIndex="{Binding TabIndex}" Margin="0,-4.5,0,0">
                 <TabControl.Resources>
                     <!-- Remove the headers by overriding the header style -->
                     <Style TargetType="{x:Type TabItem}">

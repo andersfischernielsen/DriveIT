@@ -134,6 +134,19 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        public string JobTitle
+        {
+            get
+            {
+                return _employeeDto.JobTitle;
+            }
+            set
+            {
+                _employeeDto.JobTitle = value;
+                NotifyPropertyChanged("JobTitle");
+            }
+        }
+
         public string FirstName
         {
             get
