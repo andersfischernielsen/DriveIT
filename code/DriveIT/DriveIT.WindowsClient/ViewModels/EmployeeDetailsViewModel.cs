@@ -107,7 +107,7 @@ namespace DriveIT.WindowsClient.ViewModels
                         .OrderByDescending(a => a.Amount)
                         .ToList();
             var thisEmployee = sells.Find(i => i.EmployeeId == _employeeDto.Id);
-            BestSellingEmployee = "" + sells.IndexOf(thisEmployee);
+            BestSellingEmployee = "" + (sells.IndexOf(thisEmployee)+1);
         }
 
 
