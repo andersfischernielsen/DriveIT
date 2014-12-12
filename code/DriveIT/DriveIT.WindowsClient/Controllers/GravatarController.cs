@@ -8,10 +8,20 @@ namespace DriveIT.WindowsClient.Controllers
 {
     public static class GravatarController
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static string CreateGravatarLink(string email)
         {
             return "http://www.gravatar.com/avatar/" + CreateMD5Hash(email) + "?s=250";
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private static string CreateMD5Hash(string input)
         {
             // Use input string to calculate MD5 hash

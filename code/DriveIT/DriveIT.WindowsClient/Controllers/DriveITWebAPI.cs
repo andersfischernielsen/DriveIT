@@ -17,7 +17,12 @@ namespace DriveIT.WindowsClient.Controllers
     {
         static private HttpClient _httpClient;
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static async Task Login(string username, string password)
         {
             #if DEBUG
@@ -45,7 +50,13 @@ namespace DriveIT.WindowsClient.Controllers
             }
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <param name="objectToCreate"></param>
+        /// <returns></returns>
         public async static Task<T> Create<T>(string uri, T objectToCreate)
         {
             try
@@ -59,7 +70,13 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="objectToCreate"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public async static Task Create(string uri, CustomerDto objectToCreate, string password)
         {
             try
@@ -85,7 +102,14 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="objectToCreate"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         public async static Task Create(string uri, EmployeeDto objectToCreate, string password, Role role)
         {
             if (role == Role.Customer) throw new ArgumentException("Cannot be Customer.", "role");
@@ -112,7 +136,12 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
             // TODO FJERN INITIERINGEN new T[0]
@@ -130,7 +159,12 @@ namespace DriveIT.WindowsClient.Controllers
             }
             return objects.ToList();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public async static Task<T> Read<T>(string uri)
         {
             T objectToRead;
@@ -146,8 +180,13 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <param name="objectToUpdate"></param>
+        /// <returns></returns>
         public async static Task Update<T>(string uri, T objectToUpdate)
         {
             try
@@ -160,6 +199,12 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public async static Task Delete<T>(string uri)
         {
             try
@@ -172,7 +217,17 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <param name="phone"></param>
+        /// <param name="confirmPhone"></param>
+        /// <returns></returns>
         public async static Task CreateCustomer(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
@@ -186,7 +241,17 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <param name="phone"></param>
+        /// <param name="confirmPhone"></param>
+        /// <returns></returns>
         public async static Task CreateEmployee(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
@@ -201,7 +266,17 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <param name="phone"></param>
+        /// <param name="confirmPhone"></param>
+        /// <returns></returns>
         public async static Task CreateAdministrator(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
@@ -216,7 +291,10 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private static async Task<Role?> GetRole()
         {
             try
@@ -243,7 +321,18 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <param name="phone"></param>
+        /// <param name="confirmPhone"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
         {
             HttpResponseMessage result;
