@@ -248,7 +248,10 @@ namespace DriveIT.WindowsClient.ViewModels
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// A method for notifying the view if any properties have been changed.
+        /// <param name="info">The name of the property which has changed</param>
+        /// </summary>
         private void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)

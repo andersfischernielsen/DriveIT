@@ -4,6 +4,9 @@ using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
+    /// <summary>
+    /// A controller which creates the strings to CRUD sales in the DriveITWebAPI class
+    /// </summary>
     public class SaleController
     {
         /// <summary>

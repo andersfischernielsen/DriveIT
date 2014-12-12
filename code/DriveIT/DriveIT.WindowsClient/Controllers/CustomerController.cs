@@ -4,6 +4,9 @@ using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
+    /// <summary>
+    /// A controller which creates the strings to CRUD customers in the DriveITWebAPI class
+    /// </summary>
     public class CustomerController
     {
         /// <summary>
@@ -20,7 +23,18 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the newly created Customer DTO from the database</returns>
         public async Task CreateCustomer(CustomerDto customer, string password)
         {
-            await DriveITWebAPI.Create("account/register", customer, password);
+            var registerModel = new RegisterViewModel
+            {
+                Email = customer.Email,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                PhoneNumber = customer.Phone,
+                ConfirmPhoneNumber = customer.Phone,
+                Password = password,
+                ConfirmPassword = password,
+                Role = Role.Customer
+            };
+            await DriveITWebAPI.Create("account/register", registerModel);
         }
         /// <summary>
         /// Reads a specific Customer DTO object from the API.

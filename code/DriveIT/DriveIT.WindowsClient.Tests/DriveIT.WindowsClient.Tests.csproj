@@ -59,6 +59,8 @@
     <Compile Include="Controller.Tests\SaleControllerTests.cs" />
     <Compile Include="Controller.Tests\ContactRequestControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels.Tests\PasswordCreationViewModelTests.cs" />
+    <Compile Include="ViewModels.Tests\CarViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">

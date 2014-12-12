@@ -13,6 +13,10 @@ using DriveIT.WindowsClient.ViewModels;
 namespace DriveIT.WindowsClient.Controllers
 {
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// A class which creates HTTP requests calls: POST, PUT, READ and DELETE.
+    /// The methods uses generics, and strings in parameters and thereby allowing the code to be reused.
+    /// </summary>
     public class DriveITWebAPI
     {
         static private HttpClient _httpClient;
@@ -51,13 +55,15 @@ namespace DriveIT.WindowsClient.Controllers
             }
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
         /// <summary>
         /// Creates a Post httprequest with the generic T to the webAPI at the url BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
         /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
-        /// <param name="uri"></param>
-        /// <param name="objectToCreate"></param>
-        /// <returns></returns>
+        /// <param name="uri">The uri of the api where T objects are stored</param>
+        /// <param name="objectToCreate"> the object to create at the APi</param>
+        /// <returns>The object which was created at the API</returns>
         public async static Task<T> Create<T>(string uri, T objectToCreate)
         {
             try
@@ -71,74 +77,14 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+
         /// <summary>
-        /// 
+        /// Reads all the objects of type T at the webAPI on the string BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="objectToCreate"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public async static Task Create(string uri, CustomerDto objectToCreate, string password)
-        {
-            try
-            {
-                var registerModel = new RegisterViewModel
-                {
-                    Email = objectToCreate.Email,
-                    FirstName = objectToCreate.FirstName,
-                    LastName = objectToCreate.LastName,
-                    PhoneNumber = objectToCreate.Phone,
-                    ConfirmPhoneNumber = objectToCreate.Phone,
-                    Password = password,
-                    ConfirmPassword = password,
-                    Role = Role.Customer
-                };
-                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
-                response.EnsureSuccessStatusCode();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="objectToCreate"></param>
-        /// <param name="password"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        public async static Task Create(string uri, EmployeeDto objectToCreate, string password, Role role)
-        {
-            if (role == Role.Customer) throw new ArgumentException("Cannot be Customer.", "role");
-            try
-            {
-                var registerModel = new RegisterViewModel
-                {
-                    Email = objectToCreate.Email,
-                    FirstName = objectToCreate.FirstName,
-                    LastName = objectToCreate.LastName,
-                    PhoneNumber = objectToCreate.Phone,
-                    ConfirmPhoneNumber = objectToCreate.Phone,
-                    Password = password,
-                    ConfirmPassword = password,
-                    Role = role
-                };
-                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
-                response.EnsureSuccessStatusCode();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <returns></returns>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
+        /// <param name="uri">The uri of the api where T objects are stored</param>
+        /// <returns>All T objects in the API using the URI</returns>
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
             T[] objects;
@@ -155,19 +101,19 @@ namespace DriveIT.WindowsClient.Controllers
             return objects.ToList();
         }
         /// <summary>
-        /// 
+        /// Reads the object of type T at the webAPI on the string BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <returns></returns>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
+        /// <param name="uri">The uri of the api where a single T object is stored</param>
+        /// <returns>An T object in the API using the URI</returns>
         public async static Task<T> Read<T>(string uri)
         {
-            T objectToRead;
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
-                objectToRead = await response.Content.ReadAsAsync<T>();
+                T objectToRead = await response.Content.ReadAsAsync<T>();
                 return objectToRead;
             }
             catch (Exception)
@@ -175,13 +121,15 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+
         /// <summary>
-        /// 
+        /// Creates a Put httprequest with the generic T to the webAPI at the url BaseAddress + uri. 
+        /// T and the uri string must match.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <param name="objectToUpdate"></param>
-        /// <returns></returns>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
+        /// <param name="uri">The uri of the api where T objects are stored</param>
+        /// <param name="objectToCreate"> the object to update at the APi with an ID</param>
+        /// <returns>A Task to await</returns>
         public async static Task Update<T>(string uri, T objectToUpdate)
         {
             try
@@ -195,11 +143,10 @@ namespace DriveIT.WindowsClient.Controllers
             }
         }
         /// <summary>
-        /// 
+        /// Creates a Delete httprequest to the webAPI at the url BaseAddress + uri. 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uri"></param>
-        /// <returns></returns>
+        /// <param name="uri">The uri of the API indicating a single object</param>
+        /// <returns>A Task to await</returns>
         public async static Task Delete<T>(string uri)
         {
             try
@@ -212,81 +159,12 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
+
         /// <summary>
-        /// 
+        /// Calls the API and finds out what role the logged in user is.
+        /// This must be called after the Login method.  
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <returns></returns>
-        public async static Task CreateCustomer(string email, string firstName, string lastName, string password,
-            string confirmPassword, string phone, string confirmPhone)
-        {
-            try
-            {
-                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <returns></returns>
-        public async static Task CreateEmployee(string email, string firstName, string lastName, string password,
-            string confirmPassword, string phone, string confirmPhone)
-        {
-            try
-            {
-                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <returns></returns>
-        public async static Task CreateAdministrator(string email, string firstName, string lastName, string password,
-            string confirmPassword, string phone, string confirmPhone)
-        {
-            try
-            {
-                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>The role which is matches the logged in user</returns>
         private static async Task<Role?> GetRole()
         {
             try
@@ -312,48 +190,6 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
-        {
-            HttpResponseMessage result;
-            var model = new RegisterViewModel
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                Password = password,
-                ConfirmPassword = confirmPassword,
-                PhoneNumber = phone,
-                ConfirmPhoneNumber = confirmPhone,
-                Role = role
-            };
-            result = await _httpClient.PostAsJsonAsync("account/register", model);
 
-            try
-            {
-                result.EnsureSuccessStatusCode();
-            }
-            catch (HttpRequestException)
-            {
-                if (result.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    //Maybe throw some special exception
-                    throw;
-                }
-                //else
-                throw;
-            }
-        }
     }
 }

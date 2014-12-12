@@ -11,7 +11,9 @@ As mentioned earlier the system supports create, read, update \& delete function
 Focusing the testing on the underlying frameworks used in the classes does not make sense. Trusting that the developers of the Entity Framework have done extensive testing allows testing the logic in this class instead, which saves time and allows focusing on own logic.\\
 Isolating the \texttt{PersistentStorage} logic requires setting up a mock of the DbContext and DbSet classes of Entity Framework to be able to test that the logic calls the right methods in these classes. The Moq NuGet package provides realtively easy mocking of these classes. \\
 A list of Car objects is used as the input to a Mock object that is setup to provide the same functionality as the DbSet and DbContext classes. Tests can then be run on these classes.\\
-The Moq framework provides methods to verify that a method has been run on the DbContext and thereby confirming that the method performed the correct action.
+The Moq framework provides methods to verify that a method has been run on the DbContext and thereby confirming that the method performed the correct action. 
+The Moq framework has no ability to mock extensions methods, which turned out to make a testing a great deal harder. Since the implementation of \texttt{IPersistentStorage} relies on the extension methods in .NET to include certain results when retrieving entities, this proved to be too hard to test. If a test was to be completed, then entire classes of Entity Framework would have to be mocked which was decided was outside of the scope of this project due to time pressure.\\
+Mocking other evalutation extension methods in .NET was too hard to mock as well, and therefore some functionality of the system could not be tested.
 
 \subsection{DriveIT Web API Unit Testing}
 Unit Testing of the DriveIT Web API sub system.

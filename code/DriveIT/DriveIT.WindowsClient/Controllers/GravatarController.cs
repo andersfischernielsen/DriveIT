@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DriveIT.WindowsClient.Controllers
 {
+    /// <summary>
+    /// A controller which creates the url string to the gravatar profile of the given email.
+    /// </summary>
     public static class GravatarController
     {
         /// <summary>
