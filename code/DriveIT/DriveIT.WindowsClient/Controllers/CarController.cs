@@ -15,7 +15,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <summary>
         /// Creates a Car DTO object in the API.
         /// </summary>
-        /// <param name="car">A car DTO</param>
+        /// <param name="car">A Car DTO</param>
         /// <returns>Returns the newly created Car DTO from the database</returns>
         public async Task<CarDto> CreateCar(CarDto car)
         {
