@@ -1,4 +1,5 @@
-﻿@model DriveIT.Web.Models.CarCommentViewModel
+﻿@using Microsoft.AspNet.Identity
+@model DriveIT.Web.Models.CarCommentViewModel
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <link href="../../Content/cosmo-boostrap.min.css" rel="stylesheet" />
@@ -27,10 +28,27 @@
 @*If user is signed in and car is not sold, contact button is shown*@
 else if (@User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("Create", "ContactRequest", new { id = Model.Car.Id }))
+    bool good = true;
+    foreach(var item in Model.ContactRequest)
     {
-        <input type="submit" value="Request to get contacted" class="btn btn-success" />
-    }  
+        if (item.CustomerId == User.Identity.GetUserId() && item.CarId == Model.Car.Id)
+        {
+            good = false;
+        }
+        else { }
+    }
+    if (good)
+    {
+        using (Html.BeginForm("Create", "ContactRequest", new {id = Model.Car.Id}))
+        {
+            <input type="submit" value="Request to get contacted" class="btn btn-success"/>
+        }
+    }
+    else
+    {
+        //MUSTBE  MOVED INSIDE OF LOOP
+        @Html.ActionLink("Delete Request", "Delete", "ContactRequest", new {id = Model.ContactRequest}, new {@class = "btn btn-danger"})
+    }
 }
 @*If user is not signed in and car is not sold, shown this sentence*@
 else

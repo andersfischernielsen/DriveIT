@@ -16,6 +16,7 @@ namespace DriveIT.Web.MvcControllers
 
         private CarsController carController = new CarsController();
         private CommentsController commentsController = new CommentsController();
+        private ContactRequestsController rc = new ContactRequestsController();
 
         public async Task<ActionResult> Index(String fuelType, String make, String model)
         {
@@ -71,6 +72,7 @@ namespace DriveIT.Web.MvcControllers
         {
             var car = await carController.Get(carId) as OkNegotiatedContentResult<CarDto>;
             var comments = await commentsController.GetByCarId(carId) as OkNegotiatedContentResult<List<CommentDto>>;
+            var requests = await rc.Get() as OkNegotiatedContentResult<List<ContactRequestDto>>;
 
             var viewModel = new CarCommentViewModel();
 
@@ -84,7 +86,7 @@ namespace DriveIT.Web.MvcControllers
                 viewModel.Car = car.Content;
                 viewModel.Comments = new List<CommentDto>();
             }
-
+            viewModel.ContactRequest = requests.Content;
             return View(viewModel);
         }
     }
