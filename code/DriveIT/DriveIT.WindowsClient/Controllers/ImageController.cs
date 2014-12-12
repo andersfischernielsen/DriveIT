@@ -30,9 +30,9 @@ namespace DriveIT.WindowsClient.Controllers
                     PublicAccess = BlobContainerPublicAccessType.Blob
                 });
 
-
+            var guid = Guid.NewGuid().ToString();
             // Retrieve reference to a blob named "myblob".
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(Path.GetFileName(filepath));
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(guid + Path.GetFileName(filepath));
 
             // Create or overwrite the "myblob" blob with contents from a local file.
             using (var fileStream = File.OpenRead(filepath))
@@ -40,7 +40,7 @@ namespace DriveIT.WindowsClient.Controllers
                 await blockBlob.UploadFromStreamAsync(fileStream);
             }
 
-            return string.Format("https://driveit.blob.core.windows.net/car{0}/{1}", id, Path.GetFileName(filepath));
+            return string.Format("https://driveit.blob.core.windows.net/car{0}/{1}{2}", id, guid, Path.GetFileName(filepath));
         }
     }
 }
