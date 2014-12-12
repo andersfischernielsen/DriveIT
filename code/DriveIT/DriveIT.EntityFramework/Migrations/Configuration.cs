@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -54,6 +54,7 @@ namespace DriveIT.EntityFramework.Migrations
                     FirstName = "DriveIT",
                     LastName = "Adminson",
                     PhoneNumber = "88888888",
+                    JobTitle = "Boss"
                 };
 
                 CheckResult(userManager.Create(employee, "4dmin_Password"));

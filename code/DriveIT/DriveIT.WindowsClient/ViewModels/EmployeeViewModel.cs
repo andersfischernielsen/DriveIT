@@ -193,6 +193,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     {
                         if (passwordViewModel.ProfileCreated)
                         {
+                            EmployeeId = Email;
                             Status = "Employee created";
                             EmployeeState = EmployeeStateEnum.InSystem;
                         }

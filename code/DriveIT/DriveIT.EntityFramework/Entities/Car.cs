@@ -4,12 +4,28 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DriveIT.Models;
 
-namespace DriveIT.Entities
+namespace DriveIT.EntityFramework.Entities
 {
     public class Car
     {
+        private int _id;
+
         [Key]
-        public int Id { get; set; }
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                if (ImagePaths != null)
+                {
+                    ImagePaths.ForEach(imagePath => imagePath.CarId = value);
+                }
+            }
+        }
         public string Model { get; set; }
         public string Make { get; set; }
         public int Year { get; set; }

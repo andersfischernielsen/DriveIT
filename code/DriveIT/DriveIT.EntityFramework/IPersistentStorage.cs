@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 
 namespace DriveIT.EntityFramework
 {
@@ -71,13 +71,6 @@ namespace DriveIT.EntityFramework
         Task UpdateSale(int idToUpdate, Sale saleToReplaceWith);
 
         Task<int> DeleteSale(int idToDelete);
-        #endregion
-        #region ImagePath
-        Task<List<ImagePath>> GetImagePathsForCar(int carId);
-
-        Task<int> CreateImagePath(ImagePath imagePath);
-
-        Task RemoveImagePath(int idToDelete);
         #endregion
     }
 }

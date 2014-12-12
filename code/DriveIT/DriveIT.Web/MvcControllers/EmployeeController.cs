@@ -18,10 +18,9 @@ namespace DriveIT.Web.MvcControllers
             return View(emps.Content);
         }
 
-      //  [Route("Employee/Details/{id}")]
-        public async Task<ActionResult> Details(string id)
+        public async Task<ActionResult> Details(string email)
         {
-            var emp = await controller.Get(id) as OkNegotiatedContentResult<EmployeeDto>;
+            var emp = await controller.Get(email) as OkNegotiatedContentResult<EmployeeDto>;
             return View(emp.Content);
         }
     }

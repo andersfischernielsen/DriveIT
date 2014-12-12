@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNet.Identity
+@model Tuple<IEnumerable<DriveIT.Models.CarDto>, IEnumerable<DriveIT.Models.SaleDto>>
+       
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Orders for @User.Identity.Name</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <b>Price</b>
+        </th>
+        <th>
+            <b>Sale Date</b>
+        </th>
+        <th>
+            <b>Make</b>
+        </th>
+        <th>
+            <b>Model</b>
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item2 in Model.Item2) {
+    <tr>
+        @if (item2.CustomerId == User.Identity.GetUserId())
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item2.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item2.Sold)
+            </td>
+            <td>
+                @foreach (var item1 in Model.Item1)
+                {
+                    if (item2.CarId == item1.Id)
+                    {
+                        @Html.DisplayFor(modelItem => item1.Make)
+                    }
+                }
+            </td>
+            <td>
+                @foreach (var item1 in Model.Item1)
+                {
+                    if (item2.CarId == item1.Id)
+                    {
+                        @Html.DisplayFor(modelItem => item1.Model)
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Car", new {id = item2.CarId}, null)
+            </td>
+        }
+    </tr>
+}
+
+</table>

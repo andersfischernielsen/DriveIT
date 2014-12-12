@@ -13,18 +13,13 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         public ObservableCollection<CustomerViewModel> CustomerViewModels { get; set; }
 
-        public CustomerListViewModel(IEnumerable<CustomerDto> customerDtos)
-        {
-            CustomerViewModels = 
-                new ObservableCollection<CustomerViewModel>(customerDtos
-                .Select(customerDto => new CustomerViewModel(customerDto)));
-        }
-
         public CustomerListViewModel()
         {
             CustomerViewModels = new ObservableCollection<CustomerViewModel>();
-            ReadList();
+            UpdateList();
         }
+
+        #region Properties
 
         private CustomerViewModel _selectedCustomer;
         public CustomerViewModel SelectedCustomer
@@ -38,39 +33,56 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        #region CRUDS
+        private string _status = "";
 
-        public async void ReadList()
+        public string Status
         {
-            try
+            get { return _status; }
+            set
             {
-                var customerController = new CustomerController();
-                foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
-                {
-                    CustomerViewModels.Add(new CustomerViewModel(customerDto));
-                }
-            }
-            catch (Exception e)
-            {
-                
-                throw;
+                _status = value;
+                NotifyPropertyChanged("Status");
             }
         }
+        private bool _canDeleteAndUpdate;
+
+        public bool CanDeleteAndUpdate
+        {
+            get { return _canDeleteAndUpdate; }
+            set
+            {
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
+            }
+        }
+        #endregion Properties
+
+        #region CRUDS
         public async void UpdateList()
         {
             try
             {
+                Status = "";
                 CustomerViewModels.Clear();
                 var customerController = new CustomerController();
                 foreach (CustomerDto customerDto in await customerController.ReadCustomerList())
                 {
                     CustomerViewModels.Add(new CustomerViewModel(customerDto));
                 }
+                if (CustomerViewModels.Count >= 1)
+                {
+                    SelectedCustomer = CustomerViewModels[0];
+                    CanDeleteAndUpdate = true;
+                }
+                else
+                {
+                    CanDeleteAndUpdate = false;
+                }
             }
             catch (Exception e)
             {
-                
-                throw;
+                CanDeleteAndUpdate = false;
+                Status = "Failed to update the list of customers!";
             }
         }
         public void DeleteCustomer()
@@ -81,13 +93,22 @@ namespace DriveIT.WindowsClient.ViewModels
                 else
                 {
                     CustomerViewModels.Remove(SelectedCustomer);
-                    SelectedCustomer = null;
+                    if (CustomerViewModels.Count >= 1)
+                    {
+                        SelectedCustomer = CustomerViewModels[0];
+                        CanDeleteAndUpdate = true;
+                    }
+                    else
+                    {
+                        CanDeleteAndUpdate = false;
+                    }
                 }
+                Status = "";
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to delete the customer!";
             }
         }
 
@@ -99,11 +120,12 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntityCustomerWindow { DataContext = newCustomer };
                 CustomerViewModels.Add(newCustomer);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to create window!";
             }
         }
 
@@ -114,11 +136,12 @@ namespace DriveIT.WindowsClient.ViewModels
                 CustomerViewModel customer = SelectedCustomer;
                 var window = new EntityCustomerWindow { DataContext = customer };
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update window!";
             }
         }
 

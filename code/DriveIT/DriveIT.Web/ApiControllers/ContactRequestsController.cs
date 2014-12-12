@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
@@ -75,6 +76,7 @@ namespace DriveIT.Web.ApiControllers
             {
                 return BadRequest("CustomerId must match the logged in user!");
             }
+            value.Requested = DateTime.Now;
             var newContactRequestId = await _repo.CreateContactRequest(value.ToEntity());
             value.Id = newContactRequestId;
             return CreatedAtRoute("DefaultApi", new { id = newContactRequestId }, value);

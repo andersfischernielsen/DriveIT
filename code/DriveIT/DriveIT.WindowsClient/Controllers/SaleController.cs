@@ -10,9 +10,9 @@ namespace DriveIT.WindowsClient.Controllers
         {
         }
 
-        public async Task CreateSale(SaleDto sale)
+        public async Task<SaleDto> CreateSale(SaleDto sale)
         {
-            await DriveITWebAPI.Create("sales", sale);
+            return await DriveITWebAPI.Create("sales", sale);
         }
         public async Task<SaleDto> ReadSale(int id)
         {
