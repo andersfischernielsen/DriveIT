@@ -23,16 +23,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
                     return _contactRequestDto.Id;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
             }
             set
             {
@@ -59,32 +50,49 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             try
             {
-                CustomerIdsList = (await new CustomerController().ReadCustomerList()).Select(i => i.Email).ToList();
+                _contactRequestDto =
+                    await new ContactRequestController().ReadContactRequest(ContactRequestId.GetValueOrDefault());
+            }
+            catch (Exception)
+            {
+                Status = "Could not get the contact request from the DB";
+            }
+            try
+            {
                 EmployeeIdsList = (await new EmployeeController().ReadEmployeeList()).Select(i => i.Email).ToList();
             }
             catch (Exception)
             {
-                CustomerIdsList = new List<string>();
+                Status = "Could not get list of employees.";
                 EmployeeIdsList = new List<string>();
             }
         }
 
+
         
         #region ATTRIBUTES
+
+        private bool _canUpdate = true;
+
+        public bool CanUpdate
+        {
+            get
+            {
+                return _canUpdate;
+            }
+            set
+            {
+                _canUpdate = value;
+                NotifyPropertyChanged("CanUpdate");
+            }
+        }
+
         private string _status = "";
         public string Status
         {
             get
             {
-                try
-                {
                     return _status;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
             }
             set
             {
@@ -109,8 +117,6 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 switch (ContactRequestState)
                 {
-                    case ContactRequestEnum.NotInSystem:
-                        return "Create";
                     default:
                         return "Update";
                 }
@@ -130,7 +136,6 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public static List<string> CustomerIdsList { get; set; } 
         public string CustomerId
         {
             get
@@ -178,7 +183,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 switch (ContactRequestState)
                 {
                     case ContactRequestEnum.NotInSystem:
-                        CreateContactRequest();
                         break;
                     default:
                         UpdateContactRequest();
@@ -191,28 +195,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to save contact request!";
             }
         }
-        /// <summary>
-        /// Gets called from the view
-        /// </summary>
-        public async void CreateContactRequest()
-        {
-            try
-            {
-                var contactRequestController = new ContactRequestController();
-                var contactRequestInDB = await contactRequestController.CreateContactRequest(_contactRequestDto);
 
-                _contactRequestDto = contactRequestInDB;
-                NotifyPropertyChanged("");
-
-                Status = "Contact Request Created";
-                ContactRequestState = ContactRequestEnum.InSystem;
-            }
-            catch (Exception e)
-            {
-                
-                Status = "Failed to create contact request!";
-            }
-        }
         /// <summary>
         /// Gets called from the view
         /// </summary>
@@ -243,12 +226,12 @@ namespace DriveIT.WindowsClient.ViewModels
                     await contactRequestController.DeleteContactRequest(_contactRequestDto);
                     ContactRequestId = null;
                     Status = "Contact Request Deleted";
+                    CanUpdate = false;
                     ContactRequestState = ContactRequestEnum.NotInSystem;
                 }
             }
             catch (Exception e)
             {
-
                 Status = "Failed to delete contact request!";
             }
         }
@@ -265,7 +248,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntitySaleWindow { DataContext = newSale };
                 window.Show();
                 Status = "Created Sale from Contact Request";
-                //Dunno if above should be moved or be there at all!
+
             }
             catch (Exception)
             {

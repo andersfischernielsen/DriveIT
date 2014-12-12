@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DriveIT.Models.ContactRequestDto>
+﻿@model Tuple<IEnumerable<DriveIT.Models.CarDto>, IEnumerable<DriveIT.Models.ContactRequestDto>>
 
 @{
     ViewBag.Title = "Index";
@@ -10,36 +10,48 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Requested)
+            <strong>Date</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            <strong>Make</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CarId)
+            <strong>Model</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeId)
+            <strong>Responsible Employee</strong>
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item2 in Model.Item2) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Requested)
+            @Html.DisplayFor(modelItem => item2.Requested)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
+            @foreach (var item1 in Model.Item1)
+            {
+                if (item1.Id == item2.CarId)
+                {
+                    @Html.DisplayFor(modelItem => item1.Make)
+                }
+            }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CarId)
+            @foreach (var item1 in Model.Item1)
+            {
+                if (item1.Id == item2.CarId)
+                {
+                    @Html.DisplayFor(modelItem => item1.Model)
+                }
+            }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmployeeId)
+            @Html.DisplayFor(modelItem => item2.EmployeeId)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id=item2.Id })
         </td>
     </tr>
 }
