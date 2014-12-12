@@ -41,12 +41,13 @@ namespace DriveIT.WindowsClient.Controllers
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async static Task Create<T>(string uri, T objectToCreate)
+        public async static Task<T> Create<T>(string uri, T objectToCreate)
         {
             try
             {
                 var response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
                 response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<T>();
             }
             catch (Exception e)
             {
