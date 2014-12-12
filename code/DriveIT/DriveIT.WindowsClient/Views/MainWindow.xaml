@@ -199,21 +199,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Contact Requests" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="53" Width="294"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
-                            </Button.Background>
-                            <StackPanel>
-                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                            </StackPanel>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=RequestsDataGrid}" MethodName="CreateNewContactRequestWindow"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=RequestsForContactTabItem}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=RequestsForContactTabItem}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -227,7 +213,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=RequestsForContactTabItem}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=RequestsForContactTabItem}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -241,7 +227,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource RequestsForContactBarColor}"/>
                             </Button.Background>
@@ -482,7 +468,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button IsEnabled="{Binding DataContext.CanUpdate, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="1">
+                        <Button IsEnabled="{Binding DataContext.CanUpdate, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -496,7 +482,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDelete, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="2">
+                        <Button IsEnabled="{Binding DataContext.CanDelete, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -510,7 +496,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="3">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -525,6 +511,20 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=EmployeesTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="1">
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
+                            </Button.Background>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="CreateNewEmployeeWindow"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <StackPanel>
+                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
+                            </StackPanel>
+                        </Button>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -781,8 +781,8 @@
                     <ViewModels:EmployeeDetailsViewModel/>
                 </Grid.DataContext>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="279*"/>
-                    <RowDefinition Height="311*"/>
+                    <RowDefinition Height="Auto" MinHeight="277"/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.Background>
                     <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
