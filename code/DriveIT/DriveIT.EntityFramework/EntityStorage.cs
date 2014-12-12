@@ -9,84 +9,64 @@ namespace DriveIT.EntityFramework
     public class EntityStorage : IPersistentStorage
     {
         #region Car
-        public async Task<Car> GetCarWithId(int idToGet, DriveITContext optionalContext = null)
+        public async Task<Car> GetCarWithId(int idToGet)
         {
-            //If the optional DriveITContext is null, then instantiate a new context and use that.
-            //This is done for testing purposes, where a mocked DriveITContext is injected.
-            if (optionalContext == null) optionalContext = new DriveITContext();
-
             //Dispose the context as soon as we are done with it, so we don't end up with a massive 
             //object when running.
-            using (optionalContext)
+            using (var context = new DriveITContext())
             {
                 //Retrieve a car with the given ID and include its ImagePaths stored in the ImagePaths DbSet.
-                return await optionalContext.Cars.Include(car => car.ImagePaths).SingleOrDefaultAsync(car => car.Id == idToGet);
+                return await context.Cars.Include(car => car.ImagePaths).SingleOrDefaultAsync(car => car.Id == idToGet);
             }
         }
 
-        public async Task<List<Car>> GetAllCars(DriveITContext optionalContext = null)
+        public async Task<List<Car>> GetAllCars()
         {
-            //If the optional DriveITContext is null, then instantiate a new context and use that.
-            //This is done for testing purposes, where a mocked DriveITContext is injected.
-            if (optionalContext == null) optionalContext = new DriveITContext();
-
-            using (optionalContext)
+            using (var context = new DriveITContext())
             {
                 //Retrieve all cars and their ImagePaths from the ImagePaths DbSet.
-                return await optionalContext.Cars.Include(car => car.ImagePaths).ToListAsync();
+                return await context.Cars.Include(car => car.ImagePaths).ToListAsync();
             }
         }
 
-        public async Task<int> CreateCar(Car carToCreate, DriveITContext optionalContext = null)
+        public async Task<int> CreateCar(Car carToCreate)
         {
-            //If the optional DriveITContext is null, then instantiate a new context and use that.
-            //This is done for testing purposes, where a mocked DriveITContext is injected.
-            if (optionalContext == null) optionalContext = new DriveITContext();
-
-            using (optionalContext)
+            using (var context = new DriveITContext())
             {
-                optionalContext.Cars.Add(carToCreate);
-                await optionalContext.SaveChangesAsync();
+                context.Cars.Add(carToCreate);
+                await context.SaveChangesAsync();
                 return carToCreate.Id;
             }
         }
 
-        public async Task UpdateCar(int idToUpdate, Car carToReplaceWith, DriveITContext optionalContext = null)
+        public async Task UpdateCar(int idToUpdate, Car carToReplaceWith)
         {
-            //If the optional DriveITContext is null, then instantiate a new context and use that.
-            //This is done for testing purposes, where a mocked DriveITContext is injected.
-            if (optionalContext == null) optionalContext = new DriveITContext();
-
-            using (optionalContext)
+            using (var context = new DriveITContext())
             {
                 //Delete the old images for the car.
                 //This Done by finding ImagePaths for a given carId.
-                optionalContext.ImagePaths
-                    .RemoveRange(optionalContext.ImagePaths
+                context.ImagePaths
+                    .RemoveRange(context.ImagePaths
                         .Where(imagePath => imagePath.CarId == idToUpdate));
 
                 //Find the old car with the Id to update.
-                var oldCar = await optionalContext.Cars.FindAsync(idToUpdate);
+                var oldCar = await context.Cars.FindAsync(idToUpdate);
                 //Copy all properties. DriveITContext has some functionality (OnModelCreating) 
                 //behind the scenes to make sure that the new ImagePaths are copied properly as well.
                 CopyCarProperties(oldCar, carToReplaceWith);
 
-                await optionalContext.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 
-        public async Task<int> DeleteCar(int id, DriveITContext optionalContext = null)
+        public async Task<int> DeleteCar(int id)
         {
-            //If the optional DriveITContext is null, then instantiate a new context and use that.
-            //This is done for testing purposes, where a mocked DriveITContext is injected.
-            if (optionalContext == null) optionalContext = new DriveITContext();
-
-            using (optionalContext)
+            using (var context = new DriveITContext())
             {
                 //Remove the car (if found) from the DbSet.
-                var toRemove = await optionalContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
-                optionalContext.Cars.Remove(toRemove);
-                return await optionalContext.SaveChangesAsync();
+                var toRemove = await context.Cars.FirstOrDefaultAsync(x => x.Id == id);
+                context.Cars.Remove(toRemove);
+                return await context.SaveChangesAsync();
             }
         }
 
@@ -318,57 +298,81 @@ namespace DriveIT.EntityFramework
         }
         #endregion
         #region Sale
-        public async Task<Sale> GetSaleWithId(int idToGet)
+        public async Task<Sale> GetSaleWithId(int idToGet, DriveITContext optionalContext = null)
         {
-            using (var context = new DriveITContext())
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
+            if (optionalContext == null) optionalContext = new DriveITContext();
+
+            using (optionalContext)
             {
-                return await context.Sales.FindAsync(idToGet);
+                return await optionalContext.Sales.FindAsync(idToGet);
             }
         }
 
-        public async Task<List<Sale>> GetAllSales()
+        public async Task<List<Sale>> GetAllSales(DriveITContext optionalContext = null)
         {
-            using (var context = new DriveITContext())
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
+            if (optionalContext == null) optionalContext = new DriveITContext();
+
+            using (optionalContext)
             {
-                return await context.Sales.ToListAsync();
+                return await optionalContext.Sales.ToListAsync();
             }
         }
 
-        public async Task<Sale> GetSaleByCarId(int carId)
+        public async Task<Sale> GetSaleByCarId(int carId, DriveITContext optionalContext = null)
         {
-            using (var context = new DriveITContext())
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
+            if (optionalContext == null) optionalContext = new DriveITContext();
+
+            using (optionalContext)
             {
-                return await context.Sales.SingleOrDefaultAsync(sale => sale.CarId == carId);
+                return await optionalContext.Sales.SingleOrDefaultAsync(sale => sale.CarId == carId);
             }
         }
 
-        public async Task<int> CreateSale(Sale saleToCreate)
+        public async Task<int> CreateSale(Sale saleToCreate, DriveITContext optionalContext = null)
         {
-            using (var context = new DriveITContext())
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
+            if (optionalContext == null) optionalContext = new DriveITContext();
+
+            using (optionalContext)
             {
-                context.Sales.Add(saleToCreate);
-                await context.SaveChangesAsync();
+                optionalContext.Sales.Add(saleToCreate);
+                await optionalContext.SaveChangesAsync();
                 return saleToCreate.Id;
             }
         }
 
-        public async Task UpdateSale(int idToUpdate, Sale saleToReplaceWith)
+        public async Task UpdateSale(int idToUpdate, Sale saleToReplaceWith, DriveITContext optionalContext = null)
         {
-            using (var context = new DriveITContext())
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
+            if (optionalContext == null) optionalContext = new DriveITContext();
+
+            using (optionalContext)
             {
-                var oldSale = await context.Sales.FindAsync(idToUpdate);
+                var oldSale = await optionalContext.Sales.FindAsync(idToUpdate);
                 CopySaleProperties(oldSale, saleToReplaceWith);
 
-                await context.SaveChangesAsync();
+                await optionalContext.SaveChangesAsync();
             }
         }
 
-        public async Task<int> DeleteSale(int idToDelete)
+        public async Task<int> DeleteSale(int idToDelete, DriveITContext optionalContext = null)
         {
-            using (var context = new DriveITContext())
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
+            if (optionalContext == null) optionalContext = new DriveITContext();
+
+            using (optionalContext)
             {
-                context.Sales.Remove(await context.Sales.FindAsync(idToDelete));
-                return await context.SaveChangesAsync();
+                optionalContext.Sales.Remove(await optionalContext.Sales.FindAsync(idToDelete));
+                return await optionalContext.SaveChangesAsync();
             }
         }
 
