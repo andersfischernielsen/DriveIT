@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DriveIT.Models;
 
@@ -13,7 +14,19 @@ namespace DriveIT.WindowsClient.Controllers
 
         public async Task CreateEmployee(EmployeeDto employee, string password, Role role)
         {
-            await DriveITWebAPI.Create("account/register", employee, password, role);
+            if (role == Role.Customer) throw new ArgumentException("Cannot be Customer.", "role");
+            var registerModel = new RegisterViewModel
+            {
+                Email = employee.Email,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                PhoneNumber = employee.Phone,
+                ConfirmPhoneNumber = employee.Phone,
+                Password = password,
+                ConfirmPassword = password,
+                Role = role
+            };
+            await DriveITWebAPI.Create("account/register", registerModel);
         }   
         public async Task<EmployeeDto> ReadEmployee(string email)
         {
