@@ -1,0 +1,56 @@
+﻿@model DriveIT.Models.EmployeeDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details for @Model.FirstName @Model.LastName</h2>
+
+<div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    <b>Email:</b>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    <b>First name:</b>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    <b>Last name:</b>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    <b>Phone:</b>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-6">
+            @Html.Gravatar(Model.Email, 150)
+        </div>
+    </div>
+   
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
