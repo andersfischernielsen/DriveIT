@@ -6,7 +6,7 @@
     xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
     mc:Ignorable="d"
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
-        Title="MainWindow" Height="720" Width="1366" Background="#FFEDF1F3"
+        Title="MainWindow" Height="744" Width="1366" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainViewViewModel/>
@@ -793,15 +793,24 @@
                     </Border.BorderBrush>
                 </Border>
                 <Image HorizontalAlignment="Left" Height="259" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Source="{Binding GravatarLink}"/>
-                <Label Margin="10,73,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
-                <Label Margin="10,119,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
-                <Label Margin="10,211,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
+                <Label Margin="10,10,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Logged in as:"/>
+                <Label Margin="10,56,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Best Seller Rank:"/>
+                <Label Margin="10,97,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="First Name:"/>
+                <Label Margin="10,138,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Last Name:"/>
+                <Label Margin="10,179,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Phone:"/>
+                <Label Margin="10,220,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Email:"/>
+                <Label Margin="10,261,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Job Title:"/>
+                
+                <Label HorizontalContentAlignment="Right" Margin="10,56,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding BestSellingEmployee}"/>
+                <Label HorizontalContentAlignment="Right" Margin="10,97,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
+                <Label HorizontalContentAlignment="Right" Margin="10,138,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding LastName}"/>
+                <Label HorizontalContentAlignment="Right" Margin="10,179,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
+                <Label HorizontalContentAlignment="Right" Margin="10,220,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
+                <Label HorizontalContentAlignment="Right" Margin="10,261,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding JobTitle}"/>
                 <TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="29" Width="270" FontStyle="Italic" TextAlignment="Center" Grid.Row="1">
                     <TextBlock.Background>
                         <SolidColorBrush Color="Black" Opacity="0.15"/>
                     </TextBlock.Background><Hyperlink NavigateUri="http://driveit.azurewebsites.net" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
-                <Label Margin="10,165,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding LastName}"/>
-                <Label Margin="10,10,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Logged in as:"/>
             </Grid>
         </Grid>
     </Grid>
