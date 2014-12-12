@@ -400,6 +400,14 @@ namespace DriveIT.WindowsClient.ViewModels
             try
             {
                 await UploadImages();
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to upload image!";
+            }
+            try
+            {
                 var carController = new CarController();
                 await carController.CreateCar(_carDto);
                 Status = "Car Created";
