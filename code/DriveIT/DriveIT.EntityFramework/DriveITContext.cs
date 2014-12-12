@@ -8,6 +8,15 @@ namespace DriveIT.EntityFramework
 // ReSharper disable once InconsistentNaming
     public class DriveITContext : IdentityDbContext<DriveITUser>
     {
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Car>()
+                .HasMany(car => car.ImagePaths)
+                .WithRequired(imagePath => imagePath.Car)
+                .HasForeignKey(imagePath => imagePath.CarId);
+        }
+
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<ContactRequest> ContactRequests { get; set; }

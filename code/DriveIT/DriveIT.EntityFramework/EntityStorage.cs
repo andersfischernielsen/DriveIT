@@ -28,7 +28,7 @@ namespace DriveIT.EntityFramework
 
             using (optionalContext)
             {
-                return await optionalContext.Cars.FindAsync(idToGet);
+                return await optionalContext.Cars.Include(car => car.ImagePaths).SingleOrDefaultAsync(car => car.Id == idToGet);
             }
         }
 
@@ -44,7 +44,7 @@ namespace DriveIT.EntityFramework
 
             using (optionalContext)
             {
-                return await optionalContext.Cars.ToListAsync();
+                return await optionalContext.Cars.Include(car => car.ImagePaths).ToListAsync();
             }
         }
 
@@ -62,6 +62,7 @@ namespace DriveIT.EntityFramework
             using (optionalContext)
             {
                 optionalContext.Cars.Add(carToCreate);
+                //optionalContext.ImagePaths.AddRange(carToCreate.ImagePaths);
                 await optionalContext.SaveChangesAsync();
                 return carToCreate.Id;
             }
@@ -127,6 +128,7 @@ namespace DriveIT.EntityFramework
             toChange.Year = toSetFrom.Year;
             toChange.TopSpeed = toSetFrom.TopSpeed;
             toChange.NoughtTo100 = toSetFrom.NoughtTo100;
+            toChange.ImagePaths = toSetFrom.ImagePaths;
         }
         #endregion
         #region Employee
@@ -393,33 +395,24 @@ namespace DriveIT.EntityFramework
             toChange.Price = toSetFrom.Price;
         }
         #endregion
-        #region ImagePath
-        public async Task<List<ImagePath>> GetImagePathsForCar(int carId)
-        {
-            using (var context = new DriveITContext())
-            {
-                return await context.ImagePaths.Where(imagePath => imagePath.CarId == carId).ToListAsync();
-            }
-        }
+        //#region ImagePath
+        //private async Task CreateImagePath(ImagePath imagePath)
+        //{
+        //    using (var context = new DriveITContext())
+        //    {
+        //        context.ImagePaths.Add(imagePath);
+        //        await context.SaveChangesAsync();
+        //    }
+        //}
 
-        public async Task<int> CreateImagePath(ImagePath imagePath)
-        {
-            using (var context = new DriveITContext())
-            {
-                context.ImagePaths.Add(imagePath);
-                await context.SaveChangesAsync();
-                return imagePath.Id;
-            }
-        }
-
-        public async Task RemoveImagePath(int idToDelete)
-        {
-            using (var context = new DriveITContext())
-            {
-                context.ImagePaths.Remove(await context.ImagePaths.FindAsync(idToDelete));
-                await context.SaveChangesAsync();
-            }
-        }
-        #endregion
+        //private async Task RemoveImagePath(ImagePath objectToDelete)
+        //{
+        //    using (var context = new DriveITContext())
+        //    {
+        //        context.ImagePaths.Remove(objectToDelete);
+        //        await context.SaveChangesAsync();
+        //    }
+        //}
+        //#endregion
     }
 }
