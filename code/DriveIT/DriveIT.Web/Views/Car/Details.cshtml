@@ -20,6 +20,8 @@
 <h1>Car Details</h1>
 <p>In this window, car information of the choosen car, from the previous page, will be shown.</p>
 
+@*Button for CarRequests.*@
+@Model.
 @using (Html.BeginForm("Create", "ContactRequest", new { id = Model.Car.Id }))
 {
     <input type="submit" value="Request to get contacted" class="btn btn-success" />

@@ -17,7 +17,13 @@
         <dt>Profile information:</dt>
         <dd>
             [
-            @Html.ActionLink("Edit account information", "Edit", "Customer", new { email = User.Identity.GetUserId()}, null)
+            @Html.ActionLink("Edit account information", "Edit", "Customer", new {email = User.Identity.GetUserId()}, null)
+            ]
+        </dd>
+        <dt>My Requests</dt>
+        <dd>
+            [
+            @Html.ActionLink("My Requests", "Index", "ContactRequest", new { email = User.Identity.GetUserId() }, null)
             ]
         </dd>
         <dt>My Orders</dt>

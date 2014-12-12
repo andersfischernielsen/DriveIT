@@ -13,19 +13,17 @@ namespace DriveIT.Web.MvcControllers
     public class ContactRequestController : Controller
     {
         private ContactRequestsController controller = new ContactRequestsController();
+        private CarsController cc = new CarsController();
         
         // GET: ContactRequest
         public async Task<ActionResult> Index(string email)
         {
+            var cars = await cc.Get() as OkNegotiatedContentResult<List<CarDto>>;
             var requests = await controller.GetByUserId(email) as OkNegotiatedContentResult<List<ContactRequestDto>>;
-            return View(requests.Content);
-        }
+            var tuple = new Tuple<IEnumerable<CarDto>, IEnumerable<ContactRequestDto>>(cars.Content, requests.Content); 
+            return View(tuple);
 
-        //[HttpGet]
-        //public async Task<ActionResult> Create()
-        //{
-        //    return View();
-        //}
+        }
 
         [AuthorizeRoles(Role.Customer)]
         [HttpPost]
@@ -39,7 +37,7 @@ namespace DriveIT.Web.MvcControllers
             };
             await controller.Post(contactRequestDto);
 
-            return RedirectToAction("Details", "Car", new { carId = contactRequestDto.CarId});
+            return RedirectToAction("Details", "Car", new { carId = contactRequestDto.CarId });
         }
 
         // GET: ContactRequest/Delete/5
