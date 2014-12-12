@@ -12,6 +12,14 @@ namespace DriveIT.WindowsClient.ViewModels
     public class CarListViewModel : IViewModelBase
     {
         public ObservableCollection<CarViewModel> CarViewModels { get; set; }
+
+        public CarListViewModel()
+        {
+            CarViewModels = new ObservableCollection<CarViewModel>();
+            UpdateList();
+        }
+
+        #region Properties
         private CarViewModel _selectedCar;
         public CarViewModel SelectedCar
         {
@@ -24,18 +32,31 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public CarListViewModel(IEnumerable<CarDto> carDtos)
+        private string _status = "";
+
+        public string Status
         {
-            CarViewModels = new ObservableCollection<CarViewModel>(
-                carDtos
-                .Select(carDto => new CarViewModel(carDto)));
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged("Status");
+            }
         }
-        public CarListViewModel()
+        private bool _canDeleteAndUpdate;
+
+        public bool CanDeleteAndUpdate
         {
-            CarViewModels = new ObservableCollection<CarViewModel>();
-            ReadList();
+            get { return _canDeleteAndUpdate; }
+            set
+            {
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
+            }
         }
- 
+
+        #endregion Properties
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -49,38 +70,31 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion
 
         #region CRUDS
-        public async void ReadList()
-        {
-            try
-            {
-                var carController = new CarController();
-                foreach (CarDto carDto in await carController.ReadCarList())
-                {
-                    CarViewModels.Add(new CarViewModel(carDto));
-                }
-            }
-            catch (Exception e)
-            {
-                
-                throw;
-            }
-        }
-
         public async void UpdateList()
         {
             try
             {
+                Status = "";
                 CarViewModels.Clear();
                 var carController = new CarController();
                 foreach (CarDto carDto in await carController.ReadCarList())
                 {
                     CarViewModels.Add(new CarViewModel(carDto));
                 }
+                if (CarViewModels.Count >= 1)
+                {
+                    SelectedCar = CarViewModels[0];
+                    CanDeleteAndUpdate = true;
+                }
+                else
+                {
+                    CanDeleteAndUpdate = false;
+                }
             }
             catch (Exception e)
             {
-                
-                throw;
+                CanDeleteAndUpdate = false;
+                Status = "Failed to retrieve data for cars!";
             }
         }
 
@@ -92,13 +106,22 @@ namespace DriveIT.WindowsClient.ViewModels
                 else
                 {
                     CarViewModels.Remove(SelectedCar);
-                    SelectedCar = null;
+                    if (CarViewModels.Count >= 1)
+                    {
+                        SelectedCar = CarViewModels[0];
+                        CanDeleteAndUpdate = true;
+                    }
+                    else
+                    {
+                        CanDeleteAndUpdate = false;
+                    }
                 }
+                Status = "";
             }
             catch (Exception e)
             {
                 
-                throw;
+                Status = "Failed to delete the car!";
             }
         }
 
@@ -110,11 +133,12 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntityCarWindow { DataContext = newCar };
                 CarViewModels.Add(newCar);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
                 
-                throw;
+                Status = "Failed to create window!";
             }
         }
 
@@ -125,11 +149,12 @@ namespace DriveIT.WindowsClient.ViewModels
                 CarViewModel car = SelectedCar;
                 var window = new EntityCarWindow { DataContext = car };
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
                 
-                throw;
+                Status = "Failed to update window!";
             }
         }
         #endregion CRUDS

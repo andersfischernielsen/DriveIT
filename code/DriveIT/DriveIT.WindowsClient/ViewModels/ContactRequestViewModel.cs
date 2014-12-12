@@ -50,7 +50,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public ContactRequestViewModel()
         {
             _contactRequestDto = new ContactRequestDto();
-            //Requested = DateTime.Now;
+            Requested = DateTime.Now;
             ContactRequestState = ContactRequestEnum.NotInSystem;
             UpdateForeignKeyLists();
         }
@@ -199,7 +199,11 @@ namespace DriveIT.WindowsClient.ViewModels
             try
             {
                 var contactRequestController = new ContactRequestController();
-                await contactRequestController.CreateContactRequest(_contactRequestDto);
+                var contactRequestInDB = await contactRequestController.CreateContactRequest(_contactRequestDto);
+
+                _contactRequestDto = contactRequestInDB;
+                NotifyPropertyChanged("");
+
                 Status = "Contact Request Created";
                 ContactRequestState = ContactRequestEnum.InSystem;
             }
