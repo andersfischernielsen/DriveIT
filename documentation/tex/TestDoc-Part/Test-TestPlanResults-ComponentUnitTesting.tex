@@ -1,6 +1,9 @@
 \section{Component / Unit Testing}
 \subsection{Car Query Unit Testing}
-Unit Testing of the Car Query sub system.
+The most significant methods have been unit tested in the \texttt{CarQuery} system.\\
+Retrieving information as JSON and transfering this data to DTO objects has been tested to ensure that this functionality does not have any errors.\\
+Checking that data is received and that this data is correct is tested by requesting a known data set (\texttt{"make=ford"}) and that the received data is of the correct type. Different queuries have also been tested against the API.\\ 
+Boundary testing is performed by sending a malformed \texttt{CarDto} object as a parameter to the class and checking that a expected exception is thrown. Positive testing is performed as well by sending a correct \texttt{CarDto} object.
 
 \subsection{Persistent Storage Unit Testing}
 Unit Testing of the IPersistentStorage sub system.
