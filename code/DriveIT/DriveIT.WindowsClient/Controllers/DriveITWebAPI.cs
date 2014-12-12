@@ -71,68 +71,7 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="objectToCreate"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public async static Task Create(string uri, CustomerDto objectToCreate, string password)
-        {
-            try
-            {
-                var registerModel = new RegisterViewModel
-                {
-                    Email = objectToCreate.Email,
-                    FirstName = objectToCreate.FirstName,
-                    LastName = objectToCreate.LastName,
-                    PhoneNumber = objectToCreate.Phone,
-                    ConfirmPhoneNumber = objectToCreate.Phone,
-                    Password = password,
-                    ConfirmPassword = password,
-                    Role = Role.Customer
-                };
-                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
-                response.EnsureSuccessStatusCode();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="objectToCreate"></param>
-        /// <param name="password"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        public async static Task Create(string uri, EmployeeDto objectToCreate, string password, Role role)
-        {
-            if (role == Role.Customer) throw new ArgumentException("Cannot be Customer.", "role");
-            try
-            {
-                var registerModel = new RegisterViewModel
-                {
-                    Email = objectToCreate.Email,
-                    FirstName = objectToCreate.FirstName,
-                    LastName = objectToCreate.LastName,
-                    PhoneNumber = objectToCreate.Phone,
-                    ConfirmPhoneNumber = objectToCreate.Phone,
-                    Password = password,
-                    ConfirmPassword = password,
-                    Role = role
-                };
-                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
-                response.EnsureSuccessStatusCode();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -162,12 +101,11 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns></returns>
         public async static Task<T> Read<T>(string uri)
         {
-            T objectToRead;
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
-                objectToRead = await response.Content.ReadAsAsync<T>();
+                T objectToRead = await response.Content.ReadAsAsync<T>();
                 return objectToRead;
             }
             catch (Exception)
@@ -212,77 +150,7 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <returns></returns>
-        public async static Task CreateCustomer(string email, string firstName, string lastName, string password,
-            string confirmPassword, string phone, string confirmPhone)
-        {
-            try
-            {
-                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <returns></returns>
-        public async static Task CreateEmployee(string email, string firstName, string lastName, string password,
-            string confirmPassword, string phone, string confirmPhone)
-        {
-            try
-            {
-                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <returns></returns>
-        public async static Task CreateAdministrator(string email, string firstName, string lastName, string password,
-            string confirmPassword, string phone, string confirmPhone)
-        {
-            try
-            {
-                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -312,48 +180,6 @@ namespace DriveIT.WindowsClient.Controllers
                 throw;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="password"></param>
-        /// <param name="confirmPassword"></param>
-        /// <param name="phone"></param>
-        /// <param name="confirmPhone"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
-        {
-            HttpResponseMessage result;
-            var model = new RegisterViewModel
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                Password = password,
-                ConfirmPassword = confirmPassword,
-                PhoneNumber = phone,
-                ConfirmPhoneNumber = confirmPhone,
-                Role = role
-            };
-            result = await _httpClient.PostAsJsonAsync("account/register", model);
 
-            try
-            {
-                result.EnsureSuccessStatusCode();
-            }
-            catch (HttpRequestException)
-            {
-                if (result.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    //Maybe throw some special exception
-                    throw;
-                }
-                //else
-                throw;
-            }
-        }
     }
 }
