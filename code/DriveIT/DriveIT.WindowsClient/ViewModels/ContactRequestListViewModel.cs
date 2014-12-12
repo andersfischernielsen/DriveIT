@@ -24,16 +24,11 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public ContactRequestListViewModel(IEnumerable<ContactRequestDto> contactRequestDtos)
-        {
-            ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>(
-                contactRequestDtos
-                .Select(contactRequest => new ContactRequestViewModel(contactRequest)));
-        }
+        #region Properties
         public ContactRequestListViewModel()
         {
             ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>();
-            ReadList();
+            UpdateList();
         }
 
         private string _status = "";
@@ -47,41 +42,44 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
         }
 
-        #region CRUDS
-
-        public async void ReadList()
+        private bool _canDeleteAndUpdate;
+        public bool CanDeleteAndUpdate
         {
-            try
+            get { return _canDeleteAndUpdate; }
+            set
             {
-                var contactRequestController = new ContactRequestController();
-                foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
-                {
-                    ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
-                }
-                Status = "";
-            }
-            catch (Exception e)
-            {
-
-                Status = "Failed to retrieve contact requests!";
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
             }
         }
+        #endregion Properties
 
+        #region CRUDS
         public async void UpdateList()
         {
             try
             {
+                Status = "";
                 ContactRequestViewModels.Clear();
                 var contactRequestController = new ContactRequestController();
                 foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
                 {
                     ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
                 }
-                Status = "";
+                if (ContactRequestViewModels.Count >= 1)
+                {
+                    SelectedRequest = ContactRequestViewModels[0];
+                    CanDeleteAndUpdate = true;
+                }
+                else
+                {
+                    CanDeleteAndUpdate = false;
+                }
             }
             catch (Exception e)
             {
-                Status = "Failed to update the list of contact requests!";
+                Status = "Failed to retrieve contact requests!";
+                CanDeleteAndUpdate = false;
             }
         }
 
@@ -93,7 +91,15 @@ namespace DriveIT.WindowsClient.ViewModels
                 else
                 {
                     ContactRequestViewModels.Remove(SelectedRequest);
-                    SelectedRequest = null;
+                    if (ContactRequestViewModels.Count >= 1)
+                    {
+                        SelectedRequest = ContactRequestViewModels[0];
+                        CanDeleteAndUpdate = true;
+                    }
+                    else
+                    {
+                        CanDeleteAndUpdate = false;
+                    }
                 }
                 Status = "";
             }

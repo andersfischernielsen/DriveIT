@@ -13,17 +13,14 @@ namespace DriveIT.WindowsClient.ViewModels
     {
     public ObservableCollection<EmployeeViewModel> EmployeeViewModels { get; set; }
 
-        public EmployeeListViewModel(IEnumerable<EmployeeDto> employeeDtos)
-        {
-            EmployeeViewModels = new ObservableCollection<EmployeeViewModel>(
-                employeeDtos
-                .Select(employeeDto => new EmployeeViewModel(employeeDto)));
-        }
+
         public EmployeeListViewModel()
         {
             EmployeeViewModels = new ObservableCollection<EmployeeViewModel>();
-            ReadList();
+            UpdateList();
         }
+
+        #region Properties
 
         private EmployeeViewModel _selectedEmployee;
         public EmployeeViewModel SelectedEmployee
@@ -48,6 +45,19 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Status");
             }
         }
+        private bool _canDeleteAndUpdate;
+
+        public bool CanDeleteAndUpdate
+        {
+            get { return _canDeleteAndUpdate; }
+            set
+            {
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
+            }
+        }
+
+        #endregion Properties
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -62,39 +72,30 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion
 
         #region CRUDS
-        public async void ReadList()
-        {
-            try
-            {
-                var employeeController = new EmployeeController();
-                foreach (EmployeeDto employeeDto in await employeeController.ReadEmployeeList())
-                {
-                    EmployeeViewModels.Add(new EmployeeViewModel(employeeDto));
-                }
-                Status = "";
-            }
-            catch (Exception e)
-            {
-
-                Status = "Failed to retrieve data for employees!";
-            }
-        }
-
         public async void UpdateList()
         {
             try
             {
+                Status = "";
                 EmployeeViewModels.Clear();
                 var employeeController = new EmployeeController();
                 foreach (EmployeeDto employeeDtoDto in await employeeController.ReadEmployeeList())
                 {
                     EmployeeViewModels.Add(new EmployeeViewModel(employeeDtoDto));
                 }
-                Status = "";
+                if (EmployeeViewModels.Count >= 1)
+                {
+                    SelectedEmployee = EmployeeViewModels[0];
+                    CanDeleteAndUpdate = true;
+                }
+                else
+                {
+                    CanDeleteAndUpdate = false;
+                }
             }
             catch (Exception e)
             {
-
+                CanDeleteAndUpdate = false;
                 Status = "Failed to update the list!";
             }
         }
@@ -107,7 +108,15 @@ namespace DriveIT.WindowsClient.ViewModels
                 else
                 {
                     EmployeeViewModels.Remove(SelectedEmployee);
-                    SelectedEmployee = null;
+                    if (EmployeeViewModels.Count >= 1)
+                    {
+                        SelectedEmployee = EmployeeViewModels[0];
+                        CanDeleteAndUpdate = true;
+                    }
+                    else
+                    {
+                        CanDeleteAndUpdate = false;
+                    }
                 }
                 Status = "";
             }

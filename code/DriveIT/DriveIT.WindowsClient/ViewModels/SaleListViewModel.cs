@@ -14,16 +14,13 @@ namespace DriveIT.WindowsClient.ViewModels
     {
     public ObservableCollection<SaleViewModel> SaleViewModels { get; set; }
 
-        public SaleListViewModel(IEnumerable<SaleDto> saleDtos)
-        {
-            SaleViewModels = new ObservableCollection<SaleViewModel>(
-                saleDtos.Select(saleDto => new SaleViewModel(saleDto)));
-        }
         public SaleListViewModel()
         {
             SaleViewModels = new ObservableCollection<SaleViewModel>();
-            ReadList();
+            UpdateList();
         }
+
+        #region Properties
 
         private SaleViewModel _selectedSale;
         public SaleViewModel SelectedSale
@@ -48,7 +45,21 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Status");
             }
         }
- 
+
+        private bool _canDeleteAndUpdate;
+
+        public bool CanDeleteAndUpdate
+        {
+            get { return _canDeleteAndUpdate; }
+            set
+            {
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
+            }
+        }
+
+        #endregion Properties
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,39 +73,31 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion
 
         #region CRUDS
-        public async void ReadList()
-        {
-            try
-            {
-                var saleController = new SaleController();
-                foreach (SaleDto saleDto in await saleController.ReadSaleList())
-                {
-                    SaleViewModels.Add(new SaleViewModel(saleDto));
-                }
-                Status = "";
-            }
-            catch (Exception e)
-            {
-
-                Status = "Failed to retrieve data for sales!";
-            }
-        }
         public async void UpdateList()
         {
             try
             {
+                Status = "";
                 SaleViewModels.Clear();
                 var saleController = new SaleController();
                 foreach (SaleDto saleDto in await saleController.ReadSaleList())
                 {
                     SaleViewModels.Add(new SaleViewModel(saleDto));
                 }
-                Status = "";
+                if (SaleViewModels.Count >= 1)
+                {
+                    SelectedSale = SaleViewModels[0];
+                    CanDeleteAndUpdate = true;
+                }
+                else
+                {
+                    CanDeleteAndUpdate = false;
+                }
             }
             catch (Exception e)
             {
-
-                Status = "Failed to update the list!";
+                CanDeleteAndUpdate = false;
+                Status = "Failed to retrieve data for sales!";
             }
         }
 
@@ -106,7 +109,15 @@ namespace DriveIT.WindowsClient.ViewModels
                 else
                 {
                     SaleViewModels.Remove(SelectedSale);
-                    SelectedSale = null;
+                    if (SaleViewModels.Count >= 1)
+                    {
+                        SelectedSale = SaleViewModels[0];
+                        CanDeleteAndUpdate = true;
+                    }
+                    else
+                    {
+                        CanDeleteAndUpdate = false;
+                    }
                 }
                 Status = "";
             }

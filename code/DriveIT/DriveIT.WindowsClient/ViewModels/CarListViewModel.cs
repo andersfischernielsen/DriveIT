@@ -12,6 +12,14 @@ namespace DriveIT.WindowsClient.ViewModels
     public class CarListViewModel : IViewModelBase
     {
         public ObservableCollection<CarViewModel> CarViewModels { get; set; }
+
+        public CarListViewModel()
+        {
+            CarViewModels = new ObservableCollection<CarViewModel>();
+            UpdateList();
+        }
+
+        #region Properties
         private CarViewModel _selectedCar;
         public CarViewModel SelectedCar
         {
@@ -22,18 +30,6 @@ namespace DriveIT.WindowsClient.ViewModels
                 _selectedCar = value;
                 NotifyPropertyChanged("SelectedCar");
             }
-        }
-
-        public CarListViewModel(IEnumerable<CarDto> carDtos)
-        {
-            CarViewModels = new ObservableCollection<CarViewModel>(
-                carDtos
-                .Select(carDto => new CarViewModel(carDto)));
-        }
-        public CarListViewModel()
-        {
-            CarViewModels = new ObservableCollection<CarViewModel>();
-            ReadList();
         }
 
         private string _status = "";
@@ -47,7 +43,20 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Status");
             }
         }
- 
+        private bool _canDeleteAndUpdate;
+
+        public bool CanDeleteAndUpdate
+        {
+            get { return _canDeleteAndUpdate; }
+            set
+            {
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
+            }
+        }
+
+        #endregion Properties
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -61,40 +70,31 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion
 
         #region CRUDS
-        public async void ReadList()
-        {
-            try
-            {
-                var carController = new CarController();
-                foreach (CarDto carDto in await carController.ReadCarList())
-                {
-                    CarViewModels.Add(new CarViewModel(carDto));
-                }
-                Status = "";
-            }
-            catch (Exception e)
-            {
-
-                Status = "Failed to retrieve data for cars!";
-            }
-        }
-
         public async void UpdateList()
         {
             try
             {
+                Status = "";
                 CarViewModels.Clear();
                 var carController = new CarController();
                 foreach (CarDto carDto in await carController.ReadCarList())
                 {
                     CarViewModels.Add(new CarViewModel(carDto));
                 }
-                Status = "";
+                if (CarViewModels.Count >= 1)
+                {
+                    SelectedCar = CarViewModels[0];
+                    CanDeleteAndUpdate = true;
+                }
+                else
+                {
+                    CanDeleteAndUpdate = false;
+                }
             }
             catch (Exception e)
             {
-                
-                Status = "Failed to update the list of cars!";
+                CanDeleteAndUpdate = false;
+                Status = "Failed to retrieve data for cars!";
             }
         }
 
@@ -106,7 +106,15 @@ namespace DriveIT.WindowsClient.ViewModels
                 else
                 {
                     CarViewModels.Remove(SelectedCar);
-                    SelectedCar = null;
+                    if (CarViewModels.Count >= 1)
+                    {
+                        SelectedCar = CarViewModels[0];
+                        CanDeleteAndUpdate = true;
+                    }
+                    else
+                    {
+                        CanDeleteAndUpdate = false;
+                    }
                 }
                 Status = "";
             }
