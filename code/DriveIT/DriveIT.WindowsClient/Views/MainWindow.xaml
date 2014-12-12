@@ -255,6 +255,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=RequestsForContactTabItem}" Margin="10,10,10,44" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
@@ -324,6 +325,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=CarsTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="OrdersPowerTabItem">
@@ -393,6 +395,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=OrdersTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
@@ -462,6 +465,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=CustomersTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="EmployeesPowerTabItem">
@@ -534,6 +538,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=EmployeesTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -629,7 +634,7 @@
                     <TabControl.Background>
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
                     </TabControl.Background>
-                    <TabItem Header="RequestsForContactTabItem">
+                    <TabItem x:Name="RequestsForContactTabItem" Header="RequestsForContactTabItem">
                         <TabItem.DataContext>
                             <ViewModels:ContactRequestListViewModel/>
                         </TabItem.DataContext>
@@ -659,7 +664,7 @@
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="CarsTabItem">
+                    <TabItem x:Name="CarsTabItem" Header="CarsTabItem">
                         <TabItem.DataContext>
                             <ViewModels:CarListViewModel/>
                         </TabItem.DataContext>
@@ -689,7 +694,7 @@
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="OrdersTabItem">
+                    <TabItem x:Name="OrdersTabItem" Header="OrdersTabItem">
                         <TabItem.DataContext>
                             <ViewModels:SaleListViewModel/>
                         </TabItem.DataContext>
@@ -720,7 +725,7 @@
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="CustomersTabItem">
+                    <TabItem x:Name="CustomersTabItem" Header="CustomersTabItem">
                         <TabItem.DataContext>
                             <ViewModels:CustomerListViewModel/>
                         </TabItem.DataContext>
@@ -751,7 +756,7 @@
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="EmployeesTabItem">
+                    <TabItem x:Name="EmployeesTabItem" Header="EmployeesTabItem">
                         <TabItem.DataContext>
                             <ViewModels:EmployeeListViewModel/>
                         </TabItem.DataContext>

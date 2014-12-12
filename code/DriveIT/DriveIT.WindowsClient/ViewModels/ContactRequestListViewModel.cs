@@ -58,6 +58,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -76,6 +77,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -93,6 +95,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     ContactRequestViewModels.Remove(SelectedRequest);
                     SelectedRequest = null;
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -108,6 +111,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntityContactRequestWindow { DataContext = newContactRequest };
                 ContactRequestViewModels.Add(newContactRequest);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
@@ -122,6 +126,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 ContactRequestViewModel contactRequest = SelectedRequest;
                 var window = new EntityContactRequestWindow { DataContext = contactRequest };
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
