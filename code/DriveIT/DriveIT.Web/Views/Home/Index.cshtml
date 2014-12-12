@@ -3,21 +3,18 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <br/>
-        <p>
-            <b>Welcome</b> to the DriveIT website selling used cars from our own used car lot. If you're a new customer you can register @Html.ActionLink("here", "Register", "Account") .
-            If you're already a user of the system, you can login @Html.ActionLink("here", "Login", "Account") .
-        </p>
-    </div>
-    <div class="col-md-3"></div>
-</div>
 
 <br />
+<img src="~/Content/Image/about.jpg" width="100%" />
+<br /><br />
+
+Welcome to the <b>DriveIT</b> website selling used cars from our own used car lot. <br/>
+If you're a new customer you can register @Html.ActionLink("here", "Register", "Account") . <br/> 
+If you're already a user of the system, you can login @Html.ActionLink("here", "Login", "Account") .
+
+
+<br /><br/>
 <h2>Newest Cars For Sale:</h2>
-<br />
 <table class="table">
     <tr>
         <th>
