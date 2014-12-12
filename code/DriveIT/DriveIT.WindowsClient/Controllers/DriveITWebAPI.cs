@@ -20,7 +20,7 @@ namespace DriveIT.WindowsClient.Controllers
         public static async Task Login(string username, string password)
         {
             _httpClient = new HttpClient { BaseAddress = new Uri("http://driveit.azurewebsites.net/api/") };
-            //_httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:36774/api") };
+            //_httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:36774/api/") };
 
             var dict = new Dictionary<string, string>
             {
