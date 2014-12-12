@@ -1,0 +1,57 @@
+﻿@model Tuple<DriveIT.Models.CarDto, DriveIT.Models.SaleDto>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SaleDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item2.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item2.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item2.Sold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item2.Sold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item2.CarId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item2.CarId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item2.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item2.CustomerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item2.EmployeeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item2.EmployeeId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

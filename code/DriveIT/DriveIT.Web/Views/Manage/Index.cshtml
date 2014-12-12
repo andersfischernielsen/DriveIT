@@ -6,7 +6,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<h3>@Html.ActionLink("My Profile", "Show", "Customer", new { id = User.Identity.GetUserId() }, null)</h3>
+<h3>@Html.ActionLink("My Profile", "Show", "Customer", new { email = User.Identity.GetUserId() }, null)</h3>
 
 
 <p class="text-success">@ViewBag.StatusMessage</p>
@@ -17,7 +17,7 @@
         <dt>Profile information:</dt>
         <dd>
             [
-            @Html.ActionLink("Edit account information", "Edit", "Customer", new {id = User.Identity.GetUserId()}, null)
+            @Html.ActionLink("Edit account information", "Edit", "Customer", new { email = User.Identity.GetUserId()}, null)
             ]
         </dd>
         <dt>My Orders</dt>
