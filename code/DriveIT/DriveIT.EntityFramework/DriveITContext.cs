@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DriveIT.EntityFramework

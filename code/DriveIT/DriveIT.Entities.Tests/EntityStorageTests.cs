@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using DriveIT.EntityFramework;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using Moq;
 using NUnit.Framework;

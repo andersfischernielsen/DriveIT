@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

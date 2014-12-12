@@ -56,15 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
-    <Compile Include="Comment.cs" />
-    <Compile Include="ContactRequest.cs" />
-    <Compile Include="Customer.cs" />
-    <Compile Include="DriveItUser.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="ImagePath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sale.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

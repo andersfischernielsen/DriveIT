@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 
 namespace DriveIT.EntityFramework
 {

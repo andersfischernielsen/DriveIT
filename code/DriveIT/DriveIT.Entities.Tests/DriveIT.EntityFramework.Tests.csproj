@@ -91,10 +91,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DriveIT.Entities\DriveIT.Entities.csproj">
-      <Project>{16C04BA6-6FE0-4986-B33A-DB39A723E02E}</Project>
-      <Name>DriveIT.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DriveIT.EntityFramework\DriveIT.EntityFramework.csproj">
       <Project>{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}</Project>
       <Name>DriveIT.EntityFramework</Name>
