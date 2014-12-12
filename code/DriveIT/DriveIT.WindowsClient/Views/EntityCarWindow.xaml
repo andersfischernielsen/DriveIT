@@ -111,11 +111,11 @@
             <Label Content="Car" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="68"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="Id" Height="28" Grid.Row="1"
 				Grid.Column="0" VerticalAlignment="Top" Text="{Binding CarId}" IsReadOnly="true" IsEnabled="False"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarModel}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="Make" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarMake}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="Model" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarModel}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="Make" Height="28" VerticalAlignment="Top" Text="{Binding CarMake}" Grid.Row="1"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="Year" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Year}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,51,0" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Price}"/>
-            <DatePicker Padding="6,2" Margin="10,175,51,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Created" Height="28" FontSize="16" Grid.Row="1" DisplayDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Long" SelectedDate="{Binding Created}" Text="Monday, January 01, 2014">
+            <DatePicker IsEnabled="False" Padding="6,2" Margin="10,175,51,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Created" Height="28" FontSize="16" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="{Binding Created}" Text="Monday, January 01, 2014">
                 <DatePicker.Background>
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
                 </DatePicker.Background>
