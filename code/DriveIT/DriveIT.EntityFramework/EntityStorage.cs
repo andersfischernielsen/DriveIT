@@ -6,106 +6,84 @@ using DriveIT.EntityFramework.Entities;
 
 namespace DriveIT.EntityFramework
 {
-    /// <summary>
-    /// EntityStorage is a class for communicating with and underlying SQL database. 
-    /// The class enables CRUD functionality of the Entities found in the DriveIT.Entities project.
-    /// The documentation for other methods than the Car-related methods has been omitted due to 
-    /// the similarity of their functionality and time pressure.
-    /// </summary>
     public class EntityStorage : IPersistentStorage
     {
         #region Car
-        /// <summary>
-        /// Retrieve a Car entity with a specific ID. 
-        /// Optionally use a specified DriveITContext for fetching the entity.
-        /// </summary>
-        /// <param name="idToGet">The ID of the wanted Car.</param>
-        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
-        /// <returns>A Car entity with the specific ID.</returns>
         public async Task<Car> GetCarWithId(int idToGet, DriveITContext optionalContext = null)
         {
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
             if (optionalContext == null) optionalContext = new DriveITContext();
 
+            //Dispose the context as soon as we are done with it, so we don't end up with a massive 
+            //object when running.
             using (optionalContext)
             {
+                //Retrieve a car with the given ID and include its ImagePaths stored in the ImagePaths DbSet.
                 return await optionalContext.Cars.Include(car => car.ImagePaths).SingleOrDefaultAsync(car => car.Id == idToGet);
             }
         }
 
-        /// <summary>
-        /// Retrieve a List of all Car entities. 
-        /// Optionally use a specified DriveITContext for fetching the entities.
-        /// </summary>
-        /// <param name="optionalContext">An optional DriveITContext to use for getting the entities.</param>
-        /// <returns>A List of all Car entities.</returns>
         public async Task<List<Car>> GetAllCars(DriveITContext optionalContext = null)
         {
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
             if (optionalContext == null) optionalContext = new DriveITContext();
 
             using (optionalContext)
             {
+                //Retrieve all cars and their ImagePaths from the ImagePaths DbSet.
                 return await optionalContext.Cars.Include(car => car.ImagePaths).ToListAsync();
             }
         }
 
-        /// <summary>
-        /// Save a Car entity.
-        /// Optionally use a specified DriveITContext for saving the entity.
-        /// </summary>
-        /// <param name="carToCreate">The Car to save.</param>
-        /// <param name="optionalContext">An optional DriveITContext to use for saving the entity.</param>
-        /// <returns>An integer of entities changed in the database.</returns>
         public async Task<int> CreateCar(Car carToCreate, DriveITContext optionalContext = null)
         {
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
             if (optionalContext == null) optionalContext = new DriveITContext();
 
             using (optionalContext)
             {
                 optionalContext.Cars.Add(carToCreate);
-                //optionalContext.ImagePaths.AddRange(carToCreate.ImagePaths);
                 await optionalContext.SaveChangesAsync();
                 return carToCreate.Id;
             }
         }
 
-        /// <summary>
-        /// Update a Car entity with a specific ID. 
-        /// Optionally use a specified DriveITContext for updating the entity.
-        /// </summary>
-        /// <param name="idToUpdate">The ID of the wanted Car.</param>
-        /// <param name="carToReplaceWith">The Car entity to use for updating (by overwriting).</param>
-        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
-        /// <returns>A Car entity with the specific ID.</returns>
         public async Task UpdateCar(int idToUpdate, Car carToReplaceWith, DriveITContext optionalContext = null)
         {
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
             if (optionalContext == null) optionalContext = new DriveITContext();
 
             using (optionalContext)
             {
+                //Delete the old images for the car.
+                //This Done by finding ImagePaths for a given carId.
                 optionalContext.ImagePaths
-                    .RemoveRange(
-                        optionalContext.ImagePaths
+                    .RemoveRange(optionalContext.ImagePaths
                         .Where(imagePath => imagePath.CarId == idToUpdate));
+
+                //Find the old car with the Id to update.
                 var oldCar = await optionalContext.Cars.FindAsync(idToUpdate);
+                //Copy all properties. DriveITContext has some functionality (OnModelCreating) 
+                //behind the scenes to make sure that the new ImagePaths are copied properly as well.
                 CopyCarProperties(oldCar, carToReplaceWith);
 
                 await optionalContext.SaveChangesAsync();
             }
         }
 
-        /// <summary>
-        /// Delete a Car entity with a specific ID. 
-        /// Optionally use a specified DriveITContext for deleting the entity.
-        /// </summary>
-        /// <param name="id">The ID of the Car to delete.</param>
-        /// <param name="optionalContext">An optional DriveITContext to use for getting the entity.</param>
-        /// <returns>A Car entity with the specific ID.</returns>
         public async Task<int> DeleteCar(int id, DriveITContext optionalContext = null)
         {
+            //If the optional DriveITContext is null, then instantiate a new context and use that.
+            //This is done for testing purposes, where a mocked DriveITContext is injected.
             if (optionalContext == null) optionalContext = new DriveITContext();
 
             using (optionalContext)
             {
+                //Remove the car (if found) from the DbSet.
                 var toRemove = await optionalContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
                 optionalContext.Cars.Remove(toRemove);
                 return await optionalContext.SaveChangesAsync();
@@ -114,6 +92,7 @@ namespace DriveIT.EntityFramework
 
         /// <summary>
         /// A method for replacing the properties of one Car entity with the properties of another Car entity.
+        /// This copies the reference (or the value if primitive) to the properties of the new Car.
         /// </summary>
         /// <param name="toChange">The Car entity whose properties will be replaced.</param>
         /// <param name="toSetFrom">The Car entity whose properties will be used for replacing.</param>
@@ -134,7 +113,9 @@ namespace DriveIT.EntityFramework
             toChange.NoughtTo100 = toSetFrom.NoughtTo100;
             toChange.ImagePaths = toSetFrom.ImagePaths;
         }
+
         #endregion
+
         #region Employee
         public async Task<Employee> GetEmployeeWithId(string idToGet)
         {
