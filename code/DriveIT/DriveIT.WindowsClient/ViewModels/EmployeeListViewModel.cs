@@ -113,7 +113,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CanDelete = false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 CanUpdate = false;
                 CanDelete = false;
@@ -143,7 +143,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to delete the employee!";
@@ -160,9 +160,8 @@ namespace DriveIT.WindowsClient.ViewModels
                 window.Show();
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
                 Status = "Failed to create window!";
             }
         }
@@ -176,9 +175,8 @@ namespace DriveIT.WindowsClient.ViewModels
                 window.Show();
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
                 Status = "Failed to update window!";
             }
         }

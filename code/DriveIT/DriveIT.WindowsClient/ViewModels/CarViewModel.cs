@@ -393,9 +393,8 @@ namespace DriveIT.WindowsClient.ViewModels
                         break;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
                 Status = "Failed to save car!";
             }
         }
@@ -404,17 +403,10 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateCar()
         {
+            
             try
             {
                 await UploadImages();
-            }
-            catch (Exception e)
-            {
-
-                Status = "Failed to upload image!";
-            }
-            try
-            {
                 var carController = new CarController();
                 var carInDB = await carController.CreateCar(_carDto);
 
@@ -451,10 +443,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 _carDto.ImagePaths = newPaths;
                 CreateImageViewModels();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
-                throw;
+                Status = "Failed to upload image!";
             }
         }
         /// <summary>
@@ -469,7 +460,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 await carController.UpdateCar(_carDto);
                 Status = "Car Updated";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to update car!";
@@ -491,7 +482,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CarState = CarStateEnum.Initial;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to delete car!";
@@ -509,7 +500,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception)
             {
-                
+                Status = "Failed to create imagepaths!";
                 throw;
             }
         }

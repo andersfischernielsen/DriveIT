@@ -59,9 +59,8 @@ namespace DriveIT.WindowsClient.ViewModels
                     //ImagePath = File.ReadAllText(@openFileDialog.FileName);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
                 throw;
             }
         }
