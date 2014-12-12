@@ -7,8 +7,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using DriveIT.Web.Providers;
 using DriveIT.Web.Results;
@@ -319,7 +319,7 @@ namespace DriveIT.Web.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = null;
+            IdentityResult result;
 
             if (User != null && User.IsInRole(Role.Administrator.ToString()) && (model.Role != null && model.Role != Role.Customer))
             {
@@ -343,6 +343,8 @@ namespace DriveIT.Web.ApiControllers
                         }
                         result = await UserManager.AddToRoleAsync(employee.Id, Role.Employee.ToString());
                         break;
+                    default:
+                        return BadRequest("Error defining role!");
                 }
             }
             else
@@ -397,7 +399,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsAdministrator")]
         [AuthorizeRoles(Role.Administrator)]
         public IHttpActionResult GetIsAdministrator()
@@ -405,7 +406,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsEmployee")]
         [AuthorizeRoles(Role.Employee)]
         public IHttpActionResult GetIsEmployee()
@@ -413,7 +413,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsCustomer")]
         [AuthorizeRoles(Role.Customer)]
         public IHttpActionResult GetIsCustomer()

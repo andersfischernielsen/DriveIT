@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows;
+using System.Linq;
+using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 
@@ -19,19 +19,12 @@ namespace DriveIT.WindowsClient.ViewModels
             Sold,
         }
 
-        public static List<string> FueltypeStrings
+        public static FuelType[] FueltypeStrings
         {
             get
             {
-                // todo get from enum instead. VERY BAD CODE
-                return new List<string>()
-                {
-                    FuelType.Gasoline.ToString(),
-                    FuelType.Diesel.ToString(),
-                    FuelType.Electric.ToString(),
-                };
+                return (FuelType[]) Enum.GetValues(typeof(FuelType));
             }
-            set { }
         }
 
         // todo ; til at notifie at alt er updated.
@@ -40,20 +33,15 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _carDto = carDto;
             CarState = CarStateEnum.ForSale;
-            if (_carDto.ImagePaths != null)
-            {
-                ImageViewModel = new ImageViewModel(_carDto.ImagePaths[0]);
-            }
-            else
-            {
-                ImageViewModel = new ImageViewModel();
-            }
+            CreateImageViewModels();
+
         }
         public CarViewModel()
         {
             _carDto = new CarDto();
             Created = DateTime.Now;
-            ImageViewModel = new ImageViewModel();
+            CreateImageViewModels();
+
             CarState = CarStateEnum.Initial;
         }
 
@@ -64,16 +52,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
                     return _status;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
             }
             set
             {
@@ -82,19 +61,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        private ImageViewModel _imageViewModel;
-        public ImageViewModel ImageViewModel
-        {
-            get { return _imageViewModel; }
-            set
-            {
-                _imageViewModel = value;
-                NotifyPropertyChanged("ImageViewModel");
-            }
-        }
-
         private CarStateEnum _actualCarState;
-        public  CarStateEnum CarState
+        public CarStateEnum CarState
         {
             get { return _actualCarState; }
             set
@@ -120,16 +88,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
-                    return _carDto.Id.Value;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
+                return _carDto.Id;
             }
             set
             {
@@ -304,6 +263,95 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion Attributes
 
+        #region ImageGallery
+        public List<ImageViewModel> ImageGallery { get; set; }
+        private ImageViewModel _selectedImageViewModel;
+        public ImageViewModel SelectedImageViewModel
+        {
+            get { return _selectedImageViewModel; }
+            set
+            {
+                _selectedImageViewModel = value;
+                NotifyPropertyChanged("SelectedImageViewModel");
+            }
+        }
+
+        private void CreateImageViewModels()
+        {
+            ImageGallery = new List<ImageViewModel>();
+            if (_carDto.ImagePaths != null && _carDto.ImagePaths.Any())
+            {
+                foreach (var imagePath in _carDto.ImagePaths)
+                {
+                    ImageGallery.Add(new ImageViewModel(imagePath));
+                }
+            }
+            else
+            {
+                ImageGallery.Add(new ImageViewModel());
+            }
+            SelectedImageViewModel = ImageGallery[0];
+            ImageAmtString = "Image 1 of " + ImageGallery.Count;
+        }
+
+        private string _imageAmtString;
+        public string ImageAmtString
+        {
+            get { return _imageAmtString; }
+            set
+            {
+                _imageAmtString = value;
+                NotifyPropertyChanged("ImageAmtString");
+            }
+        }
+
+        public void NextImage()
+        {
+            int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
+            int nextIndex = currentIndex + 1;
+            if (nextIndex == ImageGallery.Count)
+            {
+                nextIndex = 0;
+            }
+            SelectedImageViewModel = ImageGallery[nextIndex];
+            ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel) + 1) + " of " + ImageGallery.Count;
+        }
+        public void PreviousImage()
+        {
+            int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
+            int nextIndex = currentIndex - 1;
+            if (nextIndex <= -1)
+            {
+                nextIndex = ImageGallery.Count - 1;
+            }
+            SelectedImageViewModel = ImageGallery[nextIndex];
+            ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel) + 1) + " of " + ImageGallery.Count;
+        }
+        public void DeleteImage()
+        {
+            if (ImageGallery.Count == 1)
+            {
+                ImageGallery[0] = new ImageViewModel();
+                SelectedImageViewModel = ImageGallery[0];
+            }
+            else
+            {
+                ImageGallery.Remove(SelectedImageViewModel);
+                PreviousImage();
+            }
+        }
+        public void AddImage()
+        {
+            if (!SelectedImageViewModel.IsEmpty())
+            {
+                ImageGallery.Add(new ImageViewModel());
+                SelectedImageViewModel = ImageGallery[ImageGallery.Count - 1];
+                ImageAmtString = "Image " + ImageGallery.Count + " of " + ImageGallery.Count;
+            }
+        }
+
+        #endregion ImageGallery
+
         public async void ImportCarQueryData()
         {
             Status = "Importing...";
@@ -317,54 +365,133 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 Status = "Failed to import from CarQuery";
             }
-            
+
         }
 
         #region CRUDS
 
         public void SaveCar()
         {
-            switch (CarState)
+            try
             {
-                case CarStateEnum.Initial:
-                    CreateCar();
-                    break;
-                default: 
-                    UpdateCar();
-                    break;
-            }            
+                CreateImagePathStrings();
+                switch (CarState)
+                {
+                    case CarStateEnum.Initial:
+                        CreateCar();
+                        //todo Fix the problem with IDs and images.
+                        break;
+                    default:
+                        UpdateCar();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to save car!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void CreateCar()
         {
-            var carController = new CarController();
-            await carController.CreateCar(_carDto);
-            Status = "Car Created";
-            CarState = CarStateEnum.ForSale;
+            try
+            {
+                await UploadImages();
+                var carController = new CarController();
+                await carController.CreateCar(_carDto);
+                Status = "Car Created";
+                CarState = CarStateEnum.ForSale;
+            }
+            catch (Exception)
+            {
+                
+                Status = "Failed to create car!";
+            }
+        }
+
+        private async Task UploadImages()
+        {
+            try
+            {
+                var newPaths = new List<string>();
+                foreach (var imagePath in _carDto.ImagePaths)
+                {
+                    var uri = new Uri(imagePath);
+                    if (uri.IsFile)
+                    {
+                        newPaths.Add(await ImageController.UploadImage(_carDto.Id.Value, imagePath));
+                    }
+                    else
+                    {
+                        newPaths.Add(imagePath);
+                    }
+                }
+                _carDto.ImagePaths = newPaths;
+                CreateImageViewModels();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateCar()
         {
-            var carController = new CarController();
-            await carController.UpdateCar(_carDto);
-            Status = "Car Updated";
+            try
+            {
+                await UploadImages();
+                var carController = new CarController();
+                await carController.UpdateCar(_carDto);
+                Status = "Car Updated";
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to update car!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void DeleteCar()
         {
-            if (CarState != CarStateEnum.Initial)
+            try
             {
-                var carController = new CarController();
-                await carController.DeleteCar(_carDto);
-                CarId = null;
-                Status = "Car Deleted";
-                CarState = CarStateEnum.Initial;
+                if (CarState != CarStateEnum.Initial)
+                {
+                    var carController = new CarController();
+                    await carController.DeleteCar(_carDto);
+                    CarId = null;
+                    Status = "Car Deleted";
+                    CarState = CarStateEnum.Initial;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to delete car!";
+            }
+        }
+
+        public void CreateImagePathStrings()
+        {
+            try
+            {
+                _carDto.ImagePaths = ImageGallery
+                .Where(i => !string.IsNullOrWhiteSpace(i.ImagePath))
+                .Select(i => i.ImagePath)
+                .ToList();
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
         #endregion CRUDS

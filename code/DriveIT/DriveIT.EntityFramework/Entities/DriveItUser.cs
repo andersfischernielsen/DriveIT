@@ -1,10 +1,9 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace DriveIT.Entities
+namespace DriveIT.EntityFramework.Entities
 {
     // ReSharper disable once InconsistentNaming
     public abstract class DriveITUser : IdentityUser

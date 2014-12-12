@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DriveIT.Models;
+using DriveIT.WindowsClient.Controllers;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -26,29 +27,15 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeDetailsViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
-            GravatarLink = "http://www.gravatar.com/avatar/" + CreateMD5(_employeeDto.Email);
+            GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
         public EmployeeDetailsViewModel()
         {
             _employeeDto = new EmployeeDto(){Email = ""};
-            GravatarLink = "http://www.gravatar.com/avatar/" + CreateMD5(_employeeDto.Email);
+            GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
 
-         public static string CreateMD5(string input)
-        {
-            // Use input string to calculate MD5 hash
-            var md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-            // Convert the byte array to hexadecimal string
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hashBytes.Length; i++)
-            {
-                sb.Append(hashBytes[i].ToString("x2"));
-            }
-            return sb.ToString();
-        }
+         
 
         #region Attributes
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms.VisualStyles;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
@@ -12,13 +14,10 @@ namespace DriveIT.WindowsClient.ViewModels
     {
     public ObservableCollection<SaleViewModel> SaleViewModels { get; set; }
 
-        public SaleListViewModel(IList<SaleDto> saleDtos)
+        public SaleListViewModel(IEnumerable<SaleDto> saleDtos)
         {
-            SaleViewModels = new ObservableCollection<SaleViewModel>();
-            foreach (SaleDto saleDto in saleDtos)
-            {
-                SaleViewModels.Add(new SaleViewModel(saleDto));
-            }
+            SaleViewModels = new ObservableCollection<SaleViewModel>(
+                saleDtos.Select(saleDto => new SaleViewModel(saleDto)));
         }
         public SaleListViewModel()
         {
@@ -53,45 +52,85 @@ namespace DriveIT.WindowsClient.ViewModels
         #region CRUD
         public async void ReadList()
         {
-            var saleController = new SaleController();
-            foreach (SaleDto saleDto in await saleController.ReadSaleList())
+            try
             {
-                SaleViewModels.Add(new SaleViewModel(saleDto));
+                var saleController = new SaleController();
+                foreach (SaleDto saleDto in await saleController.ReadSaleList())
+                {
+                    SaleViewModels.Add(new SaleViewModel(saleDto));
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw;
             }
         }
         public async void UpdateList()
         {
-            SaleViewModels.Clear();
-            var saleController = new SaleController();
-            foreach (SaleDto saleDto in await saleController.ReadSaleList())
+            try
             {
-                SaleViewModels.Add(new SaleViewModel(saleDto));
+                SaleViewModels.Clear();
+                var saleController = new SaleController();
+                foreach (SaleDto saleDto in await saleController.ReadSaleList())
+                {
+                    SaleViewModels.Add(new SaleViewModel(saleDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void DeleteSale()
         {
-            if (SelectedSale.SaleId.HasValue) SelectedSale.DeleteSale();
-            else
+            try
             {
-                SaleViewModels.Remove(SelectedSale);
-                SelectedSale = null;
+                if (SelectedSale.SaleId.HasValue) SelectedSale.DeleteSale();
+                else
+                {
+                    SaleViewModels.Remove(SelectedSale);
+                    SelectedSale = null;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void CreateNewSaleWindow()
         {
-            var newSale = new SaleViewModel();
-            var window = new EntitySaleWindow { DataContext = newSale };
-            SaleViewModels.Add(newSale);
-            window.Show();
+            try
+            {
+                var newSale = new SaleViewModel();
+                var window = new EntitySaleWindow { DataContext = newSale };
+                SaleViewModels.Add(newSale);
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public void UpdateSaleWindow()
         {
-            SaleViewModel sale = SelectedSale;
-            var window = new EntitySaleWindow { DataContext = sale };
-            window.Show();
+            try
+            {
+                SaleViewModel sale = SelectedSale;
+                var window = new EntitySaleWindow { DataContext = sale };
+                window.Show();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
         #endregion CRUD
     }

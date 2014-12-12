@@ -57,7 +57,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             try
             {
-                Status = "Login in...";
+                Status = "Logging in...";
                 await DriveITWebAPI.Login(Username, Password);
                 Status = "Login successful!";
                 var window = new MainWindow(await new EmployeeController().ReadEmployee(Username));
@@ -77,9 +77,9 @@ namespace DriveIT.WindowsClient.ViewModels
             try
             {
                 Status = "Trying to skip login...";
-                await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
+                await DriveITWebAPI.Login("admin@driveit.dk", "4dmin_Password");
                 Status = "Login skipped!";
-                var window = new MainWindow(await new EmployeeController().ReadEmployee("mlin@itu.dk"));
+                var window = new MainWindow(await new EmployeeController().ReadEmployee("admin@driveit.dk"));
                 window.Show();
                 CloseAction.Invoke();
             }

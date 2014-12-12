@@ -32,7 +32,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                     Email = "jajaja@itu.dk",
                     FirstName = "Mr Handsome",
                     LastName = "Cake"
-                });
+                },"testPassword1234");
             Thread.Sleep(2000);
             t = _customerController.ReadCustomerList().Result;
             Console.WriteLine(t.Count);

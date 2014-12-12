@@ -1,5 +1,7 @@
 ﻿using System;
-using DriveIT.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 
 namespace DriveIT.Web.Models
@@ -14,7 +16,7 @@ namespace DriveIT.Web.Models
                 Color = dto.Color,
                 Created = dto.Created,
                 DistanceDriven = dto.DistanceDriven,
-                Fuel = dto.Fuel.ToString(),
+                Fuel = dto.Fuel,
                 Id = dto.Id ?? 0,
                 Make = dto.Make,
                 Model = dto.Model,
@@ -24,10 +26,25 @@ namespace DriveIT.Web.Models
                 Year = dto.Year ?? 0,
                 Drive = dto.Drive,
                 Mileage = dto.Mileage,
-                ImagePaths = dto.ImagePaths,
                 NoughtTo100 = dto.NoughtTo100,
-                TopSpeed = dto.TopSpeed
+                TopSpeed = dto.TopSpeed,
+                ImagePaths = dto.ImagePaths.Select(path => new ImagePath { Path = path }).ToList()
             };
+        }
+
+        public static List<ImagePath> ToImagePaths(this CarDto dto)
+        {
+            if (!dto.Id.HasValue)
+            {
+                throw new InvalidOperationException("Id not set on dto");
+            }
+            return dto.ImagePaths
+                .Select(path => new ImagePath
+                {
+                    CarId = dto.Id.Value,
+                    Path = path
+                })
+                .ToList();
         }
 
         public static CarDto ToDto(this Car car)
@@ -44,12 +61,12 @@ namespace DriveIT.Web.Models
                 Sold = car.Sold,
                 Transmission = car.Transmission,
                 Year = car.Year,
-                Fuel = (FuelType)Enum.Parse(typeof(FuelType), car.Fuel),
+                Fuel = car.Fuel,
                 Drive = car.Drive,
                 Mileage = car.Mileage,
-                ImagePaths = car.ImagePaths,
                 TopSpeed = car.TopSpeed,
-                NoughtTo100 = car.NoughtTo100
+                NoughtTo100 = car.NoughtTo100,
+                ImagePaths = car.ImagePaths.Select(path => path.Path).ToList(),
             };
         }
 
@@ -161,7 +178,8 @@ namespace DriveIT.Web.Models
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 PhoneNumber = dto.Phone,
-                Email = dto.Email
+                Email = dto.Email,
+                JobTitle = dto.JobTitle,
             };
         }
 
@@ -173,7 +191,8 @@ namespace DriveIT.Web.Models
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
                 Phone = employee.PhoneNumber,
-                Email = employee.Email
+                Email = employee.Email,
+                JobTitle = employee.JobTitle,
             };
         }
     }

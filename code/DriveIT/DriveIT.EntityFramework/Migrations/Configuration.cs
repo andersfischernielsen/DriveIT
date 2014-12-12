@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -54,9 +54,10 @@ namespace DriveIT.EntityFramework.Migrations
                     FirstName = "DriveIT",
                     LastName = "Adminson",
                     PhoneNumber = "88888888",
+                    JobTitle = "Boss"
                 };
 
-                CheckResult(userManager.Create(employee, "4dminPassword"));
+                CheckResult(userManager.Create(employee, "4dmin_Password"));
             }
 
             foreach (Role role in Enum.GetValues(typeof(Role)))
@@ -85,7 +86,7 @@ namespace DriveIT.EntityFramework.Migrations
                     PhoneNumber = "11221144",
                 };
 
-                CheckResult(userManager.Create(customer, "Cust0merPassword"));
+                CheckResult(userManager.Create(customer, "Cust0mer_Password"));
             }
             foreach (Role role in Enum.GetValues(typeof(Role)))
             {
@@ -109,7 +110,7 @@ namespace DriveIT.EntityFramework.Migrations
                     CustomerId = "cust@driveit.dk",
                     EmployeeId = "admin@driveit.dk",
                     Price = 1000000,
-                    DateOfSale = DateTime.Now
+                    DateOfSale = new DateTime(2014, 12, 5) // More than 5 days ago (shouldn't appear on web)
                 },
                 new Sale
                 {
@@ -118,7 +119,7 @@ namespace DriveIT.EntityFramework.Migrations
                     CustomerId = "cust@driveit.dk",
                     EmployeeId = "admin@driveit.dk",
                     Price = 400000,
-                    DateOfSale = DateTime.Now
+                    DateOfSale = DateTime.Now // Less than 5 days ago (should appear on web at time of deployment!)
                 },
             };
 
@@ -187,30 +188,28 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = 1,
                     Make = "Ford",
                     Model = "Focus",
-                    Fuel = "Gasoline",
+                    Fuel = FuelType.Gasoline,
                     Color = "Black",
                     Created = DateTime.Now,
                     DistanceDriven = 10000,
                     Drive = "FWD",
                     Mileage = 20,
                     Price = 10000,
-                    Sold = false,
                     Transmission = "Manual",
-                    Year = 2008
+                    Year = 2008,
                 },
                 new Car
                 {
                     Id = 2,
                     Make = "Ford",
                     Model = "Fiesta",
-                    Fuel = "Gasoline",
+                    Fuel = FuelType.Gasoline,
                     Color = "Dark Green",
                     Created = DateTime.Now,
                     DistanceDriven = 20000,
                     Drive = "FWD",
                     Mileage = 15,
                     Price = 50000,
-                    Sold = false,
                     Transmission = "Manual",
                     Year = 2005
                 },
@@ -219,14 +218,13 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = 3,
                     Make = "Audi",
                     Model = "A4",
-                    Fuel = "Diesel",
+                    Fuel = FuelType.Gasoline,
                     Color = "Dark Blue",
                     Created = DateTime.Now,
                     DistanceDriven = 80000,
                     Drive = "FWD",
                     Mileage = 10,
                     Price = 100000,
-                    Sold = false,
                     Transmission = "Automatic",
                     Year = 2008
                 },
@@ -235,14 +233,13 @@ namespace DriveIT.EntityFramework.Migrations
                     Id = 4,
                     Make = "Audi",
                     Model = "R8",
-                    Fuel = "Gasoline",
+                    Fuel = FuelType.Gasoline,
                     Color = "Red",
                     Created = DateTime.Now,
                     DistanceDriven = 100000,
                     Drive = "RWD",
                     Mileage = 10,
                     Price = 500000,
-                    Sold = false,
                     Transmission = "Manual",
                     Year = 2010
                 }
@@ -250,7 +247,7 @@ namespace DriveIT.EntityFramework.Migrations
 
             foreach (var car in cars)
             {
-                context.Cars.AddOrUpdate(car);
+                context.Cars.AddOrUpdate(c => c.Id, car);
             }
         }
 

@@ -32,20 +32,5 @@ namespace DriveIT.WindowsClient.Views
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
         }
-        private void CloseWindowPopUp(object sender, CancelEventArgs e)
-        {
-            if (Visibility != Visibility.Visible) return;
-
-            var response = MessageBox.Show("Do you really want to exit?", "Exiting...",
-                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-            if (response == MessageBoxResult.No)
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                Application.Current.Shutdown();
-            }
-        }
     }
 }

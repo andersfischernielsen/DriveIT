@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityEmployeeWindow"
 	x:Name="EmployeeWindow"
 	Title="EntityEmployeeWindow"
-	Width="915" Height="591.175" Background="#FFE9EFF3">
+	Width="889.958" Height="591.175" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:EmployeeViewModel/>
     </Window.DataContext>
@@ -56,25 +56,6 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="2">
-                <Button.Background>
-                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
-                </Button.Background>
-            </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="3">
-                <Button.Background>
-                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
-                </Button.Background>
-            </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="4">
-                <Button.Background>
-                    <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
-                </Button.Background>
-                <StackPanel>
-                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/cancel.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                    <TextBlock Text="Cancel" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                </StackPanel>
-            </Button>
             <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="5">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
@@ -100,19 +81,18 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="388*"/>
-                <ColumnDefinition Width="435*"/>
+                <ColumnDefinition Width="251*"/>
+                <ColumnDefinition Width="179*"/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="235" Margin="10,10,0,0" VerticalAlignment="Top" Width="384" Grid.RowSpan="2"/>
-            <Label Content="Employee" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="139.5"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,51,0" Watermark="EmployeeId" Height="28" Grid.Row="1"
+            <Label Content="Employee" Style="{StaticResource EntityWindowHeaderLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="140"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,10,10,0" Watermark="EmployeeId" Height="28" Grid.Row="1"
 				Grid.Column="0" VerticalAlignment="Top" IsReadOnly="true" IsEnabled="False" Text="{Binding EmployeeId}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,51,0" Watermark="UserName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Username}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,51,0" Watermark="FirstName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding FirstName}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,51,0" Watermark="LastName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding LastName}"/>
-            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,51,0" Watermark="Phone" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Phone}"/>
-            <Image Grid.Column="1" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="235" Width="384"/>
-            <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="154.5,10,10,0" VerticalAlignment="Top" Width="252.73" Height="35" Content="{Binding Status}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,10,0" Watermark="Email" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Email}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,10,0" Watermark="FirstName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding FirstName}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,10,0" Watermark="LastName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding LastName}"/>
+            <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,10,0" Watermark="Phone" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Phone}"/>
+            <Image Grid.Column="1" Margin="10,10,10,165" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding GravatarLink}"/>
+            <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="155,10,10,0" VerticalAlignment="Top" Height="35" Content="{Binding Status}"/>
         </Grid>
     </Grid>
 </Window>

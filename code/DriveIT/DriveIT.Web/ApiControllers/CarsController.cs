@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
@@ -23,10 +22,14 @@ namespace DriveIT.Web.ApiControllers
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Select(car => car.ToDto())
-                .ToList());
+            var cars = await _repo.GetAllCars();
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
+                dtos.Add(car.ToDto());
+            }
+            return Ok(dtos);
         }
 
         // GET: api/Cars/5
@@ -37,47 +40,24 @@ namespace DriveIT.Web.ApiControllers
             {
                 return NotFound();
             }
+            car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
             return Ok(car.ToDto());
         }
 
-        // GET: api/Cars?fuelType=Diesel
-        public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
+        internal async Task<List<CarDto>> WebCarList()
         {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
-        }
-
-        // Get: api/Cars?make=Opel
-        public async Task<IHttpActionResult> GetCarsByMake(string make)
-        {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
-        }
-
-        // Get: api/Cars?Model=Zafira
-        public async Task<IHttpActionResult> GetCarsByModel(string model)
-        {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
-        }
-
-        // Get: api/Cars?make=Opel&model=Zafira
-        public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
-        {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto()));
+            var cars = await _repo.GetAllCars();
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                var sale = await _repo.GetSaleByCarId(car.Id);
+                if (sale == null || DateTime.Now.Subtract(sale.DateOfSale).Days < 5)
+                {
+                    car.Sold = sale != null;
+                    dtos.Add(car.ToDto());
+                }
+            }
+            return dtos;
         }
 
         // POST: api/Cars
@@ -111,6 +91,7 @@ namespace DriveIT.Web.ApiControllers
                 return NotFound();
             }
             await _repo.UpdateCar(id, value.ToEntity());
+
             return Ok();
         }
 

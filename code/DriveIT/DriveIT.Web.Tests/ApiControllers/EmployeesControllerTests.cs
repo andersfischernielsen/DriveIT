@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using DriveIT.Web.ApiControllers;
 using DriveIT.Web.Models;
