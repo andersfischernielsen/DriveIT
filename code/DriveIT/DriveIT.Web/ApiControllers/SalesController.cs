@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
@@ -67,6 +68,7 @@ namespace DriveIT.Web.ApiControllers
             {
                 return BadRequest("Null value not allowed.");
             }
+            value.Sold = DateTime.Now;
             var newSaleId = await _repo.CreateSale(value.ToEntity());
             value.Id = newSaleId;
             return CreatedAtRoute("DefaultApi", new { id = newSaleId }, value);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DriveIT.EntityFramework;
@@ -64,8 +65,9 @@ namespace DriveIT.Web.ApiControllers
             {
                 return BadRequest("CustomerId should be the same as the logged in user");
             }
-
+            value.Date = DateTime.Now;
             var newCommentId = await _repo.CreateComment(value.ToEntity());
+            value.Id = newCommentId;
             return CreatedAtRoute("DefaultApi", new { id = newCommentId }, value);
         }
 

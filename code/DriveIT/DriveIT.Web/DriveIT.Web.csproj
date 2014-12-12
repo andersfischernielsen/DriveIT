@@ -176,7 +176,6 @@
     <Compile Include="ApiControllers\CustomersController.cs" />
     <Compile Include="ApiControllers\EmployeesController.cs" />
     <Compile Include="ApiControllers\SalesController.cs" />
-    <Compile Include="ApiControllers\UploadController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />

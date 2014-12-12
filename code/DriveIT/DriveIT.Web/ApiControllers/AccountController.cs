@@ -319,7 +319,7 @@ namespace DriveIT.Web.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = null;
+            IdentityResult result;
 
             if (User != null && User.IsInRole(Role.Administrator.ToString()) && (model.Role != null && model.Role != Role.Customer))
             {
