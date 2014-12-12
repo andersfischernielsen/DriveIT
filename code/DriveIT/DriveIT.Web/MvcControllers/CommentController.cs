@@ -13,12 +13,9 @@ namespace DriveIT.Web.MvcControllers
 
         private CommentsController controller = new CommentsController();
 
-        public async Task<ActionResult> Index(int carId, int customerId)
+        public ActionResult Index()
         {
-            ViewBag.carId = carId;
-            ViewBag.customerId = customerId;
-            var comments = await controller.GetByCarId(carId) as OkNegotiatedContentResult<List<CommentDto>>;
-            return View(comments.Content);
+            return View();
         }
 
         [HttpGet]
@@ -35,49 +32,32 @@ namespace DriveIT.Web.MvcControllers
         {
             comment.Date = DateTime.Now;
             var commentToPost = await controller.Post(comment) as CreatedAtRouteNegotiatedContentResult<CommentDto>;
-            return RedirectToAction("Index", commentToPost.Content);
+            return RedirectToAction("Details", "Car", new { carId = comment.CarId });
         }
 
         [HttpGet]
         public async Task<ActionResult> Edit(int commentId)
         {
             var comment = await controller.GetByCommentId(commentId) as OkNegotiatedContentResult<CommentDto>;
+            
             return View(comment.Content);
+            
         }
         
         [HttpPost]
         public async Task<ActionResult> Edit(CommentDto comment)
         {
-            await controller.Put(comment.Id.Value, comment);
-            var updatedComment = await controller.GetByCommentId(comment.Id.Value) as OkNegotiatedContentResult<CommentDto>;
-            return RedirectToAction("Index", updatedComment.Content);
+            comment.Date = DateTime.Now;
+          
+            var updatedComment = await controller.Put(comment.Id.Value, comment) as OkNegotiatedContentResult<CommentDto>;
+
+            return RedirectToAction("Details", "Car", new { carId = comment.CarId });
         }
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int commentId, int redirectCarId)
         {
-            await controller.Delete(id);
-            return RedirectToAction("Index");
+            await controller.Delete(commentId);
+            return RedirectToAction("Details", "Car", new { carId = redirectCarId });
         }
-
-        //public async Task<IList<CommentDto>> GetComments(int carId)
-        //{
-        //    var commentsToReturn = await DriveITWebAPI.ReadList<CommentDto>("Comments/" + carId);
-        //    return commentsToReturn;
-        //}
-
-        //public async Task UpdateComment(CommentDto value)
-        //{
-        //    await DriveITWebAPI.Update("Comments", value, value.Id.Value);
-        //}
-
-        //public async Task CreateComment(int carId, CommentDto value)
-        //{
-        //    await DriveITWebAPI.Create("Comments/" + carId, value);
-        //}
-
-        //public async Task DeleteComment(int CarId, int CommentId)
-        //{
-        //    await DriveITWebAPI.Delete<CommentDto>("Comments/" + CarId, CommentId);
-        //}
     }
 }
