@@ -27,6 +27,41 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("EmployeeId");
             }
         }
+        
+
+
+        public EmployeeViewModel(EmployeeDto employeeDto)
+        {
+            _employeeDto = employeeDto;
+            EmployeeState = EmployeeStateEnum.InSystem;
+            GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
+
+            if (EmployeeDetailsViewModel.LoggedInRole == Role.Administrator) CanDeleteAndUpdate = true;
+            else CanDeleteAndUpdate = false;
+        }
+
+        public EmployeeViewModel()
+        {
+            _employeeDto = new EmployeeDto();
+            EmployeeState = EmployeeStateEnum.NotInSystem;
+
+            if (EmployeeDetailsViewModel.LoggedInRole == Role.Administrator) CanDeleteAndUpdate = true;
+            else CanDeleteAndUpdate = false;
+        }
+
+
+        #region Attributes
+        private bool _canDeleteAndUpdate;
+        public bool CanDeleteAndUpdate
+        {
+            get { return _canDeleteAndUpdate; }
+            set
+            {
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
+            }
+        }
+
         private string _gravatarLink;
         public string GravatarLink
         {
@@ -38,21 +73,6 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public EmployeeViewModel(EmployeeDto employeeDto)
-        {
-            _employeeDto = employeeDto;
-            EmployeeState = EmployeeStateEnum.InSystem;
-            GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
-        }
-
-        public EmployeeViewModel()
-        {
-            _employeeDto = new EmployeeDto();
-            EmployeeState = EmployeeStateEnum.NotInSystem;
-        }
-
-
-        #region Attributes
         private string _status = "";
         public string Status
         {
