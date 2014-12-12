@@ -28,7 +28,7 @@ namespace DriveIT.Web.ApiControllers
             {
                 return NotFound();
             }
-            return Ok(comment);
+            return Ok(comment.ToDto());
         }
 
         // GET: api/Comments/5
