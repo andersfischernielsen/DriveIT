@@ -265,6 +265,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\driveit %2810%29.pubxml" />
     <None Include="Properties\PublishProfiles\driveit %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\driveit %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\driveit %285%29.pubxml" />
