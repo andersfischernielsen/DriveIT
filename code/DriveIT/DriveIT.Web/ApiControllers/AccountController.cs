@@ -343,6 +343,8 @@ namespace DriveIT.Web.ApiControllers
                         }
                         result = await UserManager.AddToRoleAsync(employee.Id, Role.Employee.ToString());
                         break;
+                    default:
+                        return BadRequest("Error defining role!");
                 }
             }
             else
@@ -397,7 +399,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsAdministrator")]
         [AuthorizeRoles(Role.Administrator)]
         public IHttpActionResult GetIsAdministrator()
@@ -405,7 +406,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsEmployee")]
         [AuthorizeRoles(Role.Employee)]
         public IHttpActionResult GetIsEmployee()
@@ -413,7 +413,6 @@ namespace DriveIT.Web.ApiControllers
             return Ok();
         }
 
-        [OverrideAuthentication]
         [Route("IsCustomer")]
         [AuthorizeRoles(Role.Customer)]
         public IHttpActionResult GetIsCustomer()

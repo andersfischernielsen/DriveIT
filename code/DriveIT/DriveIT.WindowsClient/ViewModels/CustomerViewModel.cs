@@ -2,12 +2,13 @@
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
     public class CustomerViewModel : IViewModelBase
     {
-        private CustomerDto _customerDto;
+        private readonly CustomerDto _customerDto;
 
         public enum CustomerEnum
         {
@@ -19,16 +20,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             get
             {
-                try
-                {
-                    return _customerDto.Id;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
+                return _customerDto.Id;
             }
             set
             {
@@ -41,6 +33,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _customerDto = customerDto;
             CustomerState = CustomerEnum.InSystem;
+            GravatarLink = GravatarController.CreateGravatarLink(_customerDto.Email);
         }
         public CustomerViewModel()
         {
@@ -72,7 +65,16 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-
+        private string _gravatarLink;
+        public string GravatarLink
+        {
+            get { return _gravatarLink; }
+            set
+            {
+                _gravatarLink = value;
+                NotifyPropertyChanged("GravatarLink");
+            }
+        }
 
         private CustomerEnum _actualCustomerState;
         public CustomerEnum CustomerState
@@ -143,6 +145,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _customerDto.Email = value;
+                GravatarLink = GravatarController.CreateGravatarLink(_customerDto.Email);
                 NotifyPropertyChanged("Email");
             }
         }
@@ -151,50 +154,94 @@ namespace DriveIT.WindowsClient.ViewModels
         #region CRUDS
         public void SaveCustomer()
         {
-            switch (CustomerState)
+            try
             {
-                case CustomerEnum.NotInSystem:
-                    CreateCustomer();
-                    break;
-                default:
-                    UpdateCustomer();
-                    break;
+                switch (CustomerState)
+                {
+                    case CustomerEnum.NotInSystem:
+                        CreateCustomer();
+                        break;
+                    default:
+                        UpdateCustomer();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to save customer!";
             }
         }
-        
+
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void CreateCustomer()
         {
-            var customerController = new CustomerController();
-            await customerController.CreateCustomer(_customerDto);
-            Status = "Customer Created";
-            CustomerState = CustomerEnum.InSystem;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(Email))
+                {
+                    var passwordViewModel = new PasswordCreationViewModel(_customerDto);
+                    var window = new PasswordCreationView(passwordViewModel);
+                    window.ShowDialog();
+                    {
+                        if (passwordViewModel.ProfileCreated)
+                        {
+                            Status = "Customer Created";
+                            CustomerState = CustomerEnum.InSystem;
+                        }
+                        else
+                        {
+                            Status = "Did not create customer";
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to create customer!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateCustomer()
         {
-            var customerController = new CustomerController();
-            await customerController.UpdateCustomer(_customerDto);
-            Status = "Customer Updated";
+            try
+            {
+                var customerController = new CustomerController();
+                await customerController.UpdateCustomer(_customerDto);
+                Status = "Customer Updated";
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to update customer!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void DeleteCustomer()
         {
-            if (CustomerState != CustomerEnum.NotInSystem)
+            try
             {
-                var customerController = new CustomerController();
-                await customerController.DeleteCustomer(_customerDto);
-                CustomerId = null;
-                Status = "Customer Deleted";
-                CustomerState = CustomerEnum.NotInSystem;
+                if (CustomerState != CustomerEnum.NotInSystem)
+                {
+                    var customerController = new CustomerController();
+                    await customerController.DeleteCustomer(_customerDto);
+                    CustomerId = null;
+                    Status = "Customer Deleted";
+                    CustomerState = CustomerEnum.NotInSystem;
+                }
             }
-            
+            catch (Exception e)
+            {
+                
+                Status = "Failed to delete customer!";
+            }
         }
         #endregion CRUDS
 

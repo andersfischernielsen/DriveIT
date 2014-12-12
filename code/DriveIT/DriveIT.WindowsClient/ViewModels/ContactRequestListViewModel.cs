@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
@@ -23,13 +24,11 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public ContactRequestListViewModel(IList<ContactRequestDto> contactRequestDtos)
+        public ContactRequestListViewModel(IEnumerable<ContactRequestDto> contactRequestDtos)
         {
-            ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>();
-            foreach (ContactRequestDto contactRequestDto in contactRequestDtos)
-            {
-                ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
-            }
+            ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>(
+                contactRequestDtos
+                .Select(contactRequest => new ContactRequestViewModel(contactRequest)));
         }
         public ContactRequestListViewModel()
         {
@@ -37,53 +36,93 @@ namespace DriveIT.WindowsClient.ViewModels
             ReadList();
         }
 
-        #region CRUD
+        #region CRUDS
 
         public async void ReadList()
         {
-            var contactRequestController = new ContactRequestController();
-            foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
+            try
             {
-                ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
+                var contactRequestController = new ContactRequestController();
+                foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
+                {
+                    ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public async void UpdateList()
         {
-            ContactRequestViewModels.Clear();
-            var contactRequestController = new ContactRequestController();
-            foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
+            try
             {
-                ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
+                ContactRequestViewModels.Clear();
+                var contactRequestController = new ContactRequestController();
+                foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
+                {
+                    ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void DeleteContactRequest()
         {
-            if (SelectedRequest.ContactRequestId.HasValue) SelectedRequest.DeleteContactRequest();
-            else
+            try
             {
-                ContactRequestViewModels.Remove(SelectedRequest);
-                SelectedRequest = null;
+                if (SelectedRequest.ContactRequestId.HasValue) SelectedRequest.DeleteContactRequest();
+                else
+                {
+                    ContactRequestViewModels.Remove(SelectedRequest);
+                    SelectedRequest = null;
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw;
             }
         }
 
         public void CreateNewContactRequestWindow()
         {
-            var newContactRequest = new ContactRequestViewModel();
-            var window = new EntityContactRequestWindow {DataContext = newContactRequest};
-            ContactRequestViewModels.Add(newContactRequest);
-            window.Show();
+            try
+            {
+                var newContactRequest = new ContactRequestViewModel();
+                var window = new EntityContactRequestWindow { DataContext = newContactRequest };
+                ContactRequestViewModels.Add(newContactRequest);
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public void UpdateContactRequestWindow()
         {
-            ContactRequestViewModel contactRequest = SelectedRequest;
-            var window = new EntityContactRequestWindow {DataContext = contactRequest};
-            window.Show();
+            try
+            {
+                ContactRequestViewModel contactRequest = SelectedRequest;
+                var window = new EntityContactRequestWindow { DataContext = contactRequest };
+                window.Show();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
-        #endregion CRUD
+        #endregion CRUDS
 
         #region INotifyPropertyChanged
 

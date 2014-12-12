@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DriveIT.Entities;
 using DriveIT.Models;
 
@@ -14,7 +16,7 @@ namespace DriveIT.Web.Models
                 Color = dto.Color,
                 Created = dto.Created,
                 DistanceDriven = dto.DistanceDriven,
-                Fuel = dto.Fuel.ToString(),
+                Fuel = dto.Fuel,
                 Id = dto.Id ?? 0,
                 Make = dto.Make,
                 Model = dto.Model,
@@ -24,13 +26,27 @@ namespace DriveIT.Web.Models
                 Year = dto.Year ?? 0,
                 Drive = dto.Drive,
                 Mileage = dto.Mileage,
-                ImagePaths = dto.ImagePaths,
                 NoughtTo100 = dto.NoughtTo100,
                 TopSpeed = dto.TopSpeed
             };
         }
 
-        public static CarDto ToDto(this Car car)
+        public static List<ImagePath> ToImagePaths(this CarDto dto)
+        {
+            if (!dto.Id.HasValue)
+            {
+                throw new InvalidOperationException("Id not set on dto");
+            }
+            return dto.ImagePaths
+                .Select(path => new ImagePath
+                {
+                    CarId = dto.Id.Value, 
+                    Path = path
+                })
+                .ToList();
+        }
+
+        public static CarDto ToDto(this Car car, List<ImagePath> imagePaths)
         {
             return new CarDto
             {
@@ -44,10 +60,10 @@ namespace DriveIT.Web.Models
                 Sold = car.Sold,
                 Transmission = car.Transmission,
                 Year = car.Year,
-                Fuel = (FuelType)Enum.Parse(typeof(FuelType), car.Fuel),
+                Fuel = car.Fuel,
                 Drive = car.Drive,
                 Mileage = car.Mileage,
-                ImagePaths = car.ImagePaths,
+                ImagePaths = imagePaths.Select(path => path.Path).ToList(),
                 TopSpeed = car.TopSpeed,
                 NoughtTo100 = car.NoughtTo100
             };

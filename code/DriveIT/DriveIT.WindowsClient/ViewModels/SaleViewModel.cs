@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 
@@ -41,11 +43,27 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _saleDto = saleDto;
             SaleState = SaleEnum.InSystem;
+            UpdateForeignKeyLists();
         }
         public SaleViewModel()
         {
             _saleDto = new SaleDto();
             SaleState = SaleEnum.NotInSystem;
+            UpdateForeignKeyLists();
+        }
+
+        public async void UpdateForeignKeyLists()
+        {
+            try
+            {
+                CustomerIdsList = (await new CustomerController().ReadCustomerList()).Select(i => i.Email).ToList();
+                EmployeeIdsList = (await new EmployeeController().ReadEmployeeList()).Select(i => i.Email).ToList();
+            }
+            catch (Exception)
+            {
+                CustomerIdsList = new List<string>();
+                EmployeeIdsList = new List<string>();
+            }
         }
 
         #region Attributes
@@ -131,6 +149,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
+        public static List<string> CustomerIdsList { get; set; }
         public string CustomerId
         {
             get
@@ -143,6 +162,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CustomerId");
             }
         }
+        public static List<string> EmployeeIdsList { get; set; }
         public string EmployeeId
         {
             get
@@ -160,14 +180,22 @@ namespace DriveIT.WindowsClient.ViewModels
         #region CRUDS
         public void SaveSale()
         {
-            switch (SaleState)
+            try
             {
-                case SaleEnum.NotInSystem:
-                    CreateSale();
-                    break;
-                default:
-                    UpdateSale();
-                    break;
+                switch (SaleState)
+                {
+                    case SaleEnum.NotInSystem:
+                        CreateSale();
+                        break;
+                    default:
+                        UpdateSale();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to save sale!";
             }
         }
         /// <summary>
@@ -175,33 +203,57 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateSale()
         {
-            var saleController = new SaleController();
-            await saleController.CreateSale(_saleDto);
-            Status = "Sale Created";
-            SaleState = SaleEnum.InSystem;
+            try
+            {
+                var saleController = new SaleController();
+                await saleController.CreateSale(_saleDto);
+                Status = "Sale Created";
+                SaleState = SaleEnum.InSystem;
+            }
+            catch (Exception e)
+            {
+                Status = "Failed to create sale!";
+            }
+
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateSale()
         {
-            var saleController = new SaleController();
-            await saleController.UpdateSale(_saleDto);
-            Status = "Sale Updated";
+            try
+            {
+                var saleController = new SaleController();
+                await saleController.UpdateSale(_saleDto);
+                Status = "Sale Updated";
+            }
+            catch (Exception e)
+            {
+                Status = "Failed to update sales!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void DeleteSale()
         {
-            if (SaleState != SaleEnum.NotInSystem)
+            try
             {
                 var saleController = new SaleController();
-                await saleController.DeleteSale(_saleDto);
-                SaleId = null;
-                Status = "Sale Deleted";
-                SaleState = SaleEnum.NotInSystem;
+                if (SaleState != SaleEnum.NotInSystem)
+                {
+                    await saleController.DeleteSale(_saleDto);
+                    SaleId = null;
+                    Status = "Sale Deleted";
+                    SaleState = SaleEnum.NotInSystem;
+                }
             }
+            catch (Exception)
+            {
+
+                Status = "Failed to delete sale!";
+            }
+            
         }
         #endregion CRUDS
 

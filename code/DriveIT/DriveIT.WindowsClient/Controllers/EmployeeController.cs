@@ -11,9 +11,9 @@ namespace DriveIT.WindowsClient.Controllers
 
         }
 
-        public async Task CreateEmployee(EmployeeDto employee)
+        public async Task CreateEmployee(EmployeeDto employee, string password, Role role)
         {
-            await DriveITWebAPI.Create("employees", employee);
+            await DriveITWebAPI.Create("account/register", employee, password, role);
         }   
         public async Task<EmployeeDto> ReadEmployee(string email)
         {

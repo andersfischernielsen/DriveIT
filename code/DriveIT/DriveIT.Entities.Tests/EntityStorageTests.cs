@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using DriveIT.EntityFramework;
+using DriveIT.Models;
 using Moq;
 using NUnit.Framework;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
@@ -31,7 +32,7 @@ namespace DriveIT.Entities.Tests
                     Created = DateTime.Now,
                     DistanceDriven = 20,
                     Drive = "FWD",
-                    Fuel = "Gas",
+                    Fuel = FuelType.Gasoline,
                     Make = "Ford",
                     Mileage = 20.5f,
                     Model = "TT",
@@ -46,7 +47,7 @@ namespace DriveIT.Entities.Tests
                     Created = DateTime.Now,
                     DistanceDriven = 20,
                     Drive = "FWD",
-                    Fuel = "Gas",
+                    Fuel = FuelType.Gasoline,
                     Make = "Bentley",
                     Mileage = 20.5f,
                     Model = "Continental GT",
@@ -85,7 +86,7 @@ namespace DriveIT.Entities.Tests
                 Created = DateTime.Now,
                 DistanceDriven = 20,
                 Drive = "FWD",
-                Fuel = "Gas",
+                Fuel = FuelType.Gasoline,
                 Make = "Ford",
                 Mileage = 20.5f,
                 Model = "TT",

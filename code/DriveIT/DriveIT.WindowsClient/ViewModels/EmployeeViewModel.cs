@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -12,22 +13,13 @@ namespace DriveIT.WindowsClient.ViewModels
             NotInSystem,
             InSystem
         }
-        private EmployeeDto _employeeDto;
+        private readonly EmployeeDto _employeeDto;
 
         public string EmployeeId
         {
             get
             {
-                try
-                {
-                    return _employeeDto.Id;
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
-
+                return _employeeDto.Id;
             }
             set
             {
@@ -35,12 +27,22 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("EmployeeId");
             }
         }
-
+        private string _gravatarLink;
+        public string GravatarLink
+        {
+            get { return _gravatarLink; }
+            set
+            {
+                _gravatarLink = value;
+                NotifyPropertyChanged("GravatarLink");
+            }
+        }
 
         public EmployeeViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
             EmployeeState = EmployeeStateEnum.InSystem;
+            GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
 
         public EmployeeViewModel()
@@ -97,7 +99,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
             }
         }
-        
+
         public string Email
         {
             get
@@ -107,6 +109,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _employeeDto.Email = value;
+                GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
                 NotifyPropertyChanged("Email");
             }
         }
@@ -148,7 +151,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        
+
 
         #endregion Attributes
 
@@ -156,14 +159,22 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void SaveEmployee()
         {
-            switch (EmployeeState)
+            try
             {
-                case EmployeeStateEnum.NotInSystem:
-                    CreateEmployee();
-                    break;
-                default:
-                    UpdateEmployee();
-                    break;
+                switch (EmployeeState)
+                {
+                    case EmployeeStateEnum.NotInSystem:
+                        CreateEmployee();
+                        break;
+                    default:
+                        UpdateEmployee();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to save employee!";
             }
         }
 
@@ -172,10 +183,31 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateEmployee()
         {
-            var employeeController = new EmployeeController();
-            await employeeController.CreateEmployee(_employeeDto);
-            Status = "Employee Created";
-            EmployeeState = EmployeeStateEnum.InSystem;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(Email))
+                {
+                    var passwordViewModel = new PasswordCreationViewModel(_employeeDto);
+                    var window = new PasswordCreationView(passwordViewModel);
+                    window.ShowDialog();
+                    {
+                        if (passwordViewModel.ProfileCreated)
+                        {
+                            Status = "Employee created";
+                            EmployeeState = EmployeeStateEnum.InSystem;
+                        }
+                        else
+                        {
+                            Status = "Did not create employee";
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Status = "Failed to create employee!";
+            }
+            
         }
 
         /// <summary>
@@ -183,9 +215,17 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void UpdateEmployee()
         {
-            var employeeController = new EmployeeController();
-            await employeeController.UpdateEmployee(_employeeDto);
-            Status = "Employee Updated";
+            try
+            {
+                var employeeController = new EmployeeController();
+                await employeeController.UpdateEmployee(_employeeDto);
+                Status = "Employee Updated";
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to update employee!";
+            }
         }
 
         /// <summary>
@@ -193,13 +233,21 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void DeleteEmployee()
         {
-            if (EmployeeState != EmployeeStateEnum.NotInSystem)
+            try
             {
-                var employeeController = new EmployeeController();
-                await employeeController.DeleteEmployee(_employeeDto);
-                EmployeeId = null;
-                Status = "Employee Deleted";
-                EmployeeState = EmployeeStateEnum.NotInSystem;
+                if (EmployeeState != EmployeeStateEnum.NotInSystem)
+                {
+                    var employeeController = new EmployeeController();
+                    await employeeController.DeleteEmployee(_employeeDto);
+                    EmployeeId = null;
+                    Status = "Employee Deleted";
+                    EmployeeState = EmployeeStateEnum.NotInSystem;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to delete employee!";
             }
         }
 

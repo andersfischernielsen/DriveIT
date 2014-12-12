@@ -23,10 +23,14 @@ namespace DriveIT.Web.ApiControllers
         // GET: api/Cars
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Select(car => car.ToDto())
-                .ToList());
+            var cars = await _repo.GetAllCars();
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
         }
 
         // GET: api/Cars/5
@@ -37,47 +41,82 @@ namespace DriveIT.Web.ApiControllers
             {
                 return NotFound();
             }
-            return Ok(car.ToDto());
+            car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
+            return Ok(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+        }
+
+        internal async Task<List<CarDto>> WebCarList()
+        {
+            var cars = await _repo.GetAllCars();
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                var sale = await _repo.GetSaleByCarId(car.Id);
+                if (sale == null || DateTime.Now.Subtract(sale.DateOfSale).Days < 5)
+                {
+                    car.Sold = sale != null;
+                    dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+                }
+            }
+            return dtos;
         }
 
         // GET: api/Cars?fuelType=Diesel
         public async Task<IHttpActionResult> GetCarsByFuelType(string fuelType)
         {
-            return Ok(
+            var cars =
                 (await _repo.GetAllCars())
-                .Where(car => string.Equals(fuelType, car.Fuel, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
+                .Where(car => string.Equals(fuelType, car.Fuel.ToString(), StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
         }
 
         // Get: api/Cars?make=Opel
         public async Task<IHttpActionResult> GetCarsByMake(string make)
         {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
+            var cars = (await _repo.GetAllCars())
+                .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
         }
 
         // Get: api/Cars?Model=Zafira
         public async Task<IHttpActionResult> GetCarsByModel(string model)
         {
-            return Ok(
-                (await _repo.GetAllCars())
-                .Where(car => string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto())
-                .ToList());
+            var cars = (await _repo.GetAllCars())
+                .Where(car => string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
         }
 
         // Get: api/Cars?make=Opel&model=Zafira
         public async Task<IHttpActionResult> GetCarsByMakeAndModel(string make, string model)
         {
-            return Ok(
-                (await _repo.GetAllCars())
+            var cars = (await _repo.GetAllCars())
                 .Where(car => string.Equals(make, car.Make, StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase))
-                .Select(car => car.ToDto()));
+                    && string.Equals(model, car.Model, StringComparison.OrdinalIgnoreCase));
+            var dtos = new List<CarDto>();
+            foreach (var car in cars)
+            {
+                car.Sold = await _repo.GetSaleByCarId(car.Id) != null;
+                dtos.Add(car.ToDto(await _repo.GetImagePathsForCar(car.Id)));
+            }
+            return Ok(dtos);
         }
 
         // POST: api/Cars
@@ -94,6 +133,10 @@ namespace DriveIT.Web.ApiControllers
             }
             var newCarId = await _repo.CreateCar(value.ToEntity());
             value.Id = newCarId;
+            foreach (var imagePath in value.ToImagePaths())
+            {
+                await _repo.CreateImagePath(imagePath);
+            }
             return CreatedAtRoute("DefaultApi", new Dictionary<string, object> { { "id", newCarId } }, value);
         }
 
@@ -111,6 +154,16 @@ namespace DriveIT.Web.ApiControllers
                 return NotFound();
             }
             await _repo.UpdateCar(id, value.ToEntity());
+            // Remove all imagePaths.
+            foreach (var imagePath in await _repo.GetImagePathsForCar(id))
+            {
+                await _repo.RemoveImagePath(imagePath.Id);
+            }
+            // Add new/updated imagePaths.
+            foreach (var imagePath in value.ToImagePaths())
+            {
+                await _repo.CreateImagePath(imagePath);
+            }
             return Ok();
         }
 

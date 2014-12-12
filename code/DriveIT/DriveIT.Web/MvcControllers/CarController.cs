@@ -17,10 +17,7 @@ namespace DriveIT.Web.MvcControllers
         public async Task<ActionResult> Index(String fuelType, String make, String model)
         {
             //Select all cars
-            var elements = await controller.Get() as OkNegotiatedContentResult<List<CarDto>>;
-
-            var carList = from e in elements.Content
-                select e;
+            IEnumerable<CarDto> carList = await controller.WebCarList();
 
             //Get list of fuel types
             var fuelList = from c in carList

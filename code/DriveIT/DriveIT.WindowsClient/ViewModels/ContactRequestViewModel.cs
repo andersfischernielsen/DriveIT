@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Documents;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
+using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
@@ -44,12 +45,28 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _contactRequestDto = contactRequestDto;
             ContactRequestState = ContactRequestEnum.InSystem;
+            UpdateForeignKeyLists();
         }
         public ContactRequestViewModel()
         {
             _contactRequestDto = new ContactRequestDto();
             //Requested = DateTime.Now;
             ContactRequestState = ContactRequestEnum.NotInSystem;
+            UpdateForeignKeyLists();
+        }
+
+        public async void UpdateForeignKeyLists()
+        {
+            try
+            {
+                CustomerIdsList = (await new CustomerController().ReadCustomerList()).Select(i => i.Email).ToList();
+                EmployeeIdsList = (await new EmployeeController().ReadEmployeeList()).Select(i => i.Email).ToList();
+            }
+            catch (Exception)
+            {
+                CustomerIdsList = new List<string>();
+                EmployeeIdsList = new List<string>();
+            }
         }
 
         
@@ -112,6 +129,8 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Requested");
             }
         }
+
+        public static List<string> CustomerIdsList { get; set; } 
         public string CustomerId
         {
             get
@@ -136,6 +155,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarId");
             }
         }
+        public static List<string> EmployeeIdsList { get; set; } 
         public string EmployeeId
         {
             get
@@ -153,14 +173,22 @@ namespace DriveIT.WindowsClient.ViewModels
         #region CRUDS
         public void SaveContactRequest()
         {
-            switch (ContactRequestState)
+            try
             {
-                case ContactRequestEnum.NotInSystem:
-                    CreateContactRequest();
-                    break;
-                default:
-                    UpdateContactRequest();
-                    break;
+                switch (ContactRequestState)
+                {
+                    case ContactRequestEnum.NotInSystem:
+                        CreateContactRequest();
+                        break;
+                    default:
+                        UpdateContactRequest();
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to save contact request!";
             }
         }
         /// <summary>
@@ -168,32 +196,77 @@ namespace DriveIT.WindowsClient.ViewModels
         /// </summary>
         public async void CreateContactRequest()
         {
-            var contactRequestController = new ContactRequestController();
-            await contactRequestController.CreateContactRequest(_contactRequestDto);
-            Status = "Contact Request Created";
-            ContactRequestState = ContactRequestEnum.InSystem;
+            try
+            {
+                var contactRequestController = new ContactRequestController();
+                await contactRequestController.CreateContactRequest(_contactRequestDto);
+                Status = "Contact Request Created";
+                ContactRequestState = ContactRequestEnum.InSystem;
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to create contact request!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void UpdateContactRequest()
         {
-            var contactRequestController = new ContactRequestController();
-            await contactRequestController.UpdateContactRequest(_contactRequestDto);
-            Status = "Contact Request Updated";
+            try
+            {
+                var contactRequestController = new ContactRequestController();
+                await contactRequestController.UpdateContactRequest(_contactRequestDto);
+                Status = "Contact Request Updated";
+            }
+            catch (Exception e)
+            {
+                
+                Status = "Failed to update contact request!";
+            }
         }
         /// <summary>
         /// Gets called from the view
         /// </summary>
         public async void DeleteContactRequest()
         {
-            if (ContactRequestState != ContactRequestEnum.NotInSystem)
+            try
             {
-                var contactRequestController = new ContactRequestController();
-                await contactRequestController.DeleteContactRequest(_contactRequestDto);
-                ContactRequestId = null;
-                Status = "Contact Request Deleted";
-                ContactRequestState = ContactRequestEnum.NotInSystem;
+                if (ContactRequestState != ContactRequestEnum.NotInSystem)
+                {
+                    var contactRequestController = new ContactRequestController();
+                    await contactRequestController.DeleteContactRequest(_contactRequestDto);
+                    ContactRequestId = null;
+                    Status = "Contact Request Deleted";
+                    ContactRequestState = ContactRequestEnum.NotInSystem;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Status = "Failed to delete contact request!";
+            }
+        }
+
+        public void CreateSaleFromRequest()
+        {
+            try
+            {
+                var newSale = new SaleViewModel();
+                // This must be done to ensure that the Sale is in the correct SaleState.
+                newSale.CarId = CarId;
+                newSale.CustomerId = CustomerId;
+                newSale.EmployeeId = EmployeeId;
+                var window = new EntitySaleWindow { DataContext = newSale };
+                window.Show();
+                Status = "Created Sale from Contact Request";
+                //Dunno if above should be moved or be there at all!
+            }
+            catch (Exception)
+            {
+                
+                Status = "Failed to create sale from request!";
             }
         }
         #endregion CRUDS

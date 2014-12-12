@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
-// ReSharper disable once InconsistentNaming
+    // ReSharper disable once InconsistentNaming
     public class DriveITWebAPI
     {
-        static private HttpClient _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
+        static private HttpClient _httpClient;
 
 
         public static async Task Login(string username, string password)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5552/api/") };
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://driveit.azurewebsites.net/api/") };
 
             var dict = new Dictionary<string, string>
             {
@@ -31,7 +31,10 @@ namespace DriveIT.WindowsClient.Controllers
             var result = await _httpClient.PostAsync("Token", new FormUrlEncodedContent(dict));
             result.EnsureSuccessStatusCode();
 
-            if (await GetRole() == Role.Customer)
+            var token = await result.Content.ReadAsAsync<Token>();
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.access_token);
+            var role = await GetRole();
+            if (role == Role.Customer)
             {
                 throw new Exception("An error occurred while logging into the client...");
             }
@@ -45,10 +48,62 @@ namespace DriveIT.WindowsClient.Controllers
                 var response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
                 response.EnsureSuccessStatusCode();
             }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async static Task Create(string uri, CustomerDto objectToCreate, string password)
+        {
+            try
+            {
+                var registerModel = new RegisterViewModel
+                {
+                    Email = objectToCreate.Email,
+                    FirstName = objectToCreate.FirstName,
+                    LastName = objectToCreate.LastName,
+                    PhoneNumber = objectToCreate.Phone,
+                    ConfirmPhoneNumber = objectToCreate.Phone,
+                    Password = password,
+                    ConfirmPassword = password,
+                    Role = Role.Customer
+                };
+                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
+                response.EnsureSuccessStatusCode();
+            }
             catch (Exception)
             {
                 //Console.WriteLine(ex.Message);
-                ErrorMessagePopUp();
+                //ErrorMessagePopUp();
+                throw;
+            }
+        }
+
+        public async static Task Create(string uri, EmployeeDto objectToCreate, string password, Role role)
+        {
+            if (role == Role.Customer) throw new ArgumentException("Cannot be Customer.", "role");
+            try
+            {
+                var registerModel = new RegisterViewModel
+                {
+                    Email = objectToCreate.Email,
+                    FirstName = objectToCreate.FirstName,
+                    LastName = objectToCreate.LastName,
+                    PhoneNumber = objectToCreate.Phone,
+                    ConfirmPhoneNumber = objectToCreate.Phone,
+                    Password = password,
+                    ConfirmPassword = password,
+                    Role = role
+                };
+                var response = await _httpClient.PostAsJsonAsync(uri, registerModel);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                //Console.WriteLine(ex.Message);
+                //ErrorMessagePopUp();
+                throw;
             }
         }
 
@@ -62,11 +117,10 @@ namespace DriveIT.WindowsClient.Controllers
                 response.EnsureSuccessStatusCode();
                 objects = await response.Content.ReadAsAsync<T[]>();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                //Console.WriteLine(ex.Message);
                 // TODO Håndter dette
-                ErrorMessagePopUp();
+                throw;
             }
             return objects.ToList();
         }
@@ -81,9 +135,8 @@ namespace DriveIT.WindowsClient.Controllers
                 objectToRead = await response.Content.ReadAsAsync<T>();
                 return objectToRead;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                ErrorMessagePopUp();
                 throw;
             }
         }
@@ -98,7 +151,7 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                ErrorMessagePopUp();
+                throw;
             }
         }
         public async static Task Delete<T>(string uri)
@@ -108,41 +161,73 @@ namespace DriveIT.WindowsClient.Controllers
                 var response = await _httpClient.DeleteAsync(uri);
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                ErrorMessagePopUp();
+                throw;
             }
         }
 
         public async static Task CreateCustomer(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
-            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
+            try
+            {
+                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public async static Task CreateEmployee(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
-            if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
+            try
+            {
+                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
+                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         public async static Task CreateAdministrator(string email, string firstName, string lastName, string password,
             string confirmPassword, string phone, string confirmPhone)
         {
-            if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
-            await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
+            try
+            {
+                if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
+                await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         private static async Task<Role?> GetRole()
         {
-            var result = await _httpClient.GetAsync("account/isadministrator");
-            if (result.IsSuccessStatusCode) return Role.Administrator;
-            result = await _httpClient.GetAsync("account/isemployee");
-            if (result.IsSuccessStatusCode) return Role.Employee;
-            result = await _httpClient.GetAsync("account/iscustomer");
-            if (result.IsSuccessStatusCode) return Role.Customer;
-            return null;
+            try
+            {
+                var result = await _httpClient.GetAsync("account/isadministrator");
+                if (result.IsSuccessStatusCode) return Role.Administrator;
+                result = await _httpClient.GetAsync("account/isemployee");
+                if (result.IsSuccessStatusCode) return Role.Employee;
+                result = await _httpClient.GetAsync("account/iscustomer");
+                if (result.IsSuccessStatusCode) return Role.Customer;
+                return null;
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
 
         private async static Task CreateUser(string email, string firstName, string lastName, string password, string confirmPassword, string phone, string confirmPhone, Role? role)
@@ -175,24 +260,6 @@ namespace DriveIT.WindowsClient.Controllers
                 //else
                 throw;
             }
-        }
-        private static void ErrorMessagePopUp()
-        {
-
-            var response = MessageBox.Show("There was an error processing your request...", "Error!",
-                MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-
-        public static async Task<String> UploadImage(byte[] imageData, MediaTypeHeaderValue type)
-        {
-            var content = new MultipartFormDataContent();
-            var b = new ByteArrayContent(imageData);
-            b.Headers.ContentType = type;
-            content.Add(b);
-            
-            var message = await _httpClient.PostAsync("upload", content);
-            message.EnsureSuccessStatusCode();
-            return (await message.Content.ReadAsAsync<List<String>>()).SingleOrDefault();
         }
     }
 }
