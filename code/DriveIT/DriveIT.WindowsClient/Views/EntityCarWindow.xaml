@@ -160,7 +160,8 @@
                 </i:Interaction.Triggers>
             </Button>
             <Label Style="{DynamicResource StatusLabelStyle}" Content="{Binding ImageAmtString}" Grid.Column="1" HorizontalAlignment="Center" Margin="215,259,226,0" Grid.Row="1" VerticalAlignment="Top" Height="28"/>
-            <CheckBox Content="Sold" IsEnabled="False" HorizontalAlignment="Left" Margin="10,208,0,0" Grid.Row="1" VerticalAlignment="Top" Height="28" Width="437" IsChecked="{Binding Sold}"/>
+            <CheckBox Style="{DynamicResource FillCheckBoxStyle}" Content="Sold" IsEnabled="False" HorizontalAlignment="Stretch" Margin="10,208,51,0" Grid.Row="1" VerticalAlignment="Top" Height="28" IsChecked="{Binding Sold}"/>
+            <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Id" Margin="0,10,51,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>
         </Grid>
     </Grid>
 </Window>

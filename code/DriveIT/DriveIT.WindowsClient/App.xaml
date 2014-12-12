@@ -81,12 +81,27 @@
                 <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
             </Style>
 
+            <Style x:Key="FillTextBlockLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="8,2.5"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+            </Style>
+
             <Style x:Key="FillComboBoxkStyle" TargetType="{x:Type ComboBox}">
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="BorderBrush" Value="{x:Null}"/>
                 <Setter Property="Padding" Value="8,2.5"/>
                 <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundColorBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+            </Style>
+
+            <Style x:Key="FillCheckBoxStyle" TargetType="{x:Type CheckBox}">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundColorBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
 
             <Style x:Key="StatusLabelStyle" TargetType="{x:Type Label}">
