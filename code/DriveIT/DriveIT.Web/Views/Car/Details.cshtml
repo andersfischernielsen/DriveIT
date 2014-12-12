@@ -1,5 +1,18 @@
 ﻿@model DriveIT.Web.Models.CarCommentViewModel
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link href="../../Content/cosmo-boostrap.min.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel({
+            interval: 5000
+        })
+    });
+</script>
+
+
 @{
     ViewBag.Title = "Car Details";
 }
@@ -124,11 +137,36 @@
 
     </dl>
     <p>Images:</p>
-    @foreach (var path in Model.Car.ImagePaths)
+
+    @if (Model.Car.ImagePaths.Count == 0)
     {
-        <img src=@path alt="Image of car"/><br/>
+        <div id="myCarousel" class="carousel" style="width:900px;height:900px;position:fixed;top:200px;right:-50px">
+            <div class="carousel-inner">
+                
+                <div class="item">
+                    <img src="http://i.stack.imgur.com/QE8X8.png" onclick="" height="300" width="300"/>
+                </div>
+                
+                <div class="item">
+                    <img src="http://i.stack.imgur.com/QE8X7.png" onclick="" height="300" width="300" />
+                </div>
+                
+            </div>
+            
+            <div id="myCarouselControll" class="carousel" style="width:200px;">
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
     }
+    else
+    {
+       <p>No images to show.</p>
+    }
+
 </div>
+
+
 
 @{
     Html.RenderPartial("~/Views/Comment/Index.cshtml", Model);
