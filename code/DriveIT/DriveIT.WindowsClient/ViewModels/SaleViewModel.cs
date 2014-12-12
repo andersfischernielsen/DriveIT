@@ -22,7 +22,7 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 try
                 {
-                    return _saleDto.Id.Value;
+                    return _saleDto.Id;
                 }
                 catch (Exception)
                 {

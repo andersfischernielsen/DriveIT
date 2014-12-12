@@ -68,7 +68,7 @@ If you're already a user of the system, you can login @Html.ActionLink("here", "
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", "Car", new { id = item.Id }, null)
+                @Html.ActionLink("Details", "Details", "Car", new { carId = item.Id }, null)
             </td>
         </tr>
     }

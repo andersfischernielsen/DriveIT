@@ -25,7 +25,7 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 try
                 {
-                    return _contactRequestDto.Id.Value;
+                    return _contactRequestDto.Id;
                 }
                 catch (Exception)
                 {
