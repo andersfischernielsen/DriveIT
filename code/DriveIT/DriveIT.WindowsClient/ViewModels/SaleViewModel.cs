@@ -206,9 +206,8 @@ namespace DriveIT.WindowsClient.ViewModels
                         break;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
                 Status = "Failed to save sale!";
             }
         }
@@ -228,7 +227,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Sale Created";
                 SaleState = SaleEnum.InSystem;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Status = "Failed to create sale!";
             }
@@ -245,7 +244,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 await saleController.UpdateSale(_saleDto);
                 Status = "Sale Updated";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Status = "Failed to update sales!";
             }

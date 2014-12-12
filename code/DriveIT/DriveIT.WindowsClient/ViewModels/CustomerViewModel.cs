@@ -166,7 +166,7 @@ namespace DriveIT.WindowsClient.ViewModels
                         break;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to save customer!";
@@ -176,7 +176,7 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public async void CreateCustomer()
+        public void CreateCustomer()
         {
             try
             {
@@ -199,7 +199,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to create customer!";
@@ -216,7 +216,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 await customerController.UpdateCustomer(_customerDto);
                 Status = "Customer Updated";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to update customer!";
@@ -238,7 +238,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CustomerState = CustomerEnum.NotInSystem;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to delete customer!";

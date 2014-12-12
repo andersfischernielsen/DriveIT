@@ -783,11 +783,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" MinHeight="277"/>
                     <RowDefinition/>
+                    <RowDefinition Height="48"/>
                 </Grid.RowDefinitions>
                 <Grid.Background>
                     <SolidColorBrush Color="#FFCFCECA" Opacity="0.2"/>
                 </Grid.Background>
-                <Border BorderThickness="1" Grid.RowSpan="2">
+                <Border BorderThickness="1" Grid.RowSpan="3">
                     <Border.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsBorderColor}"/>
                     </Border.BorderBrush>
@@ -800,14 +801,14 @@
                 <Label Margin="10,179,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Phone:"/>
                 <Label Margin="10,220,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Email:"/>
                 <Label Margin="10,261,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="Job Title:"/>
-                
+
                 <Label HorizontalContentAlignment="Right" Margin="10,56,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding BestSellingEmployee}"/>
                 <Label HorizontalContentAlignment="Right" Margin="10,97,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding FirstName}"/>
                 <Label HorizontalContentAlignment="Right" Margin="10,138,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding LastName}"/>
                 <Label HorizontalContentAlignment="Right" Margin="10,179,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
                 <Label HorizontalContentAlignment="Right" Margin="10,220,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
                 <Label HorizontalContentAlignment="Right" Margin="10,261,10,0" VerticalAlignment="Top" Height="41" FontSize="18" Grid.Row="1" Content="{Binding JobTitle}"/>
-                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="29" Width="270" FontStyle="Italic" TextAlignment="Center" Grid.Row="1">
+                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" Width="260" FontStyle="Italic" TextAlignment="Center" Grid.Row="2">
                     <TextBlock.Background>
                         <SolidColorBrush Color="Black" Opacity="0.15"/>
                     </TextBlock.Background><Hyperlink NavigateUri="http://driveit.azurewebsites.net" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>

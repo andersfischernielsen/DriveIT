@@ -79,7 +79,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CanDeleteAndUpdate = false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 CanDeleteAndUpdate = false;
                 Status = "Failed to update the list of customers!";
@@ -105,7 +105,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to delete the customer!";
@@ -122,7 +122,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 window.Show();
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to create window!";
@@ -138,7 +138,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 window.Show();
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to update window!";

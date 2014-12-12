@@ -94,7 +94,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CanDeleteAndUpdate = false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 CanDeleteAndUpdate = false;
                 Status = "Failed to retrieve data for sales!";
@@ -121,7 +121,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to delete the sale!";
@@ -138,7 +138,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 window.Show();
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to create window!";
