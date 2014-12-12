@@ -82,7 +82,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Getters and setters for the attributes of a SaleDTO.
+        /// Getters and setters for the attributes of a SaleDTO while notifying view.
         /// </summary>
         #region Attributes
         private string _status = "";
