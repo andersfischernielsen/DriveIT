@@ -42,6 +42,9 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -53,6 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DriveITContext.cs" />
+    <Compile Include="Entities\Car.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\ContactRequest.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\DriveItUser.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\ImagePath.cs" />
+    <Compile Include="Entities\Sale.cs" />
     <Compile Include="EntityStorage.cs" />
     <Compile Include="IPersistentStorage.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -63,15 +74,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DriveIT.Entities\DriveIT.Entities.csproj">
-      <Project>{16C04BA6-6FE0-4986-B33A-DB39A723E02E}</Project>
-      <Name>DriveIT.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DriveIT.Models\DriveIT.Models.csproj">
       <Project>{9279ADF0-FC58-4C2F-B34F-D472F13976EC}</Project>
       <Name>DriveIT.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

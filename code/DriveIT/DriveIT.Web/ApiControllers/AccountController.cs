@@ -7,8 +7,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using DriveIT.Web.Providers;
 using DriveIT.Web.Results;
@@ -319,7 +319,7 @@ namespace DriveIT.Web.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = null;
+            IdentityResult result;
 
             if (User != null && User.IsInRole(Role.Administrator.ToString()) && (model.Role != null && model.Role != Role.Customer))
             {

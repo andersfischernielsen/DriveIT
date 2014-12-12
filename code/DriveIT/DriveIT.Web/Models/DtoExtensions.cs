@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 
 namespace DriveIT.Web.Models
@@ -27,7 +27,8 @@ namespace DriveIT.Web.Models
                 Drive = dto.Drive,
                 Mileage = dto.Mileage,
                 NoughtTo100 = dto.NoughtTo100,
-                TopSpeed = dto.TopSpeed
+                TopSpeed = dto.TopSpeed,
+                ImagePaths = dto.ImagePaths.Select(path => new ImagePath { Path = path }).ToList()
             };
         }
 
@@ -40,13 +41,13 @@ namespace DriveIT.Web.Models
             return dto.ImagePaths
                 .Select(path => new ImagePath
                 {
-                    CarId = dto.Id.Value, 
+                    CarId = dto.Id.Value,
                     Path = path
                 })
                 .ToList();
         }
 
-        public static CarDto ToDto(this Car car, List<ImagePath> imagePaths)
+        public static CarDto ToDto(this Car car)
         {
             return new CarDto
             {
@@ -63,9 +64,9 @@ namespace DriveIT.Web.Models
                 Fuel = car.Fuel,
                 Drive = car.Drive,
                 Mileage = car.Mileage,
-                ImagePaths = imagePaths.Select(path => path.Path).ToList(),
                 TopSpeed = car.TopSpeed,
-                NoughtTo100 = car.NoughtTo100
+                NoughtTo100 = car.NoughtTo100,
+                ImagePaths = car.ImagePaths.Select(path => path.Path).ToList(),
             };
         }
 
@@ -177,7 +178,8 @@ namespace DriveIT.Web.Models
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 PhoneNumber = dto.Phone,
-                Email = dto.Email
+                Email = dto.Email,
+                JobTitle = dto.JobTitle,
             };
         }
 
@@ -189,7 +191,8 @@ namespace DriveIT.Web.Models
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
                 Phone = employee.PhoneNumber,
-                Email = employee.Email
+                Email = employee.Email,
+                JobTitle = employee.JobTitle,
             };
         }
     }
