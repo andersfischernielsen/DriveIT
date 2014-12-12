@@ -59,13 +59,11 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             try
             {
-                CustomerIdsList = (await new CustomerController().ReadCustomerList()).Select(i => i.Email).ToList();
                 EmployeeIdsList = (await new EmployeeController().ReadEmployeeList()).Select(i => i.Email).ToList();
             }
             catch (Exception)
             {
                 Status = "Could not get list of employees.";
-                CustomerIdsList = new List<string>();
                 EmployeeIdsList = new List<string>();
             }
         }
@@ -138,7 +136,6 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public static List<string> CustomerIdsList { get; set; } 
         public string CustomerId
         {
             get
