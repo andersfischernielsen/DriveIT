@@ -13,6 +13,10 @@ using DriveIT.WindowsClient.ViewModels;
 namespace DriveIT.WindowsClient.Controllers
 {
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// A class which creates HTTP requests calls: POST, PUT, READ and DELETE.
+    /// The methods uses generics, and strings in parameters and thereby allowing the code to be reused.
+    /// </summary>
     public class DriveITWebAPI
     {
         static private HttpClient _httpClient;

@@ -5,6 +5,9 @@ using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
+    /// <summary>
+    /// A controller which creates the strings to CRUD Employees in the DriveITWebAPI class
+    /// </summary>
     public class EmployeeController
     {
         public EmployeeController()

@@ -13,6 +13,9 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         public ObservableCollection<CarViewModel> CarViewModels { get; set; }
 
+        /// <summary>
+        /// The default constructor. Calling the UpdateList() method initially to load in data.
+        /// </summary>
         public CarListViewModel()
         {
             CarViewModels = new ObservableCollection<CarViewModel>();
@@ -43,8 +46,11 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Status");
             }
         }
+        
         private bool _canDeleteAndUpdate;
-
+        /// <summary>
+        /// Binds to the isEnabled property of the "See info" and "Delete" buttons in the main view. Notifies the view when changes happen
+        /// </summary>
         public bool CanDeleteAndUpdate
         {
             get { return _canDeleteAndUpdate; }
@@ -59,7 +65,10 @@ namespace DriveIT.WindowsClient.ViewModels
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// A method for notifying the view if any properties have been changed.
+        /// <param name="info">The name of the property which has changed</param>
+        /// </summary>
         private void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
