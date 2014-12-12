@@ -71,6 +71,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     EmployeeViewModels.Add(new EmployeeViewModel(employeeDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -89,6 +90,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     EmployeeViewModels.Add(new EmployeeViewModel(employeeDtoDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -107,6 +109,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     EmployeeViewModels.Remove(SelectedEmployee);
                     SelectedEmployee = null;
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -123,6 +126,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntityEmployeeWindow { DataContext = newEmployee };
                 EmployeeViewModels.Add(newEmployee);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
@@ -138,6 +142,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 EmployeeViewModel employee = SelectedEmployee;
                 var window = new EntityEmployeeWindow { DataContext = employee };
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {

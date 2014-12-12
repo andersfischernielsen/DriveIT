@@ -70,6 +70,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     CarViewModels.Add(new CarViewModel(carDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -88,6 +89,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     CarViewModels.Add(new CarViewModel(carDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -106,6 +108,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CarViewModels.Remove(SelectedCar);
                     SelectedCar = null;
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -122,6 +125,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntityCarWindow { DataContext = newCar };
                 CarViewModels.Add(newCar);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
@@ -137,6 +141,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 CarViewModel car = SelectedCar;
                 var window = new EntityCarWindow { DataContext = car };
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {

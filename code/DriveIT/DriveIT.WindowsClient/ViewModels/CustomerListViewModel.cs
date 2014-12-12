@@ -61,6 +61,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     CustomerViewModels.Add(new CustomerViewModel(customerDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -78,6 +79,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     CustomerViewModels.Add(new CustomerViewModel(customerDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -95,6 +97,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CustomerViewModels.Remove(SelectedCustomer);
                     SelectedCustomer = null;
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -111,6 +114,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntityCustomerWindow { DataContext = newCustomer };
                 CustomerViewModels.Add(newCustomer);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
@@ -126,6 +130,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 CustomerViewModel customer = SelectedCustomer;
                 var window = new EntityCustomerWindow { DataContext = customer };
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
