@@ -660,6 +660,7 @@
                                     <xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
@@ -686,10 +687,10 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column IsMainColumn="True" FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
-                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CarMake" Title="Make"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CarModel" Title="Model" ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Fuel"  Title="Fuel"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
@@ -721,6 +722,7 @@
                                     <xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
@@ -747,11 +749,11 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column FieldName="CustomerId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
-                                    <xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Email" Title="Email"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
@@ -778,10 +780,10 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column FieldName="EmployeeId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
-                                    <xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
