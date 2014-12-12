@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using DriveIT.EntityFramework;
+using DriveIT.Entities.Tests;
 using DriveIT.EntityFramework.Entities;
-using DriveIT.Models;
 using Moq;
 using NUnit.Framework;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace DriveIT.Entities.Tests
+namespace DriveIT.EntityFramework.Tests
 {
     [TestFixture]
     public class EntityStorageTests
     {
         private IPersistentStorage _toTest;
-        private Mock<DbSet<Car>> _mockSet;
+        private Mock<DbSet<Sale>> _mockSet;
         private Mock<DriveITContext> _mockContext;
 
         [TestFixtureSetUp]
@@ -26,116 +23,92 @@ namespace DriveIT.Entities.Tests
         {
             _toTest = new EntityStorage();
 
-            var cars = new List<Car> 
+            var sales = new List<Sale> 
             { 
-                new Car
+                new Sale
                 {
-                    Color = "Green",
-                    Created = DateTime.Now,
-                    DistanceDriven = 20,
-                    Drive = "FWD",
-                    Fuel = FuelType.Gasoline,
-                    Make = "Ford",
-                    Mileage = 20.5f,
-                    Model = "TT",
-                    Price = 1000,
-                    Sold = false,
-                    Transmission = "Manual",
-                    Year = 2001
-                }, 
-                new Car
-                {
-                    Color = "Red",
-                    Created = DateTime.Now,
-                    DistanceDriven = 20,
-                    Drive = "FWD",
-                    Fuel = FuelType.Gasoline,
-                    Make = "Bentley",
-                    Mileage = 20.5f,
-                    Model = "Continental GT",
+                    Id = 1,
                     Price = 20000,
-                    Sold = true,
-                    Transmission = "Manual",
-                    Year = 2001
+                    CarId = 1, 
+                    CustomerId = "customer",
+                    DateOfSale = DateTime.Now,
+                    EmployeeId = "employee"
+                }, 
+                new Sale
+                {
+                    Id = 2,
+                    Price = 30000,
+                    CarId = 2, 
+                    CustomerId = "customer",
+                    DateOfSale = DateTime.Now,
+                    EmployeeId = "employee"
                 }, 
             }.AsQueryable();
 
-            _mockSet = new Mock<DbSet<Car>>();
-            _mockSet.As<IDbAsyncEnumerable<Car>>()
+            _mockSet = new Mock<DbSet<Sale>>();
+            _mockSet.As<IDbAsyncEnumerable<Sale>>()
                 .Setup(m => m.GetAsyncEnumerator())
-                .Returns(new TestDbAsyncEnumerator<Car>(cars.GetEnumerator()));
+                .Returns(new TestDbAsyncEnumerator<Sale>(sales.GetEnumerator()));
 
-            _mockSet.As<IQueryable<Car>>()
+            _mockSet.As<IQueryable<Sale>>()
                 .Setup(m => m.Provider)
-                .Returns(new TestDbAsyncQueryProvider<Car>(cars.Provider));
+                .Returns(new TestDbAsyncQueryProvider<Sale>(sales.Provider));
 
-            _mockSet.As<IQueryable<Car>>().Setup(m => m.Expression).Returns(cars.Expression);
-            _mockSet.As<IQueryable<Car>>().Setup(m => m.ElementType).Returns(cars.ElementType);
-            _mockSet.As<IQueryable<Car>>().Setup(m => m.GetEnumerator()).Returns(cars.GetEnumerator());
+            _mockSet.As<IQueryable<Sale>>().Setup(m => m.Expression).Returns(sales.Expression);
+            _mockSet.As<IQueryable<Sale>>().Setup(m => m.ElementType).Returns(sales.ElementType);
+            _mockSet.As<IQueryable<Sale>>().Setup(m => m.GetEnumerator()).Returns(sales.GetEnumerator());
 
-            _mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(_mockSet.Object.FindAsync(1));
+            _mockSet.Setup(m => m.FindAsync(It.IsAny<int>())).Returns(_mockSet.Object.FindAsync(It.IsAny<int>()));
 
             _mockContext = new Mock<DriveITContext>();
-            _mockContext.Setup(c => c.Cars).Returns(_mockSet.Object);
+            _mockContext.Setup(c => c.Sales).Returns(_mockSet.Object);
         }
 
         [Test]
-        public async void CreateCarTest()
+        public async void CreateSaleTest()
         {
-            await _toTest.CreateCar(new Car
+            await _toTest.CreateSale(new Sale
             {
-                Color = "Green",
-                Created = DateTime.Now,
-                DistanceDriven = 20,
-                Drive = "FWD",
-                Fuel = FuelType.Gasoline,
-                Make = "Ford",
-                Mileage = 20.5f,
-                Model = "TT",
-                Price = 2000,
-                Sold = false,
-                Transmission = "Manual",
-                Year = 2001
+                Id = 3,
+                Price = 40000,
+                CarId = 3,
+                CustomerId = "customer",
+                DateOfSale = DateTime.Now,
+                EmployeeId = "employee"
             },
             _mockContext.Object);
 
-            _mockSet.Verify(m => m.Add(It.IsAny<Car>()), Times.Once);
+            _mockSet.Verify(m => m.Add(It.IsAny<Sale>()), Times.Once);
             _mockContext.Verify(m => m.SaveChangesAsync());
         }
 
-        //[Test]
-        //public async void GetAllCarsTest()
-        //{
-        //    var result = await _toTest.GetAllCars(_mockContext.Object);
-        //    Assert.AreEqual(2, result.Count());
-        //    Assert.AreEqual("Ford", result[0].Make);
-        //    Assert.AreEqual("Bentley", result[1].Make);
-        //}
+        [Test]
+        public async void GetAllCarsTest()
+        {
+            var result = await _toTest.GetAllSales(_mockContext.Object);
+            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual("customer", result[0].CustomerId);
+            Assert.AreEqual("employee", result[1].EmployeeId);
+        }
 
         [Test]
         public async void DeleteCarTest()
         {
-            await _toTest.DeleteCar(1, _mockContext.Object);
+            await _toTest.DeleteSale(1, _mockContext.Object);
 
-            Assert.IsNull(_mockContext.Object.Cars.FindAsync(1));
-            _mockSet.Verify(m => m.Remove(It.IsAny<Car>()), Times.Once);
+            _mockSet.Verify(m => m.Remove(It.IsAny<Sale>()), Times.Once);
             _mockContext.Verify(m => m.SaveChangesAsync(), Times.AtLeastOnce);
         }
 
         //[Test]
-        //public async void UpdateCarTest()
+        //public async void UpdateSaleTest()
         //{
-        //    await _toTest.UpdateCar(1, new Car {Color = "Turquoise" }, _mockContext.Object);
+        //    await _toTest.UpdateSale(2, new Sale { Price = 200000 }, _mockContext.Object);
 
-        //    var result = await _mockContext.Object.Cars.FirstOrDefaultAsync(x => x.Color == "Turquoise");
-        //    Assert.AreEqual("Turquoise", result.Color);
-        //    Assert.AreEqual(0, result.DistanceDriven);
-        //    _mockContext.Verify(m => m.SaveChangesAsync(), Times.Once);
+        //    var result = _mockSet.Object.FirstOrDefault(x => x.Price == 200000);
+        //    Assert.AreEqual(200000, result.Price);
+        //    Assert.IsNull(result.Employee);
+        //    _mockContext.Verify(m => m.SaveChangesAsync(), Times.AtLeastOnce);
         //}
-
-        public static void Main(string[] args)
-        {
-            
-        }
     }
 }

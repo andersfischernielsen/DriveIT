@@ -4,6 +4,9 @@ using DriveIT.Models;
 
 namespace DriveIT.WindowsClient.Controllers
 {
+    /// <summary>
+    /// A controller which creates the strings to CRUD ContactRequests in the DriveITWebAPI class
+    /// </summary>
     public class ContactRequestController
     {
         /// <summary>
