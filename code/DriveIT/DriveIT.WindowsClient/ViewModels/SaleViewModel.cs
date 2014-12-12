@@ -49,6 +49,7 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             _saleDto = new SaleDto();
             SaleState = SaleEnum.NotInSystem;
+            Sold = DateTime.Now;
             UpdateForeignKeyLists();
         }
 
