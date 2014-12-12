@@ -5,7 +5,7 @@
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.carousel').carousel({
             interval: 5000
         })
@@ -19,6 +19,11 @@
 
 <h2>Car Details</h2>
 <p>In this window, car information of the choosen car, from the previous page, will be shown.</p>
+
+@using (Html.BeginForm("Create", "ContactRequest", new { id = Model.Car.Id }))
+{
+    <input type="submit" value="Request to get contacted" class="btn btn-success" />
+}
 
 <div>
     <hr />

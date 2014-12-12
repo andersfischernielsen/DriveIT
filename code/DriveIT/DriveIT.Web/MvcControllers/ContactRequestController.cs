@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DriveIT.Models;
 using DriveIT.Web.ApiControllers;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Provider;
 
 namespace DriveIT.Web.MvcControllers
 {
@@ -20,6 +21,12 @@ namespace DriveIT.Web.MvcControllers
             return View(requests.Content);
         }
 
+        //[HttpGet]
+        //public async Task<ActionResult> Create()
+        //{
+        //    return View();
+        //}
+
         [AuthorizeRoles(Role.Customer)]
         [HttpPost]
         public async Task<ActionResult> Create(int id)
@@ -30,16 +37,16 @@ namespace DriveIT.Web.MvcControllers
                 CustomerId = User.Identity.GetUserId(),
                 Requested = DateTime.Now
             };
-            controller.Post(contactRequestDto);
+            await controller.Post(contactRequestDto);
 
-            return RedirectToAction("Details", "Car", id);
+            return RedirectToAction("Details", "Car", new { carId = contactRequestDto.CarId});
         }
 
         // GET: ContactRequest/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
             await controller.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", User.Identity.GetUserId());
         }
     }
 }
