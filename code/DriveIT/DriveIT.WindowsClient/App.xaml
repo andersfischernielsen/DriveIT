@@ -22,6 +22,9 @@
             <Color x:Key="StatusLabelColor"         A="255" R="4" G="7" B="25"/>
             <Color x:Key="WhiteTextColor"           A="255" R="250" G="235" B="215"/>
             <SolidColorBrush x:Key="WhiteTextColorBrush" Color="{DynamicResource WhiteTextColor}"/>
+            <SolidColorBrush x:Key="SemiTransparentDarkGrayBrush" Color="DarkGray" Opacity="0.35"/>
+            <SolidColorBrush x:Key="SemiTransparentLightGrayBrush" Color="Gray" Opacity="0.5"/>
+            <SolidColorBrush x:Key="SemiTransparentLightBlackBrush" Color="Black" Opacity="0.4"/>
             <!-- http://www.flatuicolorpicker.com/ -->
             <Color x:Key="RequestsForContactBarColor">#26A65B</Color>
             <Color x:Key="RequestsForContactBarGridColor">#3FC380</Color>
@@ -174,21 +177,15 @@
                         <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                     </Trigger>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" TargetName="border" Value="Brown"/>
-                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentDarkGrayBrush}"/>
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentDarkGrayBrush}"/>
                     </Trigger>
                     <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Background" TargetName="border" Value="Brown"/>
-                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
-                    </Trigger>
-                    <Trigger Property="ToggleButton.IsChecked" Value="True">
-                        <Setter Property="Background" TargetName="border" Value="Brown"/>
-                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentLightBlackBrush}"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource SemiTransparentLightBlackBrush}"/>
                     </Trigger>
                     <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Background" TargetName="border" Value="Brown"/>
-                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
-                        <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Chartreuse"/>
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentLightGrayBrush}"/>
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
