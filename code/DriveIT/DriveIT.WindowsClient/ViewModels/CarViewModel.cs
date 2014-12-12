@@ -117,27 +117,25 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CarMake");
             }
         }
-        public int Year
+        public int? Year
         {
-            get
-            {
-                return _carDto.Year ?? 0;
-            }
+            get { return _carDto.Year; }
             set
             {
                 _carDto.Year = value;
                 NotifyPropertyChanged("Year");
             }
         }
-        public decimal Price
+        public decimal? Price
         {
             get
             {
+                if (_carDto.Price == 0) return null;
                 return _carDto.Price;
             }
             set
             {
-                _carDto.Price = value;
+                _carDto.Price = value.GetValueOrDefault();
                 NotifyPropertyChanged("Price");
             }
         }
@@ -165,15 +163,16 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Sold");
             }
         }
-        public float Mileage
+        public float? Mileage
         {
             get
             {
+                if (Math.Abs(_carDto.Mileage) < 1) return null;
                 return _carDto.Mileage;
             }
             set
             {
-                _carDto.Mileage = value;
+                _carDto.Mileage = value.GetValueOrDefault();
                 NotifyPropertyChanged("Mileage");
             }
         }
@@ -189,15 +188,16 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Color");
             }
         }
-        public int DistanceDriven
+        public int? DistanceDriven
         {
             get
             {
+                if (_carDto.DistanceDriven == 0) return null;
                 return _carDto.DistanceDriven;
             }
             set
             {
-                _carDto.DistanceDriven = value;
+                _carDto.DistanceDriven = value.GetValueOrDefault();
                 NotifyPropertyChanged("DistanceDriven");
             }
         }
@@ -237,27 +237,29 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Transmission");
             }
         }
-        public float TopSpeed
+        public float? TopSpeed
         {
             get
             {
+                if (Math.Abs(_carDto.TopSpeed) < 1) return null;
                 return _carDto.TopSpeed;
             }
             set
             {
-                _carDto.TopSpeed = value;
+                _carDto.TopSpeed = value.GetValueOrDefault();
                 NotifyPropertyChanged("TopSpeed");
             }
         }
-        public float NoughtTo100
+        public float? NoughtTo100
         {
             get
             {
+                if (Math.Abs(_carDto.NoughtTo100) < 1) return null;
                 return _carDto.NoughtTo100;
             }
             set
             {
-                _carDto.NoughtTo100 = value;
+                _carDto.NoughtTo100 = value.GetValueOrDefault();
                 NotifyPropertyChanged("NoughtTo100");
             }
         }
@@ -372,6 +374,11 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public void SaveCar()
         {
+            if (string.IsNullOrWhiteSpace(CarModel) || string.IsNullOrWhiteSpace(CarMake) || Price == 0)
+            {
+                Status = "Model, Make and Price must be set.";
+                return;
+            }
             try
             {
                 CreateImagePathStrings();
