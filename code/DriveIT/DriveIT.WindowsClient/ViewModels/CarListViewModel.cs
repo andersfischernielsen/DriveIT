@@ -35,6 +35,18 @@ namespace DriveIT.WindowsClient.ViewModels
             CarViewModels = new ObservableCollection<CarViewModel>();
             ReadList();
         }
+
+        private string _status = "";
+
+        public string Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
  
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
