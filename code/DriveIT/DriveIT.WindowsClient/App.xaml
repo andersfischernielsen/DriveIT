@@ -22,6 +22,9 @@
             <Color x:Key="StatusLabelColor"         A="255" R="4" G="7" B="25"/>
             <Color x:Key="WhiteTextColor"           A="255" R="250" G="235" B="215"/>
             <SolidColorBrush x:Key="WhiteTextColorBrush" Color="{DynamicResource WhiteTextColor}"/>
+            <SolidColorBrush x:Key="SemiTransparentDarkGrayBrush" Color="DarkGray" Opacity="0.35"/>
+            <SolidColorBrush x:Key="SemiTransparentLightGrayBrush" Color="Gray" Opacity="0.5"/>
+            <SolidColorBrush x:Key="SemiTransparentLightBlackBrush" Color="Black" Opacity="0.4"/>
             <!-- http://www.flatuicolorpicker.com/ -->
             <Color x:Key="RequestsForContactBarColor">#26A65B</Color>
             <Color x:Key="RequestsForContactBarGridColor">#3FC380</Color>
@@ -81,12 +84,30 @@
                 <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
             </Style>
 
+            <Style x:Key="FillTextBlockLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="8,2.5"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="IsHitTestVisible" Value="False"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+            </Style>
+
             <Style x:Key="FillComboBoxkStyle" TargetType="{x:Type ComboBox}">
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="BorderBrush" Value="{x:Null}"/>
                 <Setter Property="Padding" Value="8,2.5"/>
                 <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundColorBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+            </Style>
+
+            <Style x:Key="FillCheckBoxStyle" TargetType="{x:Type CheckBox}">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="8,2.5"/>
+                <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundColorBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxTextColorBrush}"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
             </Style>
 
             <Style x:Key="StatusLabelStyle" TargetType="{x:Type Label}">
@@ -102,6 +123,7 @@
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Background" Value="{DynamicResource PowerButtonBackgroundColorBrush}"/>
+                <Setter Property="Template" Value="{DynamicResource DisabledButtonColorTemplate}"/>
             </Style>
 
             <Style x:Key="SmallButtonStyle" TargetType="Button">
@@ -149,6 +171,27 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <ControlTemplate x:Key="DisabledButtonColorTemplate" TargetType="{x:Type ButtonBase}">
+                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="Button.IsDefaulted" Value="True">
+                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentDarkGrayBrush}"/>
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentDarkGrayBrush}"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentLightBlackBrush}"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource SemiTransparentLightBlackBrush}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" TargetName="border" Value="{DynamicResource SemiTransparentLightGrayBrush}"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
         </ResourceDictionary>
 
     </Application.Resources>

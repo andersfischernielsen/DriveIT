@@ -27,17 +27,22 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeDetailsViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
+
             GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
+
         public EmployeeDetailsViewModel()
         {
             _employeeDto = new EmployeeDto(){Email = ""};
+            //LoggedInRole = Role.Employee;
             GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
 
          
 
         #region Attributes
+
+        public static Role LoggedInRole;
 
          private string _gravatarLink;
          public string GravatarLink
