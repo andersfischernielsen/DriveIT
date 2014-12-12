@@ -74,8 +74,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to retrieve data for employees!";
             }
         }
 
@@ -92,8 +92,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update the list!";
             }
         }
 
@@ -110,8 +110,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to delete the employee!";
             }
         }
 
@@ -126,8 +126,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to create window!";
             }
         }
 
@@ -141,8 +141,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update window!";
             }
         }
 
