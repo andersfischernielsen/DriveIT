@@ -17,6 +17,8 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeListViewModel()
         {
             EmployeeViewModels = new ObservableCollection<EmployeeViewModel>();
+            if (EmployeeDetailsViewModel.LoggedInRole == Role.Administrator) CanDelete = true;
+            else CanDelete = false;
             UpdateList();
         }
 
@@ -45,15 +47,26 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Status");
             }
         }
-        private bool _canDeleteAndUpdate;
 
-        public bool CanDeleteAndUpdate
+        private bool _canDelete;
+        public bool CanDelete
         {
-            get { return _canDeleteAndUpdate; }
+            get { return _canDelete; }
             set
             {
-                _canDeleteAndUpdate = value;
-                NotifyPropertyChanged("CanDeleteAndUpdate");
+                _canDelete = value;
+                NotifyPropertyChanged("CanDelete");
+            }
+        }
+
+        private bool _canUpdate;
+        public bool CanUpdate
+        {
+            get { return _canUpdate; }
+            set
+            {
+                _canUpdate = value;
+                NotifyPropertyChanged("CanUpdate");
             }
         }
 
@@ -86,16 +99,16 @@ namespace DriveIT.WindowsClient.ViewModels
                 if (EmployeeViewModels.Count >= 1)
                 {
                     SelectedEmployee = EmployeeViewModels[0];
-                    CanDeleteAndUpdate = true;
+                    CanUpdate = true;
                 }
                 else
                 {
-                    CanDeleteAndUpdate = false;
+                    CanUpdate = false;
                 }
             }
             catch (Exception e)
             {
-                CanDeleteAndUpdate = false;
+                CanUpdate = false;
                 Status = "Failed to update the list!";
             }
         }
@@ -111,11 +124,11 @@ namespace DriveIT.WindowsClient.ViewModels
                     if (EmployeeViewModels.Count >= 1)
                     {
                         SelectedEmployee = EmployeeViewModels[0];
-                        CanDeleteAndUpdate = true;
+                        CanUpdate = true;
                     }
                     else
                     {
-                        CanDeleteAndUpdate = false;
+                        CanUpdate = false;
                     }
                 }
                 Status = "";
