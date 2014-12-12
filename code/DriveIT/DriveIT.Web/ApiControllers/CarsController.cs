@@ -8,6 +8,11 @@ using DriveIT.Web.Models;
 
 namespace DriveIT.Web.ApiControllers
 {
+    /// <summary>
+    /// The CarsController handles the calls to the api regarding Cars.
+    /// Externally it uses Dto-objects from the DriveIT.Models assembly.
+    /// Internally it uses Entity-objects so it can communicate with the DriveIT.EntityFramework-assembly.
+    /// </summary>
     public class CarsController : ApiController
     {
         private readonly IPersistentStorage _repo;
