@@ -7,15 +7,23 @@ using DriveIT.WindowsClient.Controllers;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
+    /// <summary>
+    /// This class is a ViewModel, following the MVVM pattern. Furthermore it also functions as a "Adaptor Pattern"
+    /// </summary>
     public class SaleViewModel : IViewModelBase
     {
         private SaleDto _saleDto;
+        /// <summary>
+        /// Enum for determining whether the Sale is in the system or not.
+        /// </summary>
         public enum SaleEnum
         {
             NotInSystem,
             InSystem
         }
-
+        /// <summary>
+        /// Gets the nullable int value of SaleId, sets it, and notifies the view that the property is changed.
+        /// </summary>
         public int? SaleId
         {
             get
@@ -37,14 +45,19 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("SaleId");
             }
         }
-
-
+        /// <summary>
+        /// Constructor for SaleViewModel which updates the given SaleDTO and updates the SaleState.
+        /// </summary>
+        /// <param name="saleDto">The SaleDTO to be updated</param>
         public SaleViewModel(SaleDto saleDto)
         {
             _saleDto = saleDto;
             SaleState = SaleEnum.InSystem;
             UpdateForeignKeyLists();
         }
+        /// <summary>
+        /// Empty constructor which creates a new Sale DTO.
+        /// </summary>
         public SaleViewModel()
         {
             _saleDto = new SaleDto();
@@ -52,7 +65,9 @@ namespace DriveIT.WindowsClient.ViewModels
             Sold = DateTime.Now;
             UpdateForeignKeyLists();
         }
-
+        /// <summary>
+        /// Updates the list of foreign keys.
+        /// </summary>
         public async void UpdateForeignKeyLists()
         {
             try
@@ -66,7 +81,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 EmployeeIdsList = new List<string>();
             }
         }
-
+        /// <summary>
+        /// Getters and setters for the attributes of a SaleDTO.
+        /// </summary>
         #region Attributes
         private string _status = "";
         public string Status
@@ -172,6 +189,9 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion Attributes
 
         #region CRUDS
+        /// <summary>
+        /// Saves a Sale - updates the Sale if it exists, otherwise creates a new Sale.
+        /// </summary>
         public void SaveSale()
         {
             try
@@ -193,7 +213,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Gets called from the view
+        /// Creates a new SaleController, creates a Sale from the API, and notifies the view.
         /// </summary>
         public async void CreateSale()
         {
@@ -215,7 +235,7 @@ namespace DriveIT.WindowsClient.ViewModels
 
         }
         /// <summary>
-        /// Gets called from the view
+        /// Updates a SaleController, creates a Sale from the API, and notifies the view.
         /// </summary>
         public async void UpdateSale()
         {
@@ -231,7 +251,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Gets called from the view
+        /// Deletes a SaleController, creates a Sale from the API, and notifies the view.
         /// </summary>
         public async void DeleteSale()
         {
@@ -254,7 +274,9 @@ namespace DriveIT.WindowsClient.ViewModels
             
         }
         #endregion CRUDS
-
+        /// <summary>
+        /// A method for notifying the view if any properties have been changed.
+        /// </summary>
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
