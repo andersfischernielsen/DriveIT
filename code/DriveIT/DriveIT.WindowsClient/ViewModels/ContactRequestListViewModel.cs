@@ -61,8 +61,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to retrieve contact requests!";
             }
         }
 
@@ -79,8 +79,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+                Status = "Failed to update the list of contact requests!";
             }
         }
 
@@ -97,8 +96,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+                Status = "Failed to delete the contact request!";
             }
         }
 
@@ -113,8 +111,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+                Status = "Failed to create window!";
             }
         }
 
@@ -128,8 +125,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update window!";
             }
         }
 
