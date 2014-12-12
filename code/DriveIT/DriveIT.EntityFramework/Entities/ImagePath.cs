@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DriveIT.Entities
+namespace DriveIT.EntityFramework.Entities
 {
     public class ImagePath
     {
-        public int Id { get; set; }
+        [Column(Order = 0), Key]
         [ForeignKey("Car")]
         public int CarId { get; set; }
         public Car Car { get; set; }
+        [Column(Order = 1), Key]
         public string Path { get; set; }
     }
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using DriveIT.Web.ApiControllers;
 using DriveIT.Web.Models;
@@ -38,7 +38,15 @@ namespace DriveIT.Web.Tests.ApiControllers
                     Price = 60000,
                     Sold = false,
                     Transmission = "Manual",
-                    Year = 2006
+                    Year = 2006,
+                    ImagePaths = new List<ImagePath>
+                    {
+                        new ImagePath
+                        {
+                            CarId = 1,
+                            Path = "http://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Suzuki_Swift_front-1.jpg/250px-Suzuki_Swift_front-1.jpg"
+                        }
+                    }
                 },
                 new Car
                 {
@@ -54,7 +62,8 @@ namespace DriveIT.Web.Tests.ApiControllers
                     Price = 100000,
                     Sold = false,
                     Transmission = "Manual",
-                    Year = 2004
+                    Year = 2004,
+                    ImagePaths = new List<ImagePath>()
                 }
             };
             _car3 = new Car
@@ -70,7 +79,8 @@ namespace DriveIT.Web.Tests.ApiControllers
                 Price = 15000,
                 Sold = false,
                 Transmission = "Manual",
-                Year = 1993
+                Year = 1993,
+                ImagePaths = new List<ImagePath>()
             };
 
             var cars = Task.Run(() => carList);
@@ -79,7 +89,6 @@ namespace DriveIT.Web.Tests.ApiControllers
             var mockRepo = repo.Create<IPersistentStorage>();
             mockRepo.Setup(x => x.GetAllCars(null)).Returns(cars);
             mockRepo.Setup(x => x.GetCarWithId(2, null)).Returns(Task.Run(() => carList.Find(c => c.Id == 2)));
-
             mockRepo.Setup(x => x.CreateCar(It.IsAny<Car>(), null)).Returns(Task.Run(() => carList.Max(x => x.Id) + 1));
 
             _controller = new CarsController(mockRepo.Object);
@@ -132,61 +141,6 @@ namespace DriveIT.Web.Tests.ApiControllers
 
             message = await _controller.Get(-1) as NotFoundResult;
             Assert.IsNotNull(message);
-        }
-
-        [TestMethod]
-        public async Task GetCarsByFuelType_Result()
-        {
-            var message = await _controller.GetCarsByFuelType("Gasoline") as OkNegotiatedContentResult<List<CarDto>>;
-            Assert.IsNotNull(message);
-
-            var content = message.Content;
-            Assert.IsNotNull(content);
-            Assert.AreEqual(1, content.Count());
-            Assert.AreEqual(FuelType.Gasoline, content.First().Fuel);
-
-            message = await _controller.GetCarsByFuelType("Diesel") as OkNegotiatedContentResult<List<CarDto>>;
-            Assert.IsNotNull(message);
-
-            content = message.Content;
-            Assert.IsNotNull(content);
-            Assert.AreEqual(1, content.Count());
-            Assert.AreEqual(FuelType.Diesel, content.First().Fuel);
-        }
-
-        [TestMethod]
-        public async Task GetCarsByFuelType_NoResult()
-        {
-            var message = await _controller.GetCarsByFuelType("Electric") as OkNegotiatedContentResult<List<CarDto>>;
-            Assert.IsNotNull(message);
-
-            var content = message.Content;
-            Assert.IsNotNull(content);
-            Assert.AreEqual(0, content.Count());
-        }
-
-        [TestMethod]
-        public async Task GetCarsByMake_Result()
-        {
-            var message = await _controller.GetCarsByMake("Suzuki") as OkNegotiatedContentResult<List<CarDto>>;
-            Assert.IsNotNull(message);
-
-            var content = message.Content;
-            Assert.IsNotNull(content);
-            Assert.AreNotEqual(0, content.Count());
-            Assert.AreEqual("Suzuki", content.First().Make);
-        }
-
-        [TestMethod]
-        public async Task GetCarsByMake_NoResult()
-        {
-            var message =
-                await _controller.GetCarsByMake("I'm not a make") as OkNegotiatedContentResult<List<CarDto>>;
-            Assert.IsNotNull(message);
-
-            var content = message.Content;
-            Assert.IsNotNull(content);
-            Assert.IsFalse(content.Any());
         }
 
         [TestMethod]

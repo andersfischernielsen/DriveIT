@@ -111,7 +111,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public static Role[] Roletypes { get; set; }
+        public Role[] Roletypes { get; set; }
 
         private string _password;
 

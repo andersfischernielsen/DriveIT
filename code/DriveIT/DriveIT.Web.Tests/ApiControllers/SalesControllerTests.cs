@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using DriveIT.Entities;
 using DriveIT.EntityFramework;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using DriveIT.Web.ApiControllers;
 using DriveIT.Web.Models;
@@ -114,7 +114,7 @@ namespace DriveIT.Web.Tests.ApiControllers
         [Test]
         public async Task GetFromUserId_Result()
         {
-            var message = await _controller.GetFromUserId("cust@driveit.dk") as OkNegotiatedContentResult<List<SaleDto>>;
+            var message = await _controller.GetFromCustomerId("cust@driveit.dk") as OkNegotiatedContentResult<List<SaleDto>>;
             Assert.IsNotNull(message);
         }
 

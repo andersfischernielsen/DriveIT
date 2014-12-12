@@ -19,7 +19,11 @@ namespace DriveIT.WindowsClient.Controllers
 
         public static async Task Login(string username, string password)
         {
+            #if DEBUG
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:36774/api/") };
+            #else
             _httpClient = new HttpClient { BaseAddress = new Uri("http://driveit.azurewebsites.net/api/") };
+            #endif
 
             var dict = new Dictionary<string, string>
             {
@@ -34,19 +38,20 @@ namespace DriveIT.WindowsClient.Controllers
             var token = await result.Content.ReadAsAsync<Token>();
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.access_token);
             var role = await GetRole();
-            if (role == Role.Customer)
+            if (role == null || role == Role.Customer)
             {
                 throw new Exception("An error occurred while logging into the client...");
             }
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async static Task Create<T>(string uri, T objectToCreate)
+        public async static Task<T> Create<T>(string uri, T objectToCreate)
         {
             try
             {
                 var response = await _httpClient.PostAsJsonAsync(uri, objectToCreate);
                 response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<T>();
             }
             catch (Exception e)
             {

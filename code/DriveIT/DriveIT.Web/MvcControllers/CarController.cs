@@ -6,18 +6,21 @@ using System.Web.Http.Results;
 using System.Web.Mvc;
 using DriveIT.Models;
 using DriveIT.Web.ApiControllers;
+using DriveIT.Web.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace DriveIT.Web.MvcControllers
 {
     public class CarController : AsyncController
     {
 
-        private CarsController controller = new CarsController();
+        private CarsController carController = new CarsController();
+        private CommentsController commentsController = new CommentsController();
 
         public async Task<ActionResult> Index(String fuelType, String make, String model)
         {
             //Select all cars
-            IEnumerable<CarDto> carList = await controller.WebCarList();
+            IEnumerable<CarDto> carList = await carController.WebCarList();
 
             //Get list of fuel types
             var fuelList = from c in carList
@@ -66,44 +69,23 @@ namespace DriveIT.Web.MvcControllers
 
         public async Task<ActionResult> Details(int carId)
         {
-            var car = await controller.Get(carId) as OkNegotiatedContentResult<CarDto>;
-            return View(car.Content);
+            var car = await carController.Get(carId) as OkNegotiatedContentResult<CarDto>;
+            var comments = await commentsController.GetByCarId(carId) as OkNegotiatedContentResult<List<CommentDto>>;
+
+            var viewModel = new CarCommentViewModel();
+
+            if (comments != null)
+            {
+                viewModel.Car = car.Content;
+                viewModel.Comments = comments.Content;
+            }
+            else
+            {
+                viewModel.Car = car.Content;
+                viewModel.Comments = new List<CommentDto>();
+            }
+
+            return View(viewModel);
         }
-
-        //public async Task<IList<CarDto>> GetAllCars()
-        //{
-        //    var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars");
-        //    return carsToReturn;
-        //}
-
-        //public async Task<CarDto> GetSingleCar(int Id)
-        //{
-        //    var carToReturn = await DriveITWebAPI.Read<CarDto>("Cars/" + Id);
-        //    return carToReturn;
-        //}
-
-        //public async Task<IList<CarDto>> GetCarsByFuelType(string fuelType)
-        //{
-        //    var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars?fuelType=" + fuelType);
-        //    return carsToReturn;
-        //}
-
-        //public async Task<IList<CarDto>> GetCarsByMake(string make)
-        //{
-        //    var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars?make=" + make);
-        //    return carsToReturn;
-        //}
-
-        //public async Task<IList<CarDto>> GetCarsByModel(string model)
-        //{
-        //    var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars?model=" + model);
-        //    return carsToReturn;
-        //}
-
-        //public async Task<IList<CarDto>> GetCarsByMakeAndModel(string make, string model)
-        //{
-        //    var carsToReturn = await DriveITWebAPI.ReadList<CarDto>("Cars?make=" + make + "&model=" + model);
-        //    return carsToReturn;
-        //}
     }
 }

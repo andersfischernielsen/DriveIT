@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DriveIT.Entities
+namespace DriveIT.EntityFramework.Entities
 {
-    public class ContactRequest
+    public class Sale
     {
         [Key]
         public int Id { get; set; }
@@ -20,7 +20,7 @@ namespace DriveIT.Entities
         public string EmployeeId { get; set; }
 
         public virtual Employee Employee { get; set; }
-        public DateTime Created { get; set; }
-
+        public DateTime DateOfSale { get; set; }
+        public decimal Price { get; set; }
     }
 }

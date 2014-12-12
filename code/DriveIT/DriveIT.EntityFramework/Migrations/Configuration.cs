@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using DriveIT.Entities;
+using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,6 +16,12 @@ namespace DriveIT.EntityFramework.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
+        /// <summary>
+        /// Seed the initial Entities into the database. This is to avoid having to spend a lot
+        /// of time doing this manually at deployment. 
+        /// This creates an admin user, a customer and a bunch of Orders, Cars and ContactRequests.
+        /// </summary>
+        /// <param name="context">The DriveITContext to seed.</param>
         protected override void Seed(DriveITContext context)
         {
             var roleStore = new RoleStore<IdentityRole>(context);
@@ -54,6 +60,7 @@ namespace DriveIT.EntityFramework.Migrations
                     FirstName = "DriveIT",
                     LastName = "Adminson",
                     PhoneNumber = "88888888",
+                    JobTitle = "Boss"
                 };
 
                 CheckResult(userManager.Create(employee, "4dmin_Password"));

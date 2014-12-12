@@ -9,9 +9,9 @@ namespace DriveIT.WindowsClient.Controllers
         public ContactRequestController()
         {
         }
-        public async Task CreateContactRequest(ContactRequestDto contactRequest)
+        public async Task<ContactRequestDto> CreateContactRequest(ContactRequestDto contactRequest)
         {
-            await DriveITWebAPI.Create("contactRequests", contactRequest);
+            return await DriveITWebAPI.Create("contactRequests", contactRequest);
         }
         public async Task<ContactRequestDto> ReadContactRequest(int id)
         {

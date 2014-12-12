@@ -10,7 +10,7 @@ namespace DriveIT.WindowsClient.Controllers
     {
         public static string CreateGravatarLink(string email)
         {
-            return "http://www.gravatar.com/avatar/" + CreateMD5Hash(email);
+            return "http://www.gravatar.com/avatar/" + CreateMD5Hash(email) + "?s=250";
         }
         private static string CreateMD5Hash(string input)
         {
