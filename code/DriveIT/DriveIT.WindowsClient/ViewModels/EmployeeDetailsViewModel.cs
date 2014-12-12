@@ -34,7 +34,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeDetailsViewModel()
         {
             _employeeDto = new EmployeeDto(){Email = ""};
-            LoggedInRole = Role.Employee;
+            //LoggedInRole = Role.Employee;
             GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
 
