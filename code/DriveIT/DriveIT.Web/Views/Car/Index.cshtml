@@ -42,79 +42,52 @@
             @Html.DisplayNameFor(model => model.Sold)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mileage)
+            Image
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DistanceDriven)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fuel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Drive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Transmission)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TopSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoughtTo100)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Model)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Make)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sold)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mileage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DistanceDriven)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fuel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Drive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Transmission)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TopSpeed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoughtTo100)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { carId=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @if (item.Sold == true)
+                {
+                    <strong style="color: red">SOLD</strong>
+
+                }
+                else
+                {
+                    <strong style="color: green">FOR SALE</strong>
+                }
+            </td>
+            <td>
+                @if (item.ImagePaths.Count != 0)
+                {
+                    <img src=@item.ImagePaths.First() />
+                }
+                else
+                {
+                    <p>No image for this car.</p>
+                }
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", "Car", new { carid=item.Id }, null)
+            </td>
+        </tr>
+    }
 </table>
