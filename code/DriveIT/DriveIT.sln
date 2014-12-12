@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.Models", "DriveIT.Models\DriveIT.Models.csproj", "{9279ADF0-FC58-4C2F-B34F-D472F13976EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.EntityFramework.Tests", "DriveIT.Entities.Tests\DriveIT.EntityFramework.Tests.csproj", "{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.EntityFramework.Tests", "DriveIT.EntityFramework.Tests\DriveIT.EntityFramework.Tests.csproj", "{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveIT.EntityFramework", "DriveIT.EntityFramework\DriveIT.EntityFramework.csproj", "{AB46DA72-12F4-417E-B7D3-2251FA2A94D8}"
 EndProject
