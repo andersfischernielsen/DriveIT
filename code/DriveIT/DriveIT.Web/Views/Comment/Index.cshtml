@@ -1,12 +1,11 @@
-﻿@model DriveIT.Web.Models.CarCommentViewModel
+﻿@using Microsoft.AspNet.Identity
+@model DriveIT.Web.Models.CarCommentViewModel
 
 <h3>Comment Section</h3>
 <p>These are the comments for the specified car that you choose.
     You are able to create a new comment below.</p>
 
-<p>
-    @Html.ActionLink("Create new", "Create", "Comment", new {carId = Model.Car.Id, customerId = "cust@driveit.dk"}, null)
-</p>
+@Html.ActionLink("Create New", "Create", "Comment", new { carId = Model.Car.Id, customerId = User.Identity.GetUserName() }, null)
 
 <table class="table">
     <tr>
@@ -33,8 +32,12 @@
             @Html.DisplayFor(modelItem => item.CustomerId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", "Comment", new { commentId = item.Id }, null) |
-            @Html.ActionLink("Delete", "Delete", "Comment", new { commentId = item.Id, redirectCarId = item.CarId }, null)
+            @if (item.CustomerId == User.Identity.GetUserName())
+            {
+                @Html.ActionLink("Edit", "Edit", "Comment", new { commentId = item.Id }, null)
+                <br/>
+                @Html.ActionLink("Delete", "Delete", "Comment", new { commentId = item.Id, redirectCarId = item.CarId }, null)
+            }
         </td>
     </tr>
 }

@@ -12,7 +12,6 @@
     });
 </script>
 
-
 @{
     ViewBag.Title = "Car Details";
 }
@@ -143,7 +142,7 @@
     
     @if (Model.Car.ImagePaths.Count > 0)
     {
-        <div id="myCarousel" class="carousel" style="width:900px;height:400px;position:fixed;top:200px;right:50px">
+        <div id="myCarousel" class="carousel" style="position:absolute;width:900px;height:400px;top:200px;right:50px">
             <h3>
                 Images of the car
             </h3>
@@ -164,7 +163,7 @@
     }
     else
     {
-        <div style="position:fixed;top:165px;right:800px">
+        <div id="nothingFound" style="position:absolute;top:165px;right:800px">
             <h3>
                 Images of the car
             </h3>

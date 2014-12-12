@@ -5,6 +5,7 @@ using System.Web.Http.Results;
 using System.Web.Mvc;
 using DriveIT.Models;
 using DriveIT.Web.ApiControllers;
+using Microsoft.AspNet.Identity;
 
 namespace DriveIT.Web.MvcControllers
 {
@@ -23,7 +24,7 @@ namespace DriveIT.Web.MvcControllers
         {
             var newComment = new CommentDto();
             newComment.CarId = carId;
-            newComment.CustomerId = customerId;
+            newComment.CustomerId = User.Identity.GetUserName();
             return View(newComment);
         }
 
