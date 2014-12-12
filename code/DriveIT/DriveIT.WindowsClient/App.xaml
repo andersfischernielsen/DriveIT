@@ -102,6 +102,7 @@
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Background" Value="{DynamicResource PowerButtonBackgroundColorBrush}"/>
+                <Setter Property="Template" Value="{DynamicResource DisabledButtonColorTemplate}"/>
             </Style>
 
             <Style x:Key="SmallButtonStyle" TargetType="Button">
@@ -149,6 +150,33 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <ControlTemplate x:Key="DisabledButtonColorTemplate" TargetType="{x:Type ButtonBase}">
+                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="Button.IsDefaulted" Value="True">
+                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" TargetName="border" Value="Brown"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" TargetName="border" Value="Brown"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
+                    </Trigger>
+                    <Trigger Property="ToggleButton.IsChecked" Value="True">
+                        <Setter Property="Background" TargetName="border" Value="Brown"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" TargetName="border" Value="Brown"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="Brown"/>
+                        <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Chartreuse"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
         </ResourceDictionary>
 
     </Application.Resources>
