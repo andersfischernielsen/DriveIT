@@ -18,7 +18,8 @@ namespace DriveIT.WindowsClient.Controllers
         static private HttpClient _httpClient;
 
         /// <summary>
-        /// Logs into the windows client if user is of role Employee or Administrator.
+        /// Logs into the windows client if user is of role Employee or Administrator. This sets the header of the ongoing http requests.
+        /// When logged in the role of the username is checked and if its customer profile an exception occurs.
         /// </summary>
         /// <param name="username">The username of the user</param>
         /// <param name="password">The password of the user</param>
@@ -51,9 +52,9 @@ namespace DriveIT.WindowsClient.Controllers
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
         /// <summary>
-        /// 
+        /// Creates a Post httprequest with the generic T to the webAPI at the url BaseAddress + uri. 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
         /// <param name="uri"></param>
         /// <param name="objectToCreate"></param>
         /// <returns></returns>
