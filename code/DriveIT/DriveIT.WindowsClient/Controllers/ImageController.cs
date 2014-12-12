@@ -9,6 +9,12 @@ namespace DriveIT.WindowsClient.Controllers
 {
     public class ImageController
     {
+        /// <summary>
+        /// Uploads the image to Azure, and then proceeds to return the imagepath.
+        /// </summary>
+        /// <param name="id">The id of the car to be associated with the image</param>
+        /// <param name="filepath">The filepath of the image to be uploaded</param>
+        /// <returns>Returns the imagepath for the image</returns>
         public static async Task<String> UploadImage(int id, string filepath)
         {
             // Retrieve storage account from connection string.
@@ -30,9 +36,9 @@ namespace DriveIT.WindowsClient.Controllers
                     PublicAccess = BlobContainerPublicAccessType.Blob
                 });
 
-
+            var guid = Guid.NewGuid().ToString();
             // Retrieve reference to a blob named "myblob".
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(Path.GetFileName(filepath));
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(guid + Path.GetFileName(filepath));
 
             // Create or overwrite the "myblob" blob with contents from a local file.
             using (var fileStream = File.OpenRead(filepath))
@@ -40,7 +46,7 @@ namespace DriveIT.WindowsClient.Controllers
                 await blockBlob.UploadFromStreamAsync(fileStream);
             }
 
-            return string.Format("https://driveit.blob.core.windows.net/car{0}/{1}", id, Path.GetFileName(filepath));
+            return string.Format("https://driveit.blob.core.windows.net/car{0}/{1}{2}", id, guid, Path.GetFileName(filepath));
         }
     }
 }

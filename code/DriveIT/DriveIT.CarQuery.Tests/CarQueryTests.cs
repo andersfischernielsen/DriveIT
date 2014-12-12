@@ -14,13 +14,36 @@ namespace DriveIT.CarQuery.Tests
     public class CarQueryTests
     {
         [Test]
-        public async void TestRead()
+        public async void TestReadMake()
         {
             var result = await JSONWrapper.Read<TrimArray>("make=ford");
 
             Assert.IsNotNull(result);
             Assert.GreaterOrEqual(result.Trims.Count(), 1);
             Assert.IsTrue(result.Trims[0].make_display.ToLower() == "ford");
+        }
+
+        [Test]
+        public async void TestReadYearAndMake()
+        {
+            var result = await JSONWrapper.Read<TrimArray>("make=ford&year=2005");
+
+            Assert.IsNotNull(result);
+            Assert.GreaterOrEqual(result.Trims.Count(), 1);
+            Assert.IsTrue(result.Trims[0].make_display.ToLower() == "ford");
+            Assert.IsTrue(result.Trims[0].model_year.ToLower() == "2005");
+        }
+
+        [Test]
+        public async void TestReadYearModelAndMake()
+        {
+            var result = await JSONWrapper.Read<TrimArray>("make=ford&year=2005&model=focus");
+
+            Assert.IsNotNull(result);
+            Assert.GreaterOrEqual(result.Trims.Count(), 1);
+            Assert.IsTrue(result.Trims[0].make_display.ToLower() == "ford");
+            Assert.IsTrue(result.Trims[0].model_year.ToLower() == "2005");
+            Assert.IsTrue(result.Trims[0].model_name.ToLower() == "focus");
         }
 
         [Test]

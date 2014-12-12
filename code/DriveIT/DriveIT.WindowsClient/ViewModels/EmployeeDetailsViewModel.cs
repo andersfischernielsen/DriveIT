@@ -27,6 +27,7 @@ namespace DriveIT.WindowsClient.ViewModels
         public EmployeeDetailsViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
+            GenerateBestSellingEmployeeRank();
 
             GravatarLink = GravatarController.CreateGravatarLink(_employeeDto.Email);
         }
@@ -66,6 +67,49 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("Email");
             }
         }
+
+        public string JobTitle
+        {
+            get
+            {
+                return _employeeDto.JobTitle;
+            }
+            set
+            {
+                _employeeDto.JobTitle = value;
+                NotifyPropertyChanged("JobTitle");
+            }
+        }
+
+        private string _bestSellingEmployeeRank = "";
+        public string BestSellingEmployee
+        {
+            get
+            {
+                return _bestSellingEmployeeRank;
+            }
+            set
+            {
+                _bestSellingEmployeeRank = value;
+                NotifyPropertyChanged("BestSellingEmployee");
+            }
+        }
+
+        /// <summary>
+        /// Sums all sales on employees and get this employees index on the ordered list - and thereby getting the logged in employees rank.
+        /// </summary>
+        private async void GenerateBestSellingEmployeeRank()
+        {
+            var temp = await (new SaleController().ReadSaleList());
+            var sells = temp
+                        .GroupBy(a => a.EmployeeId)
+                        .Select(a => new { Amount = a.Sum(b => b.Price), EmployeeId = a.Key })
+                        .OrderByDescending(a => a.Amount)
+                        .ToList();
+            var thisEmployee = sells.Find(i => i.EmployeeId == _employeeDto.Id);
+            BestSellingEmployee = "" + (sells.IndexOf(thisEmployee)+1);
+        }
+
 
 
         public string FirstName
