@@ -138,7 +138,7 @@ namespace DriveIT.EntityFramework.Migrations
                     CarId = 1,
                     CustomerId = "cust@driveit.dk",
                     Created = DateTime.Now,
-                    EmployeeId = "mlin@itu.dk"
+                    EmployeeId = "admin@driveit.dk"
                 }
             };
 

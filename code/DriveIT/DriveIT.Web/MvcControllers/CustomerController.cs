@@ -11,16 +11,16 @@ namespace DriveIT.Web.MvcControllers
     {
         private CustomersController controller = new CustomersController();
 
-        public async Task<ActionResult> Show(string id)
+        public async Task<ActionResult> Show(string email)
         {
-            var customer = await controller.Get(id) as OkNegotiatedContentResult<CustomerDto>;
+            var customer = await controller.Get(email) as OkNegotiatedContentResult<CustomerDto>;
             return View(customer.Content);
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Edit(string email)
         {
-            var customer = await controller.Get(id) as OkNegotiatedContentResult<CustomerDto>;
+            var customer = await controller.Get(email) as OkNegotiatedContentResult<CustomerDto>;
             return View(customer.Content);
         }
 
@@ -33,9 +33,9 @@ namespace DriveIT.Web.MvcControllers
             return RedirectToAction("Index", "Manage");
         }
 
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(string email)
         {
-            await controller.Delete(id);
+            await controller.Delete(email);
             return RedirectToAction("Index", "Home");
         }
     }
