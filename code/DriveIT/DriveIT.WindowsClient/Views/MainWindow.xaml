@@ -6,7 +6,7 @@
     xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
     mc:Ignorable="d"
         x:Class="DriveIT.WindowsClient.Views.MainWindow"
-        Title="MainWindow" Height="744" Width="1366" Background="#FFEDF1F3"
+        Title="MainWindow" Height="758" Width="1366" Background="#FFEDF1F3"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainViewViewModel/>
@@ -703,8 +703,8 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column FieldName="SaleId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
-                                    <xcdg:Column FieldName="Price" Title="Created"  ReadOnly="True" Width="*"/>
-                                    <xcdg:Column FieldName="Sold" Title="Sold"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Price" Title="Sold for"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Sold" Title="Date Sold"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
