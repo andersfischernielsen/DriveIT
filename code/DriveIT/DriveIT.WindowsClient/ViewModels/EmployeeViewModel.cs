@@ -204,9 +204,8 @@ namespace DriveIT.WindowsClient.ViewModels
                         break;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
                 Status = "Failed to save employee!";
             }
         }
@@ -214,7 +213,7 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Gets called from the view
         /// </summary>
-        public async void CreateEmployee()
+        public void CreateEmployee()
         {
             try
             {
@@ -237,7 +236,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Status = "Failed to create employee!";
             }
@@ -255,7 +254,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 await employeeController.UpdateEmployee(_employeeDto);
                 Status = "Employee Updated";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to update employee!";
@@ -278,7 +277,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     EmployeeState = EmployeeStateEnum.NotInSystem;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to delete employee!";
