@@ -13,8 +13,8 @@ namespace DriveIT.Web.MvcControllers
 
         public async Task<ActionResult> Index()
         {
-            var cars = await controller.Get() as OkNegotiatedContentResult<List<CarDto>>;
-            return View(cars.Content);
+            var cars = await controller.WebCarList();
+            return View(cars);
         }
 
         public ActionResult About()

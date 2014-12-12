@@ -16,6 +16,12 @@ namespace DriveIT.EntityFramework.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
+        /// <summary>
+        /// Seed the initial Entities into the database. This is to avoid having to spend a lot
+        /// of time doing this manually at deployment. 
+        /// This creates an admin user, a customer and a bunch of Orders, Cars and ContactRequests.
+        /// </summary>
+        /// <param name="context">The DriveITContext to seed.</param>
         protected override void Seed(DriveITContext context)
         {
             var roleStore = new RoleStore<IdentityRole>(context);
