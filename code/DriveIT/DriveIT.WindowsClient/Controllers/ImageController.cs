@@ -9,6 +9,12 @@ namespace DriveIT.WindowsClient.Controllers
 {
     public class ImageController
     {
+        /// <summary>
+        /// Uploads the image to Azure, and then proceeds to return the imagepath.
+        /// </summary>
+        /// <param name="id">The id of the car to be associated with the image</param>
+        /// <param name="filepath">The filepath of the image to be uploaded</param>
+        /// <returns>Returns the imagepath for the image</returns>
         public static async Task<String> UploadImage(int id, string filepath)
         {
             // Retrieve storage account from connection string.
