@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using DriveIT.EntityFramework.Entities;
 using DriveIT.Models;
 
 namespace DriveIT.Web.Models
 {
+    /// <summary>
+    /// DtoExtensions is a collection of static extension-methods that enables the user 
+    /// to convert between entities and dtos without writing the code every time.
+    /// </summary>
     public static class DtoExtensions
     {
-
         public static Car ToEntity(this CarDto dto)
         {
             return new Car
@@ -30,21 +31,6 @@ namespace DriveIT.Web.Models
                 TopSpeed = dto.TopSpeed,
                 ImagePaths = dto.ImagePaths.Select(path => new ImagePath { Path = path }).ToList()
             };
-        }
-
-        public static List<ImagePath> ToImagePaths(this CarDto dto)
-        {
-            if (!dto.Id.HasValue)
-            {
-                throw new InvalidOperationException("Id not set on dto");
-            }
-            return dto.ImagePaths
-                .Select(path => new ImagePath
-                {
-                    CarId = dto.Id.Value,
-                    Path = path
-                })
-                .ToList();
         }
 
         public static CarDto ToDto(this Car car)
