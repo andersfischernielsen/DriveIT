@@ -61,7 +61,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion
 
-        #region CRUD
+        #region CRUDS
         public async void ReadList()
         {
             try
@@ -75,7 +75,7 @@ namespace DriveIT.WindowsClient.ViewModels
             catch (Exception e)
             {
 
-                throw;
+                Status = "Failed to retrieve data for sales!";
             }
         }
         public async void UpdateList()
@@ -91,8 +91,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update the list!";
             }
         }
 
@@ -109,8 +109,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to delete the sale!";
             }
         }
 
@@ -125,8 +125,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to create window!";
             }
         }
 
@@ -140,10 +140,10 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception)
             {
-                
-                throw;
+
+                Status = "Failed to update window!";
             }
         }
-        #endregion CRUD
+        #endregion CRUDS
     }
 }
