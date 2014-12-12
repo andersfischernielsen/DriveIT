@@ -482,21 +482,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Employees" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
-                            <Button.Background>
-                                <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
-                            </Button.Background>
-                            <StackPanel>
-                                <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
-                                <TextBlock Text="Create" Style="{DynamicResource PowerToolTextBlockStyle}"/>
-                            </StackPanel>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=EmployeesDataGrid}" MethodName="CreateNewEmployeeWindow"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                        <Button IsEnabled="{Binding DataContext.CanUpdate, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -510,7 +496,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                        <Button IsEnabled="{Binding DataContext.CanDelete, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -524,7 +510,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,12" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
