@@ -24,52 +24,62 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        public ContactRequestListViewModel(IEnumerable<ContactRequestDto> contactRequestDtos)
-        {
-            ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>(
-                contactRequestDtos
-                .Select(contactRequest => new ContactRequestViewModel(contactRequest)));
-        }
+        #region Properties
         public ContactRequestListViewModel()
         {
             ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>();
-            ReadList();
+            UpdateList();
         }
+
+        private string _status = "";
+
+        public string Status
+        {
+            get { return _status; } 
+            set { 
+                    _status = value; 
+                    NotifyPropertyChanged("Status"); 
+                }
+        }
+
+        private bool _canDeleteAndUpdate;
+        public bool CanDeleteAndUpdate
+        {
+            get { return _canDeleteAndUpdate; }
+            set
+            {
+                _canDeleteAndUpdate = value;
+                NotifyPropertyChanged("CanDeleteAndUpdate");
+            }
+        }
+        #endregion Properties
 
         #region CRUDS
-
-        public async void ReadList()
-        {
-            try
-            {
-                var contactRequestController = new ContactRequestController();
-                foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
-                {
-                    ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
-                }
-            }
-            catch (Exception e)
-            {
-                
-                throw;
-            }
-        }
-
         public async void UpdateList()
         {
             try
             {
+                Status = "";
                 ContactRequestViewModels.Clear();
                 var contactRequestController = new ContactRequestController();
                 foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
                 {
                     ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
                 }
+                if (ContactRequestViewModels.Count >= 1)
+                {
+                    SelectedRequest = ContactRequestViewModels[0];
+                    CanDeleteAndUpdate = true;
+                }
+                else
+                {
+                    CanDeleteAndUpdate = false;
+                }
             }
             catch (Exception e)
             {
-                
-                throw;
+                Status = "Failed to retrieve contact requests!";
+                CanDeleteAndUpdate = false;
             }
         }
 
@@ -81,13 +91,21 @@ namespace DriveIT.WindowsClient.ViewModels
                 else
                 {
                     ContactRequestViewModels.Remove(SelectedRequest);
-                    SelectedRequest = null;
+                    if (ContactRequestViewModels.Count >= 1)
+                    {
+                        SelectedRequest = ContactRequestViewModels[0];
+                        CanDeleteAndUpdate = true;
+                    }
+                    else
+                    {
+                        CanDeleteAndUpdate = false;
+                    }
                 }
+                Status = "";
             }
             catch (Exception e)
             {
-                
-                throw;
+                Status = "Failed to delete the contact request!";
             }
         }
 
@@ -99,11 +117,11 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntityContactRequestWindow { DataContext = newContactRequest };
                 ContactRequestViewModels.Add(newContactRequest);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
-                
-                throw;
+                Status = "Failed to create window!";
             }
         }
 
@@ -114,11 +132,12 @@ namespace DriveIT.WindowsClient.ViewModels
                 ContactRequestViewModel contactRequest = SelectedRequest;
                 var window = new EntityContactRequestWindow { DataContext = contactRequest };
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update window!";
             }
         }
 

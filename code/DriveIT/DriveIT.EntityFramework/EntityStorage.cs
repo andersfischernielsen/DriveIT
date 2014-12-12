@@ -82,6 +82,10 @@ namespace DriveIT.EntityFramework
 
             using (optionalContext)
             {
+                optionalContext.ImagePaths
+                    .RemoveRange(
+                        optionalContext.ImagePaths
+                        .Where(imagePath => imagePath.CarId == idToUpdate));
                 var oldCar = await optionalContext.Cars.FindAsync(idToUpdate);
                 CopyCarProperties(oldCar, carToReplaceWith);
 
@@ -174,6 +178,7 @@ namespace DriveIT.EntityFramework
             toChange.FirstName = toSetFrom.FirstName;
             toChange.LastName = toSetFrom.LastName;
             toChange.PhoneNumber = toSetFrom.PhoneNumber;
+            toChange.JobTitle = toSetFrom.JobTitle;
         }
         #endregion
         #region Customer
@@ -395,24 +400,5 @@ namespace DriveIT.EntityFramework
             toChange.Price = toSetFrom.Price;
         }
         #endregion
-        //#region ImagePath
-        //private async Task CreateImagePath(ImagePath imagePath)
-        //{
-        //    using (var context = new DriveITContext())
-        //    {
-        //        context.ImagePaths.Add(imagePath);
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
-
-        //private async Task RemoveImagePath(ImagePath objectToDelete)
-        //{
-        //    using (var context = new DriveITContext())
-        //    {
-        //        context.ImagePaths.Remove(objectToDelete);
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
-        //#endregion
     }
 }

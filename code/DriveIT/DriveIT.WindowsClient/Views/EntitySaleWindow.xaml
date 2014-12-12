@@ -102,7 +102,7 @@
 				Grid.Column="0" VerticalAlignment="Top" IsReadOnly="true" IsEnabled="False" Text="{Binding SaleId}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,265,0" Watermark="Price" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Price}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,265,0" Watermark="CarId" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CarId}"/>
-            <DatePicker Padding="6,2" Margin="10,76,265,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Sold" Height="28" FontSize="16" Grid.Row="1" DisplayDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Long" SelectedDate="{Binding Sold}" Text="Monday, January 01, 2014">
+            <DatePicker IsEnabled="False" Padding="6,2" Margin="10,76,265,0" VerticalAlignment="Top" BorderBrush="{x:Null}" ToolTip="Sold" Height="28" FontSize="16" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="{Binding Sold}" Text="Monday, January 01, 2014">
                 <DatePicker.Background>
                     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}"/>
                 </DatePicker.Background>

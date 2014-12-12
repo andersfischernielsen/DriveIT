@@ -188,6 +188,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     {
                         if (passwordViewModel.ProfileCreated)
                         {
+                            CustomerId = Email;
                             Status = "Customer Created";
                             CustomerState = CustomerEnum.InSystem;
                         }

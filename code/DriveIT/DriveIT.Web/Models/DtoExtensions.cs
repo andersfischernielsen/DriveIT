@@ -178,7 +178,8 @@ namespace DriveIT.Web.Models
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 PhoneNumber = dto.Phone,
-                Email = dto.Email
+                Email = dto.Email,
+                JobTitle = dto.JobTitle,
             };
         }
 
@@ -190,7 +191,8 @@ namespace DriveIT.Web.Models
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
                 Phone = employee.PhoneNumber,
-                Email = employee.Email
+                Email = employee.Email,
+                JobTitle = employee.JobTitle,
             };
         }
     }

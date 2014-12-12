@@ -255,6 +255,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=RequestsForContactTabItem}" Margin="10,10,10,44" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CarsPowerTabItem">
@@ -324,6 +325,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=CarsTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="OrdersPowerTabItem">
@@ -393,6 +395,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=OrdersTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="CustomersPowerTabItem">
@@ -462,6 +465,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=CustomersTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="EmployeesPowerTabItem">
@@ -534,6 +538,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
+                        <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=EmployeesTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -576,7 +581,7 @@
                         <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Orders" Margin="-5,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
+                <Button Style="{DynamicResource MenuBarButtonStyle}" Content="Sales" Margin="-5,205,0,0" VerticalAlignment="Top" Height="80" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <ei:GoToStateAction StateName="OrdersBarState"/>
@@ -629,7 +634,7 @@
                     <TabControl.Background>
                         <SolidColorBrush Color="{DynamicResource OverlayComponentsColor}" Opacity="0.2"/>
                     </TabControl.Background>
-                    <TabItem Header="RequestsForContactTabItem">
+                    <TabItem x:Name="RequestsForContactTabItem" Header="RequestsForContactTabItem">
                         <TabItem.DataContext>
                             <ViewModels:ContactRequestListViewModel/>
                         </TabItem.DataContext>
@@ -655,11 +660,12 @@
                                     <xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="CarsTabItem">
+                    <TabItem x:Name="CarsTabItem" Header="CarsTabItem">
                         <TabItem.DataContext>
                             <ViewModels:CarListViewModel/>
                         </TabItem.DataContext>
@@ -681,15 +687,15 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column IsMainColumn="True" FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
-                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CarMake" Title="Make"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CarModel" Title="Model" ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Fuel"  Title="Fuel"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="OrdersTabItem">
+                    <TabItem x:Name="OrdersTabItem" Header="OrdersTabItem">
                         <TabItem.DataContext>
                             <ViewModels:SaleListViewModel/>
                         </TabItem.DataContext>
@@ -716,11 +722,12 @@
                                     <xcdg:Column FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CustomerId" Title="CustomerId"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="EmployeeId" Title="EmployeeId"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="CustomersTabItem">
+                    <TabItem x:Name="CustomersTabItem" Header="CustomersTabItem">
                         <TabItem.DataContext>
                             <ViewModels:CustomerListViewModel/>
                         </TabItem.DataContext>
@@ -742,16 +749,16 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column FieldName="CustomerId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
-                                    <xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Email" Title="Email"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="EmployeesTabItem">
+                    <TabItem x:Name="EmployeesTabItem" Header="EmployeesTabItem">
                         <TabItem.DataContext>
                             <ViewModels:EmployeeListViewModel/>
                         </TabItem.DataContext>
@@ -773,10 +780,10 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column FieldName="EmployeeId" Title="Id"  ReadOnly="True" Width="*" IsMainColumn="True" />
-                                    <xcdg:Column FieldName="Username" Title="Username"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="FirstName" Title="FirstName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="LastName" Title="LastName"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Phone" Title="Phone"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>
                                 </xcdg:DataGridControl.Columns>
                             </xcdg:DataGridControl>
                         </Grid>

@@ -54,6 +54,7 @@ namespace DriveIT.EntityFramework.Migrations
                     FirstName = "DriveIT",
                     LastName = "Adminson",
                     PhoneNumber = "88888888",
+                    JobTitle = "Boss"
                 };
 
                 CheckResult(userManager.Create(employee, "4dmin_Password"));
