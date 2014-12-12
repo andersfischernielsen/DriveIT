@@ -71,6 +71,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     SaleViewModels.Add(new SaleViewModel(saleDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -88,6 +89,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     SaleViewModels.Add(new SaleViewModel(saleDto));
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -106,6 +108,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     SaleViewModels.Remove(SelectedSale);
                     SelectedSale = null;
                 }
+                Status = "";
             }
             catch (Exception e)
             {
@@ -122,6 +125,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 var window = new EntitySaleWindow { DataContext = newSale };
                 SaleViewModels.Add(newSale);
                 window.Show();
+                Status = "";
             }
             catch (Exception e)
             {
@@ -137,6 +141,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 SaleViewModel sale = SelectedSale;
                 var window = new EntitySaleWindow { DataContext = sale };
                 window.Show();
+                Status = "";
             }
             catch (Exception)
             {
