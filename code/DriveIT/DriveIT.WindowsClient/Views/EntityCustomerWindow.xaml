@@ -9,7 +9,7 @@
 	x:Class="DriveIT.WindowsClient.Views.EntityCustomerWindow"
 	x:Name="CustomerWindow"
 	Title="EntityCustomerWindow"
-	Width="853" Height="553" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
+	Width="853" Height="460.443" Background="#FFE9EFF3" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:CustomerViewModel/>
     </Window.DataContext>
@@ -90,7 +90,7 @@
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,76,10,0" Watermark="FirstName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding FirstName}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,109,10,0" Watermark="LastName" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding LastName}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,142,10,0" Watermark="Phone" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Phone}"/>
-            <Image Grid.Column="1" Margin="10,10,10,148" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding GravatarLink}"/>
+            <Image Grid.Column="1" Margin="10,10,10,48" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding GravatarLink}"/>
             <xctk:WatermarkTextBox Style="{DynamicResource FillTextBlockStyle}" Margin="10,43,10,0" Watermark="Email" Height="28" Grid.Row="1" VerticalAlignment="Top" Text="{Binding Email}"/>
             <Label x:Name="CarStatusLabel" Style="{DynamicResource StatusLabelStyle}" Margin="155,10,10,0" VerticalAlignment="Top" Height="35" Content="{Binding Status}"/>
         </Grid>
