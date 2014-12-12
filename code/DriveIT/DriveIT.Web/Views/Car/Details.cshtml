@@ -5,10 +5,10 @@
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.carousel').carousel({
             interval: 5000
-        })
+        });
     });
 </script>
 
@@ -17,14 +17,26 @@
     ViewBag.Title = "Car Details";
 }
 
-<h2>Car Details</h2>
+<h1>Car Details</h1>
 <p>In this window, car information of the choosen car, from the previous page, will be shown.</p>
 
 <div>
     <hr />
+
+    <h2>The car is: @if (Model.Car.Sold)
+                    {
+                        <strong style="color: red">SOLD</strong>
+
+                    }
+                    else
+                    {
+                        <strong style="color: green">FOR SALE</strong>
+                    }
+    </h2>
+
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Model)
+            @Html.DisplayNameFor(model => model.Car.Model):
         </dt>
 
         <dd>
@@ -32,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Make)
+            @Html.DisplayNameFor(model => model.Car.Make):
         </dt>
 
         <dd>
@@ -40,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Year)
+            @Html.DisplayNameFor(model => model.Car.Year):
         </dt>
 
         <dd>
@@ -48,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Price)
+            @Html.DisplayNameFor(model => model.Car.Price):
         </dt>
 
         <dd>
@@ -56,7 +68,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Created)
+            @Html.DisplayNameFor(model => model.Car.Created):
         </dt>
 
         <dd>
@@ -64,15 +76,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Sold)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Car.Sold)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Car.Mileage)
+            @Html.DisplayNameFor(model => model.Car.Mileage):
         </dt>
 
         <dd>
@@ -80,7 +84,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Color)
+            @Html.DisplayNameFor(model => model.Car.Color):
         </dt>
 
         <dd>
@@ -88,7 +92,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.DistanceDriven)
+            @Html.DisplayNameFor(model => model.Car.DistanceDriven):
         </dt>
 
         <dd>
@@ -96,7 +100,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Fuel)
+            @Html.DisplayNameFor(model => model.Car.Fuel):
         </dt>
 
         <dd>
@@ -104,7 +108,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Drive)
+            @Html.DisplayNameFor(model => model.Car.Drive):
         </dt>
 
         <dd>
@@ -112,7 +116,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.Transmission)
+            @Html.DisplayNameFor(model => model.Car.Transmission):
         </dt>
 
         <dd>
@@ -120,7 +124,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.TopSpeed)
+            @Html.DisplayNameFor(model => model.Car.TopSpeed):
         </dt>
 
         <dd>
@@ -128,7 +132,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Car.NoughtTo100)
+            @Html.DisplayNameFor(model => model.Car.NoughtTo100):
         </dt>
 
         <dd>
@@ -136,38 +140,43 @@
         </dd>
 
     </dl>
-    <p>Images:</p>
-
-    @if (Model.Car.ImagePaths.Count == 0)
+    
+    @if (Model.Car.ImagePaths.Count > 0)
     {
-        <div id="myCarousel" class="carousel" style="width:900px;height:900px;position:fixed;top:200px;right:-50px">
-            <div class="carousel-inner">
-                
-                <div class="item">
-                    <img src="http://i.stack.imgur.com/QE8X8.png" onclick="" height="300" width="300"/>
-                </div>
-                
-                <div class="item">
-                    <img src="http://i.stack.imgur.com/QE8X7.png" onclick="" height="300" width="300" />
-                </div>
-                
+        <div id="myCarousel" class="carousel" style="width:900px;height:400px;position:fixed;top:200px;right:50px">
+            <h3>
+                Images of the car
+            </h3>
+            <div class="carousel-inner">            
+                @foreach (var image in Model.Car.ImagePaths)
+                {
+                    <div class="item">
+                        <img src="@image" height="300" width="300" />
+                    </div>
+                }
             </div>
             
-            <div id="myCarouselControll" class="carousel" style="width:200px;">
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            <div id="myCarouselControll" class="carousel" style="width:270px;height:200px">
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left" style="color:black"></span></a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right" style="color:black"></span></a>
             </div>
         </div>
     }
     else
     {
-       <p>No images to show.</p>
+        <div style="position:fixed;top:165px;right:800px">
+            <h3>
+                Images of the car
+            </h3>
+
+            <p>
+                No images to show.
+            </p>
+        </div>
     }
 
 </div>
-
-
-
+<br>
 @{
     Html.RenderPartial("~/Views/Comment/Index.cshtml", Model);
 }

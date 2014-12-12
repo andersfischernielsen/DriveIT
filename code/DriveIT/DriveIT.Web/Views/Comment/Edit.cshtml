@@ -5,7 +5,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h3>Edit your comment below</h3>
+        <h3>Edit comment</h3>
+        <p>In this view, you are able to edit your comment.</p>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
