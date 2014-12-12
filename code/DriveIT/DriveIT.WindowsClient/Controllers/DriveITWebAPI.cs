@@ -18,11 +18,11 @@ namespace DriveIT.WindowsClient.Controllers
         static private HttpClient _httpClient;
 
         /// <summary>
-        /// 
+        /// Logs into the windows client if user is of role Employee or Administrator.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
+        /// <param name="username">The username of the user</param>
+        /// <param name="password">The password of the user</param>
+        /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public static async Task Login(string username, string password)
         {
             #if DEBUG
