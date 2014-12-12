@@ -336,9 +336,6 @@
     <Resource Include="Image\icons\contactrequests\sale.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="DriveIT.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Image\icons\DriveIT.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
