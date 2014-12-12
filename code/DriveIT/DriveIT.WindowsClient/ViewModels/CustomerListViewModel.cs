@@ -64,8 +64,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to retrieve data for customers!";
             }
         }
         public async void UpdateList()
@@ -81,8 +81,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update the list of customers!";
             }
         }
         public void DeleteCustomer()
@@ -98,8 +98,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to delete the customer!";
             }
         }
 
@@ -114,8 +114,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to create window!";
             }
         }
 
@@ -129,8 +129,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
             catch (Exception e)
             {
-                
-                throw;
+
+                Status = "Failed to update window!";
             }
         }
 
