@@ -189,7 +189,7 @@ namespace DriveIT.WindowsClient.ViewModels
                         break;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 Status = "Failed to save contact request!";
@@ -207,7 +207,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 await contactRequestController.UpdateContactRequest(_contactRequestDto);
                 Status = "Contact Request Updated";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to update contact request!";
@@ -230,7 +230,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     ContactRequestState = ContactRequestEnum.NotInSystem;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Status = "Failed to delete contact request!";
             }

@@ -91,7 +91,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CanDeleteAndUpdate = false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 CanDeleteAndUpdate = false;
                 Status = "Failed to retrieve data for cars!";
@@ -118,7 +118,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 }
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to delete the car!";
@@ -135,7 +135,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 window.Show();
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to create window!";
@@ -151,7 +151,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 window.Show();
                 Status = "";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
                 Status = "Failed to update window!";
