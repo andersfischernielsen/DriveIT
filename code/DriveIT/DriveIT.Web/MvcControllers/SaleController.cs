@@ -25,10 +25,10 @@ namespace DriveIT.Web.MvcControllers
                 return View(tuple);
             }
 
-            public async Task<ActionResult> Details(string email)
+            public async Task<ActionResult> Details(int id)
             {
-                var car = await cc.Get(email) as OkNegotiatedContentResult<CarDto>;
-                var sale = await controller.Get(email) as OkNegotiatedContentResult<SaleDto>;
+                var car = await cc.Get(id) as OkNegotiatedContentResult<CarDto>;
+                var sale = await controller.Get(id) as OkNegotiatedContentResult<SaleDto>;
                 var tuple = new Tuple<CarDto, SaleDto>(car.Content, sale.Content);
                 return View(tuple);
             }
