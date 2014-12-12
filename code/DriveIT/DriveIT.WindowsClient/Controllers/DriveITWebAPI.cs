@@ -18,7 +18,8 @@ namespace DriveIT.WindowsClient.Controllers
         static private HttpClient _httpClient;
 
         /// <summary>
-        /// Logs into the windows client if user is of role Employee or Administrator.
+        /// Logs into the windows client if user is of role Employee or Administrator. This sets the header of the ongoing http requests.
+        /// When logged in the role of the username is checked and if its customer profile an exception occurs.
         /// </summary>
         /// <param name="username">The username of the user</param>
         /// <param name="password">The password of the user</param>
@@ -51,9 +52,9 @@ namespace DriveIT.WindowsClient.Controllers
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
         /// <summary>
-        /// 
+        /// Creates a Post httprequest with the generic T to the webAPI at the url BaseAddress + uri. 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T"> An object matching the expected object in the API at url (BaseAddress+Uri)</typeparam>
         /// <param name="uri"></param>
         /// <param name="objectToCreate"></param>
         /// <returns></returns>
@@ -65,7 +66,7 @@ namespace DriveIT.WindowsClient.Controllers
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsAsync<T>();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -97,8 +98,6 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                //Console.WriteLine(ex.Message);
-                //ErrorMessagePopUp();
                 throw;
             }
         }
@@ -131,8 +130,6 @@ namespace DriveIT.WindowsClient.Controllers
             }
             catch (Exception)
             {
-                //Console.WriteLine(ex.Message);
-                //ErrorMessagePopUp();
                 throw;
             }
         }
@@ -144,17 +141,15 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns></returns>
         public async static Task<IList<T>> ReadList<T>(string uri)
         {
-            // TODO FJERN INITIERINGEN new T[0]
-            T[] objects = new T[0];
+            T[] objects;
             try
             {
                 var response = await _httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 objects = await response.Content.ReadAsAsync<T[]>();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                // TODO Håndter dette
                 throw;
             }
             return objects.ToList();
@@ -175,7 +170,7 @@ namespace DriveIT.WindowsClient.Controllers
                 objectToRead = await response.Content.ReadAsAsync<T>();
                 return objectToRead;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -212,7 +207,7 @@ namespace DriveIT.WindowsClient.Controllers
                 var response = await _httpClient.DeleteAsync(uri);
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -235,9 +230,8 @@ namespace DriveIT.WindowsClient.Controllers
             {
                 await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Customer);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
                 throw;
             }
         }
@@ -260,9 +254,8 @@ namespace DriveIT.WindowsClient.Controllers
                 if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
                 await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Employee);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
                 throw;
             }
         }
@@ -285,9 +278,8 @@ namespace DriveIT.WindowsClient.Controllers
                 if (await GetRole() != Role.Administrator) throw new Exception("Access denied");
                 await CreateUser(email, firstName, lastName, password, confirmPassword, phone, confirmPhone, Role.Administrator);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
                 throw;
             }
         }
@@ -315,9 +307,8 @@ namespace DriveIT.WindowsClient.Controllers
                 if (result.IsSuccessStatusCode) return Role.Customer;
                 return null;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
                 throw;
             }
         }
