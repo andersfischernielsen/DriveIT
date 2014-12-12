@@ -7,7 +7,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('.carousel').carousel({
-            interval: 5000
+            interval: 4000
         });
     });
 </script>
@@ -161,24 +161,24 @@ else
 
     </dl>
     
-    @if (Model.Car.ImagePaths.Count > 0)
+    @if (Model.Car.ImagePaths.Count == 0)
     {
-        <div id="myCarousel" class="carousel" style="position:absolute;width:900px;height:400px;top:230px;right:50px">
+        <div id="myCarousel" class="carousel" style="position:absolute;width:900px;height:400px;top:200px;right:50px">
             <h3>
                 Images of the car
             </h3>
             <div class="carousel-inner">            
                 @foreach (var image in Model.Car.ImagePaths)
                 {
-                    <div class="item" style="width:400px">
+                    <div class="item" style="width:550px">
                         <img src="@image" />
                     </div>
                 }
             </div>
            
             <div id="myCarouselControll" class="carousel">
-                <a class="left carousel-control" id="left" href="#myCarousel" data-slide="prev" style="left:-60px;top:370px;height:0"><span class="glyphicon glyphicon-chevron-left" style="color:black"></span></a>
-                <a class="right carousel-control" id="right" href="#myCarousel" data-slide="next" style="right:460px;top:370px;height:0;"><span class="glyphicon glyphicon-chevron-right" style="color:black"></span></a>
+                <a class="left carousel-control" id="left" href="#myCarousel" data-slide="prev" style="left:-60px;top:0px;height:0"><span class="glyphicon glyphicon-chevron-left" style="color:black"></span></a>
+                <a class="right carousel-control" id="right" href="#myCarousel" data-slide="next" style="right:310px;top:0px;height:0;"><span class="glyphicon glyphicon-chevron-right" style="color:black"></span></a>
             </div> 
         </div>
     }

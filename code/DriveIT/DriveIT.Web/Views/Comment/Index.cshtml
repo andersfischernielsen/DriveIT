@@ -5,7 +5,11 @@
 <p>These are the comments for the specified car that you choose.
     You are able to create a new comment below.</p>
 
-@Html.ActionLink("Create New", "Create", "Comment", new { carId = Model.Car.Id, customerId = User.Identity.GetUserName() }, null)
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Create New", "Create", "Comment", new { carId = Model.Car.Id, customerId = User.Identity.GetUserName() }, null)
+}
+<br><br/>
 
 <table class="table">
     <tr>
