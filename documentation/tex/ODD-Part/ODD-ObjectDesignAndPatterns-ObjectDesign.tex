@@ -1,4 +1,8 @@
 \section{Object Design}
+\subsection{WindowsClient Controllers}
+\subsubsection{Reuse \& Encapsulation}
+To perform the Create, Read, Update and Delete functionality The \texttt{DriveIT Windows Client} uses a number of controllers. These controllers each handle the different kinds of entities which the system supports. To Reuse code and therefore making it easier to test, maintain and makes the system less prone to erros, the class \texttt{DriveITWebAPI} is created. This class encapsulate all http-request code to contact the API and uses generics to allow all the controllers to reuse the methods. 
+Therefore all the entity controllers know nothing of the \texttt{DriveIT Web API} or the code to contact it, and with a few adjustments the \texttt{DriveITWebAPI} could be reused in any other project involving a REST based web API.
 
 \subsection{Persistent Storage}
 
