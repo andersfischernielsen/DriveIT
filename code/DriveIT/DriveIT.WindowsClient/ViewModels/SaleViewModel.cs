@@ -109,6 +109,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CreateUpdateButtonText");
             }
         }
+        /// <summary>
+        /// A string bound to a button's content describing what action will happen when pressing.
+        /// </summary>
         public string CreateUpdateButtonText
         {
             get
@@ -189,6 +192,9 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         #endregion Attributes
 
+        /// <summary>
+        /// Finds the price of the car with id CarId and updates the Property Price.
+        /// </summary>
         public async void FindPriceBasedOnCar()
         {
             try
