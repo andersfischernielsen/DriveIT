@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using DriveIT.Entities.Tests;
 using DriveIT.EntityFramework.Entities;
 using Moq;
 using NUnit.Framework;
@@ -110,5 +109,10 @@ namespace DriveIT.EntityFramework.Tests
         //    Assert.IsNull(result.Employee);
         //    _mockContext.Verify(m => m.SaveChangesAsync(), Times.AtLeastOnce);
         //}
+
+        public static void Main(string[] args)
+        {
+            
+        }
     }
 }

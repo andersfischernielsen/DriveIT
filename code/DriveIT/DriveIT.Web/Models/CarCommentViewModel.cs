@@ -11,5 +11,6 @@ namespace DriveIT.Web.Models
     {
         public CarDto Car;
         public IEnumerable<CommentDto> Comments;
+        public IEnumerable<ContactRequestDto> ContactRequest;
     }
 }
