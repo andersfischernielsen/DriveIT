@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using DriveIT.Models;
 using DriveIT.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -14,6 +13,10 @@ namespace DriveIT.Web.MvcControllers
     [Authorize]
     public class ManageController : Controller
     {
+        /// <summary>
+        /// This class is responsible for managing the signed in user. It is pretty much auto generated with
+        /// the asp.net mvc framework and therefore no further documented by us.
+        /// </summary>
         private DriveITSignInManager _signInManager;
         private DriveITUserManager _userManager;
 

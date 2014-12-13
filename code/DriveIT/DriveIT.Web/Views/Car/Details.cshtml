@@ -1,4 +1,5 @@
-﻿@model DriveIT.Web.Models.CarCommentViewModel
+﻿@using Microsoft.AspNet.Identity
+@model DriveIT.Web.Models.CarCommentViewModel
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <link href="../../Content/cosmo-boostrap.min.css" rel="stylesheet" />
@@ -27,10 +28,29 @@
 @*If user is signed in and car is not sold, contact button is shown*@
 else if (@User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("Create", "ContactRequest", new { id = Model.Car.Id }))
+    bool good = true;
+    foreach(var item in Model.ContactRequest)
     {
-        <input type="submit" value="Request to get contacted" class="btn btn-success" />
-    }  
+        if (item.CustomerId == User.Identity.GetUserId() && item.CarId == Model.Car.Id)
+        {
+            good = false;
+        }
+        else { }
+    }
+    if (good)
+    {
+        using (Html.BeginForm("Create", "ContactRequest", new {id = Model.Car.Id}))
+        {
+            <input type="submit" value="Request to get contacted" class="btn btn-success"/>
+        }
+    }
+    else
+    {
+        <strong>
+            You have requested to get contacted about this car. You can see all your requests and cancel them
+            @Html.ActionLink("HERE", "Index", "ContactRequest", new { email = User.Identity.GetUserId() }, null)
+        </strong>
+    }
 }
 @*If user is not signed in and car is not sold, shown this sentence*@
 else
@@ -163,7 +183,7 @@ else
     
     @if (Model.Car.ImagePaths.Count > 0)
     {
-        <div id="myCarousel" class="carousel" style="position:absolute;width:900px;height:400px;top:200px;right:50px">
+        <div id="myCarousel" class="carousel" style="position:relative;width:900px;height:0px;top:-325px;right:-550px">
             <h3>
                 Images of the car
             </h3>
@@ -184,7 +204,8 @@ else
     }
     else
     {
-        <div id="nothingFound" style="position:absolute;width:900px;height:400px;top:230px;right:50px">
+        
+        <div id="nothingFound" style="position:relative;width:900px;height:0px;top:-325px;right:-550px">
             <h3>
                 Images of the car
             </h3>
