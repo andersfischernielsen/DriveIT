@@ -157,6 +157,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _saleDto.CarId = value.GetValueOrDefault();
+                FindPriceBasedOnCar();
                 NotifyPropertyChanged("CarId");
             }
         }
@@ -187,6 +188,20 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion Attributes
+
+        public async void FindPriceBasedOnCar()
+        {
+            try
+            {
+                var temp = await (new CarController().ReadCar(CarId.GetValueOrDefault()));
+                Price = temp.Price;
+
+            }
+            catch (Exception)
+            {
+                Status = "Something went wrong. CarId might be invalid.";
+            }
+        }
 
         #region CRUDS
         /// <summary>
