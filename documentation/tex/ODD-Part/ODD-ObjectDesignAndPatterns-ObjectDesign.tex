@@ -1,18 +1,22 @@
 \section{Object Design}
 
-\subsection{Reuse}
-\subsubsection{XXX}
+\subsection{Persistent Storage}
 
-\subsection{Inheritance}
-\subsubsection{XXX}
+\subsubsection{Reuse}
+The \texttt{EntitiyStorage} class is very specific for the \texttt{DriveIT System} since it only deals with creating, reading, updating and deleting \texttt{DriveIT} entities. It therefore does not provide any major re-usability for other purposes than this. 
 
-\subsection{Encapsulation}
+Adding re-usability could be accomplished by using generics (supported by the C\# language), which would allow the system to create, read, update and delete any input entity, provided it was supported by the given \texttt{DbContext}. This would allow for greater extensibility and easier code maintenance.
+
+\subsubsection{Inheritance}
+The \texttt{DriveITContext} extends an \texttt{IdentityDbContext} which provides the built in functionality for handling user logins and different user roles, which is used for the login- and access control functionality of the \texttt{DriveIT System}.
+The \texttt{IdentityDbContext} in turn extends a \texttt{DbContext} which enables \texttt{Entity Framework} to save the User entities (along with every other \texttt{DriveIT} entity) in the underlying Microsoft SQL database.
+
+\subsubsection{Encapsulation}
 Encapsulation has been a high priority during development of the \texttt{DriveIT System}. 
 
 Keeping functionality of different sub systems encapsulated has helped debugging and refactoring. Extensibility is also made easier in the future.
 
-\subsubsection{PersistentStorage}
-Encapsulation has been used in the \texttt{Persistent Storage} system in methods dealing with retreiving, editing and deleting entities. Methods generally have few side effects and only do not keep references to others classes after performing their task.
+Encapsulation has been used in the \texttt{Persistent Storage} system in methods dealing with retrieving, editing and deleting entities. Methods generally have few side effects and only do not keep references to others classes after performing their task.
 
 A design choice in implementing the methods were to only keep a \texttt{DriveITContext} (which inherits from \texttt{DbContext}) in memory for a short amount of time to ensure that the context only fulfilled its purpose in dealing with the entities and then was discarded.
 
