@@ -67,7 +67,7 @@ namespace DriveIT.Web.MvcControllers
         public async Task<ActionResult> Delete(int id)
         {
             await controller.Delete(id);
-            return RedirectToAction("Details", "Car", new { carId = id });
+            return RedirectToAction("Index", "ContactRequest", new { email = User.Identity.GetUserId() });
         }
     }
 }

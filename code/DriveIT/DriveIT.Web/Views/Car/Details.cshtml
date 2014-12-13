@@ -46,8 +46,10 @@ else if (@User.Identity.IsAuthenticated)
     }
     else
     {
-        //MUSTBE  MOVED INSIDE OF LOOP
-        @Html.ActionLink("Delete Request", "Delete", "ContactRequest", new {id = Model.ContactRequest}, new {@class = "btn btn-danger"})
+        <strong>
+            You have requested to get contacted about this car. You can see all your requests and cancel them
+            @Html.ActionLink("HERE", "Index", "ContactRequest", new { email = User.Identity.GetUserId() }, null)
+        </strong>
     }
 }
 @*If user is not signed in and car is not sold, shown this sentence*@
