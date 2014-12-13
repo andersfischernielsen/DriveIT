@@ -5,7 +5,7 @@
 \subsubsection{Reuse}
 The \texttt{EntitiyStorage} class is very specific for the \texttt{DriveIT System} since it only deals with creating, reading, updating and deleting \texttt{DriveIT} entities. It therefore does not provide any major re-usability for other purposes than this. 
 
-Adding re-usability could be accomplished by using generics (supported by the C\# language), which would allow the system to create, read, update and delete any input entity, provided it was supported by the given \texttt{DbContext}. This would allow for greater extensibility and easier code maintenance.
+Adding re-usability could be accomplished by using generics (supported by the C$\sharp$ language), which would allow the system to create, read, update and delete any input entity, provided it was supported by the given \texttt{DbContext}. This would allow for greater extensibility and easier code maintenance.
 
 \subsubsection{Inheritance}
 The \texttt{DriveITContext} extends an \texttt{IdentityDbContext} which provides the built in functionality for handling user logins and different user roles, which is used for the login- and access control functionality of the \texttt{DriveIT System}.
@@ -21,3 +21,15 @@ Encapsulation has been used in the \texttt{Persistent Storage} system in methods
 A design choice in implementing the methods were to only keep a \texttt{DriveITContext} (which inherits from \texttt{DbContext}) in memory for a short amount of time to ensure that the context only fulfilled its purpose in dealing with the entities and then was discarded.
 
 Updating entities requires copying all attributes of the entity which is done in separate methods without side effects.
+
+\subsection{CarQuery}
+
+\subsubsection{Reuse}
+The \texttt{JSONWrapper} of the \texttt{CarQuery} sub system is written using generics, which enables using any object and URL as input for getting and deserialising aserialised JSON object, provided that the properties of the input object match the received JSON data. 
+The class is only used by the \texttt{CarQuery} system, though. This functionality could be used by other classes in the system for communicating with e.g. the \texttt{DriveIT Web API}. 
+Having a generic method for dealing with filling out properties instead of a specific \texttt{Car}-only method would also have benefited reuse of the system.
+
+\subsubsection{Encapsulation}
+The functionality of the \texttt{CarQuery} sub system is implemented using few static classes with few methods dealing with small tasks. The classes have been made static due to the fact that their functionality has a "use and forget"-feel to them. 
+
+The sub system is used in short periods of time and only has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} sub system is therefore made up of static functionality.
