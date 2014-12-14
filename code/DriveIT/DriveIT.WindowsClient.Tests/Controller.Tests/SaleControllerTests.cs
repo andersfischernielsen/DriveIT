@@ -62,7 +62,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         }
 
         [Test]
-        public async Task TestCreateCar()
+        public async Task TestCreateSale()
         {
             var t = _saleController.ReadSaleList().Result;
             int amtOfSalesStart = t.Count;
@@ -88,7 +88,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         }
 
         [Test]
-        public async Task TestDeleteCar()
+        public async Task TestDeleteSale()
         {
             var t = _saleController.ReadSaleList().Result;
             int amtOfSalesStart = t.Count;
@@ -104,7 +104,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
 
         [Test]
-        public async Task TestUpdateCar()
+        public async Task TestUpdateSale()
         {
             var t = _saleController.ReadSaleList().Result;
             int amtOfCarsStart = t.Count;
