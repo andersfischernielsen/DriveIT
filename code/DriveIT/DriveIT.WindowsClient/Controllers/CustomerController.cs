@@ -81,7 +81,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// </summary>
         /// <param name="email">The email of the Customer DTO to be deleted</param>
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
-        public async Task DeleteCustomer(int email)
+        public async Task DeleteCustomer(string email)
         {
             string search = "?email=" + email;
             await DriveITWebAPI.Delete<CustomerDto>("customers/" + search);
