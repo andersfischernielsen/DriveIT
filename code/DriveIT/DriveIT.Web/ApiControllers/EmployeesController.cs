@@ -42,16 +42,16 @@ namespace DriveIT.Web.ApiControllers
                 .ToList());
         }
 
-        // GET: api/Employees/5
+        // GET: api/Employees/?email=email
         /// <summary>
-        /// Get an employee by his id.
+        /// Get an employee by his email.
         /// </summary>
-        /// <param name="id">The id of the employee.</param>
+        /// <param name="email">The email of the employee.</param>
         /// <returns>A Task resulting in an IHttpActionResult which states whether the call succeeded or not.
-        /// If it did succeed, it contains the EmployeeDto representing the employee with the id.</returns>
-        public async Task<IHttpActionResult> Get(string id)
+        /// If it did succeed, it contains the EmployeeDto representing the employee with the email.</returns>
+        public async Task<IHttpActionResult> Get(string email)
         {
-            var employee = await _repo.GetEmployeeWithId(id);
+            var employee = await _repo.GetEmployeeWithId(email);
             if (employee == null)
             {
                 return NotFound();
@@ -64,21 +64,21 @@ namespace DriveIT.Web.ApiControllers
         /// Update an employee.
         /// Only accessible by administrators.
         /// </summary>
-        /// <param name="id">The id of the employee to update.</param>
+        /// <param name="email">The email of the employee to update.</param>
         /// <param name="value">The updated information about the employee.</param>
         /// <returns>A Task resulting in an IHttpActionResult which states whether the request succeeded.</returns>
         [AuthorizeRoles(Role.Administrator)]
-        public async Task<IHttpActionResult> Put(string id, [FromBody]EmployeeDto value)
+        public async Task<IHttpActionResult> Put(string email, [FromBody]EmployeeDto value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (await _repo.GetEmployeeWithId(id) == null)
+            if (await _repo.GetEmployeeWithId(email) == null)
             {
                 return NotFound();
             }
-            await _repo.UpdateEmployee(id, value.ToEntity());
+            await _repo.UpdateEmployee(email, value.ToEntity());
             return Ok();
         }
 
@@ -87,17 +87,17 @@ namespace DriveIT.Web.ApiControllers
         /// Delete an employee.
         /// Only accessible by administrators.
         /// </summary>
-        /// <param name="id">The id of the employee to delete.</param>
+        /// <param name="email">The email of the employee to delete.</param>
         /// <returns>A Task resulting in an IHttpActionResult which states whether the call succeeded or not.</returns>
         [AuthorizeRoles(Role.Administrator)]
-        public async Task<IHttpActionResult> Delete(string id)
+        public async Task<IHttpActionResult> Delete(string email)
         {
-            var employee = await _repo.GetEmployeeWithId(id);
+            var employee = await _repo.GetEmployeeWithId(email);
             if (employee == null)
             {
                 return NotFound();
             }
-            await _repo.DeleteEmployee(id);
+            await _repo.DeleteEmployee(email);
             return Ok();
         }
     }

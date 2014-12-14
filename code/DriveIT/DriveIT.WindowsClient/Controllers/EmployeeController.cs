@@ -45,7 +45,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Employee with the respective email from the database</returns>
         public async Task<EmployeeDto> ReadEmployee(string email)
         {
-            string search = "?id=" + email;
+            string search = "?email=" + email;
             var employeeToReturn = await DriveITWebAPI.Read<EmployeeDto>("employees/" + search);
             return employeeToReturn;
         }
@@ -65,7 +65,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public async Task UpdateEmployee(EmployeeDto employee)
         {
-            string search = "?id=" + employee.Email;
+            string search = "?email=" + employee.Email;
             await DriveITWebAPI.Update("employees/" + search, employee);
         }
         /// <summary>
@@ -75,7 +75,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public async Task DeleteEmployee(EmployeeDto employee)
         {
-            string search = "?id=" + employee.Email;
+            string search = "?email=" + employee.Email;
             await DriveITWebAPI.Delete<EmployeeDto>("employees/" + search);
         }
         /// <summary>
@@ -85,7 +85,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public async void DeleteEmployee(int email)
         {
-            string search = "?id=" + email;
+            string search = "?email=" + email;
             await DriveITWebAPI.Delete<EmployeeDto>("employees/" + search);
         }
     }
