@@ -2,8 +2,10 @@
 
 \subsection{Persistent Storage}
 The \texttt{PersistentStorage} sub system provides an interface \texttt{IPersistenStorage}, which gives access to creating, reading, updating and deleting \texttt{DriveIT} entities. 
+
 \subsubsection{Implementors, Extenders \& Users}
-The IPersistentStorage has an implementor, EntityStorage, which in turn uses a DriveITContext to accomplish its tasks. 
+The implementor of \texttt{IPersistentStorage}, \texttt{EntityStorage}, uses an instance of DriveITContext to accomplish its tasks. The main purpose of the \texttt{DriveITContext} is to support the functionality of EntityStorage. Other implementors are free to support the functionality of the methods of the \texttt{IPersistenStorage} in other ways. 
 
 \subsubsection{Visibility}
-The 
+Every methods in the \texttt{IPersistentStorage} is public to users. The methods in the interface are expected to be implemented, and users of the interface should not expect otherwise.
+The \texttt{EntityStorage} implementation has few private methods exclusively for internal use, since their purpose is very specific to the functionality of the implementation.
