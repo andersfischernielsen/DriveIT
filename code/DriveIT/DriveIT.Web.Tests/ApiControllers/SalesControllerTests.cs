@@ -55,10 +55,10 @@ namespace DriveIT.Web.Tests.ApiControllers
 
             var repo = new MockRepository(MockBehavior.Loose);
             var mockRepo = repo.Create<IPersistentStorage>();
-            mockRepo.Setup(x => x.GetAllSales()).Returns(Task.Run(() => salesList));
-            mockRepo.Setup(x => x.GetSaleWithId(2)).Returns(Task.Run(() => salesList.Find(c => c.Id == 2)));
+            mockRepo.Setup(x => x.GetAllSales(null)).ReturnsAsync(salesList);
+            mockRepo.Setup(x => x.GetSaleWithId(2, null)).ReturnsAsync(salesList.Find(c => c.Id == 2));
 
-            mockRepo.Setup(x => x.CreateSale(It.IsAny<Sale>())).Returns(Task.Run(() => salesList.Max(x => x.Id) + 1));
+            mockRepo.Setup(x => x.CreateSale(It.IsAny<Sale>(), null)).ReturnsAsync(salesList.Max(x => x.Id) + 1);
 
             _controller = new SalesController(mockRepo.Object);
         }
