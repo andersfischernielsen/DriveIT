@@ -1,4 +1,8 @@
 \section{Object Design}
+\subsection{WindowsClient Controllers}
+\subsubsection{Reuse \& Encapsulation}
+To perform the Create, Read, Update and Delete functionality The \texttt{DriveIT Windows Client} uses a number of controllers. These controllers each handle the different kinds of entities which the system supports. To Reuse code and therefore making it easier to test, maintain and makes the system less prone to erros, the class \texttt{DriveITWebAPI} is created. This class encapsulate all http-request code to contact the API and uses generics to allow all the controllers to reuse the methods. 
+Therefore all the entity controllers know nothing of the \texttt{DriveIT Web API} or the code to contact it, and with a few adjustments the \texttt{DriveITWebAPI} could be reused in any other project involving a REST based web API.
 
 \subsection{Persistent Storage}
 
@@ -10,6 +14,8 @@ Adding re-usability could be accomplished by using generics (supported by the C$
 \subsubsection{Inheritance}
 The \texttt{DriveITContext} extends an \texttt{IdentityDbContext} which provides the built in functionality for handling user logins and different user roles, which is used for the login- and access control functionality of the \texttt{DriveIT System}.
 The \texttt{IdentityDbContext} in turn extends a \texttt{DbContext} which enables \texttt{Entity Framework} to save the User entities (along with every other \texttt{DriveIT} entity) in the underlying Microsoft SQL database.
+
+In the \texttt{Persistent Storage} system we have 2 kinds of concrete user types. The \texttt{Customer} and the \texttt{Employee}. Both of these inherits from an abstract \texttt{DriveITUser} which inherits from \texttt{IdentityUser} which is the base for all users in ASP.NET Identity. \texttt{DriveITUser} adds a few common properties to the user-model, which means that both \texttt{Customer}s and \texttt{Employee}s have first and last names.
 
 \subsubsection{Encapsulation}
 Encapsulation has been a high priority during development of the \texttt{DriveIT System}. 

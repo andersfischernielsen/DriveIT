@@ -18,7 +18,15 @@ namespace DriveIT.Web.MvcControllers
         private CommentsController commentsController = new CommentsController();
         private ContactRequestsController rc = new ContactRequestsController();
        
-
+        /// <summary>
+        /// This method gets all the cars, fill in into the viewbag properties to be used for the select boxes and
+        /// sort out the cars according to the parameters. A list of cars containing the result of the search will thereafter
+        /// be returned to the view for displaying the information.
+        /// </summary>
+        /// <param name="fuelType">fueltype of the car to find.</param>
+        /// <param name="make">make of the car to find.</param>
+        /// <param name="model">model of the car to find.</param>
+        /// <returns>~Views/Car/Index.cshtml</returns>
         public async Task<ActionResult> Index(String fuelType, String make, String model)
         {
             //Select all cars
@@ -69,6 +77,12 @@ namespace DriveIT.Web.MvcControllers
             return View(carList);
         }
 
+        /// <summary>
+        /// Gets the car according to the carId, gets the comments according to the carId and a list of contact requests.
+        /// A viewmodel is filled with these information and being given to the view for displaying the information.
+        /// </summary>
+        /// <param name="carId">carId of the specific car.</param>
+        /// <returns>~Views/Car/Details.cshtml</returns>
         public async Task<ActionResult> Details(int carId)
         {
             var car = await carController.Get(carId) as OkNegotiatedContentResult<CarDto>;
@@ -76,15 +90,14 @@ namespace DriveIT.Web.MvcControllers
             var requests = await rc.Get() as OkNegotiatedContentResult<List<ContactRequestDto>>;
 
             var viewModel = new CarCommentViewModel();
+            viewModel.Car = car.Content;
 
             if (comments != null)
             {
-                viewModel.Car = car.Content;
                 viewModel.Comments = comments.Content;
             }
             else
             {
-                viewModel.Car = car.Content;
                 viewModel.Comments = new List<CommentDto>();
             }
             viewModel.ContactRequest = requests.Content;
