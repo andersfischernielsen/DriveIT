@@ -255,7 +255,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Cars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -269,7 +269,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CarsDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CarsDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -283,7 +283,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CarsDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CarsDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -297,7 +297,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                             </Button.Background>
@@ -325,7 +325,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Sales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -339,7 +339,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=SalesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=SalesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -353,7 +353,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=SalesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=SalesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -367,7 +367,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource OrdersBarColor}"/>
                             </Button.Background>
@@ -395,7 +395,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{DynamicResource HeaderLabel}" Content="Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="1">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -409,7 +409,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CustomersDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="2">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CustomersDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="2">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -423,7 +423,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CustomersDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="3">
+                        <Button IsEnabled="{Binding DataContext.CanDeleteAndUpdate, ElementName=CustomersDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="3">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>
@@ -437,7 +437,7 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,8.5,0,10" Grid.Column="4">
+                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="4">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource CustomersBarColor}"/>
                             </Button.Background>

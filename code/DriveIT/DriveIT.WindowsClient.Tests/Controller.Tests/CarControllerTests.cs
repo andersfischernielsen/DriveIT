@@ -12,12 +12,24 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     public class CarControllerTests
     {
         private CarController _carController;
+        private int setupCarId;
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
             DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
             _carController = new CarController();
+            var test = _carController.CreateCar(new CarDto()
+            {
+                Color = "TestSetup",
+                DistanceDriven = 100,
+                Model = "TestModel",
+                Make = "TestMake",
+                Price = 100,
+                Fuel = FuelType.Gasoline
+            });
+            test.Wait();
+            setupCarId = test.Id;
         }
 
         [Test]
