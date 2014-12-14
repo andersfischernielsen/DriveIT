@@ -271,7 +271,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Deletes a SaleController, creates a Sale from the API, and notifies the view.
+        /// Creates a SaleController, deletes a Sale from the API, and notifies the view.
         /// </summary>
         public async void DeleteSale()
         {
