@@ -174,13 +174,13 @@ else
     
     @*Makes a carousel of images, where the header is "Images of the car", and the inner content of the carousel are the images of the car, given by the car imagepaths.
         If the number of images is greater than 0, it will display the carousel of the cars, else it will display a message telling that there are no images for the specific car.*@
-    @if (Model.Car.ImagePaths.Count == 0)
+    @if (Model.Car.ImagePaths.Count > 0)
     {
         <div id="myCarousel" class="carousel" style="position:relative;width:900px;height:0px;top:-325px;right:-550px">
             <h3>
                 Images of the car
             </h3>
-            <div class="carousel-inner">            
+            <div class="carousel-inner">                    
                 @foreach (var image in Model.Car.ImagePaths)
                 {
                     if (image == Model.Car.ImagePaths.First())
@@ -196,7 +196,7 @@ else
                         </div>
                     }
                 }
-           </div>
+            </div>
             @*Used to control the carousel. Contains and displays two arrows to navigate in the carousel.*@
             <div id="myCarouselControll" class="carousel">
                 <a class="left carousel-control" id="left" href="#myCarousel" data-slide="prev" style="left:-60px;top:0px;height:"><span class="glyphicon glyphicon-chevron-left" style="color:black"></span></a>
