@@ -1,37 +1,39 @@
 \section{Access Control and Security}
 
-\textbf{Access Matrix for DriveIT System}\\\\
-\begin{tabular}{|l||*{6}{c|}}\hline
-\backslashbox{\miniscule Actors\kern-1em}{\kern-1em \miniscule Objects}
-&\makebox[1em]{\miniscule Car}&\makebox[1em]{\miniscule Customer}&\makebox[1em]{\miniscule Order}
-&\makebox[1em]{\miniscule Employee}&\makebox[1em]{\miniscule Comment}&\makebox[4em]{\miniscule ContactRequest}\\\hline\hline
+\todo{Check that it matches the program/api}
+\textbf{Access Matrix for DriveIT System}
 
-\miniscule Customer & \miniscule getCars & \miniscule getUserInformation & \miniscule getOrders & \miniscule getEmployees & \miniscule createComment & \miniscule createContactRequest\\
-	       && \miniscule UpdateOwnInformation &&& \miniscule getComments & \miniscule getContactRequests\\
-	       &&&&& \miniscule updateComment & \miniscule updateContactRequest\\
-	       &&&&& \miniscule deleteComment & \miniscule deleteContactRequest\\\hline
+\begin{tabular}{|l|*{6}{c|}}\hline
+\backslashbox{\miniscule\textbf{Actors}\kern-1em}{\miniscule\textbf{Objects}\kern-1em}
+&\miniscule\textbf{Car}&\miniscule\textbf{Customer}&\miniscule\textbf{Order}
+&\miniscule\textbf{Employee}&\miniscule\textbf{Comment}&\miniscule\textbf{ContactRequest}\\\hline
 
-\miniscule Non-Customer & \miniscule getCars & \miniscule createNewUser && \miniscule getEmployees &&\\
-	       && \miniscule getUserInformation &&&&\\\hline
+\miniscule\textbf{Customer} &\miniscule getCars &\miniscule getUserInformation &\miniscule getOrders &\miniscule getEmployees & \miniscule createComment & \miniscule createContactRequest\\
+	       && \miniscule UpdateInformation &&& \miniscule getComments & \miniscule getContactRequests\\
+	       &&&&& \miniscule updateComment & \miniscule deleteContactRequest\\
+	       &&&&& \miniscule deleteComment & \miniscule \\\hline
 
-\miniscule Employee & \miniscule createCar & \miniscule createNewUser & \miniscule createOrder & \miniscule getEmployees && \miniscule getContactRequests\\
-	       & \miniscule getCars & \miniscule getUserInformation & \miniscule getOrders &&& \miniscule deleteContactRequest\\
-	       & \miniscule updateCar & \miniscule updateUser & \miniscule updateOrder &&&\\
+\miniscule\textbf{Non-registered} & \miniscule getCars & \miniscule createNewUser && \miniscule \miniscule getEmployees &&\\
+\miniscule\textbf{user} &&&&&&\\\hline
+
+\miniscule\textbf{Employee} & \miniscule createCar & \miniscule createNewUser & \miniscule createOrder & \miniscule getEmployees && \miniscule getContactRequests\\
+	       & \miniscule getCars & \miniscule getUserInformation & \miniscule getOrders &&& \miniscule updateContactRequest\\
+	       & \miniscule updateCar & \miniscule updateUser & \miniscule updateOrder &&& \miniscule deleteContactRequest\\
 	       & \miniscule deleteCar && \miniscule deleteOrder &&&\\\hline
 
-\miniscule Admin & \miniscule createCar & \miniscule createNewUser & \miniscule createOrder & \miniscule createEmployee && \miniscule getContactRequests\\
-	  & \miniscule getCars & \miniscule getUserInformation & \miniscule getOrders & \miniscule getEmployees && \miniscule deleteContactRequest\\
-	  & \miniscule updateCar & \miniscule updateUser & \miniscule updateOrder & \miniscule updateEmployee &&\\
+\miniscule\textbf{Administrator} & \miniscule createCar & \miniscule createNewUser & \miniscule createOrder & \miniscule createEmployee && \miniscule getContactRequests\\
+	  & \miniscule getCars & \miniscule getUserInformation & \miniscule getOrders & \miniscule getEmployees && \miniscule updateContactRequest\\
+	  & \miniscule updateCar & \miniscule updateUser & \miniscule updateOrder & \miniscule updateEmployee && \miniscule deleteContactRequest\\
 	  & \miniscule deleteCar && \miniscule deleteOrder & \miniscule deleteEmployee &&\\\hline
 
-\end{tabular}\\
-\\\\
+\end{tabular}\\\\
+
 Due to the fact that our DriveIT System is available for many users, it is neccessary to keep track of which users may have access to specific ressources in our system. To keep track of which users got access to which ressources, it is neccessary to check each user at login, through authentication, to confirm which ressources they can access.\\
 
-In our system, a non-customer (a person accessing our DriveIT homepage without login) should be restricted to only be able to search for cars, get a list of employees and create a new user on the homepage.\\
+In our system, a non-registered user (a person accessing the DriveIT homepage without login) should be restricted to only be able to search for cars, get a list of employees and create a new user on the homepage.\\
 
-The customer is able to access more on our DriveIT homepage than a non-customer. The customer is able to access the same information as a non-customer, but are also able to look through the customers own orders, and also able to create, update or delete the customers own comment on a car.\\
+The customer is able to access more on the DriveIT homepage than a non-registered user. The customer is able to access the same information as a non-registered user, but are also able to look through his or her own orders, and also able to create, update or delete his pr her own comments on cars.\\
 
-The employee is able to create, update or delete a car, and search for cars. The employee is also able to create a new user (if a person calls in for help), get information about a specific user and update a user by request of a customer. The employee is also able to create an order, see the orders of a specific customer, update an order and delete an order. The employee should also be able to get a list of employees, if it is needed in any case.\\
+The employee is able to create, update or delete cars, and search for cars. The employee is also able to create a new user (if a person calls the \todo{company}company for help), get information about a specific user and update a user by request of a customer. The employee is also able to create an order, see the orders of a specific customer, update an order and delete an order. The employee should also be able to get a list of employees, if it is needed in any case.\\
 
-Admins of the system is able to get access to any ressources of our system.
+Administrators of the system can do everything the employee can, but also create, update and delete other employees and administrators.
