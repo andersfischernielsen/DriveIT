@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +27,8 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Model = "TestModel",
                 Make = "TestMake",
                 Price = 100,
-                Fuel = FuelType.Gasoline
+                Fuel = FuelType.Gasoline,
+                ImagePaths = new List<string>()
             });
             test.Wait();
             setupCarId = test.Id;

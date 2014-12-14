@@ -467,7 +467,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         /// <summary>
-        /// Gets called from the view
+        /// Updates the images and information about the _carDto
         /// </summary>
         public async Task UpdateCar()
         {
@@ -517,7 +517,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         
         /// <summary>
-        /// Gets called from the view
+        /// Gets called from the view. Deletes the car at the webApi, with the id _carDto.Id
         /// </summary>
         public async void DeleteCar()
         {
