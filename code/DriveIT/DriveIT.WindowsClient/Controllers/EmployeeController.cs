@@ -24,19 +24,25 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the newly created Employee DTO from the database</returns>
         public async Task CreateEmployee(EmployeeDto employee, string password, Role role)
         {
-            if (role != Role.Administrator || role != Role.Employee) throw new ArgumentException("Cannot be Customer.", "role");
-            var registerModel = new RegisterViewModel
+            if (role == Role.Administrator || role == Role.Employee)
             {
-                Email = employee.Email,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                PhoneNumber = employee.Phone,
-                ConfirmPhoneNumber = employee.Phone,
-                Password = password,
-                ConfirmPassword = password,
-                Role = role
-            };
-            await DriveITWebAPI.Create("account/register", registerModel);
+                var registerModel = new RegisterViewModel
+                {
+                    Email = employee.Email,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    PhoneNumber = employee.Phone,
+                    ConfirmPhoneNumber = employee.Phone,
+                    Password = password,
+                    ConfirmPassword = password,
+                    Role = role
+                };
+                await DriveITWebAPI.Create("account/register", registerModel);
+            }
+            else
+            {
+                throw new ArgumentException("Cannot be Customer.", "role");
+            }
         }
         /// <summary>
         /// Reads a specific Employee DTO object from the API.
