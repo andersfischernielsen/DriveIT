@@ -1,16 +1,6 @@
-﻿@model DriveIT.Web.Models.CarCommentViewModel
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<link href="../../Content/cosmo-boostrap.min.css" rel="stylesheet" />
-<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.carousel').carousel({
-            interval: 4000
-        });
-    });
-</script>
+﻿@using System.Linq
+@using Microsoft.AspNet.Identity
+@model DriveIT.Web.Models.CarCommentViewModel
 
 @{
     ViewBag.Title = "Car Details";
@@ -19,7 +9,7 @@
 <h1>Car Details</h1>
 <p>In this window, car information of the choosen car, from the previous page, will be shown.</p>
 
-@*If the car is sold, not button is shown*@
+@*If the car is sold, no button is shown*@
 @if (@Model.Car.Sold)
 {
     <p></p>
@@ -27,12 +17,31 @@
 @*If user is signed in and car is not sold, contact button is shown*@
 else if (@User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("Create", "ContactRequest", new { id = Model.Car.Id }))
+    bool good = true;
+    foreach(var item in Model.ContactRequest)
     {
-        <input type="submit" value="Request to get contacted" class="btn btn-success" />
-    }  
+        if (item.CustomerId == User.Identity.GetUserId() && item.CarId == Model.Car.Id)
+        {
+            good = false;
+        }
+        else { }
+    }
+    if (good)
+    {
+        using (Html.BeginForm("Create", "ContactRequest", new {id = Model.Car.Id}))
+        {
+            <input type="submit" value="Request to get contacted" class="btn btn-success"/>
+        }
+    }
+    else
+    {
+        <strong>
+            You have requested to get contacted about this car. You can see all your requests and cancel them
+            @Html.ActionLink("HERE", "Index", "ContactRequest", new { email = User.Identity.GetUserId() }, null)
+        </strong>
+    }
 }
-@*If user is not signed in and car is not sold, shown this sentence*@
+@*If user is not signed in and car is not sold, show this sentence*@
 else
 {
     <p>To request to get contacted regarding this car you need to @Html.ActionLink("sign in", "LogIn", "Account").</p>
@@ -42,7 +51,7 @@ else
 
 <div>
     <hr />
-
+    @*If the car is sold, it will be displayed with a fat, red SOLD. If it isn't sold, it will display FOR SALE.*@
     <h2>The car is: @if (Model.Car.Sold)
                     {
                         <strong style="color: red">SOLD</strong>
@@ -53,7 +62,9 @@ else
                         <strong style="color: green">FOR SALE</strong>
                     }
     </h2>
-
+    
+    @*dl defines a description list, containing information about the car. dt defines terms/names (general, such as model, make etc.) and dd defines each term/name of the car
+        (more specific about the car, model is audi etc.)*@
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Car.Model):
@@ -161,30 +172,42 @@ else
 
     </dl>
     
-    @if (Model.Car.ImagePaths.Count > 0)
+    @*Makes a carousel of images, where the header is "Images of the car", and the inner content of the carousel are the images of the car, given by the car imagepaths.
+        If the number of images is greater than 0, it will display the carousel of the cars, else it will display a message telling that there are no images for the specific car.*@
+    @if (Model.Car.ImagePaths.Count == 0)
     {
-        <div id="myCarousel" class="carousel" style="position:absolute;width:900px;height:400px;top:200px;right:50px">
+        <div id="myCarousel" class="carousel" style="position:relative;width:900px;height:0px;top:-325px;right:-550px">
             <h3>
                 Images of the car
             </h3>
             <div class="carousel-inner">            
                 @foreach (var image in Model.Car.ImagePaths)
                 {
-                    <div class="item" style="width:550px">
-                        <img src="@image" />
-                    </div>
+                    if (image == Model.Car.ImagePaths.First())
+                    {
+                        <div class="item active" style="width:550px">
+                            <img src="@image" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item" style="width:550px">
+                            <img src="@image" />
+                        </div>
+                    }
                 }
-            </div>
-           
+           </div>
+            @*Used to control the carousel. Contains and displays two arrows to navigate in the carousel.*@
             <div id="myCarouselControll" class="carousel">
-                <a class="left carousel-control" id="left" href="#myCarousel" data-slide="prev" style="left:-60px;top:0px;height:0"><span class="glyphicon glyphicon-chevron-left" style="color:black"></span></a>
+                <a class="left carousel-control" id="left" href="#myCarousel" data-slide="prev" style="left:-60px;top:0px;height:"><span class="glyphicon glyphicon-chevron-left" style="color:black"></span></a>
                 <a class="right carousel-control" id="right" href="#myCarousel" data-slide="next" style="right:310px;top:0px;height:0;"><span class="glyphicon glyphicon-chevron-right" style="color:black"></span></a>
             </div> 
         </div>
     }
     else
     {
-        <div id="nothingFound" style="position:absolute;width:900px;height:400px;top:230px;right:50px">
+        
+        <div id="nothingFound" style="position:relative;width:900px;height:0px;top:-325px;right:-550px">
             <h3>
                 Images of the car
             </h3>
@@ -202,6 +225,8 @@ else
 <br>
 <br>
 <br>
+@*Rendering the partial view, Index in the Comment folder, and taking the CarCommentViewModel as parameter, whereas the viewmodel is being used by the controller to display
+    information in the partial view.*@
 @{
     Html.RenderPartial("~/Views/Comment/Index.cshtml", Model);
 }

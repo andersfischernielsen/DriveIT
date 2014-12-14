@@ -3,13 +3,16 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+    @*the Id, CarId and CustomerId are all hidden, as a customer shouldn't be able to access the Id's of our database.
+        There is an editorfor for Title and Description only, as they are the only properties a customer should be able to change*@
     <div class="form-horizontal">
         <h3>Edit comment</h3>
         <p>In this view, you are able to edit your comment.</p>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CarId)
+        @Html.HiddenFor(model => model.CustomerId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -26,7 +29,8 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        
+        @*Being used to submit the values of whats written in the editors above.*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

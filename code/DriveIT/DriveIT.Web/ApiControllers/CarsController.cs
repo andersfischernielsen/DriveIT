@@ -71,6 +71,8 @@ namespace DriveIT.Web.ApiControllers
         /// Returns CarDto's of the Cars which has not been sold, or has been sold within the last 5 days.
         /// </summary>
         /// <returns>A Task resulting in a List of CarDto's</returns>
+        [Route("api/cars/webcarlist")]
+        [HttpGet]
         public async Task<List<CarDto>> WebCarList()
         {
             var cars = await _repo.GetAllCars();
