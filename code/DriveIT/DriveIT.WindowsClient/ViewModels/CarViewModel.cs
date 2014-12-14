@@ -414,7 +414,7 @@ namespace DriveIT.WindowsClient.ViewModels
         /// <summary>
         /// Based on the carstate either Create the var or Update it. If neither CarModel, CarMake nor Price is set the status is updated.
         /// </summary>
-        public void SaveCar()
+        public async void SaveCar()
         {
             if (string.IsNullOrWhiteSpace(CarModel) || string.IsNullOrWhiteSpace(CarMake) || Price == 0)
             {
@@ -427,10 +427,10 @@ namespace DriveIT.WindowsClient.ViewModels
                 switch (CarState)
                 {
                     case CarStateEnum.Initial:
-                        CreateCar();
+                        await CreateCar();
                         break;
                     default:
-                        UpdateCar();
+                        await UpdateCar();
                         break;
                 }
             }
@@ -443,18 +443,17 @@ namespace DriveIT.WindowsClient.ViewModels
         /// Creates the given car and update the carDto with the created cardto in the database(to find the ID).
         /// Changes the carstate to CarStateEnum.ForSale
         /// </summary>
-        public async void CreateCar()
+        public async Task CreateCar()
         {
             try
             {
+                Status = "Trying to create car...";
                 var carController = new CarController();
-                var carInDB = await carController.CreateCar(_carDto);
+                _carDto = await carController.CreateCar(_carDto);
 
                 await UploadImages();
-
                 await carController.UpdateCar(_carDto);
 
-                _carDto = carInDB;
                 NotifyPropertyChanged("");
 
                 Status = "Car Created";
@@ -464,6 +463,26 @@ namespace DriveIT.WindowsClient.ViewModels
             {
                 
                 Status = "Failed to create car!";
+            }
+        }
+
+        /// <summary>
+        /// Updates the images and information about the _carDto
+        /// </summary>
+        public async Task UpdateCar()
+        {
+            try
+            {
+                Status = "Trying to update car...";
+                await UploadImages();
+                var carController = new CarController();
+                await carController.UpdateCar(_carDto);
+                Status = "Car Updated";
+            }
+            catch (Exception)
+            {
+
+                Status = "Failed to update car!";
             }
         }
 
@@ -496,26 +515,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to upload image!";
             }
         }
+        
         /// <summary>
-        /// Gets called from the view
-        /// </summary>
-        public async void UpdateCar()
-        {
-            try
-            {
-                await UploadImages();
-                var carController = new CarController();
-                await carController.UpdateCar(_carDto);
-                Status = "Car Updated";
-            }
-            catch (Exception)
-            {
-
-                Status = "Failed to update car!";
-            }
-        }
-        /// <summary>
-        /// Gets called from the view
+        /// Gets called from the view. Deletes the car at the webApi, with the id _carDto.Id
         /// </summary>
         public async void DeleteCar()
         {

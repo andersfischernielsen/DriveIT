@@ -13,13 +13,17 @@ namespace DriveIT.WindowsClient.ViewModels
     public class SaleListViewModel : IViewModelBase
     {
     public ObservableCollection<SaleViewModel> SaleViewModels { get; set; }
-
+        /// <summary>
+        /// The default constructor. Calling the UpdateList() method initially to load in data.
+        /// </summary>
         public SaleListViewModel()
         {
             SaleViewModels = new ObservableCollection<SaleViewModel>();
             UpdateList();
         }
-
+        /// <summary>
+        /// Getters and setters for the attributes of a SaleDTO while notifying view.
+        /// </summary>
         #region Properties
 
         private SaleViewModel _selectedSale;
@@ -71,7 +75,9 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion
-
+        /// <summary>
+        /// Initializes the list of Sales and sets them to be editable.
+        /// </summary>
         #region CRUDS
         public async void UpdateList()
         {
@@ -100,7 +106,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to retrieve data for sales!";
             }
         }
-
+        /// <summary>
+        /// Deletes the selected Sale.
+        /// </summary>
         public void DeleteSale()
         {
             try

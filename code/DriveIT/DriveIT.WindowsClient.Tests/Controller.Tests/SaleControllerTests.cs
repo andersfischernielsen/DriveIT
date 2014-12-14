@@ -14,11 +14,18 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     public class SaleControllerTests
     {
         private SaleController _orderController;
+
+        [TestFixtureSetUp]
+        public void SetupFixture()
+        {
+            DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
+        }
+
         [SetUp]
-        public async Task Setup()
+        public void Setup()
         {
             _orderController = new SaleController();
-            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
+            
         }
 
         [Test]
