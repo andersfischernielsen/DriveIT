@@ -40,9 +40,9 @@ namespace DriveIT.Web.Tests.ApiControllers
 
             var repo = new MockRepository(MockBehavior.Loose);
             var mockRepo = repo.Create<IPersistentStorage>();
-            mockRepo.Setup(x => x.GetAllCustomers()).Returns(Task.Run(() => customerList));
-            mockRepo.Setup(x => x.GetCustomerWithId("cust@driveit.dk")).Returns(Task.Run(() => customerList.Find(c => c.Id == "cust@driveit.dk")));
-            mockRepo.Setup(x => x.GetCustomerWithId("anothercust@driveit.dk")).Returns(Task.Run(() => customerList.Find(c => c.Id == "anothercust@driveit.dk")));
+            mockRepo.Setup(x => x.GetAllCustomers()).ReturnsAsync(customerList);
+            mockRepo.Setup(x => x.GetCustomerWithId("cust@driveit.dk")).ReturnsAsync(customerList.Find(c => c.Id == "cust@driveit.dk"));
+            mockRepo.Setup(x => x.GetCustomerWithId("anothercust@driveit.dk")).ReturnsAsync(customerList.Find(c => c.Id == "anothercust@driveit.dk"));
 
 
             _controller = new CustomersController(mockRepo.Object);
