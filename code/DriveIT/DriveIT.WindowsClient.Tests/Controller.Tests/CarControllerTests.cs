@@ -13,7 +13,9 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     public class CarControllerTests
     {
         private CarController _carController;
-        private int setupCarId;
+
+        private int _createdCarId;
+        private int _toDeleteCarId;
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
@@ -32,16 +34,14 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 ImagePaths = new List<string>()
             });
             carTask.Wait();
-            setupCarId = carTask.Result.Id.GetValueOrDefault();
-            Console.WriteLine();
+            _toDeleteCarId = carTask.Result.Id.GetValueOrDefault();
         }
 
         [TestFixtureTearDown]
         public void TestFixtureTearDown()
         {
-            var deleteTask = _carController.DeleteCar(setupCarId);
+            var deleteTask = _carController.DeleteCar(_createdCarId);
             deleteTask.Wait();
-            Console.WriteLine();
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Assert.AreEqual(carToCreate.Price, carJustIn.Price);
             Assert.AreEqual(carToCreate.Fuel, carJustIn.Fuel);
 
-            await _carController.DeleteCar(carJustIn.Id.GetValueOrDefault());
+            _createdCarId = carJustIn.Id.GetValueOrDefault();
         }
 
         [Test]
@@ -80,29 +80,13 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _carController.ReadCarList().Result;
             int amtOfCarsStart = t.Count;
-            var carToCreate = new CarDto()
-            {
-                Color = "Red",
-                DistanceDriven = 10000,
-                Model = "A8",
-                Make = "Audi",
-                Price = 200000,
-                Fuel = FuelType.Gasoline,
-                Created = DateTime.Now,
-                ImagePaths = new List<string>()
-            };
-            await _carController.CreateCar(carToCreate);
-            Thread.Sleep(1000);
-            t = _carController.ReadCarList().Result;
-            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
-            var carJustIn = t[t.Count - 1];
-            await _carController.DeleteCar(carJustIn.Id.GetValueOrDefault());
+            await _carController.DeleteCar(_toDeleteCarId);
             t = _carController.ReadCarList().Result;
 
-            Assert.AreEqual(amtOfCarsStart, t.Count);
+            Assert.AreEqual(amtOfCarsStart-1, t.Count);
             foreach (var carDto in t)
             {
-                Assert.AreNotEqual(carJustIn.Id.GetValueOrDefault(), carDto.Id.GetValueOrDefault());
+                Assert.AreNotEqual(_toDeleteCarId, carDto.Id.GetValueOrDefault());
             }
         }
 
