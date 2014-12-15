@@ -18,11 +18,28 @@ This implementation provides the WindowsClient with an easy way to manipulate da
 \subsection{Observer pattern}
 An important part of the "Model View ViewModel" pattern is the data-binding which exists between the View and their ViewModel, in WPF this is done by having the viewmodels implement the interface \texttt{INotifyPropertyChanged} which will notify the view when the ViewModel has changed. By using this interface the ViewModel knows nothing of the view and cannot directly change its attributes.
 
+\subsection{Model View Controller (MVC) Pattern}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{Figures/WebImages/MVCPattern}\\
+	\caption{The MVC Pattern - http://www.w3schools.com/aspnet/mvc_intro.asp}
+	\label{fig:MVCPattern}
+\end{figure}
+The \texttt{DriveIT Web Client} uses the "Model View Controller" architectural pattern, which is making a seperation of the business logic (model) and the input control (controller) from the display logic (view).
+
+The model is the part of the application that wil be handling all the logic for the application data. The models are being used to store data from the dabatase.
+The view is the part of the application that will be handling the representation of the data. Most often, this data will be given by the model.
+The controller is the part of the application that will be handling the user interaction with the \texttt{DriveIT Web Client}. The controllers reads the user input and updates the model's state.
+
+The MVC pattern allows for seperation of the model, view and the controller classes, such that their individual purposes are clearly distinct from each other. This means that different developers are able to work on each of the individual parts of the MVC pattern, E.g we are able to work on the view without depending on the business logic (model) or the input (controller). By making this distinction between different parts of the MVC pattern, it also makes it easier to test our \texttt{DriveIT Web Client} application, and remain a good data-structure throughout the development of our Web Client.
+
+\todo{Write more specific about how we have implemented it in our system.}
+
 \subsection{Façade Pattern}
 The facade design pattern is used several times in the \texttt{DriveIT System}.
 The \texttt{Persistent Storage} sub system uses a façade pattern do hide the internal sub systems that accomplish the functionality defined in the \texttt{IPersistentStorage} interface.
 
-The \texttt{DriveITContext} defined in the sub system is used by an implementor, texttt{EntityStorage}, o the interface, but is hidden for users of the interface. 
+The \texttt{DriveITContext} defined in the sub system is used by an implementor, \texttt{EntityStorage}, o the interface, but is hidden for users of the interface. 
 
 \begin{figure}[H]
 	\centering
