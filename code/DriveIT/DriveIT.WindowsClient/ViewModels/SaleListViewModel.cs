@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Forms.VisualStyles;
-using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
 
@@ -86,10 +83,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "";
                 SaleViewModels.Clear();
                 var saleController = new SaleController();
-                foreach (SaleDto saleDto in await saleController.ReadSaleList())
-                {
-                    SaleViewModels.Add(new SaleViewModel(saleDto));
-                }
+                SaleViewModels = new ObservableCollection<SaleViewModel>((await saleController.ReadSaleList()).Select(sale => new SaleViewModel(sale)));
                 if (SaleViewModels.Count >= 1)
                 {
                     SelectedSale = SaleViewModels[0];
@@ -99,6 +93,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     CanDeleteAndUpdate = false;
                 }
+                NotifyPropertyChanged("");
             }
             catch (Exception)
             {

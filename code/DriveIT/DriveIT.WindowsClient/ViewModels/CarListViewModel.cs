@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
 
@@ -91,10 +89,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "";
                 CarViewModels.Clear();
                 var carController = new CarController();
-                foreach (CarDto carDto in await carController.ReadCarList())
-                {
-                    CarViewModels.Add(new CarViewModel(carDto));
-                }
+                CarViewModels = new ObservableCollection<CarViewModel>((await carController.ReadCarList()).Select(car => new CarViewModel(car)));
                 if (CarViewModels.Count >= 1)
                 {
                     SelectedCar = CarViewModels[0];
@@ -104,6 +99,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     CanDeleteAndUpdate = false;
                 }
+                NotifyPropertyChanged("");
             }
             catch (Exception)
             {
