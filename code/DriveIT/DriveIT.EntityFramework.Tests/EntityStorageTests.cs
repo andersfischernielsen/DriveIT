@@ -6,7 +6,6 @@ using System.Linq;
 using DriveIT.EntityFramework.Entities;
 using Moq;
 using NUnit.Framework;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace DriveIT.EntityFramework.Tests
 {
@@ -109,10 +108,5 @@ namespace DriveIT.EntityFramework.Tests
         //    Assert.IsNull(result.Employee);
         //    _mockContext.Verify(m => m.SaveChangesAsync(), Times.AtLeastOnce);
         //}
-
-        public static void Main(string[] args)
-        {
-            
-        }
     }
 }
