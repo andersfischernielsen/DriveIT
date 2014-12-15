@@ -1,11 +1,12 @@
-﻿@model Tuple<IEnumerable<DriveIT.Models.CarDto>, IEnumerable<DriveIT.Models.ContactRequestDto>>
+﻿@using Microsoft.AspNet.Identity
+@model Tuple<IEnumerable<DriveIT.Models.CarDto>, IEnumerable<DriveIT.Models.ContactRequestDto>>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Contact requests for " + User.Identity.GetUserId();
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <table class="table">
     <tr>
