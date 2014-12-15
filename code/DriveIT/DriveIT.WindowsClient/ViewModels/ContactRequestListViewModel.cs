@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using DriveIT.WindowsClient.Views;
 
@@ -67,10 +65,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "";
                 ContactRequestViewModels.Clear();
                 var contactRequestController = new ContactRequestController();
-                foreach (ContactRequestDto contactRequestDto in await contactRequestController.ReadContactRequests())
-                {
-                    ContactRequestViewModels.Add(new ContactRequestViewModel(contactRequestDto));
-                }
+                ContactRequestViewModels = new ObservableCollection<ContactRequestViewModel>((await contactRequestController.ReadContactRequests()).Select(contactRequest => new ContactRequestViewModel(contactRequest)));
                 if (ContactRequestViewModels.Count >= 1)
                 {
                     SelectedRequest = ContactRequestViewModels[0];
@@ -80,6 +75,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 {
                     CanDeleteAndUpdate = false;
                 }
+                NotifyPropertyChanged("");
             }
             catch (Exception)
             {

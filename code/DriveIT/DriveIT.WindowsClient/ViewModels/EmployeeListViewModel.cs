@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -106,10 +105,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "";
                 EmployeeViewModels.Clear();
                 var employeeController = new EmployeeController();
-                foreach (EmployeeDto employeeDtoDto in await employeeController.ReadEmployeeList())
-                {
-                    EmployeeViewModels.Add(new EmployeeViewModel(employeeDtoDto));
-                }
+                EmployeeViewModels = new ObservableCollection<EmployeeViewModel>((await employeeController.ReadEmployeeList()).Select(employee => new EmployeeViewModel(employee)));
                 if (EmployeeViewModels.Count >= 1)
                 {
                     SelectedEmployee = EmployeeViewModels[0];
@@ -121,6 +117,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     CanUpdate = false;
                     CanDelete = false;
                 }
+                NotifyPropertyChanged("");
             }
             catch (Exception)
             {
