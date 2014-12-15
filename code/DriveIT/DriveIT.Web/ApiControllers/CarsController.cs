@@ -110,6 +110,7 @@ namespace DriveIT.Web.ApiControllers
             {
                 return BadRequest("Null value not allowed.");
             }
+            value.Created = DateTime.Now;
             var newCarId = await _repo.CreateCar(value.ToEntity());
             value.Id = newCarId;
             return CreatedAtRoute("DefaultApi", new Dictionary<string, object> { { "id", newCarId } }, value);

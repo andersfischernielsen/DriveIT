@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using DriveIT.CarQuery;
 using DriveIT.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit;
 using NUnit.Framework;
-using Assert = NUnit.Framework.Assert;
 
 namespace DriveIT.CarQuery.Tests
 {
@@ -60,11 +55,6 @@ namespace DriveIT.CarQuery.Tests
         {
             var malformedCarDto = new CarDto {Make = null, Model = null};
             Assert.Throws(typeof(ArgumentNullException), async () => await CarQuery.FillCarData(malformedCarDto));
-        }
-
-        public static void Main(string[] args)
-        {
-            
         }
     }
 }

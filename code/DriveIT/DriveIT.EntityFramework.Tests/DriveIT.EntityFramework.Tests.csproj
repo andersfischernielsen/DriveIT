@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{36AD2C9B-2DA7-4895-BEA4-FD6C3965DC47}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DriveIT.EntityFramework.Tests</RootNamespace>
     <AssemblyName>DriveIt.EntityFramework.Tests</AssemblyName>

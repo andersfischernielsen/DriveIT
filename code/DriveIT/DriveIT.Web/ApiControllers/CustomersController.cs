@@ -80,7 +80,6 @@ namespace DriveIT.Web.ApiControllers
         [AuthorizeRoles(Role.Administrator, Role.Employee)]
         public async Task<IHttpActionResult> Put(string email, [FromBody]CustomerDto value)
         {
-            //Todo check user is changing himself!
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
