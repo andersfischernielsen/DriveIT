@@ -58,7 +58,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             LogInAsEmployee();
             _carId = new CarController().ReadCarList().Result[0].Id.GetValueOrDefault();
             _carId2 = new CarController().ReadCarList().Result[1].Id.GetValueOrDefault();
-            _customerId = new CustomerController().ReadCustomerList().Result[0].Id;
+            _customerId = "cust@driveit.dk";
             _employeeId = new EmployeeController().ReadEmployeeList().Result[0].Id;
         }
 
