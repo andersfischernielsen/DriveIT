@@ -511,7 +511,7 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=EmployeesTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="1">
+                        <Button IsEnabled="{Binding DataContext.CanDelete, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
