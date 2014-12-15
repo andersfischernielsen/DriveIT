@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -28,7 +24,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             _saleController = new SaleController();
             CreateOtherEntities();
 
-            var saleTask = _saleController.CreateSale(new SaleDto()
+            var saleTask = _saleController.CreateSale(new SaleDto
             {
                 Price = 100,
                 CarId = _carId,
@@ -47,18 +43,11 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             _employeeId = new EmployeeController().ReadEmployeeList().Result[0].Id;
         }
 
-        private void DeleteOtherEntities()
-        {
-            new CarController().DeleteCar(_carId).Wait();
-        }
-
         [TestFixtureTearDown]
         public void TestFixtureTearDown()
         {
             var deleteTask = _saleController.DeleteSale(_createdSaleId);
             deleteTask.Wait();
-            Console.WriteLine();
-            DeleteOtherEntities();
         }
 
         [Test]
@@ -66,7 +55,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _saleController.ReadSaleList().Result;
             int amtOfSalesStart = t.Count;
-            var saleToCreate = new SaleDto()
+            var saleToCreate = new SaleDto
             {
                 Price = 200,
                 CarId = _carId,
@@ -75,7 +64,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Sold = DateTime.Now
             };
             await _saleController.CreateSale(saleToCreate);
-            Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
             Assert.AreEqual(amtOfSalesStart + 1, t.Count);
             var saleJustIn = t[t.Count - 1];
@@ -107,7 +95,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         public async Task TestUpdateSale()
         {
             var t = _saleController.ReadSaleList().Result;
-            int amtOfCarsStart = t.Count;
+            int amtOfSaleStart = t.Count;
             var saleToCreate = new SaleDto()
             {
                 Price = 300,
@@ -117,18 +105,16 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Sold = DateTime.Now
             };
             await _saleController.CreateSale(saleToCreate);
-            Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
-            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
+            Assert.AreEqual(amtOfSaleStart + 1, t.Count);
             var saleJustIn = t[t.Count - 1];
 
             saleJustIn.Price = 400;
 
             await _saleController.UpdateSale(saleJustIn);
 
-            Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
-            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
+            Assert.AreEqual(amtOfSaleStart + 1, t.Count);
             var saleUpdated = t[t.Count - 1];
             Assert.AreEqual(saleUpdated.Id.GetValueOrDefault(), saleJustIn.Id.GetValueOrDefault());
 

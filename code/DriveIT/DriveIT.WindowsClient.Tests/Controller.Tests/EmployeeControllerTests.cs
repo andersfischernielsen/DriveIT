@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
-using DriveIT.WindowsClient.ViewModels;
 using NUnit.Framework;
 
 namespace DriveIT.WindowsClient.Tests.Controller.Tests
@@ -24,7 +18,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
             _employeeController = new EmployeeController();
-            var empTask = _employeeController.CreateEmployee(new EmployeeDto()
+            var empTask = _employeeController.CreateEmployee(new EmployeeDto
             {
                 Email = "EmpSetupTest@mail.dk",
                 JobTitle = "Tester",
@@ -34,7 +28,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             },"EmpTestPass1",Role.Employee);
             empTask.Wait();
             _toDeleteEmpId = "EmpSetupTest@mail.dk";
-            Thread.Sleep(1000);
         }
 
         [TestFixtureTearDown]
@@ -49,7 +42,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _employeeController.ReadEmployeeList().Result;
             int amtOfCarsStart = t.Count;
-            var empToCreate = new EmployeeDto()
+            var empToCreate = new EmployeeDto
             {
                 Email = "EmpCreateTest@mail.dk",
                 JobTitle = "Tester2",
@@ -58,12 +51,11 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Phone = "12344321",
             };
             await _employeeController.CreateEmployee(empToCreate, "EmpTestPass1", Role.Employee);
-            Thread.Sleep(1000);
             t = _employeeController.ReadEmployeeList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var empJustIn = _employeeController.ReadEmployee("EmpCreateTest@mail.dk").Result;
             Assert.AreEqual(empToCreate.Email, empJustIn.Email);
-            //Assert.AreEqual(empToCreate.JobTitle, empJustIn.JobTitle); // bug Does not update.
+            Assert.AreEqual(empToCreate.JobTitle, empJustIn.JobTitle);
             Assert.AreEqual(empToCreate.FirstName, empJustIn.FirstName);
             Assert.AreEqual(empToCreate.LastName, empJustIn.LastName);
             Assert.AreEqual(empToCreate.Phone, empJustIn.Phone);
@@ -92,7 +84,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _employeeController.ReadEmployeeList().Result;
             int amtOfCarsStart = t.Count;
-            var empToCreate = new EmployeeDto()
+            var empToCreate = new EmployeeDto
             {
                 Email = "EmpTestBefore@mail.dk",
                 JobTitle = "TesterBefore",
@@ -101,7 +93,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Phone = "12345678",
             };
             await _employeeController.CreateEmployee(empToCreate, "EmpTestPass1", Role.Employee);
-            Thread.Sleep(1000);
             t = _employeeController.ReadEmployeeList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var empJustIn = _employeeController.ReadEmployee("EmpTestBefore@mail.dk").Result;
@@ -112,7 +103,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             empJustIn.Phone = "87654321";
             await _employeeController.UpdateEmployee(empJustIn);
 
-            Thread.Sleep(1000);
             t = _employeeController.ReadEmployeeList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var empUpdated = _employeeController.ReadEmployee("EmpTestBefore@mail.dk").Result;

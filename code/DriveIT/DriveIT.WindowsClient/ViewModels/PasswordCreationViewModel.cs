@@ -17,11 +17,18 @@ namespace DriveIT.WindowsClient.ViewModels
 
         public bool ProfileCreated { get; set; }
 
+        /// <summary>
+        /// The empty constructor used by the XAML Designer.
+        /// </summary>
         public PasswordCreationViewModel()
         {
             Roletypes = new[] { Role.Customer, Role.Employee, Role.Administrator};
         }
 
+        /// <summary>
+        /// The Constructor for customer password creation. Makes it only possible to choose Role.Customer as a role.
+        /// </summary>
+        /// <param name="customerDto"></param>
         public PasswordCreationViewModel(CustomerDto customerDto)
         {
             ProfileCreated = false;
@@ -33,6 +40,10 @@ namespace DriveIT.WindowsClient.ViewModels
             UsernameString = customerDto.Email;
         }
 
+        /// <summary>
+        /// The Constructor for employee password creation. Makes it possible to choose between Admin and Employee as role.
+        /// </summary>
+        /// <param name="employeeDto"></param>
         public PasswordCreationViewModel(EmployeeDto employeeDto)
         {
             ProfileCreated = false;
@@ -156,7 +167,7 @@ namespace DriveIT.WindowsClient.ViewModels
         #region Methods
 
         /// <summary>
-        /// Dont know how to do this better
+        /// Gets called everytime the Password Property has changed. Only if the password and confirmation Password matches and all password requirements are forfilled does the CanCreateProfile change to true.
         /// </summary>
         private void CheckPassword()
         {
@@ -198,6 +209,10 @@ namespace DriveIT.WindowsClient.ViewModels
             CanCreateProfile = true;
         }
 
+        /// <summary>
+        /// Creates the profile with the username and password given by the user. Creates a Customer if the Role = Role.Customer otherwise create an employee.
+        /// Closes the window if everything goes as expected.
+        /// </summary>
         public async void CreateProfile()
         {
             if (CanCreateProfile)
