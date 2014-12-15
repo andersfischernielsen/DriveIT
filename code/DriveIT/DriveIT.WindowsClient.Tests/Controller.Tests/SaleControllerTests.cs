@@ -47,18 +47,11 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             _employeeId = new EmployeeController().ReadEmployeeList().Result[0].Id;
         }
 
-        private void DeleteOtherEntities()
-        {
-            new CarController().DeleteCar(_carId).Wait();
-        }
-
         [TestFixtureTearDown]
         public void TestFixtureTearDown()
         {
             var deleteTask = _saleController.DeleteSale(_createdSaleId);
             deleteTask.Wait();
-            Console.WriteLine();
-            DeleteOtherEntities();
         }
 
         [Test]
@@ -107,7 +100,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         public async Task TestUpdateSale()
         {
             var t = _saleController.ReadSaleList().Result;
-            int amtOfCarsStart = t.Count;
+            int amtOfSaleStart = t.Count;
             var saleToCreate = new SaleDto()
             {
                 Price = 300,
@@ -119,7 +112,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             await _saleController.CreateSale(saleToCreate);
             Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
-            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
+            Assert.AreEqual(amtOfSaleStart + 1, t.Count);
             var saleJustIn = t[t.Count - 1];
 
             saleJustIn.Price = 400;
@@ -128,7 +121,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
             Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
-            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
+            Assert.AreEqual(amtOfSaleStart + 1, t.Count);
             var saleUpdated = t[t.Count - 1];
             Assert.AreEqual(saleUpdated.Id.GetValueOrDefault(), saleJustIn.Id.GetValueOrDefault());
 
