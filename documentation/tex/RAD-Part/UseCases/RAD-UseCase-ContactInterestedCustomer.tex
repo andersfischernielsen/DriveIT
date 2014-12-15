@@ -1,41 +1,36 @@
-\usecase{
-    title = {ContactInterestedCustomer},
-    label = uc:cont-int-cust,
-    description = {The \emph{Employee} contacts the \emph{Customer} in the request.},
-%    scope = {},
-%    level = {},
-    actors = {Initiated by \emph{Employee}\\
-		   Participation by \emph{Customer}},
-%    stakeholders and interests = {},
-    precondition = {The \texttt{DriveIT Windows Client} is initialized and online.},
-%    preconditions = {
-%        \item 1
-%        \item 2
-%        \item 3  
-%    },
-    postcondition = {The employee adds an order, containing the specified car and the customer information, and the order has been registered in the \texttt{DriveIT System}.},
-%    postconditions = {
-%        \item 1
-%        \item 2
-%        \item 3
-%    },
-    main success scenario = {
-	   \item The \emph{Employee} opens the list of requests.
-	   \item The \emph{Employee} chooses a request, which will open a new windows containing information about the customer, and the specified car.
-	   \item The \emph{Employee} calls the customer.
-	   \item The \emph{Employee} and the \emph{Customer} start a conversation, talking about the car, in which the customer is interested in.
-	   \item The \emph{Customer} confirms that he is interested in the specified car.
-	   \item The \emph{Customer} terminates the conversation.
-    },
-%    extensions = {
-%        \item 1
-%        \item 2
-%        \item 3
-%    },
-%    special requirements = {
-%	    \item 1
-%        \item 2
-%		\\
-%	},
-    frequency of occurrence = Very often,
-}
+\subsubsection{UC-4 : Contact Interested Customer}
+\label{contact-interested-customer-use-case}
+\HRule \\[0.4cm]
+% Description
+\textbf{Description:} An \texttt{Employee} contacts a \texttt{Customer} who has requested to get contacted. \\
+\HRule \\[0.4cm]
+% Actors
+\textbf{Actors:} \texttt{Employee, Customer}\\
+\HRule \\[0.4cm]
+% Preconditions
+\textbf{Preconditions:} 
+\begin{itemize}
+    \item The \texttt{Windows Client} is online and the \texttt{Employee} is signed in to the system.
+    \item There exists at least one \texttt{Contact Request} in the system.
+\end{itemize}
+\HRule \\[0.4cm]
+% Postconditions
+\textbf{Postcondition:}
+\begin{itemize}
+    \item The \texttt{Customer} who requested to get contacted has been contacted by the \texttt{Employee}.
+\end{itemize}
+\HRule \\[0.4cm]
+% Main success scenarios
+\textbf{Main success scenario:}
+\begin{enumerate}
+    \item The \texttt{Employee} navigates to the view of \texttt{Contact Requests}.
+    \item The \texttt{Employee} chooses the oldest non contacted \texttt{Contact Request}, and open a detailed view of the request.
+    \item The \texttt{Employee} contact the \texttt{Customer} through one of the means listed in the detailed view.
+    \item Depending on the outcome of the communication between the two, the \texttt{Employee} either deletes the \texttt{Contact Request} or converts it into a \texttt{Sale}.
+\end{enumerate}
+\HRule \\[0.4cm]
+% Frequency
+\textbf{Frequency:}
+Daily \\
+\HRule \\[0.4cm]
+
