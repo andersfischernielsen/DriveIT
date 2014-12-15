@@ -1,36 +1,36 @@
 \section{Dynamic Models}
 
 \subsection{Use Case Sequence Diagrams}
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.8]{Figures/SequenceDiagram-CreateOrder}\\
+		\includegraphics[width=\textwidth]{Figures/SequenceDiagram-CreateOrder}\\
 		% place the figure in the Figures folder (located with the main file)
 		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{Sequence diagram of the CreateOrder use case.}
   \label{fig:SequenceDiagram-CreateOrder}
   % label it something meanfull
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.8]{Figures/SequenceDiagram-CreateUserAccount}\\
+		\includegraphics[width=\textwidth]{Figures/SequenceDiagram-CreateUserAccount}\\
 		% place the figure in the Figures folder (located with the main file)
 		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{Sequence diagram of the CreateUserAccount use case.}
   \label{fig:SequenceDiagram-CreateUserAccount}
   % label it something meanfull
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.8]{Figures/SequenceDiagram-ContactInterestedCustomer}\\
+		\includegraphics[width=\textwidth]{Figures/SequenceDiagram-ContactInterestedCustomer}\\
 		% place the figure in the Figures folder (located with the main file)
 		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{Sequence diagram of the ContactInterestedCustomer use case.}
   \label{fig:SequenceDiagram-ContactInterestedCustomer}
   % label it something meanfull
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.8]{Figures/SequenceDiagram-RequestEmployeeContact}\\
+		\includegraphics[width=\textwidth]{Figures/SequenceDiagram-RequestEmployeeContact}\\
 		% place the figure in the Figures folder (located with the main file)
 		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{Sequence diagram of the RequestEmployeeContact use case.}
@@ -39,18 +39,18 @@
 \end{figure}
 
 \subsection{State Diagrams}
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.35]{Figures/StateDiagram-Car}\\
+		\includegraphics[width=\textwidth]{Figures/StateDiagram-Car}\\
 		% place the figure in the Figures folder (located with the main file)
 		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{State diagram of the Car object}
   \label{fig:StateDiagram-Car}
-  % label it something meanfull
 \end{figure}
-\begin{figure}[h!]
+The \ref{fig:StateDiagram-Car} shows the states a car entity can be in. The car should always be possible to delete as shown in the diagram, but to be sold the car must first enter the \emph{For Sale} state. In the \emph{For Sale} and \emph{Sold} state the car should be visible from the \texttt{DriveIT Web Client} with a label indicating which of the two states its in, and the car should be visible from the \texttt{DriveIT Windows Client} in all its states.\\
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.35]{Figures/StateDiagram-ContactRequest}\\
+		\includegraphics[width=\textwidth]{Figures/StateDiagram-ContactRequest}\\
 		% place the figure in the Figures folder (located with the main file)
 		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{State diagram of the ContactRequest object}

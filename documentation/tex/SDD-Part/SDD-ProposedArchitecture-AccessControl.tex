@@ -1,39 +1,37 @@
 \section{Access Control and Security}
 
-\todo{Check that it matches the program/api}
 \textbf{Access Matrix for DriveIT System}
 
 \begin{tabular}{|l|*{6}{c|}}\hline
-\backslashbox{\miniscule\textbf{Actors}\kern-1em}{\miniscule\textbf{Objects}\kern-1em}
-&\miniscule\textbf{Car}&\miniscule\textbf{Customer}&\miniscule\textbf{Order}
-&\miniscule\textbf{Employee}&\miniscule\textbf{Comment}&\miniscule\textbf{ContactRequest}\\\hline
+\backslashbox{\miniscule\textbf{Actors}}{\miniscule\textbf{Entities}} & \miniscule\textbf{Car} & \miniscule\textbf{Comment} & \miniscule\textbf{ContactRequest} & \miniscule\textbf{Customer} & \miniscule\textbf{Employee} & \miniscule\textbf{Sale} \\\hline
 
-\miniscule\textbf{Customer} &\miniscule getCars &\miniscule getUserInformation &\miniscule getOrders &\miniscule getEmployees & \miniscule createComment & \miniscule createContactRequest\\
-	       && \miniscule UpdateInformation &&& \miniscule getComments & \miniscule getContactRequests\\
-	       &&&&& \miniscule updateComment & \miniscule deleteContactRequest\\
-	       &&&&& \miniscule deleteComment & \miniscule \\\hline
+\miniscule\textbf{Non-registered user} & \miniscule read & \miniscule read && \miniscule create & \miniscule read & \miniscule\\\hline
 
-\miniscule\textbf{Non-registered} & \miniscule getCars & \miniscule createNewUser && \miniscule \miniscule getEmployees &&\\
-\miniscule\textbf{user} &&&&&&\\\hline
+\miniscule\textbf{Customer} & \miniscule read & \miniscule create & \miniscule create & \miniscule read & \miniscule read & \miniscule read\\
+	&& \miniscule read & \miniscule read & \miniscule update &&\\
+	&& \miniscule update & \miniscule delete &&& \\
+	&& \miniscule delete &&&&\\\hline
 
-\miniscule\textbf{Employee} & \miniscule createCar & \miniscule createNewUser & \miniscule createOrder & \miniscule getEmployees && \miniscule getContactRequests\\
-	       & \miniscule getCars & \miniscule getUserInformation & \miniscule getOrders &&& \miniscule updateContactRequest\\
-	       & \miniscule updateCar & \miniscule updateUser & \miniscule updateOrder &&& \miniscule deleteContactRequest\\
-	       & \miniscule deleteCar && \miniscule deleteOrder &&&\\\hline
+\miniscule\textbf{Employee} & \miniscule create & \miniscule read & \miniscule read & \miniscule create & \miniscule read & \miniscule create \\
+	& \miniscule read && \miniscule update & \miniscule read && \miniscule read\\
+	& \miniscule update && \miniscule delete & \miniscule update && \miniscule update\\
+	& \miniscule delete &&&&& \miniscule delete\\\hline
 
-\miniscule\textbf{Administrator} & \miniscule createCar & \miniscule createNewUser & \miniscule createOrder & \miniscule createEmployee && \miniscule getContactRequests\\
-	  & \miniscule getCars & \miniscule getUserInformation & \miniscule getOrders & \miniscule getEmployees && \miniscule updateContactRequest\\
-	  & \miniscule updateCar & \miniscule updateUser & \miniscule updateOrder & \miniscule updateEmployee && \miniscule deleteContactRequest\\
-	  & \miniscule deleteCar && \miniscule deleteOrder & \miniscule deleteEmployee &&\\\hline
+\miniscule\textbf{Administrator} & \miniscule create & \miniscule read & \miniscule read & \miniscule create & \miniscule create & \miniscule create\\
+	& \miniscule read & \miniscule delete & \miniscule update & \miniscule read & \miniscule read & \miniscule read\\
+	& \miniscule update && \miniscule delete & \miniscule update & \miniscule update & \miniscule update\\
+	& \miniscule delete &&& \miniscule delete & \miniscule delete & \miniscule delete\\\hline
 
 \end{tabular}\\\\
 
-Due to the fact that our DriveIT System is available for many users, it is neccessary to keep track of which users may have access to specific ressources in our system. To keep track of which users got access to which ressources, it is neccessary to check each user at login, through authentication, to confirm which ressources they can access.\\
+Due to the fact that the DriveIT System is available for many users, it is necessary to keep track of which users may have access to specific resources in our system. To keep track of which users got access to which resources, it is necessary to check each user at login, through authentication, to confirm which resources they can access.\\
 
-In our system, a non-registered user (a person accessing the DriveIT homepage without login) should be restricted to only be able to search for cars, get a list of employees and create a new user on the homepage.\\
+In our system, a non-registered user (a person accessing the DriveIT homepage without logging in) should be restricted to only be able to search for \texttt{Car}s, get a list of \texttt{Employee}s and create a new user on the homepage.\\
 
-The customer is able to access more on the DriveIT homepage than a non-registered user. The customer is able to access the same information as a non-registered user, but are also able to look through his or her own orders, and also able to create, update or delete his pr her own comments on cars.\\
+The \texttt{Customer} is able to access more on the DriveIT homepage than a non-registered user. The \texttt{Customer} is able to access the same information as a non-registered user, but are also able to look through his or her own \texttt{Order}s, and also able to create, update or delete his or her own \texttt{Comment}s on cars.\\
 
-The employee is able to create, update or delete cars, and search for cars. The employee is also able to create a new user (if a person calls the \todo{company}company for help), get information about a specific user and update a user by request of a customer. The employee is also able to create an order, see the orders of a specific customer, update an order and delete an order. The employee should also be able to get a list of employees, if it is needed in any case.\\
+The \texttt{Employee} is able to create, update, delete and search for \texttt{Car}s. The \texttt{Employee} is also able to create a new user (if a person calls the company using the \texttt{DriveIT System} for help), get information about a specific \texttt{Customer} and update a \texttt{Customer} by request. The \texttt{Employee} is also able to create a \texttt{Sale}, see the \texttt{Sale}s of a specific \texttt{Customer}, update and delete a \texttt{Sale}. The \texttt{Employee} should also be able to get a list of other \texttt{Employee}s, if it is needed in any case.\\
 
-Administrators of the system can do everything the employee can, but also create, update and delete other employees and administrators.
+An administrator is a special kind of \texttt{Employee}, who can do everything the \texttt{Employee} can, but also create, update and delete other \texttt{Employee}s and administrators.
+
+There is a bug in the DriveIT Web Client which means that \texttt{Employee}s and administrators can create \texttt{Comment}s and \texttt{ContactRequest}s. They cannot manage other peoples \texttt{Comment}s and \texttt{ContactRequest}s though. Also, details about orders and comments does not work as supposed for customers, when accessed by \texttt{Employee}s. Information about \texttt{Employee}s and administrators cannot be changed through the Web Client, as it was not meant to support this feature.

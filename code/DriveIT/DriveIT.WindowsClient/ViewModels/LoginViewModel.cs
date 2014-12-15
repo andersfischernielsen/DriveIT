@@ -5,10 +5,17 @@ using DriveIT.WindowsClient.Views;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
+    /// <summary>
+    /// The LoginViewModel is the Viewmodel in the MVVM pattern for the Login view.
+    /// It contains the logic of sending usernames and passwords to the API and logging ind.
+    /// </summary>
     public class LoginViewModel : IViewModelBase
     {
         public Action CloseAction { get; set; }
 
+        /// <summary>
+        /// The empty constructor, setting all property strings to "";
+        /// </summary>
         public LoginViewModel()
         {
             Status = "";
@@ -52,7 +59,9 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
 
-
+        /// <summary>
+        /// Tries to login with the given Username and Password. Changes the status to reflect the process.
+        /// </summary>
         public async void Login()
         {
             try
@@ -72,6 +81,9 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// This method skips login and is used for debugging, it uses the administrator user admin@driveit.dk.
+        /// </summary>
         public async void SkipLogin()
         {
             try

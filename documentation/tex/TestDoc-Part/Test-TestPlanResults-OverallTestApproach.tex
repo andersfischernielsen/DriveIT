@@ -1,1 +1,7 @@
 \section{Overall Test Approach}
+One of the non-functional requirements and design goals of the system was to have tested critical sections of the system.
+
+This has been accomplished by using a bottom-up approach to testing. 
+The deeper layers of the system providing data have been tested using unit testing, and other sub systems of the \texttt{DriveIT System} building on top of these systems have been integration and/or system tested. 
+
+By trusting that the lower layers of the system function correctly these can then be used directly. 
