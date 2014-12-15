@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -141,7 +137,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
             await _contactRequestController.UpdateContactRequest(contactRequestJustIn);
 
-            Thread.Sleep(1000);
             t = _contactRequestController.ReadContactRequests().Result;
             Assert.AreEqual(amtOfContactRequestsStart + 1, t.Count);
             var contactRequestUpdated = t[t.Count - 1];

@@ -325,23 +325,15 @@ namespace DriveIT.Web.ApiControllers
             {
                 switch (model.Role)
                 {
+                        case Role.Employee:
                     case Role.Administrator:
-                        var admin = new Employee { UserName = model.Email, Email = model.Email, Id = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
-                        result = await UserManager.CreateAsync(admin, model.Password);
-                        if (!result.Succeeded)
-                        {
-                            return GetErrorResult(result);
-                        }
-                        result = await UserManager.AddToRoleAsync(admin.Id, Role.Administrator.ToString());
-                        break;
-                    case Role.Employee:
-                        var employee = new Employee { UserName = model.Email, Email = model.Email, Id = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
+                        var employee = new Employee { UserName = model.Email, Email = model.Email, Id = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber, JobTitle = model.JobTitle };
                         result = await UserManager.CreateAsync(employee, model.Password);
                         if (!result.Succeeded)
                         {
                             return GetErrorResult(result);
                         }
-                        result = await UserManager.AddToRoleAsync(employee.Id, Role.Employee.ToString());
+                        result = await UserManager.AddToRoleAsync(employee.Id, model.Role.ToString());
                         break;
                     default:
                         return BadRequest("Error defining role!");

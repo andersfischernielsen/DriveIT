@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -28,7 +24,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             _saleController = new SaleController();
             CreateOtherEntities();
 
-            var saleTask = _saleController.CreateSale(new SaleDto()
+            var saleTask = _saleController.CreateSale(new SaleDto
             {
                 Price = 100,
                 CarId = _carId,
@@ -59,7 +55,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _saleController.ReadSaleList().Result;
             int amtOfSalesStart = t.Count;
-            var saleToCreate = new SaleDto()
+            var saleToCreate = new SaleDto
             {
                 Price = 200,
                 CarId = _carId,
@@ -68,7 +64,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Sold = DateTime.Now
             };
             await _saleController.CreateSale(saleToCreate);
-            Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
             Assert.AreEqual(amtOfSalesStart + 1, t.Count);
             var saleJustIn = t[t.Count - 1];
@@ -110,7 +105,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Sold = DateTime.Now
             };
             await _saleController.CreateSale(saleToCreate);
-            Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
             Assert.AreEqual(amtOfSaleStart + 1, t.Count);
             var saleJustIn = t[t.Count - 1];
@@ -119,7 +113,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
             await _saleController.UpdateSale(saleJustIn);
 
-            Thread.Sleep(1000);
             t = _saleController.ReadSaleList().Result;
             Assert.AreEqual(amtOfSaleStart + 1, t.Count);
             var saleUpdated = t[t.Count - 1];

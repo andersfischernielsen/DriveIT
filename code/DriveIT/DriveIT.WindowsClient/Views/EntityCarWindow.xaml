@@ -39,7 +39,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <StackPanel>
-                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/shared/add.png" Style="{DynamicResource PowerToolIconStyle}"/>
+                    <Image Source="/DriveIT.WindowsClient;component/Image/icons/users/login.png" Style="{DynamicResource PowerToolIconStyle}"/>
                     <TextBlock Text="{Binding CreateUpdateButtonText, Mode=OneWay}" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                 </StackPanel>
             </Button>

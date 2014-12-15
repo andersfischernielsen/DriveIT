@@ -10,11 +10,6 @@ namespace DriveIT.WindowsClient.Controllers
     /// </summary>
     public class EmployeeController
     {
-        public EmployeeController()
-        {
-
-        }
-
         /// <summary>
         /// Creates a Employee DTO object in the API.
         /// </summary>
@@ -35,7 +30,8 @@ namespace DriveIT.WindowsClient.Controllers
                     ConfirmPhoneNumber = employee.Phone,
                     Password = password,
                     ConfirmPassword = password,
-                    Role = role
+                    Role = role,
+                    JobTitle = employee.JobTitle
                 };
                 await DriveITWebAPI.Create("account/register", registerModel);
             }
