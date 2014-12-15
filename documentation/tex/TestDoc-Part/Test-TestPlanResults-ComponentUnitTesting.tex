@@ -40,6 +40,7 @@ The controllers have been tested with branch coverage, except for the places men
 \subsubsection{Approach}
 As mentioned earlier, one important thing to remember when testing is to test the implemented logic, and not the framework surrounding it. Therefore we have tested the Web API using mocks of the repository, and by calling the methods directly instead of using HTTP-requests.
 Some parts of the controllers cannot be tested this way, which is the parts where the controllers uses the \texttt{ModelState} to check the request for validity, but since this is a built in part of ASP.NET Web API it is assumed that these checks works as expected.
+
 Methods without parameters (get-methods) are tested to see if they return the right data. Other methods are tested with valid and invalid input to see that the controllers handles this correctly.
 
 \subsubsection{Requirements}
@@ -52,3 +53,11 @@ The unit tests of the \texttt{DriveIT Web API} are located in the \texttt{DriveI
 
 \subsubsection{Results}
 In the current version of \texttt{DriveIT Web API} the tests have completed with success. This does not mean that the Wep API is bug-free, but it gives us more confidence that the controllers work as intended.
+
+\subsection{DriveIT Windows Client Unit Testing}
+By using the MVVM architectural pattern, the application is highly testable since the business logic is away from the view and therefore does not require any actions done in the view. Due to time limitations not all ViewModels have been tested but the \texttt{CarViewModel}'s image gallery function and the \texttt{PasswordCreationViewModel} have been tested and works as an example of how one could extend the test to cover the entire ViewModel subsystem.
+
+For two components tests described, the use of whitebox-testing and branch-testing. Branch-testing gets showcase the NextImage functionality in the \texttt{CarViewModel}. This is done by testing NextPictureWithOnePicture, NextPictureWithTwoPicture, NextPictureWithThreePicture, here there are three different scenarios, either index does not get changed, index swaps between two different values, and index increments until it hits the last index and then returns to the first. \\
+Another example of branch testing is visible in the \texttt{PasswordCreationViewModel} here the CheckPassword method is testet. Since the method contains a number of if statements, the testing must make each if-statement return true and false. For this a method is created for each of the if-statements and therefore we reach branch-testing on that method.\\
+
+All Tests in the \texttt{DriveIT Windows Client} passes the component unit-tests.
