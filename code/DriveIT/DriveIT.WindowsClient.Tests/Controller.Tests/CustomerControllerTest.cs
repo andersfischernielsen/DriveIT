@@ -13,48 +13,112 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
     [TestFixture]
     public class CustomerControllerTests
     {
-            
         private CustomerController _customerController;
-        [SetUp]
-        public async Task Setup()
+
+        private string _createdCustId;
+        private string _toDeleteCustId;
+
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
         {
+            DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
             _customerController = new CustomerController();
-            await DriveITWebAPI.Login("mlin@itu.dk", "N0t_Really_a_password");
+            var custTask = _customerController.CreateCustomer(new CustomerDto()
+            {
+                Email = "CustSetupTest@mail.dk",
+                FirstName = "TestFirst",
+                LastName = "TestLast",
+                Phone = "12344321s",
+            }, "CustTestPass1");
+            custTask.Wait();
+            _toDeleteCustId = "CustSetupTest@mail.dk";
+            Thread.Sleep(1000);
+        }
+
+        [TestFixtureTearDown]
+        public void TestFixtureTearDown()
+        {
+            var deleteTask = _customerController.DeleteCustomer(_createdCustId);
+            deleteTask.Wait();
         }
 
         [Test]
-        public async Task TestAllMethods()
+        public async Task TestCreateEmployee()
         {
             var t = _customerController.ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
-                await _customerController.CreateCustomer(new CustomerDto()
-                {
-                    Email = "jajaja@itu.dk",
-                    FirstName = "Mr Handsome",
-                    LastName = "Cake"
-                },"testPassword1234");
-            Thread.Sleep(2000);
-            t = _customerController.ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
-
-
-            Console.WriteLine("Before update: " + _customerController.ReadCustomer(t[t.Count - 1].Email).Result.FirstName);
-            await _customerController.UpdateCustomer(new CustomerDto()
+            int amtOfCarsStart = t.Count;
+            var custToCreate = new CustomerDto()
             {
-                Email = "jajaja@itu.dk",
-                FirstName = "Mr Not So Handsome",
-                LastName = "Cookie",
-                Id = t[t.Count - 1].Id
-            });
-            Thread.Sleep(2000);
+                Email = "CustCreateTest@mail.dk",
+                FirstName = "TestFirst2",
+                LastName = "TestLast2",
+                Phone = "12344321",
+            };
+            await _customerController.CreateCustomer(custToCreate, "CustTestPass1");
+            Thread.Sleep(1000);
             t = _customerController.ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
-            Console.WriteLine("After update: " + _customerController.ReadCustomer(t[t.Count - 1].Email).Result.FirstName);
+            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
+            var custJustIn = _customerController.ReadCustomer("CustCreateTest@mail.dk").Result;
+            Assert.AreEqual(custToCreate.Email, custJustIn.Email);
+            //Assert.AreEqual(empToCreate.JobTitle, empJustIn.JobTitle); // bug Does not update.
+            Assert.AreEqual(custToCreate.FirstName, custJustIn.FirstName);
+            Assert.AreEqual(custToCreate.LastName, custJustIn.LastName);
+            Assert.AreEqual(custToCreate.Phone, custJustIn.Phone);
 
-            await _customerController.DeleteCustomer(t[t.Count - 1]);
-            Thread.Sleep(2000);
+            _createdCustId = custJustIn.Id;
+        }
+
+        [Test]
+        public async Task TestDeleteEmployee()
+        {
+            var t = _customerController.ReadCustomerList().Result;
+            int amtOfCarsStart = t.Count;
+            await _customerController.DeleteCustomer(_toDeleteCustId);
             t = _customerController.ReadCustomerList().Result;
-            Console.WriteLine(t.Count);
+
+            Assert.AreEqual(amtOfCarsStart - 1, t.Count);
+            foreach (var carDto in t)
+            {
+                Assert.AreNotEqual(_toDeleteCustId, carDto.Id);
+            }
+        }
+
+
+        [Test]
+        public async Task TestUpdateEmployee()
+        {
+            var t = _customerController.ReadCustomerList().Result;
+            int amtOfCarsStart = t.Count;
+            var custToCreate = new CustomerDto()
+            {
+                Email = "CustTestBefore@mail.dk",
+                FirstName = "TestFirstBefore",
+                LastName = "TestLastBefore",
+                Phone = "12345678",
+            };
+            await _customerController.CreateCustomer(custToCreate, "EmpTestPass1");
+            Thread.Sleep(1000);
+            t = _customerController.ReadCustomerList().Result;
+            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
+            var custJustIn = _customerController.ReadCustomer("CustTestBefore@mail.dk").Result;
+
+            custJustIn.FirstName = "TestFirstAfter";
+            custJustIn.LastName = "TestLastAfter";
+            custJustIn.Phone = "87654321";
+            await _customerController.UpdateCustomer(custJustIn);
+
+            Thread.Sleep(1000);
+            t = _customerController.ReadCustomerList().Result;
+            Assert.AreEqual(amtOfCarsStart + 1, t.Count);
+            var custUpdated = _customerController.ReadCustomer("CustTestBefore@mail.dk").Result;
+            Assert.AreEqual(custUpdated.Id, custJustIn.Id);
+
+            Assert.AreEqual(custJustIn.Email, custUpdated.Email);
+            Assert.AreEqual(custJustIn.FirstName, custUpdated.FirstName);
+            Assert.AreEqual(custJustIn.LastName, custUpdated.LastName);
+            Assert.AreEqual(custJustIn.Phone, custUpdated.Phone);
+
+            await _customerController.DeleteCustomer(custUpdated.Id);
         }
     }
 }

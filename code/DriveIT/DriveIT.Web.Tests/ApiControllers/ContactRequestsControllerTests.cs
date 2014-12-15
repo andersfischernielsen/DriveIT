@@ -50,11 +50,11 @@ namespace DriveIT.Web.Tests.ApiControllers
 
             var repo = new MockRepository(MockBehavior.Loose);
             var mockRepo = repo.Create<IPersistentStorage>();
-            mockRepo.Setup(x => x.GetAllContactRequests()).Returns(Task.Run(() => contactRequests));
-            mockRepo.Setup(x => x.GetContactRequestWithId(1)).Returns(Task.Run(() => contactRequests.Find(c => c.Id == 1)));
-            mockRepo.Setup(x => x.GetContactRequestWithId(2)).Returns(Task.Run(() => contactRequests.Find(c => c.Id == 2)));
+            mockRepo.Setup(x => x.GetAllContactRequests()).ReturnsAsync(contactRequests);
+            mockRepo.Setup(x => x.GetContactRequestWithId(1)).ReturnsAsync(contactRequests.Find(c => c.Id == 1));
+            mockRepo.Setup(x => x.GetContactRequestWithId(2)).ReturnsAsync(contactRequests.Find(c => c.Id == 2));
 
-            mockRepo.Setup(x => x.CreateContactRequest(It.IsAny<ContactRequest>())).Returns(Task.Run(() => contactRequests.Max(x => x.Id) + 1));
+            mockRepo.Setup(x => x.CreateContactRequest(It.IsAny<ContactRequest>())).ReturnsAsync(contactRequests.Max(x => x.Id) + 1);
 
             _controller = new ContactRequestsController(mockRepo.Object);
         }

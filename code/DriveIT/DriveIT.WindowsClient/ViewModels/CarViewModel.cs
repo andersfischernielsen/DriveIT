@@ -8,9 +8,17 @@ using DriveIT.WindowsClient.Controllers;
 
 namespace DriveIT.WindowsClient.ViewModels
 {
+    /// <summary>
+    /// The Viewmodel for the CarEntityView following the MVVM design pattern by Microsoft.
+    /// This Viewmodel also works as an adapter design pattern for the CarDto object. This allows easy integration with the API which sends and recieves carDtos
+    /// </summary>
     public class CarViewModel : IViewModelBase
     {
         private CarDto _carDto;
+
+        /// <summary>
+        /// A state enum, which is used to decide which methods are available and control the flow.
+        /// </summary>
         public enum CarStateEnum
         {
             Initial,
@@ -19,6 +27,9 @@ namespace DriveIT.WindowsClient.ViewModels
             Sold,
         }
 
+        /// <summary>
+        /// An array of the fueltypes used to create the items in a combobox
+        /// </summary>
         public static FuelType[] FueltypeStrings
         {
             get
@@ -27,8 +38,11 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        // todo ; til at notifie at alt er updated.
-
+        /// <summary>
+        /// The constructor used for when a carDto already exists. Thsi constructor assumes the object exists in the database.
+        /// Also intialise the Imagegallery.
+        /// </summary>
+        /// <param name="carDto">A Car</param>
         public CarViewModel(CarDto carDto)
         {
             _carDto = carDto;
@@ -36,6 +50,10 @@ namespace DriveIT.WindowsClient.ViewModels
             CreateImageViewModels();
 
         }
+        /// <summary>
+        /// The empty constructor for when a cardto does not exist.
+        /// Also intialise the Imagegallery.
+        /// </summary>
         public CarViewModel()
         {
             _carDto = new CarDto();
@@ -277,7 +295,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("SelectedImageViewModel");
             }
         }
-
+        /// <summary>
+        /// Creates ImageViewModels based on the ImagePaths in _carDto. If none exists add a single ImageViewModel
+        /// </summary>
         private void CreateImageViewModels()
         {
             ImageGallery = new List<ImageViewModel>();
@@ -297,6 +317,10 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         private string _imageAmtString;
+        /// <summary>
+        /// The string describing how many images there are and which one is currently showing.
+        /// E.g "Image 1 of 3".
+        /// </summary>
         public string ImageAmtString
         {
             get { return _imageAmtString; }
@@ -307,6 +331,9 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Sets the selectedImage to the next in the image gallery. Works like a caroussel so when using Next at the last image, the first image becomes the Selected Image.
+        /// </summary>
         public void NextImage()
         {
             int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
@@ -318,6 +345,9 @@ namespace DriveIT.WindowsClient.ViewModels
             SelectedImageViewModel = ImageGallery[nextIndex];
             ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel) + 1) + " of " + ImageGallery.Count;
         }
+        /// <summary>
+        /// Sets the selectedImage to the previous in the image gallery. Works like a caroussel so when using Previous at the first image, the last image becomes the Selected Image.
+        /// </summary>
         public void PreviousImage()
         {
             int currentIndex = ImageGallery.IndexOf(SelectedImageViewModel);
@@ -329,6 +359,9 @@ namespace DriveIT.WindowsClient.ViewModels
             SelectedImageViewModel = ImageGallery[nextIndex];
             ImageAmtString = "Image " + (ImageGallery.IndexOf(SelectedImageViewModel) + 1) + " of " + ImageGallery.Count;
         }
+        /// <summary>
+        /// Removes the selectedImageviewmodel and goes to the previous picture, unless only 1 image exists in the imageGallery, in that case, the imageviewmodel is just reset.
+        /// </summary>
         public void DeleteImage()
         {
             if (ImageGallery.Count == 1)
@@ -342,6 +375,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 PreviousImage();
             }
         }
+        /// <summary>
+        /// Adds a new Imageviewmodel to the ImageGallery unless the current imageviewmodel is empty.
+        /// </summary>
         public void AddImage()
         {
             if (!SelectedImageViewModel.IsEmpty())
@@ -354,6 +390,10 @@ namespace DriveIT.WindowsClient.ViewModels
 
         #endregion ImageGallery
 
+        /// <summary>
+        /// Based on the information in the _carDto, the carQuery controller inputs new information to the carDto.
+        /// Information already filled into the _carDto will not be overriden.
+        /// </summary>
         public async void ImportCarQueryData()
         {
             Status = "Importing...";
@@ -371,8 +411,10 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         #region CRUDS
-
-        public void SaveCar()
+        /// <summary>
+        /// Based on the carstate either Create the var or Update it. If neither CarModel, CarMake nor Price is set the status is updated.
+        /// </summary>
+        public async void SaveCar()
         {
             if (string.IsNullOrWhiteSpace(CarModel) || string.IsNullOrWhiteSpace(CarMake) || Price == 0)
             {
@@ -385,11 +427,10 @@ namespace DriveIT.WindowsClient.ViewModels
                 switch (CarState)
                 {
                     case CarStateEnum.Initial:
-                        CreateCar();
-                        //todo Fix the problem with IDs and images.
+                        await CreateCar();
                         break;
                     default:
-                        UpdateCar();
+                        await UpdateCar();
                         break;
                 }
             }
@@ -399,18 +440,20 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Gets called from the view
+        /// Creates the given car and update the carDto with the created cardto in the database(to find the ID).
+        /// Changes the carstate to CarStateEnum.ForSale
         /// </summary>
-        public async void CreateCar()
+        public async Task CreateCar()
         {
-            
             try
             {
-                await UploadImages();
+                Status = "Trying to create car...";
                 var carController = new CarController();
-                var carInDB = await carController.CreateCar(_carDto);
+                _carDto = await carController.CreateCar(_carDto);
 
-                _carDto = carInDB;
+                await UploadImages();
+                await carController.UpdateCar(_carDto);
+
                 NotifyPropertyChanged("");
 
                 Status = "Car Created";
@@ -423,6 +466,30 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Updates the images and information about the _carDto
+        /// </summary>
+        public async Task UpdateCar()
+        {
+            try
+            {
+                Status = "Trying to update car...";
+                await UploadImages();
+                var carController = new CarController();
+                await carController.UpdateCar(_carDto);
+                Status = "Car Updated";
+            }
+            catch (Exception)
+            {
+
+                Status = "Failed to update car!";
+            }
+        }
+
+        /// <summary>
+        /// Uploads the images at the imagespath of the _carDto.
+        /// </summary>
+        /// <returns></returns>
         private async Task UploadImages()
         {
             try
@@ -433,7 +500,7 @@ namespace DriveIT.WindowsClient.ViewModels
                     var uri = new Uri(imagePath);
                     if (uri.IsFile)
                     {
-                        newPaths.Add(await ImageController.UploadImage(_carDto.Id.Value, imagePath));
+                        newPaths.Add(await ImageController.UploadImage(_carDto.Id.GetValueOrDefault(), imagePath));
                     }
                     else
                     {
@@ -448,26 +515,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to upload image!";
             }
         }
+        
         /// <summary>
-        /// Gets called from the view
-        /// </summary>
-        public async void UpdateCar()
-        {
-            try
-            {
-                await UploadImages();
-                var carController = new CarController();
-                await carController.UpdateCar(_carDto);
-                Status = "Car Updated";
-            }
-            catch (Exception)
-            {
-
-                Status = "Failed to update car!";
-            }
-        }
-        /// <summary>
-        /// Gets called from the view
+        /// Gets called from the view. Deletes the car at the webApi, with the id _carDto.Id
         /// </summary>
         public async void DeleteCar()
         {
@@ -489,6 +539,9 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Takes the imagepaths(strings) in the imageviewmodels of imageGallery and moves them into _cardto's ImagePaths if they are not null or empty.
+        /// </summary>
         public void CreateImagePathStrings()
         {
             try
