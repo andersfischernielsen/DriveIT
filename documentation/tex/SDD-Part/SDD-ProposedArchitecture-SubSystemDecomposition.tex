@@ -17,7 +17,15 @@ Every table in the persistence module must therefore be supported by the sub sys
 The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JavaScript Object Notation (JSON)} and transferring these via a texttt{REST} interface accessible using \texttt{HTTP}. \\
 These modules are implemented using the \texttt{ASP.NET} framework, since these provide a lot of the neccessary funtionality out of the box, and simplify and shortens development time.
 
-\subsection{WindowsApp} Used by the employees to serve the customers. The Windows application can only be accessed by employees who will have to login at startup. The application is used to CRUD cars, orders, customers and employees (by the administrator account-type).
+\subsection{Windows Client} 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{Figures/WindowsClientCodeMap}
+	\caption{The Code Map of the Windows Client}
+	\label{fig:WindowsClientCodeMap}
+\end{figure}
+The Windows Client is 
+
 \subsection{CarQuery} This subsystem is a collection of classes that enable the rest of the \texttt{DriveIT System} to fill out missing information about cars from the CarQuery API.\\
 The sub system is used by an employee when creating a new car. The subsystem mainly consists of a \texttt{JSON} deserialiser that communicates with the \texttt{CarQuery REST API} and another class that receives a Car object and fills out the missing attributes using the deserialised JSON data. \\
 The employee fills out the information he/she knows about the car and the system then narrows its information search against the \texttt{CarQuery REST API}.
