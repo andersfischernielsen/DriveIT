@@ -26,8 +26,9 @@ These modules are implemented using the \texttt{ASP.NET} framework, since these 
 \end{figure}
 The Windows Client is used by the employees, to manipulate data in the system. Depending on their role Employee or Administrator They can Create, Read, Update and Delete all entities except for creating \texttt{ContactRequest}, which only can be created through the \texttt{DriveIT Web Client}.\\
 The employee logs into the client with his or hers username and password, and can then via an user interface manipulate data in the system.\\
-The subsystem is made out of three main systems: The DriveIT.Views, the DriveIT.ViewModels and the DriveIT.Controllers. The DriveIT.Views contains the user interface written in with Microsofts WPF framework. The DriveIT.ViewModels contains the ViewModels which holds data which is bound to the Views following Microsoft's \emph{Model View ViewModel} architectural pattern. The DriveIT.Controllers section contains the controllers which transforms data and sends and receives HTTP Requests to/from the \texttt{DriveIT Web API}
-
+The subsystem is made out of three main systems: The DriveIT.Views, the DriveIT.ViewModels and the DriveIT.Controllers.\\
+The DriveIT.Views contains the user interface written in with Microsofts WPF framework. The DriveIT.ViewModels contains the ViewModels which holds data which is bound to the Views following Microsoft's \emph{Model View ViewModel} architectural pattern. Viewmodels for entities are often created in the form EntityListViewModel and EntityViewModel, but a few extra viewmodels exists for extra views such as the LoginViewModel and the PasswordCreationViewModel.\\
+The DriveIT.Controllers section contains the controllers which transforms data and sends and receives HTTP Requests to/from the \texttt{DriveIT Web API}. Images are uploaded to \emph{Azures Blob Storage} and therefore does not contact the API. Another controller to notice is the \texttt{GravatarController} which takes email strings and converts it to a link to that emails Gravatar profile url.
 
 \subsection{CarQuery} 
 This subsystem is a collection of classes that enable the rest of the \texttt{DriveIT System} to fill out missing information about cars from the CarQuery API.\\
