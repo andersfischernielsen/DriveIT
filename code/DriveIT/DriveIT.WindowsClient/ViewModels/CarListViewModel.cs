@@ -21,7 +21,9 @@ namespace DriveIT.WindowsClient.ViewModels
             CarViewModels = new ObservableCollection<CarViewModel>();
             UpdateList();
         }
-
+        /// <summary>
+        /// Getters and setters for the attributes of a CustomerDTO while notifying view.
+        /// </summary>
         #region Properties
         private CarViewModel _selectedCar;
         public CarViewModel SelectedCar
@@ -79,6 +81,9 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion
 
         #region CRUDS
+        /// <summary>
+        /// Opens the CarWindow with the information of the selected ContactRequest.
+        /// </summary>
         public async void UpdateList()
         {
             try
@@ -106,7 +111,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to retrieve data for cars!";
             }
         }
-
+        /// <summary>
+        /// Deletes the selected Car.
+        /// </summary>
         public void DeleteCar()
         {
             try
@@ -133,7 +140,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to delete the car!";
             }
         }
-
+        /// <summary>
+        /// Creates a new CarWindow to create a Car.
+        /// </summary>
         public void CreateNewCarWindow()
         {
             try
@@ -150,7 +159,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to create window!";
             }
         }
-
+        /// <summary>
+        /// Opens the CarWindow with the data of the selected Car.
+        /// </summary>
         public void UpdateCarWindow()
         {
             try
