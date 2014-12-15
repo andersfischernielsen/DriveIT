@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
 using NUnit.Framework;
@@ -23,7 +18,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
             _customerController = new CustomerController();
-            var custTask = _customerController.CreateCustomer(new CustomerDto()
+            var custTask = _customerController.CreateCustomer(new CustomerDto
             {
                 Email = "CustSetupTest@mail.dk",
                 FirstName = "TestFirst",
@@ -32,7 +27,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             }, "CustTestPass1");
             custTask.Wait();
             _toDeleteCustId = "CustSetupTest@mail.dk";
-            Thread.Sleep(1000);
         }
 
         [TestFixtureTearDown]
@@ -47,7 +41,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _customerController.ReadCustomerList().Result;
             int amtOfCarsStart = t.Count;
-            var custToCreate = new CustomerDto()
+            var custToCreate = new CustomerDto
             {
                 Email = "CustCreateTest@mail.dk",
                 FirstName = "TestFirst2",
@@ -55,12 +49,10 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Phone = "12344321",
             };
             await _customerController.CreateCustomer(custToCreate, "CustTestPass1");
-            Thread.Sleep(1000);
             t = _customerController.ReadCustomerList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var custJustIn = _customerController.ReadCustomer("CustCreateTest@mail.dk").Result;
             Assert.AreEqual(custToCreate.Email, custJustIn.Email);
-            //Assert.AreEqual(empToCreate.JobTitle, empJustIn.JobTitle); // bug Does not update.
             Assert.AreEqual(custToCreate.FirstName, custJustIn.FirstName);
             Assert.AreEqual(custToCreate.LastName, custJustIn.LastName);
             Assert.AreEqual(custToCreate.Phone, custJustIn.Phone);
@@ -89,7 +81,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _customerController.ReadCustomerList().Result;
             int amtOfCarsStart = t.Count;
-            var custToCreate = new CustomerDto()
+            var custToCreate = new CustomerDto
             {
                 Email = "CustTestBefore@mail.dk",
                 FirstName = "TestFirstBefore",
@@ -97,7 +89,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 Phone = "12345678",
             };
             await _customerController.CreateCustomer(custToCreate, "EmpTestPass1");
-            Thread.Sleep(1000);
             t = _customerController.ReadCustomerList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var custJustIn = _customerController.ReadCustomer("CustTestBefore@mail.dk").Result;
@@ -107,7 +98,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             custJustIn.Phone = "87654321";
             await _customerController.UpdateCustomer(custJustIn);
 
-            Thread.Sleep(1000);
             t = _customerController.ReadCustomerList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var custUpdated = _customerController.ReadCustomer("CustTestBefore@mail.dk").Result;

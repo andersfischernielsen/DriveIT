@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -22,7 +20,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
             _carController = new CarController();
-            var carTask = _carController.CreateCar(new CarDto()
+            var carTask = _carController.CreateCar(new CarDto
             {
                 Color = "TestSetup",
                 DistanceDriven = 100,
@@ -49,7 +47,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _carController.ReadCarList().Result;
             int amtOfCarsStart = t.Count;
-            var carToCreate = new CarDto()
+            var carToCreate = new CarDto
             {
                 Color = "Red",
                 DistanceDriven = 10000,
@@ -61,7 +59,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 ImagePaths = new List<string>()
             };
             await _carController.CreateCar(carToCreate);
-            Thread.Sleep(1000);
             t = _carController.ReadCarList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var carJustIn = t[t.Count - 1];
@@ -96,7 +93,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _carController.ReadCarList().Result;
             int amtOfCarsStart = t.Count;
-            var carToCreate = new CarDto()
+            var carToCreate = new CarDto
             {
                 Color = "Red",
                 DistanceDriven = 100,
@@ -108,7 +105,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 ImagePaths = new List<string>()
             };
             await _carController.CreateCar(carToCreate);
-            Thread.Sleep(1000);
             t = _carController.ReadCarList().Result;
             Assert.AreEqual(amtOfCarsStart+1, t.Count);
             var carJustIn = t[t.Count - 1];
@@ -121,7 +117,6 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             carJustIn.Fuel = FuelType.Diesel;
             await _carController.UpdateCar(carJustIn);
 
-            Thread.Sleep(1000);
             t = _carController.ReadCarList().Result;
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var carUpdated = t[t.Count - 1];

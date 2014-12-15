@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using DriveIT.Models;
 using DriveIT.WindowsClient.Controllers;
@@ -26,14 +22,13 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             var t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
-                await _requestForContactController.CreateContactRequest(new ContactRequestDto()
+                await _requestForContactController.CreateContactRequest(new ContactRequestDto
                 {
                     Requested = DateTime.Now,
                     CarId = 1,
                     CustomerId = "cust@driveit.dk",
                     EmployeeId = "mlin@itu.dk",
                 });
-            Thread.Sleep(5000);
             t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
 
@@ -47,13 +42,11 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
                 EmployeeId = "mlin@itu.dk",
                 Id = t[t.Count - 1].Id.Value
             });
-            Thread.Sleep(5000);
             t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
             Console.WriteLine("After update: " + _requestForContactController.ReadContactRequest(t[t.Count - 1].Id.Value).Result.Requested);
 
             await _requestForContactController.DeleteContactRequest(t[t.Count - 1].Id.Value);
-            Thread.Sleep(5000);
             t = _requestForContactController.ReadContactRequests().Result;
             Console.WriteLine(t.Count);
         }
