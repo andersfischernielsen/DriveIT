@@ -1,37 +1,38 @@
-\usecase{
-    title = {RequestEmployeeContact},
-    label = uc:req-emp-contact,
-    description = {The \emph{User} wishes to be contacted by an \emph{Employee} about a car.},
-%    scope = {},
-%    level = {},
-    actors = {Initiated by \emph{Customer}},
-%    stakeholders and interests = {},
-%    precondition = {},
-    preconditions = {
-    \item The \texttt{DriveIT System} is initialized and online.
-    \item The \texttt{Customer} has found a car in the \texttt{DriveIT System} he/she wishes to be contacted about.
-    },
-%    postcondition = {},    
-    postconditions = {
-    \item The \emph{Customer} has submitted a request form.,
-    \item The request-employee-contact-form has been registered in the \texttt{DriveIT System}.
-    },
-    main success scenario = {
-       \item The \emph{Customer} has found a car he/she wishes to be contacted about.
-       \item The \emph{Customer} fills out a request-employee-contact-form and submits it.
-       \item The request-employee-contact-form is  registered in the \texttt{DriveIT System}.
-       \item Any \emph{Employee} registered in the \texttt{DriveIT System} is now able to view and process the submission.
-    },
-%    extensions = {
-%        \item 1
-%        \item 2
-%        \item 3
-%    },
-%    special requirements = {
-%	    \item 1
-%        \item 2
-%		\\
-%	},
-    frequency of occurrence = Often,
-    open issues = {It is unclear what is unclear},
-}
+\subsubsection{UC-5 : Request to get contacted by employee}
+\label{request-contact-use-case}
+\HRule \\[0.4cm]
+% Description
+\textbf{Description:} A \texttt{Customer} wants to get contacted by a \texttt{Employee} regarding a specific car. \\
+\HRule \\[0.4cm]
+% Actors
+\textbf{Actors:} \texttt{Employee, Customer}\\
+\HRule \\[0.4cm]
+% Preconditions
+\textbf{Preconditions:} 
+\begin{itemize}
+    \item The \texttt{Customer} has established connection to the Internet.
+    \item The \texttt{Customer} has found a specific car he wants to get contacted regarding and has loaded the detailed view of the car on the \texttt{Web Client}.
+    \item The \texttt{Customer} is signed in to the system.
+\end{itemize}
+\HRule \\[0.4cm]
+% Postconditions
+\textbf{Postcondition:}
+\begin{itemize}
+\end{itemize}
+    \item The \texttt{Customer} has either been contacted regarding a car or has regret that he wants to get contacted and has deleted the request.
+\HRule \\[0.4cm]
+% Main success scenarios
+\textbf{Main success scenario:}
+\begin{enumerate}
+    \item The \texttt{Customer} clicks on the `Request to get contacted' button.
+    \item The \texttt{Customer} gets notified that he has requested to get contacted regarding the specific car.
+    \item If the \texttt{Customer} regrets that he wants to get contacted, he can follow a link on the detailed view for the specific car to see an overview of all his requests and then delete the given request.
+    \item Otherwise an \texttt{Employee} will contact the \texttt{Customer} as soon as he sees the request.
+\end{enumerate}
+
+\HRule \\[0.4cm]
+% Frequency
+\textbf{Frequency:}
+Daily \\
+\HRule \\[0.4cm]
+
