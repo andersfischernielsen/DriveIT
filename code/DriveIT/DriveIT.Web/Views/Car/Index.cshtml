@@ -1,5 +1,4 @@
-﻿@using System.Linq
-@model System.Collections.Generic.IEnumerable<DriveIT.Models.CarDto>
+﻿@model IEnumerable<DriveIT.Models.CarDto>
 
 @{
     ViewBag.Title = "Car Search";
@@ -10,13 +9,6 @@
 <h1>Car Search</h1>
 <p>In this window, you are able to search for cars, by giving, as input, the three following criteria: FuelType, Make and Model.</p>
 
-@*
-    BeginForm is a HtmlHelper. It writes an opening <form> tag, which (in this case) uses the GET method, and the request is processed by
-    the action method in the controller, for the view.
-    
-    By the GET method, the BeginForm receives data through the ViewBag property ("fuelType", "make", "model") and displays it in a dropdownlist.
-    "---" is made for an empty input in the dropdownlist.
-*@
 @using (Html.BeginForm("Index", "Car", FormMethod.Get))
 {
     <p>
@@ -27,7 +19,6 @@
     </p>
 }
 
-@*Table containing information about the car.*@
 <table class="table">
     <tr>
         <th>
@@ -84,9 +75,7 @@
             <td>
                 @if (item.ImagePaths.Count != 0)
                 {
-                    <div class="item" style="width:250px;height:200px">
-                        <img src=@item.ImagePaths.First() width="250" height="200" />
-                    </div>
+                    <img src=@item.ImagePaths.First() height="200" width="200"/>
                 }
                 else
                 {

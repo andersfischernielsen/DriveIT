@@ -31,19 +31,13 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("ContactRequestId");
             }
         }
-        /// <summary>
-        /// Constructor for ContactRequestViewModel which updates the given ContactRequestDTO and updates the ContactRequestState.
-        /// </summary>
-        /// <param name="contactRequestDto">The ContactRequestDTO to be updated</param>
+
         public ContactRequestViewModel(ContactRequestDto contactRequestDto)
         {
             _contactRequestDto = contactRequestDto;
             ContactRequestState = ContactRequestEnum.InSystem;
             UpdateForeignKeyLists();
         }
-        /// <summary>
-        /// Empty constructor which creates a new ContactRequestDTO.
-        /// </summary>
         public ContactRequestViewModel()
         {
             _contactRequestDto = new ContactRequestDto();
@@ -51,9 +45,7 @@ namespace DriveIT.WindowsClient.ViewModels
             ContactRequestState = ContactRequestEnum.NotInSystem;
             UpdateForeignKeyLists();
         }
-        /// <summary>
-        /// Updates the list of foreign keys.
-        /// </summary>
+
         public async void UpdateForeignKeyLists()
         {
             try
@@ -76,9 +68,8 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
 
-        /// <summary>
-        /// Getters and setters for the attributes of a SaleDTO while notifying view.
-        /// </summary>
+
+        
         #region ATTRIBUTES
 
         private bool _canUpdate = true;
@@ -185,9 +176,6 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion ATTRIBUTES
 
         #region CRUDS
-        /// <summary>
-        /// Saves an ContactRequest - updates the ContactRequest if it exists, otherwise creates a new ContactRequest.
-        /// </summary>
         public void SaveContactRequest()
         {
             try
@@ -209,8 +197,8 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         /// <summary>
-        /// Updates the ContactRequestController, creates a ContactRequest from the API, and notifies the view.
-        /// </summary>	
+        /// Gets called from the view
+        /// </summary>
         public async void UpdateContactRequest()
         {
             try
@@ -226,7 +214,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Creates a ContactRequestController, deletes the ContactRequest from the API, and notifies the view.
+        /// Gets called from the view
         /// </summary>
         public async void DeleteContactRequest()
         {
@@ -247,9 +235,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to delete contact request!";
             }
         }
-        /// <summary>
-        /// Creates a Sale from the current ContactRequest.
-        /// </summary>
+
         public void CreateSaleFromRequest()
         {
             try

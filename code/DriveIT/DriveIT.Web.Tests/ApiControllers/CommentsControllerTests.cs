@@ -56,14 +56,14 @@ namespace DriveIT.Web.Tests.ApiControllers
 
             var repo = new MockRepository(MockBehavior.Loose);
             var mockRepo = repo.Create<IPersistentStorage>();
-            mockRepo.Setup(x => x.GetAllCommentsForCar(1)).ReturnsAsync(commentsList.Where(c => c.CarId == 1).ToList());
-            mockRepo.Setup(x => x.GetCommentWithId(1)).ReturnsAsync(commentsList.Find(c => c.Id == 1));
-            mockRepo.Setup(x => x.GetCommentWithId(2)).ReturnsAsync(commentsList.Find(c => c.Id == 2));
+            mockRepo.Setup(x => x.GetAllCommentsForCar(1)).Returns(Task.Run(() => commentsList.Where(c => c.CarId == 1).ToList()));
+            mockRepo.Setup(x => x.GetCommentWithId(1)).Returns(Task.Run(() => commentsList.Find(c => c.Id == 1)));
+            mockRepo.Setup(x => x.GetCommentWithId(2)).Returns(Task.Run(() => commentsList.Find(c => c.Id == 2)));
             
-            mockRepo.Setup(x => x.GetAllCommentsForCar(It.IsAny<int>())).ReturnsAsync(commentsList.Where(c => c.CarId == It.IsAny<int>()).ToList());
-            mockRepo.Setup(x => x.GetAllCommentsForCar(1)).ReturnsAsync(commentsList.Where(c => c.CarId == 1).ToList());
+            mockRepo.Setup(x => x.GetAllCommentsForCar(It.IsAny<int>())).Returns(Task.Run(() => commentsList.Where(c => c.CarId == It.IsAny<int>()).ToList()));
+            mockRepo.Setup(x => x.GetAllCommentsForCar(1)).Returns(Task.Run(() => commentsList.Where(c => c.CarId == 1).ToList()));
 
-            mockRepo.Setup(x => x.CreateComment(It.IsAny<Comment>())).ReturnsAsync(commentsList.Max(x => x.Id) + 1);
+            mockRepo.Setup(x => x.CreateComment(It.IsAny<Comment>())).Returns(Task.Run(() => commentsList.Max(x => x.Id) + 1));
 
             _controller = new CommentsController(mockRepo.Object);
         }
@@ -95,7 +95,7 @@ namespace DriveIT.Web.Tests.ApiControllers
         public async Task GetByCarId_MultipleParameters_NotFoundResult()
         {
             var message = await _controller.GetByCarId(6) as NotFoundResult;
-            Assert.IsNotNull(message);
+            Assert.IsNotNull(message, (await _controller.GetByCarId(6)).GetType().ToString());
 
             message = await _controller.GetByCarId(0) as NotFoundResult;
             Assert.IsNotNull(message);

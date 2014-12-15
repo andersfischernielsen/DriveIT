@@ -13,26 +13,20 @@ namespace DriveIT.WindowsClient.ViewModels
     {
     public ObservableCollection<EmployeeViewModel> EmployeeViewModels { get; set; }
 
-        /// <summary>
-        /// The default constructor. Calling the UpdateList() method initially to load in data.
-        /// </summary>
+
         public EmployeeListViewModel()
         {
             EmployeeViewModels = new ObservableCollection<EmployeeViewModel>();
             SetCorrectDeletePermission();
             UpdateList();
         }
-        /// <summary>
-        /// A method for insuring users with the role Administator are allowed to delete other users.
-        /// </summary>
+
         private void SetCorrectDeletePermission()
         {
             if (EmployeeDetailsViewModel.LoggedInRole == Role.Administrator) CanDelete = true;
             else CanDelete = false;
         }
-        /// <summary>
-        /// Getters and setters for the attributes of a SaleDTO while notifying view.
-        /// </summary>  
+
         #region Properties
 
         private EmployeeViewModel _selectedEmployee;
@@ -96,9 +90,6 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion
 
         #region CRUDS
-        /// <summary>
-        /// Initializes the list of Employees and sets them to be editable.
-        /// </summary>
         public async void UpdateList()
         {
             try
@@ -129,9 +120,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to update the list!";
             }
         }
-        /// <summary>
-        /// Deletes the selected Employee.
-        /// </summary>
+
         public void DeleteEmployee()
         {
             try
@@ -160,9 +149,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to delete the employee!";
             }
         }
-        /// <summary>
-        /// Creates a window to create a new Employee.
-        /// </summary>
+
         public void CreateNewEmployeeWindow()
         {
             try
@@ -178,9 +165,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to create window!";
             }
         }
-        /// <summary>
-        /// Opens the EmployeeWindow with the information of the selected Employee.
-        /// </summary>
+
         public void UpdateEmployeeWindow()
         {
             try

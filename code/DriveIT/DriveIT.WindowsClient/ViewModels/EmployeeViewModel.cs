@@ -8,9 +8,6 @@ namespace DriveIT.WindowsClient.ViewModels
 {
     public class EmployeeViewModel : IViewModelBase
     {
-        /// <summary>
-        /// Enum for determining whether the Employee is in the system or not.
-        /// </summary>
         public enum EmployeeStateEnum
         {
             NotInSystem,
@@ -32,10 +29,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
         
 
-        /// <summary>
-        /// Contructor for EmployeeViewModel which updates the given EmployeeDTO and updates the EmployeeState.
-        /// </summary>
-        /// <param name="employeeDto">The EmployeeDTO to be deleted</param>
+
         public EmployeeViewModel(EmployeeDto employeeDto)
         {
             _employeeDto = employeeDto;
@@ -45,9 +39,7 @@ namespace DriveIT.WindowsClient.ViewModels
             if (EmployeeDetailsViewModel.LoggedInRole == Role.Administrator) CanDeleteAndUpdate = true;
             else CanDeleteAndUpdate = false;
         }
-        /// <summary>
-        /// Empty contstructor which creates a new EmployeeDTO
-        /// </summary>
+
         public EmployeeViewModel()
         {
             _employeeDto = new EmployeeDto();
@@ -57,9 +49,7 @@ namespace DriveIT.WindowsClient.ViewModels
             else CanDeleteAndUpdate = false;
         }
 
-        /// <summary>
-        /// Getters and setters for the attributes of a EmployeeDTO while notifying view.
-        /// </summary>
+
         #region Attributes
         private bool _canDeleteAndUpdate;
         public bool CanDeleteAndUpdate
@@ -199,9 +189,7 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion Attributes
 
         #region CRUDS
-        /// <summary>
-        /// Saves an Employee - updates the Employee if it exists, otherwise creates a new Employee.
-        /// </summary>
+
         public void SaveEmployee()
         {
             try
@@ -223,7 +211,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         /// <summary>
-        /// Creates a new EmployeeController, creates an Employee from the API, and notifies the view.
+        /// Gets called from the view
         /// </summary>
         public void CreateEmployee()
         {
@@ -256,7 +244,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         /// <summary>
-        /// Updates the EmployeeController, creates a Employee from the API, and notifies the view.
+        /// Gets called from the view
         /// </summary>
         public async void UpdateEmployee()
         {
@@ -274,7 +262,7 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         /// <summary>
-        /// Creates a EmployeeController, deletes the Sale from the API, and notifies the view.
+        /// Gets called from the view
         /// </summary>
         public async void DeleteEmployee()
         {

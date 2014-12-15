@@ -24,25 +24,19 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the newly created Employee DTO from the database</returns>
         public async Task CreateEmployee(EmployeeDto employee, string password, Role role)
         {
-            if (role == Role.Administrator || role == Role.Employee)
+            if (role != Role.Administrator || role != Role.Employee) throw new ArgumentException("Cannot be Customer.", "role");
+            var registerModel = new RegisterViewModel
             {
-                var registerModel = new RegisterViewModel
-                {
-                    Email = employee.Email,
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    PhoneNumber = employee.Phone,
-                    ConfirmPhoneNumber = employee.Phone,
-                    Password = password,
-                    ConfirmPassword = password,
-                    Role = role
-                };
-                await DriveITWebAPI.Create("account/register", registerModel);
-            }
-            else
-            {
-                throw new ArgumentException("Cannot be Customer.", "role");
-            }
+                Email = employee.Email,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                PhoneNumber = employee.Phone,
+                ConfirmPhoneNumber = employee.Phone,
+                Password = password,
+                ConfirmPassword = password,
+                Role = role
+            };
+            await DriveITWebAPI.Create("account/register", registerModel);
         }
         /// <summary>
         /// Reads a specific Employee DTO object from the API.
@@ -51,7 +45,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Employee with the respective email from the database</returns>
         public async Task<EmployeeDto> ReadEmployee(string email)
         {
-            string search = "?email=" + email;
+            string search = "?id=" + email;
             var employeeToReturn = await DriveITWebAPI.Read<EmployeeDto>("employees/" + search);
             return employeeToReturn;
         }
@@ -71,7 +65,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public async Task UpdateEmployee(EmployeeDto employee)
         {
-            string search = "?email=" + employee.Email;
+            string search = "?id=" + employee.Email;
             await DriveITWebAPI.Update("employees/" + search, employee);
         }
         /// <summary>
@@ -81,7 +75,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public async Task DeleteEmployee(EmployeeDto employee)
         {
-            string search = "?email=" + employee.Email;
+            string search = "?id=" + employee.Email;
             await DriveITWebAPI.Delete<EmployeeDto>("employees/" + search);
         }
         /// <summary>
@@ -89,9 +83,9 @@ namespace DriveIT.WindowsClient.Controllers
         /// </summary>
         /// <param name="email">The email of the Employee DTO to be deleted</param>
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
-        public async Task DeleteEmployee(string email)
+        public async void DeleteEmployee(int email)
         {
-            string search = "?email=" + email;
+            string search = "?id=" + email;
             await DriveITWebAPI.Delete<EmployeeDto>("employees/" + search);
         }
     }

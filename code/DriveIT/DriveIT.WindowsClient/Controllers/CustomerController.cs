@@ -43,7 +43,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Customer with the respective email from the database</returns>
         public async Task<CustomerDto> ReadCustomer(string email)
         {
-            string search = "?email=" + email;
+            string search = "?id=" + email;
             var customerToReturn = await DriveITWebAPI.Read<CustomerDto>("customers/" + search);
             return customerToReturn;
         }
@@ -63,7 +63,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public async Task UpdateCustomer(CustomerDto customer)
         {
-            string search = "?email=" + customer.Email;
+            string search = "?id=" + customer.Email;
             await DriveITWebAPI.Update("customers/" + search, customer);
         }
         /// <summary>
@@ -73,7 +73,7 @@ namespace DriveIT.WindowsClient.Controllers
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
         public async Task DeleteCustomer(CustomerDto customer)
         {
-            string search = "?email=" + customer.Email;
+            string search = "?id=" + customer.Email;
             await DriveITWebAPI.Delete<CustomerDto>("customers/" + search);
         }
         /// <summary>
@@ -81,9 +81,9 @@ namespace DriveIT.WindowsClient.Controllers
         /// </summary>
         /// <param name="email">The email of the Customer DTO to be deleted</param>
         /// <returns>Returns the Task indicating whether it is completed or not</returns>
-        public async Task DeleteCustomer(string email)
+        public async Task DeleteCustomer(int email)
         {
-            string search = "?email=" + email;
+            string search = "?id=" + email;
             await DriveITWebAPI.Delete<CustomerDto>("customers/" + search);
         }
     }

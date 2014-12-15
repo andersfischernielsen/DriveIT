@@ -4,7 +4,6 @@
 {
     @Html.AntiForgeryToken()
     
-    @*Labels showing what the editors are being used for.*@
     <div class="form-horizontal">
         <h3>Create Comment</h3>
         <p>In this view, you are able to create a comment for the specified car.</p>
@@ -25,8 +24,7 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-        
-        @*Being used to submit the values of whats written in the editors above.*@
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

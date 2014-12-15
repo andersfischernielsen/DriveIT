@@ -23,9 +23,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("SelectedRequest");
             }
         }
-        /// <summary>
-        /// Getters and setters for the attributes of a ContactRequestDTO while notifying view.
-        /// </summary>
+
         #region Properties
         public ContactRequestListViewModel()
         {
@@ -57,9 +55,6 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion Properties
 
         #region CRUDS
-        /// <summary>
-        /// Initializes the list of ContactRequests and sets them to be editable.
-        /// </summary>
         public async void UpdateList()
         {
             try
@@ -87,9 +82,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 CanDeleteAndUpdate = false;
             }
         }
-        /// <summary>
-        /// Deletes the selected ContactRequest.
-        /// </summary>
+
         public void DeleteContactRequest()
         {
             try
@@ -115,9 +108,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to delete the contact request!";
             }
         }
-        /// <summary>
-        /// Creates a new ContactRequest window to create ContactRequests.
-        /// </summary>
+
         public void CreateNewContactRequestWindow()
         {
             try
@@ -133,9 +124,7 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to create window!";
             }
         }
-        /// <summary>
-        /// Opens the ContactRequestWindow with the information of the selected ContactRequest.
-        /// </summary>
+
         public void UpdateContactRequestWindow()
         {
             try

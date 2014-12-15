@@ -47,21 +47,21 @@ namespace DriveIT.Web.ApiControllers
                 .ToList());
         }
 
-        // GET: api/Customers/?email=mlin@itu.dk
+        // GET: api/Customers/?id=mlin@itu.dk
         /// <summary>
-        /// Get a customer by his/her email.
+        /// Get a customer by his/her id.
         /// </summary>
-        /// <param name="email">The email of the user.</param>
+        /// <param name="id">The id of the user.</param>
         /// <returns>A Task which results in an IHttpActionResult which states whether the call succeeded.
         /// If it succeeds the result will contain a CustomerDto in the body.</returns>
         [Authorize]
-        public async Task<IHttpActionResult> Get(string email)
+        public async Task<IHttpActionResult> Get(string id)
         {
-            if (User.IsInRole("Customer") && User.Identity.GetUserId() != email)
+            if (User.IsInRole("Customer") && User.Identity.GetUserId() != id)
             {
                 return Unauthorized();
             }
-            var customer = await _repo.GetCustomerWithId(email);
+            var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();
@@ -74,23 +74,23 @@ namespace DriveIT.Web.ApiControllers
         /// Update customer information.
         /// This one can only be used by employees and administrators.
         /// </summary>
-        /// <param name="email">The email of the user.</param>
+        /// <param name="id">The id of the user.</param>
         /// <param name="value">The updated customer-information.</param>
         /// <returns>A Task resulting in an IHttpActionResult which states whether the call succeeded.</returns>
         [AuthorizeRoles(Role.Administrator, Role.Employee)]
-        public async Task<IHttpActionResult> Put(string email, [FromBody]CustomerDto value)
+        public async Task<IHttpActionResult> Put(string id, [FromBody]CustomerDto value)
         {
             //Todo check user is changing himself!
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var customer = await _repo.GetCustomerWithId(email);
+            var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();
             }
-            await _repo.UpdateCustomer(email, value.ToEntity());
+            await _repo.UpdateCustomer(id, value.ToEntity());
             return Ok();
         }
 
@@ -100,21 +100,21 @@ namespace DriveIT.Web.ApiControllers
         /// This can be called by customers and administrators.
         /// A customer can only delete itself.
         /// </summary>
-        /// <param name="email">The email of the customer to delete.</param>
+        /// <param name="id">The id of the customer to delete.</param>
         /// <returns>A Task resulting in an IHttpActionResult which states whether the call succeeded.</returns>
         [AuthorizeRoles(Role.Administrator, Role.Customer)]
-        public async Task<IHttpActionResult> Delete(string email)
+        public async Task<IHttpActionResult> Delete(string id)
         {
-            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != email)
+            if (User.IsInRole(Role.Customer.ToString()) && User.Identity.GetUserId() != id)
             {
                 return BadRequest("A customer can only delete itself.");
             }
-            var customer = await _repo.GetCustomerWithId(email);
+            var customer = await _repo.GetCustomerWithId(id);
             if (customer == null)
             {
                 return NotFound();
             }
-            await _repo.DeleteCustomer(email);
+            await _repo.DeleteCustomer(id);
             return Ok();
         }
     }

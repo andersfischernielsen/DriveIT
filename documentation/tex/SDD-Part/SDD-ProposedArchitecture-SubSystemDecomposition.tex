@@ -2,7 +2,7 @@
 We have defined the following subsystems:
 \begin{itemize}
 	\item \textbf{Persistence subsystem (EntityFramework):} This sub system manages storing and retrieving Entity objects using the Entity Framework and its serialisation functionality.\\
-	The serialised Entities are stored in a Microsoft SQL database which is hosted on Microsoft Azure. The sub system provides the \texttt{DriveIT Web API} (mentioned below) deserialised Entities, which uses these to provide the backend for other sub systems using the API.\\
+	The serialised Entities are stored in a Microsoft SQL database which is hosted on Microsoft Azure. The sub system provides the \texttt{DriveIT Web API} (mentioned below) deserialised Entities, which retrieves uses these to provide the backend for other sub systems using the API.\\
 	The subsystem supports retrieving all Entities of a given type, a specific Entity using its unique ID and retrieving an Entity on its relation to other Entities. 
 	\begin{figure}[H]
 		\centering

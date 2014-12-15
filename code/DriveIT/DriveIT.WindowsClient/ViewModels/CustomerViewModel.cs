@@ -9,9 +9,7 @@ namespace DriveIT.WindowsClient.ViewModels
     public class CustomerViewModel : IViewModelBase
     {
         private readonly CustomerDto _customerDto;
-        /// <summary>
-        /// Enum for determining whether the Customer is in the system or not.
-        /// </summary>
+
         public enum CustomerEnum
         {
             NotInSystem,
@@ -30,27 +28,19 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CustomerId");
             }
         }
-        /// <summary>
-        /// Constructor for CustomerViewModel which updates the given CustomerDTO and updates the CustomerState.
-        /// </summary>
-        /// <param name="customerDto">The CustomerDTO to be updated</param>
+
         public CustomerViewModel(CustomerDto customerDto)
         {
             _customerDto = customerDto;
             CustomerState = CustomerEnum.InSystem;
             GravatarLink = GravatarController.CreateGravatarLink(_customerDto.Email);
         }
-        /// <summary>
-        /// Empty constructor which creates a new CustomerDTO.
-        /// </summary>
         public CustomerViewModel()
         {
             _customerDto = new CustomerDto();
             CustomerState = CustomerEnum.NotInSystem;
         }
-        /// <summary>
-        /// Getters and setters for the attributes of a CustomerDTO while notifying view.
-        /// </summary>
+
         #region ATTRIBUTES
         private string _status = "";
         public string Status
@@ -162,9 +152,6 @@ namespace DriveIT.WindowsClient.ViewModels
         #endregion ATTRIBUTES
 
         #region CRUDS
-        /// <summary>
-        /// Saves an Customer - updates the Customer if it exists, otherwise creates a new Customer.
-        /// </summary>
         public void SaveCustomer()
         {
             try
@@ -187,8 +174,8 @@ namespace DriveIT.WindowsClient.ViewModels
         }
 
         /// <summary>
-        /// Creates a new CustomerController, creates an Customer from the API, and notifies the view.
-        /// </summary>	
+        /// Gets called from the view
+        /// </summary>
         public void CreateCustomer()
         {
             try
@@ -219,7 +206,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Updates the CustomerController, creates a Customer from the API, and notifies the view.
+        /// Gets called from the view
         /// </summary>
         public async void UpdateCustomer()
         {
@@ -236,7 +223,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Creates a CustomerController, deletes the Customer from the API, and notifies the view.
+        /// Gets called from the view
         /// </summary>
         public async void DeleteCustomer()
         {

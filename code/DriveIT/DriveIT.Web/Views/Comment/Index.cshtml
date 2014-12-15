@@ -5,14 +5,12 @@
 <p>These are the comments for the specified car that you choose.
     You are able to create a new comment below.</p>
 
-@*Checks if the customer is logged in. If the customer isn't logged in, he/she can't create a comment.*@
 @if (User.Identity.IsAuthenticated)
 {
     @Html.ActionLink("Create New", "Create", "Comment", new { carId = Model.Car.Id, customerId = User.Identity.GetUserName() }, null)
 }
 <br><br/>
 
-@*Table with information of comments.*@
 <table class="table">
     <tr>
         <th>
@@ -22,13 +20,7 @@
             Description
         </th>
         <th>
-            Date and time
-        </th>
-        <th>
             Customer
-        </th>
-        <th>
-            
         </th>
     </tr>
 
@@ -41,13 +33,9 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.CustomerId)
         </td>
         <td>
-            @*Checks if the customer has permission to edit or delete a specific comment.*@
             @if (item.CustomerId == User.Identity.GetUserName())
             {
                 @Html.ActionLink("Edit", "Edit", "Comment", new { commentId = item.Id }, null)
