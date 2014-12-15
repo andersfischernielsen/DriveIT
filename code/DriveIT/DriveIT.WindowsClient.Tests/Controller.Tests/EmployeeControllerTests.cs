@@ -16,7 +16,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
-            DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
+            DriveITWebAPI.Login("awis@itu.dk", "4dmin_Password").Wait();
             _employeeController = new EmployeeController();
             var empTask = _employeeController.CreateEmployee(new EmployeeDto
             {
