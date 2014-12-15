@@ -106,10 +106,10 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             Assert.AreEqual(amtOfCarsStart + 1, t.Count);
             var empJustIn = _employeeController.ReadEmployee("EmpTestBefore@mail.dk").Result;
 
-            empJustIn.JobTitle = "TesterBefore";
-            empJustIn.FirstName = "TestFirstBefore";
-            empJustIn.LastName = "TestLastBefore";
-            empJustIn.Phone = "12345678";
+            empJustIn.JobTitle = "TesterAfter";
+            empJustIn.FirstName = "TestFirstAfter";
+            empJustIn.LastName = "TestLastAfter";
+            empJustIn.Phone = "87654321";
             await _employeeController.UpdateEmployee(empJustIn);
 
             Thread.Sleep(1000);
