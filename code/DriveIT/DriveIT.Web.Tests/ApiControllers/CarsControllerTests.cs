@@ -36,7 +36,6 @@ namespace DriveIT.Web.Tests.ApiControllers
                     Model = "Swift",
                     Mileage = 18.6f,
                     Price = 60000,
-                    Sold = false,
                     Transmission = "Manual",
                     Year = 2006,
                     ImagePaths = new List<ImagePath>
@@ -60,7 +59,6 @@ namespace DriveIT.Web.Tests.ApiControllers
                     Mileage = 15f,
                     Model = "Touran",
                     Price = 100000,
-                    Sold = false,
                     Transmission = "Manual",
                     Year = 2004,
                     ImagePaths = new List<ImagePath>()
@@ -77,19 +75,40 @@ namespace DriveIT.Web.Tests.ApiControllers
                 Model = "626",
                 Mileage = 12f,
                 Price = 15000,
-                Sold = false,
                 Transmission = "Manual",
                 Year = 1993,
                 ImagePaths = new List<ImagePath>()
             };
 
-            var cars = Task.Run(() => carList);
+            var sales = new List<Sale>
+            {
+                new Sale
+                {
+                    Id = 1,
+                    CarId = 1,
+                    CustomerId = "cust@driveit.dk",
+                    DateOfSale = DateTime.Now, // less than 5 days ago.
+                    EmployeeId = "admin@driveit.dk",
+                    Price = 20000
+                },
+                new Sale
+                {
+                    Id = 2,
+                    CarId = 2,
+                    CustomerId = "cust@driveit.dk",
+                    DateOfSale = DateTime.Now.Subtract(TimeSpan.FromDays(6)), // More than 5 days ago
+                    EmployeeId = "admin@driveit.dk",
+                    Price = 10000
+                }
+            };
 
             var repo = new MockRepository(MockBehavior.Loose);
             var mockRepo = repo.Create<IPersistentStorage>();
-            mockRepo.Setup(x => x.GetAllCars(null)).Returns(cars);
-            mockRepo.Setup(x => x.GetCarWithId(2, null)).Returns(Task.Run(() => carList.Find(c => c.Id == 2)));
-            mockRepo.Setup(x => x.CreateCar(It.IsAny<Car>(), null)).Returns(Task.Run(() => carList.Max(x => x.Id) + 1));
+            mockRepo.Setup(x => x.GetAllCars()).ReturnsAsync(carList);
+            mockRepo.Setup(x => x.GetCarWithId(2)).ReturnsAsync(carList.SingleOrDefault(c => c.Id == 2));
+            mockRepo.Setup(x => x.CreateCar(It.IsAny<Car>())).ReturnsAsync(carList.Max(x => x.Id) + 1);
+            mockRepo.Setup(x => x.GetSaleByCarId(1, null)).ReturnsAsync(sales.SingleOrDefault(sale => sale.CarId == 1));
+            mockRepo.Setup(x => x.GetSaleByCarId(2, null)).ReturnsAsync(sales.SingleOrDefault(sale => sale.CarId == 2));
 
             _controller = new CarsController(mockRepo.Object);
         }
@@ -144,6 +163,17 @@ namespace DriveIT.Web.Tests.ApiControllers
         }
 
         [TestMethod]
+        public async Task WebCarList_NoParameters_ReturnsCars()
+        {
+            var result = await _controller.WebCarList();
+            Assert.IsNotNull(result);
+            foreach (var carDto in result)
+            {
+                Assert.IsTrue(carDto.Id != 2); //Test that the car that was sold more than 5 days ago is not in the list.
+            }
+        }
+
+        [TestMethod]
         public async Task Post_Returns3()
         {
             var message = await _controller.Post(_car3.ToDto()) as CreatedAtRouteNegotiatedContentResult<CarDto>;
@@ -161,8 +191,6 @@ namespace DriveIT.Web.Tests.ApiControllers
             var message = await _controller.Post(null) as BadRequestErrorMessageResult;
             Assert.IsNotNull(message);
             Assert.AreEqual("Null value not allowed.", message.Message);
-
-            //TODO Model state cannot be tested without running the api.
         }
 
         [TestMethod]

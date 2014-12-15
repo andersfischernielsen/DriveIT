@@ -13,12 +13,17 @@ namespace DriveIT.WindowsClient.ViewModels
     {
         public ObservableCollection<CustomerViewModel> CustomerViewModels { get; set; }
 
+        /// <summary>
+        /// The default constructor. Calling the UpdateList() method initially to load in data.
+        /// </summary>
         public CustomerListViewModel()
         {
             CustomerViewModels = new ObservableCollection<CustomerViewModel>();
             UpdateList();
         }
-
+        /// <summary>
+        /// Getters and setters for the attributes of a CustomerDTO while notifying view.
+        /// </summary>
         #region Properties
 
         private CustomerViewModel _selectedCustomer;
@@ -56,7 +61,9 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion Properties
-
+        /// <summary>
+        /// Initializes the list of Customers and sets them to be editable.
+        /// </summary>
         #region CRUDS
         public async void UpdateList()
         {
@@ -85,6 +92,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to update the list of customers!";
             }
         }
+        /// <summary>
+        /// Deletes the selected Customer.
+        /// </summary>
         public void DeleteCustomer()
         {
             try
@@ -111,7 +121,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to delete the customer!";
             }
         }
-
+        /// <summary>
+        /// Creates a window to create a new Customer.
+        /// </summary>
         public void CreateNewCustomerWindow()
         {
             try
@@ -128,7 +140,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 Status = "Failed to create window!";
             }
         }
-
+        /// <summary>
+        /// Opens the CustomerWindow with the information of the selected Customer.
+        /// </summary>
         public void UpdateCustomerWindow()
         {
             try

@@ -16,4 +16,7 @@ The Moq framework has no ability to mock extensions methods, which turned out to
 Mocking other evalutation extension methods in .NET was too hard to mock as well, and therefore some functionality of the system could not be tested.
 
 \subsection{DriveIT Web API Unit Testing}
-Unit Testing of the DriveIT Web API sub system.
+\todo{Say something about why the account-controller hasn't been tested?}
+The main part of the DriveIT Web API consists of the public controllers which handles the requests from users. As mentioned earlier, one important thing to remember when testing is to test the implemented logic, and not the framework surrounding it. Therefore we have tested the Web API using mocks as the repository, and by calling the methods directly instead of using HTTP-requests.
+Some parts of the controllers cannot be tested this way, which is the parts where the controllers uses the \texttt{ModelState} to check the request for validity, but since this is a built in part of ASP.NET Web API it is assumed that these checks works as expected.
+The controllers have been tested with branch coverage, except for the places mentioned above.

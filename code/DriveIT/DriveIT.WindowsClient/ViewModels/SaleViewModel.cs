@@ -109,6 +109,9 @@ namespace DriveIT.WindowsClient.ViewModels
                 NotifyPropertyChanged("CreateUpdateButtonText");
             }
         }
+        /// <summary>
+        /// A string bound to a button's content describing what action will happen when pressing.
+        /// </summary>
         public string CreateUpdateButtonText
         {
             get
@@ -157,6 +160,7 @@ namespace DriveIT.WindowsClient.ViewModels
             set
             {
                 _saleDto.CarId = value.GetValueOrDefault();
+                FindPriceBasedOnCar();
                 NotifyPropertyChanged("CarId");
             }
         }
@@ -187,6 +191,23 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         #endregion Attributes
+
+        /// <summary>
+        /// Finds the price of the car with id CarId and updates the Property Price.
+        /// </summary>
+        public async void FindPriceBasedOnCar()
+        {
+            try
+            {
+                var temp = await (new CarController().ReadCar(CarId.GetValueOrDefault()));
+                Price = temp.Price;
+
+            }
+            catch (Exception)
+            {
+                Status = "Something went wrong. CarId might be invalid.";
+            }
+        }
 
         #region CRUDS
         /// <summary>
@@ -250,7 +271,7 @@ namespace DriveIT.WindowsClient.ViewModels
             }
         }
         /// <summary>
-        /// Deletes a SaleController, creates a Sale from the API, and notifies the view.
+        /// Creates a SaleController, deletes a Sale from the API, and notifies the view.
         /// </summary>
         public async void DeleteSale()
         {
