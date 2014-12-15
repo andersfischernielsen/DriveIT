@@ -80,7 +80,7 @@
                     <TextBlock Text="Advertise" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                 </StackPanel>
             </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="5">
+            <Button IsEnabled="False" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="5">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                 </Button.Background>
@@ -89,7 +89,7 @@
                     <TextBlock Text="Help" Style="{DynamicResource PowerToolTextBlockStyle}"/>
                 </StackPanel>
             </Button>
-            <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="6">
+            <Button IsEnabled="False" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="80" Height="60" Grid.Column="6">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource CarsBarColor}"/>
                 </Button.Background>
@@ -162,7 +162,7 @@
             </Button>
             <Label Style="{DynamicResource StatusLabelStyle}" Content="{Binding ImageAmtString}" Grid.Column="1" HorizontalAlignment="Center" Margin="215,259,226,0" Grid.Row="1" VerticalAlignment="Top" Height="28"/>
             <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Id" Margin="0,10,51,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>
-            <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Make" Margin="0,45,51,0" Grid.Row="1" VerticalAlignment="Top" Width="83"/>
+            <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Manufacturer" Margin="0,45,51,0" Grid.Row="1" VerticalAlignment="Top" Width="117"/>
             <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Model" Margin="0,78,51,0" Grid.Row="1" VerticalAlignment="Top" Width="83"/>
             <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Year" Margin="0,111,51,0" Grid.Row="1" VerticalAlignment="Top" Width="83"/>
             <Label Style="{DynamicResource FillTextBlockLabelStyle}" Content="Price - DKK" Margin="0,142,51,0" Grid.Row="1" VerticalAlignment="Top" Width="108"/>

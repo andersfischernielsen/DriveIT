@@ -2,38 +2,50 @@
 
 \subsection{General Functional Requirements}
 \begin{itemize}
-    \item It must be possible for users to browse cars with different filters and criteria.
-    \item A user must be able to get contact information without signing in.
-    \item If a user wants to get contacted by DriveIT, the user must create an account.
-    \item The user must be able to create an account.
-    \item The user must be able to sign in.
-    \item A user must be able to rate/comment the cars in the system if the user is logged into the system.
-    \item The user must be able to find contact information about the employees of DriveIT.
-    \item It must be possible for the user to get contacted by employees of DriveIT.
-    \item The user must be able to edit contact information for their profile.
+    \item It must be possible for customers to browse cars with different filters and criteria.
+    \item A customer must be able to find contact information for employees without signing in.
+    \item If a customer wants to get contacted by an employee, the customer must create an account.
+    \item A customer must be able to create an account.
+    \item A customer must be able to sign in.
+    \item A customer must be able to comment the cars in the system if logged into the system.
+    \item It must be possible for customers to get contacted by employees.
+    \item Customers must be able to edit contact information for their profile.
     \item An employee must be able to browse all cars in the system.
     \item An employee must be able to edit and create information about cars.
     \item It must be possible for employees to upload images of a car.
-    \item Employees must be able to see a list of users wanting to get contacted regarding a car.
+    \item Employees must be able to see a list of customers wanting to get contacted regarding a car.
     \item Employees must be able to create profiles on behalf of customers calling the office without an existing profile.
     \item Employees must be able to create orders when a customer has decided to purchase a car.
     \item An overview of all orders must be available for employees to see.
+    \item A customer must be able to see all orders belonging to him.
     \item Employees must be able to add and remove new cars to the system.
-    \item There must be an administrator that is able to create and delete new employees.
+    \item There must be an administrator role that is able to create and delete new employees.
+    \item If several images are uploaded for a car, it must be possible to toggle through the images.
+    \item Employees must be able to get information about cars via the \texttt{Car Query API}.
+    \item A sold car must be visible in the system for another five days after purchase.
+    \item A customer must be able to see all contact requests he/she has made and delete them if no longer interested in getting contacted.
+\end{itemize}
+
+\subsection{Optional Functional Requirement}
+The following optional requirements have also been fulfilled.
+\begin{itemize}
+	\item The system is deployed/hosted on Microsoft Azure.
+	\item The system supports showing several images of a car in an image gallery.
+	\item (\textit{Partially}) The system should have a form for a customer to request contact by an employee or let the customer contact the car lot by clicking a car.
 \end{itemize}
 
 \subsection{Initial Analysis Objects}
 \begin{itemize}
     \item \textbf{Customer:}\\
-    A customer is a person visiting the web client of the DriveIT system. A customer object will have contact information about a given customer.
+    A customer is a person interested in buying a car using the web client. A customer object will hold contact information about a given customer.
     \item \textbf{Employee:}\\
-    An employee is a person working for DriveIT, who uses the Windows client. This object will hold information about a given employee. Employees can be administrators, meaning that they are able to CRUD employees.
+    An employee is a person working for the company selling used cars. The employee uses the Windows client. The employee object will hold information about a given employee. Employees can be administrators, meaning that they are able to CRUD employees.
     \item \textbf{Car:}\\
     The car object holds relevant information about itself. The object has an attribute stating whether it is sold or not.
-    \item \textbf{Order:}\\
-    An order consists of a car, an employee, and a customer. It uses some different information from each of these objects to make an order.
-    \item \textbf{Comment/Rating:}\\
-    Comment consists of a user and a text field. A car object can have several comments.
+    \item \textbf{Sale:}\\
+    A sale consists of a car, an employee, and a customer. It uses some different information from each of these objects to make a sale. From the customer's perspective, it is called an order.
+    \item \textbf{Comment:}\\
+    A comment consists of a customer and a text field. A car object can have several comments.
     \item \textbf{ContactRequest:}\\
-    Will be created when a user wants to be contacted by an employee regarding a given car. It contains the car in question an the requesting user.
+    Will be created when a customer wants to get contacted by an employee regarding a given car. It contains the car in question an the requesting customer.
 \end{itemize}

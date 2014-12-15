@@ -1,26 +1,39 @@
 \section{Subsystem Decomposition}
-We have defined the following subsystems:
+The \texttt{DriveIT System} can be split into five main sub systems - the \texttt{WindowsClient}, \texttt{CarQuery}, \texttt{Web}, \texttt{WebAPI} and \texttt{EntityFramework} sub systems. 
+These subsystems are described below. 
+
+\subsection{The DriveIT System}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Figures/DriveITSubsystemDecomposition}\\
+	\caption{Subsystems of the \texttt{DriveIT System}.}
+\end{figure}
+
 \subsection{Persistence subsystem (EntityFramework)} 
 This sub system manages storing and retrieving Entity objects using the Entity Framework and its serialisation functionality.\\
 The serialised Entities are stored in a Microsoft SQL database which is hosted on Microsoft Azure. The sub system provides the \texttt{DriveIT Web API} (mentioned below) deserialised Entities, which uses these to provide the backend for other sub systems using the API.\\
 The subsystem supports retrieving all Entities of a given type, a specific Entity using its unique ID and retrieving an Entity on its relation to other Entities. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.70]{Figures/EntityFrameworkSubsystemDecomposition}
+	\includegraphics[width=\textwidth]{Figures/EntityFrameworkSubsystemDecomposition}
 	\caption{Subsystems of the EntityFramework Subsystem.}
 \end{figure}
 
 \subsection{Web API} 
+\todo{maybe more should as this are still some kind of analysis.}
 The \texttt{DriveIT Web API} provides public communication with the persistence subsystem and also handles authorisation of users of the sub system.\\
-The subsystem, which is built on ASP.NET Web API, provides access to the persistence sub system using specific URL routes and enforces authorisation so unauthorized users only have limited access to the data of the \texttt{DriveIT System}.\\ 
-Every table in the persistence module must therefore be supported by the sub system, though not every table is available to every user.\\
-The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JSON}\footnote{http://en.wikipedia.org/wiki/JSON} or \texttt{XML}\footnote{http://en.wikipedia.org/wiki/XML} and transferring these via a \texttt{REST} interface accessible using \texttt{HTTP}. \\
-These modules are built into the ASP.NET Web API framework, and are not handled in our code.
+The subsystem, which is built on ASP.NET Web API, provides access to the persistence sub system using specific URL routes and enforces authorisation so unauthorized users, and users with different user roles, only have limited access to the data of the \texttt{DriveIT System}.\\ 
+Every table in the persistence module must therefore be supported by the Web API, although not every table is available to every user.\\
+The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JSON}\footnote{\url{http://en.wikipedia.org/wiki/JSON}} or \texttt{XML}\footnote{\url{http://en.wikipedia.org/wiki/XML}} and transferring these via a \texttt{REST} interface accessible using \texttt{HTTP}. \\
+These modules are built into the ASP.NET Web API framework, and are not handled in our code.\\
+
+The Web API consists of several controllers which uses a static class to translate \texttt{DTO's}\footnote{\url{http://en.wikipedia.org/wiki/Data_transfer_object}} into entities and vice versa. It is also the controllers that checks for special cases, e.g. when a customer wants to update or delete a comment, and it is not allowed to change other peoples comments.
+
 
 \subsection{Windows Client} 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{Figures/WindowsClientCodeMap}
+	\includegraphics[width=\textwidth]{Figures/WindowsClientCodeMap}
 	\caption{The Code Map of the Windows Client}
 	\label{fig:WindowsClientCodeMap}
 \end{figure}
@@ -40,6 +53,6 @@ The sub system is used by an employee when creating a new car. The subsystem mai
 The employee fills out the information he/she knows about the car and the system then narrows its information search against the \texttt{CarQuery REST API}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.60]{Figures/CarQuerySubsystemDecomposition}\\
+	\includegraphics[width=\textwidth]{Figures/CarQuerySubsystemDecomposition}\\
 	\caption{Subsystems of the CarQuery Subsystem.}
 \end{figure}
