@@ -10,12 +10,12 @@ The subsystem supports retrieving all Entities of a given type, a specific Entit
 	\caption{Subsystems of the EntityFramework Subsystem.}
 \end{figure}
 
-\subsection{WebAPI} 
+\subsection{Web API} 
 The \texttt{DriveIT Web API} provides public communication with the persistence subsystem and also handles authorisation of users of the sub system.\\
-The subsystem provides access to the persistence sub system using specific URL routes and enforces authorisation so unauthorized users only have limited access to the data of the \texttt{DriveIT System}.\\ 
+The subsystem, which is built on ASP.NET Web API, provides access to the persistence sub system using specific URL routes and enforces authorisation so unauthorized users only have limited access to the data of the \texttt{DriveIT System}.\\ 
 Every table in the persistence module must therefore be supported by the sub system, though not every table is available to every user.\\
-The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JavaScript Object Notation (JSON)} and transferring these via a texttt{REST} interface accessible using \texttt{HTTP}. \\
-These modules are implemented using the \texttt{ASP.NET} framework, since these provide a lot of the neccessary funtionality out of the box, and simplify and shortens development time.
+The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JSON}\footnote{http://en.wikipedia.org/wiki/JSON} or \texttt{XML}\footnote{http://en.wikipedia.org/wiki/XML} and transferring these via a \texttt{REST} interface accessible using \texttt{HTTP}. \\
+These modules are built into the ASP.NET Web API framework, and are not handled in our code.
 
 \subsection{Windows Client} 
 \begin{figure}[H]
@@ -27,7 +27,7 @@ These modules are implemented using the \texttt{ASP.NET} framework, since these 
 The Windows Client is used by the employees, to manipulate data in the system. Depending on their role Employee or Administrator They can Create, Read, Update and Delete all entities except for creating \texttt{ContactRequest}, which only can be created through the \texttt{DriveIT Web Client}.\\
 The employee logs into the client with his or hers username and password, and can then via an user interface manipulate data in the system.\\
 The subsystem is made out of three main systems: The DriveIT.Views, the DriveIT.ViewModels and the DriveIT.Controllers.\\
-The DriveIT.Views contains the user interface written in with Microsofts WPF framework. The DriveIT.ViewModels contains the ViewModels which holds data which is bound to the Views following Microsoft's \emph{Model View ViewModel} architectural pattern.\\
+The DriveIT.Views contains the user interface written in with Microsofts WPF framework. The DriveIT.ViewModels contains the ViewModels which holds data which is bound to the Views following Microsoft's \emph{Model View ViewModel} architectural pattern. Viewmodels for entities are often created in the form EntityListViewModel and EntityViewModel, but a few extra viewmodels exists for extra views such as the LoginViewModel and the PasswordCreationViewModel.\\
 The DriveIT.Controllers section contains the controllers which transforms data and sends and receives HTTP Requests to/from the \texttt{DriveIT Web API}. Images are uploaded to \emph{Azures Blob Storage} and therefore does not contact the API. Another controller to notice is the \texttt{GravatarController} which takes email strings and converts it to a link to that emails Gravatar profile url.
 
 \subsection{Web Client}
