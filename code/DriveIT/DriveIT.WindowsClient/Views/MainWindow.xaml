@@ -511,7 +511,7 @@
                             </i:Interaction.Triggers>
                         </Button>
                         <Label Style="{DynamicResource StatusLabelStyle}" Foreground="{DynamicResource WhiteTextColorBrush}" Content="{Binding DataContext.Status, ElementName=EmployeesTabItem}" Margin="10,10.25,10,44.25" Grid.Column="5" Height="28"/>
-                        <Button Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="1">
+                        <Button IsEnabled="{Binding DataContext.CanDelete, ElementName=EmployeesDataGrid}" Style="{DynamicResource PowerToolButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,8" Grid.Column="1">
                             <Button.Background>
                                 <SolidColorBrush Color="{DynamicResource EmployeesBarColor}"/>
                             </Button.Background>
@@ -808,7 +808,7 @@
                 <Label HorizontalContentAlignment="Right" Margin="10,156,10,0" VerticalAlignment="Top" Height="35" FontSize="18" Grid.Row="1" Content="{Binding Phone}"/>
                 <Label HorizontalContentAlignment="Right" Margin="10,191,10,0" VerticalAlignment="Top" Height="35" FontSize="18" Grid.Row="1" Content="{Binding Email}"/>
                 <Label HorizontalContentAlignment="Right" Margin="10,226,10,0" VerticalAlignment="Top" Height="35" FontSize="18" Grid.Row="1" Content="{Binding JobTitle}"/>
-                <TextBlock HorizontalAlignment="Left" Margin="10,0,-4,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" Width="260" FontStyle="Italic" TextAlignment="Center" Grid.Row="2">
+                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" Width="246" FontStyle="Italic" TextAlignment="Center" Grid.Row="2">
                     <TextBlock.Background>
                         <SolidColorBrush Color="Black" Opacity="0.15"/>
                     </TextBlock.Background><Hyperlink NavigateUri="http://driveit.azurewebsites.net" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Website"/></Hyperlink></TextBlock>
