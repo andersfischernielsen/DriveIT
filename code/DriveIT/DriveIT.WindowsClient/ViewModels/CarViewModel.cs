@@ -23,7 +23,6 @@ namespace DriveIT.WindowsClient.ViewModels
         {
             Initial,
             ForSale,
-            Advertised,
             Sold,
         }
 
@@ -46,8 +45,12 @@ namespace DriveIT.WindowsClient.ViewModels
         public CarViewModel(CarDto carDto)
         {
             _carDto = carDto;
-            CarState = CarStateEnum.ForSale;
             CreateImageViewModels();
+            if(Sold) CarState = CarStateEnum.Sold;
+            else
+            {
+                CarState = CarStateEnum.ForSale;
+            }
 
         }
         /// <summary>
