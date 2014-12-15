@@ -41,9 +41,6 @@ The functionality of the \texttt{CarQuery} sub system is implemented using few s
 The sub system is used in short periods of time and only has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} sub system is therefore made up of static functionality.
 
 \subsection{Web API}
-\subsubsection{Reuse}
-Because the different controllers handle different entities with different functionality, it has been hard to reuse code between them.
-
 \subsubsection{Encapsulation}
 Because the \texttt{DriveIT Web API} is supposed to provide an external REST-interface, it has been important not to expose the internal types of the persistence module. Because of that only DTO's are exchanged between the Web API and the clients.\\
 
