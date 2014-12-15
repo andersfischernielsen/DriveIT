@@ -1,5 +1,4 @@
-﻿@using DriveIT.Web.MvcControllers
-@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity
 @model DriveIT.Web.Models.IndexViewModel
 @{
     ViewBag.Title = "Manage";
@@ -45,11 +44,5 @@
             }
             ]
         </dd>
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
-        
     </dl>
 </div>
