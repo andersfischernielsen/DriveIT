@@ -48,12 +48,12 @@ namespace DriveIT.WindowsClient.Controllers
 
             var token = await result.Content.ReadAsAsync<Token>();
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.access_token);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var role = await GetRole();
             if (role == null || role == Role.Customer)
             {
                 throw new Exception("An error occurred while logging into the client...");
             }
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         /// <summary>
