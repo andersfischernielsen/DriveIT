@@ -12,6 +12,9 @@ Furthermore we used \emph{Microsoft Blend}'s \emph{Behavior Actions} to encapsul
 
 A build in part of \textit{Model View ViewModel} is a version of the Observer-Pattern. This is done by creating data-binding between the View and their ViewModel. In WPF this is achieved by having the viewmodels implement the interface \texttt{INotifyPropertyChanged} which will notify the view when the ViewModel has changed. By using this interface the ViewModel knows nothing of the View and cannot directly change its attributes.
 
+\subsection{Adapter Pattern}
+The \texttt{DriveIT Windows Client} uses the \textit{Model View ViewModel} architectural pattern which tries to ensure a clear separation between the model and the view. The pattern derives from both the \textit{Model View Controller} pattern and the \textit{Presentation Model} design pattern and therefore has some of the same attributes. By using the MVVM pattern we created a more testable and easier expandable application. Furthermore we used \textit{Microsoft Blend}'s \textit{Behavior Actions} to encapsulate calls and commands from the View such that View elements would not get send to the ViewModel. These actions are implemented to ensure low coupling.\\
+
 
 \subsection{Adapter Pattern}
 The \textit{Adapter pattern} allows the coder to encapsulate an object its methods and properties in an "Adapter" class. Since the \texttt{DriveIT Windows Client} uses the MVVM design pattern, and The \texttt{DriveIT Web API} uses Data Transfer Objects(DTO) to send and receive data and DTO's are only meant to transfer data, an Adapter Pattern fits perfectly. All Single Entitiy ViewModels in the \texttt{DriveIT.WindowsClient.ViewModels} name-space functions as Adapters for their corresponding DTO. E.g The CarViewModel class is an adapter for the CarDto class.\\ 
