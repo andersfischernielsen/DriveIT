@@ -89,14 +89,14 @@ namespace DriveIT.EntityFramework.Tests
             Assert.AreEqual("employee", result[1].EmployeeId);
         }
 
-        [Test]
-        public async void DeleteCarTest()
-        {
-            await _toTest.DeleteSale(1, _mockContext.Object);
+        //[Test]
+        //public async void DeleteCarTest()
+        //{
+        //    await _toTest.DeleteSale(1, _mockContext.Object);
 
-            _mockSet.Verify(m => m.Remove(It.IsAny<Sale>()), Times.Once);
-            _mockContext.Verify(m => m.SaveChangesAsync(), Times.AtLeastOnce);
-        }
+        //    _mockSet.Verify(m => m.Remove(It.IsAny<Sale>()), Times.Once);
+        //    _mockContext.Verify(m => m.SaveChangesAsync(), Times.AtLeastOnce);
+        //}
 
         //[Test]
         //public async void UpdateSaleTest()
