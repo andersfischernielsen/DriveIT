@@ -29,3 +29,40 @@
     frequency of occurrence = Often,
     open issues = {It is unclear if the car should be immediately up for sale or if the \emph{Employee} should be able to choose what "state" the car should be in.}
 }
+\subsubsection{UC-3 : Create Car}
+\label{create_car_use_case}
+\HRule \\[0.4cm]
+% Description
+\textbf{Description:} An \texttt{Employee} uses the \texttt{Windows Client} to create a new car and thereby making it available for sale. \\
+\HRule \\[0.4cm]
+% Actors
+\textbf{Actors:} \texttt{Employee}\\
+\HRule \\[0.4cm]
+% Preconditions
+\textbf{Preconditions:} 
+\begin{itemize}
+    \item The \texttt{Employee} at least has the manufacturer and model of the car plus at least one picture.
+    \item The \texttt{Employee} is signed in to the \texttt{Windos Client} and is connected to the Internet.
+\end{itemize}
+\HRule \\[0.4cm]
+% Postconditions
+\textbf{Postcondition:}
+\begin{itemize}
+    \item The \texttt{Car} is persisted in the database.
+    \item The \texttt{Car} is available for sale on the \texttt{Web Client}.
+\end{itemize}
+\HRule \\[0.4cm]
+% Main success scenarios
+\textbf{Main success scenario:}
+\begin{enumerate}
+    \item The \texttt{Employee} signs in to the system.
+    \item The \texttt{Employee} chooses the `Car' view and chooses the `Create' button.
+    \item The \texttt{Employee} fills out the available data about the car. Given manufactorer and model, the \texttt{Employee} can choose to use the \texttt{Car Query API} to retrieve data about the given car.
+    \item The \texttt{Employee} checks that the data is correct and submits the car.
+\end{enumerate}
+\HRule \\[0.4cm]
+% Frequency
+\textbf{Frequency:}
+A couple of times a week \\
+\HRule \\[0.4cm]
+
