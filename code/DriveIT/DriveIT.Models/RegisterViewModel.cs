@@ -38,5 +38,7 @@ namespace DriveIT.Models
         public string ConfirmPhoneNumber { get; set; }
 
         public Role? Role { get; set; }
+
+        public string JobTitle { get; set; }
     }
 }
