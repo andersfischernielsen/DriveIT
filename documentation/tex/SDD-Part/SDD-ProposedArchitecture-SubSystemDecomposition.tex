@@ -1,5 +1,14 @@
 \section{Subsystem Decomposition}
-We have defined the following subsystems:
+The \texttt{DriveIT System} can be split into five main sub systems - the \texttt{WindowsClient}, \texttt{CarQuery}, \texttt{Web}, \texttt{WebAPI} and \texttt{EntityFramework} sub systems. 
+These subsystems are described below. 
+
+\subsection{The DriveIT System}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Figures/DriveITSubsystemDecomposition}\\
+	\caption{Subsystems of the \texttt{DriveIT System}.}
+\end{figure}
+
 \subsection{Persistence subsystem (EntityFramework)} 
 This sub system manages storing and retrieving Entity objects using the Entity Framework and its serialisation functionality.\\
 The serialised Entities are stored in a Microsoft SQL database which is hosted on Microsoft Azure. The sub system provides the \texttt{DriveIT Web API} (mentioned below) deserialised Entities, which uses these to provide the backend for other sub systems using the API.\\
