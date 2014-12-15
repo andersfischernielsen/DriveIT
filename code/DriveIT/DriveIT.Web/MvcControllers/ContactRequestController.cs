@@ -31,7 +31,9 @@ namespace DriveIT.Web.MvcControllers
         {
             var cars = await cc.Get() as OkNegotiatedContentResult<List<CarDto>>;
             var requests = await controller.GetByUserId(email) as OkNegotiatedContentResult<List<ContactRequestDto>>;
-            var tuple = new Tuple<IEnumerable<CarDto>, IEnumerable<ContactRequestDto>>(cars.Content, requests.Content); 
+            var carList = cars.Content ?? new List<CarDto>();
+            var requestList = requests != null ? requests.Content : new List<ContactRequestDto>();
+            var tuple = new Tuple<IEnumerable<CarDto>, IEnumerable<ContactRequestDto>>(carList, requestList); 
             return View(tuple);
 
         }
