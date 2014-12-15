@@ -1,37 +1,37 @@
-\usecase{
-    title = {CreateUserAccount},
-    label = uc:createuser,
-    description = {The \emph{Customer} creates a user in the system.},
-%    scope = {},
-%    level = {},
-    actors = {Initiated by \emph{Customer}},
-%    stakeholders and interests = {},
-%    precondition = {},
-    preconditions = {
-        \item  The \texttt{DriveIT System} is initialized and online.
-        \item  The \emph{Customer} has at minimum opened the main view of the \texttt{DriveIT System}.
-    },
-%    postcondition = {},
-    postconditions = {
-        \item The \emph{Customer} has created an account.,
-        \item  The account has been registered in the \texttt{DriveIT System}.
-    },
-    main success scenario = {
-        \item  The \emph{Customer} creates a user account for the \texttt{DriveIT System}
-        \item  The \emph{Customer} selects \texttt{Create User} in the main view of the \texttt{DriveIT System}.
-        \item  The \emph{Customer} inputs an e-mail address, a username and a password. He/she then selects the save button to save the account.
-        \item  If the input is valid (the username and e-mail address is available), the account is saved in the \texttt{DriveIT System} and the \emph{Customer} is logged in.
-    },
-%    extensions = {
-%        \item 1
-%        \item 2
-%        \item 3
-%    },
-%    special requirements = {
-%	    \item 1
-%        \item 2
-%		\\
-%	},
-    frequency of occurrence = Often,
-    open issues = {It is unclear if the use case should revolve around the main view or the rating view of the system.},
-}
+\subsubsection{UC-2 : Create User Account}
+\label{create_account_use_case}
+\HRule \\[0.4cm]
+% Description
+\textbf{Description:} The \texttt{Customer} registers on the \texttt{Web Client} \\
+\HRule \\[0.4cm]
+% Actors
+\textbf{Actors:} \texttt{Customer}\\
+\HRule \\[0.4cm]
+% Preconditions
+\textbf{Preconditions:} 
+\begin{itemize}
+    \item  The \texttt{Web Client} is initialized and the device initialising it is connected to the Internet.
+    \item  The \texttt{Customer} is on the landing page of the \texttt{Web Client}.
+\end{itemize}
+\HRule \\[0.4cm]
+% Postconditions
+\textbf{Postcondition:}
+\begin{itemize}
+    \item The \texttt{Customer} has registered an account in the system.
+    \item The \texttt{Customer} is able to login to the system.
+\end{itemize}
+\HRule \\[0.4cm]
+% Main success scenarios
+\textbf{Main success scenario:}
+\begin{enumerate}
+    \item  The \texttt{Customer} registers an account for the \texttt{Web Client}.
+    \item  The \texttt{Customer} selects ´Register' in the main view of the \texttt{Web Client}.
+    \item  The \texttt{Customer} inputs an e-mail address, first name, last name, and a password. He/she then selects the save button to save the account.
+    \item  If the input is valid, the account is persisted and the \texttt{Customer} is logged in.
+\end{enumerate}
+\HRule \\[0.4cm]
+% Frequency
+\textbf{Frequency:}
+Often \\
+\HRule \\[0.4cm]
+
