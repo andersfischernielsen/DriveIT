@@ -2,7 +2,7 @@
 \label{create-car-use-case}
 \HRule \\[0.4cm]
 % Description
-\textbf{Description:} An \texttt{Employee} uses the \texttt{Windows Client} to create a new car and thereby making it available for sale. \\
+\textbf{Description:} An \texttt{Employee} uses the \texttt{DriveIT Windows Client} to create a new car and thereby making it available for sale. \\
 \HRule \\[0.4cm]
 % Actors
 \textbf{Actors:} \texttt{Employee}\\
@@ -10,28 +10,37 @@
 % Preconditions
 \textbf{Preconditions:} 
 \begin{itemize}
-    \item The \texttt{Employee} at least has the manufacturer and model of the car plus at least one picture.
-    \item The \texttt{Employee} is signed in to the \texttt{Windows Client} and is connected to the Internet.
+    \item The \texttt{Employee} at least has the manufacturer, model, and price of the car plus at least one picture.
+    \item The \texttt{Employee} is signed in to the \texttt{DriveIT Windows Client} and is connected to the Internet.
 \end{itemize}
 \HRule \\[0.4cm]
 % Postconditions
-\textbf{Postcondition:}
+\textbf{Postconditions:}
 \begin{itemize}
     \item The \texttt{Car} is persisted in the database.
-    \item The \texttt{Car} is available for sale on the \texttt{Web Client}.
+    \item The \texttt{Car} is available for sale on the \texttt{DriveIT Web Client}.
 \end{itemize}
 \HRule \\[0.4cm]
 % Main success scenarios
 \textbf{Main success scenario:}
 \begin{enumerate}
-    \item The \texttt{Employee} signs in to the system.
-    \item The \texttt{Employee} chooses the `Car' view and chooses the `Create' button.
-    \item The \texttt{Employee} fills out the available data about the car. Given manufactorer and model, the \texttt{Employee} can choose to use the \texttt{Car Query API} to retrieve data about the given car.
+    \item The \texttt{Employee} chooses the 'Car view' and chooses the 'Create' button to persist the car and therby making available on the \texttt{DriveIT Web Client}.
+    \item The \texttt{Employee} fills out the available data about the car.
     \item The \texttt{Employee} checks that the data is correct and submits the car.
 \end{enumerate}
+\HRule \\[0.4cm]
+\textbf{Exception Cases:}
+\begin{itemize}
+	\item If the phone number is not put in correctly the user will be notified about this.
+	\item If the password is not put in correctly the user will be notified about this.
+\end{itemize}
 \HRule \\[0.4cm]
 % Frequency
 \textbf{Frequency:}
 A couple of times a week \\
 \HRule \\[0.4cm]
-
+\textbf{Extensions:}
+\begin{itemize}
+	\item Given manufacturer and model, the \texttt{Employee} can choose to use the \texttt{Car Query} button to retrieve data about the given \texttt{Car}.
+\end{itemize}
+\HRule \\[0.4cm]
