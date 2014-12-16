@@ -9,7 +9,7 @@ Therefore all the entity controllers know nothing of the \texttt{DriveIT Web API
 \subsubsection{Reuse}
 The \texttt{EntitiyStorage} class is very specific for the \texttt{DriveIT System} since it only deals with creating, reading, updating and deleting \texttt{DriveIT} entities. It therefore does not provide any major re-usability for other purposes than this. 
 
-Adding re-usability could be accomplished by using generics (supported by the C$\sharp$ language), which would allow the system to create, read, update and delete any input entity, provided it was supported by the given \texttt{DbContext}. This would allow for greater extensibility and easier code maintenance.
+Adding re-usability could be accomplished by using generics (supported by the C$\sharp$ language), which would allow the system to create, read, update and delete any input entity, provided it was supported by the given \texttt{DbContext}. This could make the code unnecessarily complicated, since the classes would have to deal with different types of object. This would allow greater extensibility and easier code maintenance.
 
 \subsubsection{Inheritance}
 The \texttt{DriveITContext} extends an \texttt{IdentityDbContext} which provides the built in functionality for handling user logins and different user roles, which is used for the login- and access control functionality of the \texttt{DriveIT System}.
