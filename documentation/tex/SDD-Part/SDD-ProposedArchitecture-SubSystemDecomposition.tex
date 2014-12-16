@@ -1,5 +1,5 @@
 \section{Subsystem Decomposition}
-The \texttt{DriveIT System} can be split into five main subsystems - the \texttt{DriveIT Windows Client}, \texttt{CarQuery}, \texttt{DriveIT Web Client}, \texttt{DriveIT Web API}, and \texttt{EntityFramework} subsystems. 
+The \texttt{DriveIT System} can be split into five main subsystems - the \texttt{DriveIT Windows Client}, \texttt{CarQuery}, \texttt{DriveIT Web Client}, \texttt{DriveIT Web API}, and \texttt{Persistent Storage} subsystems. 
 These subsystems are described below. 
 
 \subsection{The DriveIT System}
@@ -9,25 +9,26 @@ These subsystems are described below.
 	\caption{Subsystems of the \texttt{DriveIT System}.}
 \end{figure}
 
-\subsection{Persistence subsystem (EntityFramework)} 
-This sub system manages storing and retrieving Entity objects using the Entity Framework and its serialisation functionality.\\
-The serialised Entities are stored in a Microsoft SQL database which is hosted on Microsoft Azure. The sub system provides the \texttt{DriveIT Web API} (mentioned below) deserialised Entities, which uses these to provide the backend for other sub systems using the API.\\
-The subsystem supports retrieving all Entities of a given type, a specific Entity using its unique ID and retrieving an Entity on its relation to other Entities. 
+\subsection{Persistent Storage Subsystem} 
+The Persistent Storage Subsystem manages storing and retrieving entity objects using the \textit{Entity Framework} and its serialisation functionality.\\
+The serialised entities are stored in a \textit{Microsoft SQL Database} which is hosted on \textit{Microsoft Azure}. The subsystem provides the \texttt{DriveIT Web API} with deserialised entities, which uses the entities to provide the backend for other subsystems.\\
+The subsystem supports retrieving all Entities of a given type, a specific entity using its unique ID, and retrieving an entity on its relation to other entities.
+The Persistent Storage Subsystem consists of two classes and an interface (see figure \ref{fig:entityframeworksubsystem}). \texttt{EntityStorage} is the repository working on top of the \textit{Entity Framework} database layer, \texttt{DriveITContext}, providing the \texttt{IPersistentStorage} interface.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Figures/EntityFrameworkSubsystemDecomposition}
-	\caption{Subsystems of the EntityFramework Subsystem.}
+	\caption{Classes in the Persistent Storage Subsystem.}
+	\label{fig:entityframeworksubsystem}
 \end{figure}
 
-\subsection{Web API} 
-\todo{maybe more should as this are still some kind of analysis.}
-The \texttt{DriveIT Web API} provides public communication with the persistence subsystem and also handles authorisation of users of the sub system.\\
-The subsystem, which is built on ASP.NET Web API, provides access to the persistence sub system using specific URL routes and enforces authorisation so unauthorized users, and users with different user roles, only have limited access to the data of the \texttt{DriveIT System}.\\ 
-Every table in the persistence module must therefore be supported by the Web API, although not every table is available to every user.\\
-The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JSON}\footnote{\url{http://en.wikipedia.org/wiki/JSON}} or \texttt{XML}\footnote{\url{http://en.wikipedia.org/wiki/XML}} and transferring these via a \texttt{REST} interface accessible using \texttt{HTTP}. \\
-These modules are built into the ASP.NET Web API framework, and are not handled in our code.\\
+\subsection{Web API}
+The \texttt{DriveIT Web API}, which is built on \textit{ASP.NET Web API}\footnote{\url{http://www.asp.net/web-api}}, provides public communication with the \texttt{Persistent Storage} subsystem. This is done using specific URL routes. Furthermore it enforces authorisation so unauthorized users, and users with different user roles, only have limited access to the data of the \texttt{DriveIT System}.\\ 
+Every table in the \texttt{Persistent Storage} subsystem must therefore be supported by the web API, although not every table is available to every user.\\
+The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JSON}\footnote{\url{http://en.wikipedia.org/wiki/JSON}} or \texttt{XML}\footnote{\url{http://en.wikipedia.org/wiki/XML}} and transferring these via a \texttt{REST} interface accessible using \texttt{HTTP}.\\
+These modules are built into \textit{ASP.NET Web API}, and are not handled in our code.\\
 
-The Web API consists of several controllers which uses a static class to translate \texttt{DTO's}\footnote{\url{http://en.wikipedia.org/wiki/Data_transfer_object}} into entities and vice versa. It is also the controllers that checks for special cases, e.g. when a customer wants to update or delete a comment, and it is not allowed to change other peoples comments.
+The Web API consists of several controllers which uses a static class to translate \texttt{DTO's}\footnote{\url{http://en.wikipedia.org/wiki/Data_transfer_object}} into entities and vice versa. It is also the controllers that check for special cases, e.g. when a customer wants to update or delete a comment, and it is not allowed to change other \texttt{Customer}s' comments.
 
 
 \subsection{Windows Client} 
