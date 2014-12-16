@@ -58,14 +58,20 @@ It is also possible to \textit{create}, \textit{read} and \textit{delete} \textt
 
 It is possible to create an account on the web page with a non registered email.
 
-The \texttt{DriveIT Web Client} is based on the \textit{ASP.NET MVC} framework\footnote{\url{http://www.asp.net/mvc}}, that is implementing the \textit{Model View Controller} design pattern (see section \ref{sec:MVC}). The subsystem is made of three components: Models, Views and Controllers. The views contains the user interface and is written in cshtml, which is a mix of C$\sharp$ and HTML code. The models contains lists of database records and the controllers are responsible for giving the models, filled with database records, to the views, for them to display the data in the model.
+The \texttt{DriveIT Web Client} is based on the \textit{ASP.NET MVC} framework\footnote{\url{http://www.asp.net/mvc}}, that is implementing the \textit{Model View Controller} design pattern (see section \ref{sec:MVC}).
+
+\todo{rewrite}The subsystem is made of three components: Models, Views and Controllers. The views contains the user interface and is written in cshtml, which is a mix of C$\sharp$ and HTML code. The models contains lists of database records and the controllers are responsible for giving the models, filled with database records, to the views, for them to display the data in the model.
 
 \subsection{CarQuery} 
-This subsystem is a collection of classes that enable the rest of the \texttt{DriveIT System} to fill out missing information about cars from the CarQuery API.\\
-The sub system is used by an employee when creating a new car. The subsystem mainly consists of a \texttt{JSON} deserialiser that communicates with the \texttt{CarQuery REST API} and another class that receives a Car object and fills out the missing attributes using the deserialised JSON data. \\
-The employee fills out the information he/she knows about the car and the system then narrows its information search against the \texttt{CarQuery REST API}.
+This subsystem is a collection of classes that enable the the \texttt{DriveIT Windows Client} to fill out missing information about cars, using the \textit{CarQuery API}.\\
+The subsystem is used by an \texttt{Employee} when creating or updating a \texttt{Car}. The subsystem consists of a \textit{JSON} deserialiser that communicates with the \textit{CarQuery API} and another class that receives a \texttt{Car} object and fills out the missing attributes using the deserialised \textit{JSON} data.
+
+An \texttt{Employee} fills out the known information about the \texttt{Car} and the \texttt{CarQuery} subsystem then creates its query on the \textit{CarQuery API}.
+
+Only the \texttt{CarQuery} static class is publicly accessible. As seen in figure \ref{fig:carquerysubsystem} it uses a \texttt{JSONWrapper} to receive data from the \textit{CarQuery API} and deserialises it into a \texttt{Trims} object which is an array of \texttt{Trim} objects holding the actual \texttt{Car} data.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Figures/CarQuerySubsystemDecomposition}\\
-	\caption{Subsystems of the CarQuery Subsystem.}
+	\caption{Classes of the \texttt{CarQuery} Subsystem.}
+	\label{fig:carquerysubsystem}
 \end{figure}
