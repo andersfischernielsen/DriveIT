@@ -2,50 +2,48 @@
 
 \subsection{General Functional Requirements}
 \begin{itemize}
+	\item The system must be able to support different user roles, more specifically a customer-, employee- and administrator role.
+	\item The Windows client must only be accessible to employees and administrators.
     \item It must be possible for customers to browse cars with different filters and criteria.
+    \item A customer must be able to create and sign in to a customer account on the web client.
     \item A customer must be able to find contact information for employees without signing in.
-    \item If a customer wants to get contacted by an employee, the customer must create an account.
-    \item A customer must be able to create an account.
-    \item A customer must be able to sign in.
-    \item A customer must be able to comment the cars in the system if logged into the system.
-    \item It must be possible for customers to get contacted by employees.
-    \item Customers must be able to edit contact information for their profile.
-    \item An employee must be able to browse all cars in the system.
-    \item An employee must be able to edit and create information about cars.
-    \item It must be possible for employees to upload images of a car.
-    \item Employees must be able to see a list of customers wanting to get contacted regarding a car.
-    \item Employees must be able to create profiles on behalf of customers calling the office without an existing profile.
-    \item Employees must be able to create orders when a customer has decided to purchase a car.
-    \item An overview of all orders must be available for employees to see.
-    \item A customer must be able to see all orders belonging to him.
-    \item Employees must be able to add and remove new cars to the system.
-    \item There must be an administrator role that is able to create and delete new employees.
-    \item If several images are uploaded for a car, it must be possible to toggle through the images.
-    \item Employees must be able to get information about cars via the \texttt{Car Query API}.
-    \item A sold car must be visible in the system for another five days after purchase.
-    \item A customer must be able to see all contact requests he/she has made and delete them if no longer interested in getting contacted.
+    \item A customer must be able to request contact from an employee, if the customer is signed into the system.
+    \item A customer must be able to comment on the cars in the system, if signed in.
+    \item A customer must be able to edit contact information for his/her account.
+    \item An employee must be able create, read, update, and delete all cars in the system.
+    \item It must be possible for an employee to create, read and delete several images of a car.
+    \item An employee must be able to read, update and delete a list of requests from customers wanting to be contacted regarding a car.
+    \item An employee must be able to create a account on behalf of a customer calling the dealership without an existing customer account.
+    \item An employee must be able to create, read, update and delete all sales of a car.
+    \item A customer must be able to see all cars he has purchased.
+    \item An administrator must be able to create, read, update, and delete employees.
+    \item It must be possible to browse through the images of a car.
+    \item An employee must be able to get more information about a car using the \textit{Car Query API}\footnote{\url{http://www.carqueryapi.com/}}.
+    \item A sold car must be visible in the system for another week after it has been sold.
+    \item A customer must be able to create, read, and delete all contact requests he/she has made.
 \end{itemize}
+The group have chosen to design and develop a comment system instead of a rating system for cars.
 
-\subsection{Optional Functional Requirement}
-The following optional requirements have also been fulfilled.
+\subsubsection{Optional Functional Requirements}
+The following optional requirements must be fulfilled.
 \begin{itemize}
-	\item The system is deployed/hosted on Microsoft Azure.
-	\item The system supports showing several images of a car in an image gallery.
-	\item (\textit{Partially}) The system should have a form for a customer to request contact by an employee or let the customer contact the car lot by clicking a car.
+	\item The system must be deployed/hosted on Microsoft Azure.
+	\item The system must supports showing several images of a car in an image gallery.
+	\item (\textit{Partially}) The system must have a form for a customer to request contact by an employee or let the customer contact the dealership lot by clicking a car.
 \end{itemize}
 
 \subsection{Initial Analysis Objects}
 \begin{itemize}
     \item \textbf{Customer:}\\
-    A customer is a person interested in buying a car using the web client. A customer object will hold contact information about a given customer.
+    A customer is a person interested in buying a car. The customer can only use the web client. A customer object will hold contact information about a given customer e.g. name, email, and phone.
     \item \textbf{Employee:}\\
-    An employee is a person working for the company selling used cars. The employee uses the Windows client. The employee object will hold information about a given employee. Employees can be administrators, meaning that they are able to CRUD employees.
+    An employee is a person working for the used car dealership. The employee uses the Windows client. The employee object will hold information about a given employee e.g. name, email, job title, and phone. Employees can be administrators, meaning that they are able to create, update, and delete employees.
     \item \textbf{Car:}\\
-    The car object holds relevant information about itself. The object has an attribute stating whether it is sold or not.
+    The car object is a car for sale at the used car dealership. The car object will hold relevant information about itself e.g. manufacturer, model, year, colour, price, etc. The object also has an attribute indicating whether it is sold or not.
     \item \textbf{Sale:}\\
     A sale consists of a car, an employee, and a customer. It uses some different information from each of these objects to make a sale. From the customer's perspective, it is called an order.
     \item \textbf{Comment:}\\
-    A comment consists of a customer and a text field. A car object can have several comments.
-    \item \textbf{ContactRequest:}\\
-    Will be created when a customer wants to get contacted by an employee regarding a given car. It contains the car in question an the requesting customer.
+    A comment consists of a customer, a title and a description. A car object can have several comments.
+    \item \textbf{Contact Request:}\\
+    A contact request will be created when a customer wants to be contacted by an employee regarding a given car. It contains the car in question, the requesting customer and an optional employee when the request is being dealt with.
 \end{itemize}

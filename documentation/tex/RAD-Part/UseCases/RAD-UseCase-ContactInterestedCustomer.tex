@@ -10,12 +10,12 @@
 % Preconditions
 \textbf{Preconditions:} 
 \begin{itemize}
-    \item The \texttt{Windows Client} is online and the \texttt{Employee} is signed in to the system.
-    \item There exists at least one \texttt{Contact Request} in the system.
+    \item The \texttt{DriveIT Windows Client} is online and the \texttt{Employee} is signed in to the system.
+    \item There exists at least one \texttt{Contact Request} in the \texttt{DriveIT System}.
 \end{itemize}
 \HRule \\[0.4cm]
 % Postconditions
-\textbf{Postcondition:}
+\textbf{Postconditions:}
 \begin{itemize}
     \item The \texttt{Customer} who requested to get contacted has been contacted by the \texttt{Employee}.
 \end{itemize}
@@ -24,13 +24,23 @@
 \textbf{Main success scenario:}
 \begin{enumerate}
     \item The \texttt{Employee} navigates to the view of \texttt{Contact Requests}.
-    \item The \texttt{Employee} chooses the oldest non contacted \texttt{Contact Request}, and open a detailed view of the request.
-    \item The \texttt{Employee} contact the \texttt{Customer} through one of the means listed in the detailed view.
-    \item Depending on the outcome of the communication between the two, the \texttt{Employee} either deletes the \texttt{Contact Request} or converts it into a \texttt{Sale}.
+    \item The \texttt{Employee} chooses the oldest non contacted \texttt{Contact Request}, and opens a detailed view of the request.
+    \item The \texttt{Employee} notes the \texttt{Car} ID and \texttt{Customer} ID and navigates to the '\texttt{Car} view' to find the \texttt{Car} with the correct ID.  
+    \item The \texttt{Employee} navigates to the '\texttt{Customer} view' and finds the \texttt{Customer} information. 
+    \item The \texttt{Employee} uses a phone or an external email to contact the \texttt{Customer}.
 \end{enumerate}
+\HRule \\[0.4cm]
+\textbf{Exception Cases:}
+\begin{itemize}
+	\item If the \texttt{Customer} does not answer the phone the \texttt{Employee} contacts the \texttt{Customer} through email.
+\end{itemize}
 \HRule \\[0.4cm]
 % Frequency
 \textbf{Frequency:}
 Daily \\
 \HRule \\[0.4cm]
-
+\textbf{Extensions:}
+\begin{itemize}
+	\item Depending on the outcome of the communication between the two, the \texttt{Employee} either deletes the \texttt{Contact Request} or converts it into a \texttt{Sale}.
+\end{itemize}
+\HRule \\[0.4cm]

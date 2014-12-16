@@ -2,7 +2,7 @@
 \label{create-account-use-case}
 \HRule \\[0.4cm]
 % Description
-\textbf{Description:} The \texttt{Customer} registers on the \texttt{Web Client} \\
+\textbf{Description:} The \texttt{Customer} registers on the \texttt{DriveIT Web Client} \\
 \HRule \\[0.4cm]
 % Actors
 \textbf{Actors:} \texttt{Customer}\\
@@ -10,28 +10,34 @@
 % Preconditions
 \textbf{Preconditions:} 
 \begin{itemize}
-    \item  The \texttt{Web Client} is initialized and the device initialising it is connected to the Internet.
-    \item  The \texttt{Customer} is on the landing page of the \texttt{Web Client}.
+    \item  The \texttt{DriveIT Web Client} is initialised and the device initialising it is connected to the Internet.
+    \item  The \texttt{Customer} is on the front page of the \texttt{DriveIT Web Client}.
 \end{itemize}
 \HRule \\[0.4cm]
 % Postconditions
-\textbf{Postcondition:}
+\textbf{Postconditions:}
 \begin{itemize}
     \item The \texttt{Customer} has registered an account in the system.
-    \item The \texttt{Customer} is able to login to the system.
+    \item The \texttt{Customer} is able to log in to the system.
 \end{itemize}
 \HRule \\[0.4cm]
 % Main success scenarios
 \textbf{Main success scenario:}
 \begin{enumerate}
-    \item  The \texttt{Customer} registers an account for the \texttt{Web Client}.
-    \item  The \texttt{Customer} selects ´Register' in the main view of the \texttt{Web Client}.
-    \item  The \texttt{Customer} inputs an e-mail address, first name, last name, and a password. He/she then selects the save button to save the account.
+    \item  The \texttt{Customer} wishes to register an account for the \texttt{DriveIT Web Client}.
+    \item  The \texttt{Customer} selects 'Register' in the main view of the \texttt{DriveIT Web Client}.
+    \item  The \texttt{Customer} fills in his/her e-mail address, first name, last name, phone, and a password. He/she then selects the 'Register' button to save the account.
     \item  If the input is valid, the account is persisted and the \texttt{Customer} is logged in.
 \end{enumerate}
 \HRule \\[0.4cm]
+\textbf{Exception Cases:}
+\begin{itemize}
+	\item If the phone number is not put in correctly the user will be notified about this.
+	\item If the password is not put in correctly the user will be notified about this.
+\end{itemize}
+\HRule \\[0.4cm]
 % Frequency
 \textbf{Frequency:}
-Often \\
+Hourly \\
 \HRule \\[0.4cm]
 
