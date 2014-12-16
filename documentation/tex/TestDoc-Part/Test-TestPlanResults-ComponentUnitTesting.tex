@@ -1,14 +1,6 @@
 \section{Unit Testing}
-\subsection{CarQuery Unit Testing}
-The most significant methods ensuring the functionality of the \texttt{CarQuery} class have primarily been unit tested.\\
-Retrieving information as \textit{JSON} and transferring this data to DTO objects has been tested to ensure that this functionality does not have any errors.
-
-Testing that data is received and that this data is correct is tested by requesting a known data set, e.g. \texttt{"make=ford"}, and checking that the received data is of the anticipated type. Different queries have also been tested against the \texttt{DriveIT Web API}.
-
-Boundary testing is performed by sending a malformed \texttt{CarDto} object as a parameter to the class and checking that the expected exception is thrown. Positive testing is performed as well by sending a correct \texttt{CarDto} object.
-
-\subsection{Persistent Storage Unit Testing}
-A subset of the functionality \texttt{PersistentStorage} subsystem has primarily been unit tested.
+\subsection{PersistentStorage Unit Testing}
+A subset of the functionality of the \texttt{PersistentStorage} subsystem has primarily been unit tested.
 
 As mentioned earlier the system supports create, read, update \& delete functionality of the entities of the \texttt{DriveIT System}. This functionality is very similar for the different data types, which is why testing has mainly been done for a specific entity type, namely \texttt{Car}.
 
