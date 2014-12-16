@@ -29,9 +29,9 @@ The sale will then be created and saved in the persistent storage. The \texttt{E
 \end{figure}
 
 Sequence diagram \ref{fig:SequenceDiagram-CreateUserAccount} is made from the use case \texttt{CreateUserAccount UC-2}. \textit{Sec. \ref{create-account-use-case}}. \\\\
-In this use case, the non-registered \texttt{Customer} has navigated to the \texttt{DriveIT Web Client} and thereafter clicks "Register", whereafter the customer is directed to the CreateUserWindow. 
+In this use case, the non-registered \texttt{Customer} has navigated to the \texttt{DriveIT Web Client}, clicks "Register", where after the customer is directed to the \texttt{CreateUserView}. 
 
-In this window, the user will be filling in the necessary information, and after the \texttt{Customer} has finished filling in the information, he or she click on the "Create" button and the user account will then be created and saved in the persistent storage. The CreateUserWindow will then show that the creation of the user accout has been a success, and the customer can then log in into the \texttt{DriveIT Web Client}.
+In this view, the \texttt{Customer} will be filling in the necessary information, and \texttt{Customer} he or she then clicks the "Create" button. The \texttt{Customer} account will then be created and saved in the persistent storage. The \texttt{Customer} will then be redirected to the \texttt{DriveIT Web Client} front page and is logged in.
 
 \subsubsection{ContactInterestedCustomer Sequence Diagram}
 \begin{figure}[H]
@@ -44,8 +44,10 @@ In this window, the user will be filling in the necessary information, and after
   % label it something meanfull
 \end{figure}
 
-Sequence diagram \ref{fig:SequenceDiagram-ContactInterestedCustomer} is made from the use case \texttt{ ContactInterestedCustomer UC-4} \textit{Sec. \ref{contact-interested-customer-use-case}}. \\\\
-In this case, the employee starts with opening the windows application. The employee then navigates to the ContactRequestWindow, where there will be shown a list of contact requests by different customers. The employee picks one of the contact requests and a more detailed view of the contact request will be shown. The employee then calls the customer, starts a conversation regarding the contact request, and after a while the customer will confirm his or her choice and terminate the conversation. The employee will then close the contact request detail window and create a sale.
+Sequence diagram \ref{fig:SequenceDiagram-ContactInterestedCustomer} is made from the use case \texttt{ ContactInterested} \texttt{Customer UC-4} \textit{Sec. \ref{contact-interested-customer-use-case}}. \\\\
+In this case, the \texttt{Employee} starts by opening the \texttt{DriveIT Windows Client}. The \texttt{Employee} then navigates to the \texttt{ContactRequestView}, where there will be shown a list of \texttt{Contact Requests} by different \texttt{Customers}. 
+
+The \texttt{Employee} picks one of the \texttt{Contact Request} and a more detailed view of the \texttt{Contact Request} will be shown. The \texttt{Employee} navigates to the \texttt{CustomerView}, finds the specific \texttt{Customer} and finds his information by clicking on the \texttt{Customer}.
 
 \subsubsection{RequestEmployeeContact Sequence Diagram}
 \begin{figure}[H]
@@ -58,10 +60,13 @@ In this case, the employee starts with opening the windows application. The empl
   % label it something meanfull
 \end{figure}
 
-Sequence diagram \ref{fig:SequenceDiagram-RequestEmployeeContact} is made from the use case \texttt{ RequestEmployeeContact UC-5}. \textit{Sec. \ref{request-contact-use-case}}. \\\\
-In this case, the customer, non-registered or registered and logged on, has navigated to our web client and thereafter click "Find Cars", and thereafter the search cars window will show. The customer will then search for the specific car that he or she are trying to find. The customer will then navigate to details of the car, by clicking "Details" and then create a request, by clicking "Create Request", whereas the contact request then will created and saved in the persistent storage.
+Sequence diagram \ref{fig:SequenceDiagram-RequestEmployeeContact} is made from the use case \texttt{ RequestEmployee} \texttt{Contact UC-5}. \textit{Sec. \ref{request-contact-use-case}}. \\\\
+In this case, the \texttt{Customer} is signed in and has navigated to the \texttt{DriveIT Web Client} and then clicks "Find Cars", whereupon the "CarView" will be show. 
+
+The \texttt{Customer} will then search for the specific \texttt{Car} that he or she is trying to find. The \texttt{Customer} will then navigate to the details of the \texttt{Car}, by clicking "Details". Then the \texttt{Customer} creates a request by clicking "Request to get contacted". The \texttt{Contact Request} will then be created and saved in the persistent storage.
 
 \subsection{State Diagrams}
+\subsubsection{Car State Diagram}
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=\textwidth]{Figures/StateDiagram-Car}\\
@@ -70,13 +75,6 @@ In this case, the customer, non-registered or registered and logged on, has navi
 	\caption{State diagram of the Car object}
   \label{fig:StateDiagram-Car}
 \end{figure}
-The \ref{fig:StateDiagram-Car} shows the states a car entity can be in. The car should always be possible to delete as shown in the diagram, but to be sold the car must first enter the \emph{For Sale} state. In the \emph{For Sale} and \emph{Sold} state the car should be visible from the \texttt{DriveIT Web Client} with a label indicating which of the two states its in, and the car should be visible from the \texttt{DriveIT Windows Client} in all its states.\\
-\begin{figure}[H]
-	\centering
-		\includegraphics[width=\textwidth]{Figures/StateDiagram-ContactRequest}\\
-		% place the figure in the Figures folder (located with the main file)
-		% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
-	\caption{State diagram of the ContactRequest object}
-  \label{fig:StateDiagram-ContactRequest}
-  % label it something meanfull
-\end{figure}
+Fig. \ref{fig:StateDiagram-Car} shows the states a \texttt{Car} can be in. It must always be possible to delete the \texttt{Car}, as shown in the diagram, but to be sold the \texttt{Car} must first enter the \textit{For Sale} state. 
+
+In the \textit{For Sale} and \textit{Sold} state the \texttt{Car} should be visible from the \texttt{DriveIT Web Client} with a label indicating which of the two states it is in. The \texttt{Car} should not be visible on the \texttt{DriveIT Web Client} if sold more than a week ago. The \texttt{Car} should be visible from the \texttt{DriveIT Windows Client} in all of its states.\\
