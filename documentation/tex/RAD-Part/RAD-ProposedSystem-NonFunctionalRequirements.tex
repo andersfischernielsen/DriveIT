@@ -1,31 +1,31 @@
-\section{Nonfunctional requirements}
+\section{Nonfunctional Requirements}
 \subsection{Usability}
-The \texttt{DriveIT Windows Client} should use the Windows design language such that it is intuitive for users who are used to the Windows platform.
+The \texttt{DriveIT Windows Client} must use the \textit{Design Guidelines of Microsoft\footnote{\url{http://msdn.microsoft.com/library/windows/apps/hh781237.aspx}}} such that it is intuitive for users who are used to the Windows platform.
 
-Further more the UI must be minimalistic and the most frequently used features should be placed in views no further than two mouse clicks away from the startup page. Some training may be required to use the system since only employees will be using the system. \\
+Furthermore the UI must be minimalistic and the most frequently used features should be placed in view no further than two mouse clicks away from the start-up page. Some training of employees may be required prior to using the client.\\
 
-The \texttt{DriveIT Web Client} should follow modern website design thus making the site intuitive and easy to use for everyday users. Furthermore simplicity should be paramount, and viewing information about cars should be quick and not interrupting.
+The \texttt{DriveIT Web Client} should follow modern mobile-first website design thus making the site intuitive and easy to use for everyday users. Furthermore simplicity should be paramount, and viewing information about cars should be quick and linear (e.g. not interrupt the users current task).
 
 \subsection{Reliability}
-For the \texttt{DriveIT Web Client} and \texttt{DriveIT Web API} we use Azure to deploy the system. Due to this, we are not responsible for server maintenance and down time. \\
-Azure is a reliable and fast deployment environment, saving us from the troubles of setting up and hosting our own deployment and server environment.
+For the \texttt{DriveIT Web Client} and \texttt{DriveIT Web API} we use \textit{Microsoft Azure} to deploy the system. Due to this, we are not responsible for server maintenance and down time. \\
+\textit{Microsoft Azure} is a reliable and fast deployment environment, saving development from the troubles of setting up and hosting a deployment and server environment.
 
-The three systems should have sufficient exception handling and therefore not crash unless something with the operating system or server fails.
+The three systems should have sufficient exception handling and not crash the entire system, but instead provide an error message.
 
 \subsection{Performance}
-The system should be responsive and fast to use. Most user actions should be done in the background, therefore giving the UI a fast feel. The startup time for the \texttt{DriveIT Windows Client} should be less than 5 seconds for a modern computer.
+The system must be responsive and fast to use. Most user actions must not freeze the user interface, therefore giving the UI a responsive feel. The start-up time for the \texttt{DriveIT Windows Client} must be less than 3 seconds for a modern computer.
 
-Furthermore the \texttt{DriveIT Web Client} should be fast to use and all pages should be loaded in less than 2 seconds for a 10mbit/1mbit connection excluding browser rendering time, for a modern browser.
+Furthermore the \texttt{DriveIT Web Client} must be fast to use and all pages should be loaded in less than 2 seconds for a 10mbit/1mbit connection excluding browser rendering time, for a modern browser.
 
 \subsection{Maintainability}
-The systems should be easy to maintain and extend achieved through the use of good code structure and extensive documentation. If the system is to be updated a service window will be provided in time intervals with a low user amount.
+The systems must be easy to maintain and extend which must be achieved through the use of good code structure using interfaces, design patterns, and extensive documentation. Changes in the backend of the \texttt{DriveIT System} requires a reinstall of the \texttt{DriveIT Web Client} and \texttt{Windows Client}.
 
 \subsection{Portability}
-It should be easy to port the functionality to other systems. This will be achieved by using a REST Web API therefore allowing other clients to access the same information. The \texttt{DriveIT Web Client} should be usable on mobile devices too.
+The functionality of the \texttt{DriveIT} clients should be easy to port to other clients. This must be achieved by implementing the data access of the system using an open Web API with documented functionality, therefore allowing other clients to access the information. The \texttt{DriveIT Web Client} should be usable on mobile devices too.
 
 \subsection{Implementation}
-The system will be implemented in different ways. It will have a main \texttt{DriveIT Web API} that will be taking care of persistence and communication between the \texttt{DriveIT Windows Client} and the \texttt{DriveIT Web Client}. The system will mainly be implemented using the programming language C$\sharp$. Implementation in a popular language such as C$\sharp$ assures supportability and extendability. 
-Using the .NET framework offers a lot of developer tools making life as a programmer easier and faster.
+The different parts of the system must be implemented in different ways. It must have a main \texttt{DriveIT Web API} that must take care of persistence and communication between the \texttt{DriveIT Windows Client} and the \texttt{DriveIT Web Client}. The system must mainly be implemented using the programming language C$\sharp$. Implementation in a popular language such as C$\sharp$ assures supportability and extensibility. 
+Using the \textit{.NET framework} offers a lot of developer tools making development more efficient.
 
 \subsection{Operations}
-The system should mainly be maintained by the DriveIT developers, but training will be given to the employees using the system on a daily basis to make sure that day to day problems can be easily solved.
+The system should mainly be maintained by the developers of the \texttt{DriveIT System}. Training is required for employees so that they are able to use the system on a daily basis and solve minor issues that might occur on a day to day basis.
