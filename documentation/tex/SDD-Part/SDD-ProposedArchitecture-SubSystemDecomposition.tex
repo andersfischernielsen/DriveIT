@@ -30,7 +30,6 @@ These modules are built into \textit{ASP.NET Web API}, and are not handled in ou
 
 The Web API consists of several controllers which uses a static class to translate \texttt{DTO's}\footnote{\url{http://en.wikipedia.org/wiki/Data_transfer_object}} into entities and vice versa. It is also the controllers that check for special cases, e.g. when a customer wants to update or delete a comment, and it is not allowed to change other \texttt{Customer}s' comments.
 
-
 \subsection{Windows Client} 
 \begin{figure}[H]
 	\centering
@@ -38,11 +37,15 @@ The Web API consists of several controllers which uses a static class to transla
 	\caption{The Code Map of the Windows Client}
 	\label{fig:WindowsClientCodeMapProper}
 \end{figure}
-The Windows Client is used by the employees, to manipulate data in the system. Depending on their role Employee or Administrator They can Create, Read, Update and Delete all entities except for creating \texttt{ContactRequest}, which only can be created through the \texttt{DriveIT Web Client}.\\
-The employee logs into the client with his or hers username and password, and can then via an user interface manipulate data in the system.\\
-The subsystem is made out of three main systems: The DriveIT.Views, the DriveIT.ViewModels and the DriveIT.Controllers.\\
-The DriveIT.Views contains the user interface written in with Microsofts WPF framework. The DriveIT.ViewModels contains the ViewModels which holds data which is bound to the Views following Microsoft's \emph{Model View ViewModel} architectural pattern. Viewmodels for entities are often created in the form EntityListViewModel and EntityViewModel, but a few extra viewmodels exists for extra views such as the LoginViewModel and the PasswordCreationViewModel.\\
-The DriveIT.Controllers section contains the controllers which transforms data and sends and receives HTTP Requests to/from the \texttt{DriveIT Web API}. Images are uploaded to \emph{Azures Blob Storage} and therefore does not contact the API. Another controller to notice is the \texttt{GravatarController} which takes email strings and converts it to a link to that emails Gravatar profile url.
+The Windows Client is used by the \texttt{Employee}s, to manipulate data in the system. Depending on their role, \texttt{Employee} or \texttt{Administrator}, they can \textit{CRUD} all entities except for creating \texttt{ContactRequest}s.\\
+
+The \texttt{Employee} signs in to the client with his or her email and password, and can then use the user interface to manipulate data in the \texttt{DriveIT System}.\\
+The subsystem is made out of three main components: The \texttt{Views}, the \texttt{ViewModels} and the \texttt{Controllers}.\\
+The \texttt{Views} package contains the user interface written in Windows Presentation Foundation (henceforth WPF). The \texttt{ViewModels} package contains the \texttt{ViewModel}s which hold data bound to the \texttt{View}s following Microsoft's \textit{Model View ViewModel} architectural pattern\footnote{\url{http://en.wikipedia.org/wiki/Model_View_ViewModel}}.
+
+\texttt{ViewModel}s for entities are often created in the form of a \texttt{EntityListViewModel} and a \texttt{EntityViewModel}, but a few extra \texttt{ViewModel}s exists for additional \texttt{Views}s such as the \texttt{LoginViewModel} and the \texttt{PasswordCreationViewModel}.
+
+The \texttt{Controllers} package contains the \texttt{Controller}s which transforms data and sends and receives HTTP requests to and from the \texttt{DriveIT Web API}. Images are uploaded to \textit{Azure Blob Storage}. To provide \texttt{Employee}s and \texttt{Customer}s with profile pictures, a \texttt{GravatarController} exists to convert email strings into \textit{Gravatar}\footnote{\url{https://en.gravatar.com/}} profile URLs.
 
 \subsection{Web Client}
 The \texttt{DriveIT Web Client} is accessable through the internet, whereas it is being used by non-registered users and customers, who already have registered themselves through the web client and logged on. The web client is being used to search for cars, that are being sold by the company using the \texttt{DriveIT System}, CRUD comments (if the customer is logged in, else it's only read), CRD contact requests, read orders and read employees (contact tab). A customer is also able to create, read and update information regarding their own user account.\\
