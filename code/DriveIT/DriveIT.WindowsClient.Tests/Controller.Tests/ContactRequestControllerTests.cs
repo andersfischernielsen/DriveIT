@@ -40,7 +40,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
         {
             try
             {
-                DriveITWebAPI.Login("cust@driveIT.dk", "Cust0mer_Password").Wait();
+                DriveITWebAPI.Login("awia00@gmail.com", "Cust0mer_Password").Wait();
             }
             catch (Exception)
             {
@@ -50,7 +50,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
 
         private void LogInAsEmployee()
         {
-            DriveITWebAPI.Login("admin@driveIT.dk", "4dmin_Password").Wait();
+            DriveITWebAPI.Login("awis@itu.dk", "4dmin_Password").Wait();
         }
 
         private void CreateOtherEntities()
@@ -58,7 +58,7 @@ namespace DriveIT.WindowsClient.Tests.Controller.Tests
             LogInAsEmployee();
             _carId = new CarController().ReadCarList().Result[0].Id.GetValueOrDefault();
             _carId2 = new CarController().ReadCarList().Result[1].Id.GetValueOrDefault();
-            _customerId = "cust@driveit.dk";
+            _customerId = "awia00@gmail.com";
             _employeeId = new EmployeeController().ReadEmployeeList().Result[0].Id;
         }
 
