@@ -1,37 +1,41 @@
 \section{Access Control and Security}
-
-\textbf{Access Matrix for DriveIT System}
-
-\begin{tabular}{|l|*{6}{c|}}\hline
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{|l|*{6}{c|}}\hline
 \backslashbox{\miniscule\textbf{Actors}}{\miniscule\textbf{Entities}} & \miniscule\textbf{Car} & \miniscule\textbf{Comment} & \miniscule\textbf{ContactRequest} & \miniscule\textbf{Customer} & \miniscule\textbf{Employee} & \miniscule\textbf{Sale} \\\hline
 
-\miniscule\textbf{Non-registered user} & \miniscule read & \miniscule read && \miniscule create & \miniscule read & \miniscule\\\hline
+\miniscule\textbf{Non-registered Customer} & \miniscule read & \miniscule read && \miniscule create & \miniscule read & \miniscule\\\hline
 
 \miniscule\textbf{Customer} & \miniscule read & \miniscule create & \miniscule create & \miniscule read & \miniscule read & \miniscule read\\
 	&& \miniscule read & \miniscule read & \miniscule update &&\\
 	&& \miniscule update & \miniscule delete &&& \\
 	&& \miniscule delete &&&&\\\hline
 
-\miniscule\textbf{Employee} & \miniscule create & \miniscule read & \miniscule read & \miniscule create & \miniscule read & \miniscule create \\
+\miniscule\textbf{Employee} & \miniscule create & \miniscule (read) & \miniscule read & \miniscule create & \miniscule read & \miniscule create \\
 	& \miniscule read && \miniscule update & \miniscule read && \miniscule read\\
 	& \miniscule update && \miniscule delete & \miniscule update && \miniscule update\\
 	& \miniscule delete &&&&& \miniscule delete\\\hline
 
-\miniscule\textbf{Administrator} & \miniscule create & \miniscule read & \miniscule read & \miniscule create & \miniscule create & \miniscule create\\
-	& \miniscule read & \miniscule delete & \miniscule update & \miniscule read & \miniscule read & \miniscule read\\
+\miniscule\textbf{Administrator} & \miniscule create & \miniscule (read) & \miniscule read & \miniscule create & \miniscule create & \miniscule create\\
+	& \miniscule read & \miniscule (delete) & \miniscule update & \miniscule read & \miniscule read & \miniscule read\\
 	& \miniscule update && \miniscule delete & \miniscule update & \miniscule update & \miniscule update\\
 	& \miniscule delete &&& \miniscule delete & \miniscule delete & \miniscule delete\\\hline
 
-\end{tabular}\\\\
+	\end{tabular}
+	\caption{Access Matrix for the \texttt{DriveIT System}}
+	\label{fig:accessMatrix}
+\end{figure}
 
-Due to the fact that the DriveIT System is available for many users, it is necessary to keep track of which users may have access to specific resources in our system. To keep track of which users got access to which resources, it is necessary to check each user at login, through authentication, to confirm which resources they can access.\\
+Due to the fact that the \texttt{DriveIT System} is available for many users, it is necessary to keep track of which users may have access to specific resources in the system. To keep track of which users have access to which resources, it is necessary to check each user at login, through authentication, to confirm which resources they can access. Figure \ref{fig:accessMatrix} shows which functionality the different actor types have access to.\\
 
-In our system, a non-registered user (a person accessing the DriveIT homepage without logging in) should be restricted to only be able to search for \texttt{Car}s, get a list of \texttt{Employee}s and create a new user on the homepage.\\
+In the \texttt{DriveIT System} a non-registered customer is restricted to browse \texttt{Car}s with comments, get a list of \texttt{Employee}s and create an account on the homepage.\\
 
-The \texttt{Customer} is able to access more on the DriveIT homepage than a non-registered user. The \texttt{Customer} is able to access the same information as a non-registered user, but are also able to look through his or her own \texttt{Order}s, and also able to create, update or delete his or her own \texttt{Comment}s on cars.\\
+The \texttt{Customer} is able to access the same information as a non-registered customer, but is also able to look through in \texttt{Sale}s which he or she has been part of, and able to create, update or delete his or her own \texttt{Comment}s on \texttt{Car}s.\\
 
-The \texttt{Employee} is able to create, update, delete and search for \texttt{Car}s. The \texttt{Employee} is also able to create a new user (if a person calls the company using the \texttt{DriveIT System} for help), get information about a specific \texttt{Customer} and update a \texttt{Customer} by request. The \texttt{Employee} is also able to create a \texttt{Sale}, see the \texttt{Sale}s of a specific \texttt{Customer}, update and delete a \texttt{Sale}. The \texttt{Employee} should also be able to get a list of other \texttt{Employee}s, if it is needed in any case.\\
+The \texttt{Employee} is able to create, read, update, and delete \texttt{Car}s. The \texttt{Employee} is also able to create a new \texttt{Customer}, get information about a specific \texttt{Customer} and update a \texttt{Customer} by request. The \texttt{Employee} can furthermore create a \texttt{Sale}, read all \texttt{Sale}, update, and delete a \texttt{Sale}. The \texttt{Employee} can read a list of other \texttt{Employee}s.\\
 
-An administrator is a special kind of \texttt{Employee}, who can do everything the \texttt{Employee} can, but also create, update and delete other \texttt{Employee}s and administrators.
+An administrator is a special kind of \texttt{Employee}, who can do everything the \texttt{Employee} can, but in addition create, update and delete other \texttt{Employee}s and administrators. \texttt{Customer} accounts can be deleted by the administrator role.\\
 
-There is a bug in the DriveIT Web Client which means that \texttt{Employee}s and administrators can create \texttt{Comment}s and \texttt{ContactRequest}s. They cannot manage other peoples \texttt{Comment}s and \texttt{ContactRequest}s though. Also, details about orders and comments does not work as supposed for customers, when accessed by \texttt{Employee}s. Information about \texttt{Employee}s and administrators cannot be changed through the Web Client, as it was not meant to support this feature.
+The \texttt{DriveIT Web API} supports that \texttt{Employee}s and administrators can read \texttt{Comment}s on \texttt{Car}s. It furthermore supports that administrators can delete comments. The \texttt{DriveIT Windows Client} does not support these features.\\
+
+There is a bug in the \texttt{DriveIT Web Client} which means that \texttt{Employee}s and administrators can create \texttt{Comment}s and \texttt{ContactRequest}s. They cannot manage other \texttt{Customer}'s \texttt{Comment}s and \texttt{ContactRequest}s though. Information about \texttt{Employee}s and administrators cannot be changed through the \texttt{DriveIT Web Client}, as it was not meant to support this functionality.
