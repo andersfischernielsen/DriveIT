@@ -1,35 +1,31 @@
 \section{Design Patterns}
-\subsection{Model View ViewModel (MVVM) Pattern}
+\subsection{Model View ViewModel Pattern}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{Figures/WebImages/MVVMPattern}\\
-	\caption{The MVVM Pattern - http://en.wikipedia.org/wiki/Model\_View\_ViewModel}
+	\includegraphics[width=\textwidth]{Figures/WebImages/MVVMPattern}\\
+	\caption{The Model View ViewModel Pattern}
 	\label{fig:MVVMPattern}
 \end{figure}
-The \texttt{DriveIT Windows Client} uses the \emph{Model View ViewModel} architectural pattern which tries to ensure a clear separation between the model and the view. The pattern derives from both the \emph{Model View Controller} pattern and the \emph{Presentation Model} design pattern and therefore has some of the same attributes. By using the MVVM pattern we created a more testable and easier expandable application.
+The \texttt{DriveIT Windows Client} uses the \textit{Model View ViewModel}\footnote{\url{http://en.wikipedia.org/wiki/Model\_View\_ViewModel}} (hereafter \textit{MVVM}) architectural pattern which tries to ensure a clear separation between the \textit{Model} and the \textit{View}. The pattern derives from both the \textit{Model View Controller} pattern and the \textit{Presentation Model} design pattern. Therefore it has some of the same attributes. By using the \textit{MVVM} pattern we created a more testable and easier expandable application.
 
-Furthermore we used \emph{Microsoft Blend}'s \emph{Behavior Actions} to encapsulate calls and commands from the View such that View elements would not get send to the ViewModel. These actions are implemented to ensure low coupling.\\
+Furthermore we used \textit{Microsoft Blend}'s\footnote{\url{http://en.wikipedia.org/wiki/Microsoft_Blend}} built in \textit{Actions}\footnote{\url{http://blogs.msdn.com/b/expression/archive/2009/03/23/an-introduction-to-behaviors-triggers-and-actions.aspx}} to encapsulate calls and commands from the \texttt{View} such that \texttt{View} elements would be sent to the \texttt{ViewModel}. These actions are implemented to ensure low coupling.\\
 
-A build in part of \textit{Model View ViewModel} is a version of the Observer-Pattern. This is done by creating data-binding between the View and their ViewModel. In WPF this is achieved by having the viewmodels implement the interface \texttt{INotifyPropertyChanged} which will notify the view when the ViewModel has changed. By using this interface the ViewModel knows nothing of the View and cannot directly change its attributes.
-
-\subsection{Adapter Pattern}
-The \texttt{DriveIT Windows Client} uses the \textit{Model View ViewModel} architectural pattern which tries to ensure a clear separation between the model and the view. The pattern derives from both the \textit{Model View Controller} pattern and the \textit{Presentation Model} design pattern and therefore has some of the same attributes. By using the MVVM pattern we created a more testable and easier expandable application. Furthermore we used \textit{Microsoft Blend}'s \textit{Behavior Actions} to encapsulate calls and commands from the View such that View elements would not get send to the ViewModel. These actions are implemented to ensure low coupling.\\
-
+A built-in part of \textit{MVVM} is a version of the \textit{Observer-Pattern}\footnote{\url{http://en.wikipedia.org/wiki/Observer_pattern}}. This is done by creating data-bindings between the \texttt{View} and their \texttt{ViewModel}. In \textit{WPF} this is achieved by having the \texttt{ViewModel}s implement the interface \texttt{INotifyPropertyChanged} which will notify the \texttt{View} when the \texttt{ViewModel} has changed. By using this interface the \texttt{ViewModel} knows nothing of the \texttt{View} and cannot directly change its attributes.
 
 \subsection{Adapter Pattern}
-The \textit{Adapter pattern} allows the coder to encapsulate an object its methods and properties in an "Adapter" class. Since the \texttt{DriveIT Windows Client} uses the MVVM design pattern, and The \texttt{DriveIT Web API} uses Data Transfer Objects(DTO) to send and receive data and DTO's are only meant to transfer data, an Adapter Pattern fits perfectly. All Single Entitiy ViewModels in the \texttt{DriveIT.WindowsClient.ViewModels} name-space functions as Adapters for their corresponding DTO. E.g The CarViewModel class is an adapter for the CarDto class.\\ 
+The \textit{Adapter pattern} allows the developer to encapsulate methods and properties of an object in an "Adapter" class. Since the \texttt{DriveIT Windows Client} uses the \textit{MVVM} design pattern, and the \texttt{DriveIT Web API} uses \textit{DTO}s to send and receive data, and \textit{DTO}s are only meant to transfer data, an Adapter Pattern fits perfectly. Almost all single entitiy \texttt{ViewModel}s in the \texttt{DriveIT.WindowsClient.ViewModels} namespace function as adapters for their corresponding \textit{DTO}. E.g the \texttt{CarViewModel} class is an adapter for the \texttt{CarDto} class.\\ 
 
-This implementation provides the \texttt{DriveIT Windows Client} with an easy way to manipulate data, while still retaining the data-structure such that entities can be Created, Read, Updated and Deleted over the \texttt{DriveIT Web API} without the having to convert Client Classes to API Classes.
+This implementation provides the \texttt{DriveIT Windows Client} with an easy way to manipulate data, while still retaining the data structure such that entities can be created, read, updated, and deleted over the \texttt{DriveIT Web API} without the having to convert client classes to API classes.
 
-\subsection{Model View Controller (MVC) Pattern}
+\subsection{Model View Controller Pattern}
 \label{sec:MVC}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{Figures/WebImages/MVCPattern}\\
-	\caption{The MVC Pattern - http://www.w3schools.com/aspnet/mvc_intro.asp}
+	\includegraphics[width=\textwidth]{Figures/WebImages/MVCPattern}\\
+	\caption{The Model View Controller Pattern}
 	\label{fig:MVCPattern}
 \end{figure}
-The \texttt{DriveIT Web Client} uses the "Model View Controller" architectural pattern, which is making a seperation of the business logic (model) and the input control (controller) from the display logic (view).
+The \texttt{DriveIT Web Client} uses the \textit{Model View Controller}\footnote{\url{http://www.w3schools.com/aspnet/mvc_intro.asp}} (henceforth \textit{MVC}) architectural pattern, which is making a separation of the business logic, the \textit{Model}, and the input control, the \textit{Controller}, from the display logic, \textit{View}.
 
 The model is the part of the application that wil be handling all the logic for the application data. The models are being used to store data from the dabatase.
 The view is the part of the application that will be handling the representation of the data. Most often, this data will be given by the model.
