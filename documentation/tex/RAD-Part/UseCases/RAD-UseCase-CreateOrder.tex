@@ -1,4 +1,4 @@
-\subsubsection{UC-1 : Sell a used car to a customer}
+\subsubsection{UC-1 : CreateSale}
 \label{create-order-use-case}
 \HRule \\[0.4cm]
 % Description
@@ -11,27 +11,33 @@
 \textbf{Preconditions:} 
 \begin{itemize}
     \item The \texttt{Customer} and the \texttt{Employee} has agreed upon a deal regarding the purchase of a specific car.
-    \item The \texttt{Employee} has the \texttt{Windows Client} available with an Internet connection.
+    \item The \texttt{Employee} has the \texttt{DriveIT Windows Client} available with an Internet connection.
 \end{itemize}
 \HRule \\[0.4cm]
 % Postconditions
-\textbf{Postcondition:}
+\textbf{Postconditions:}
 \begin{itemize}
     \item A \texttt{Sale} has been successfully created and is persisted in the database.
-    \item The \texttt{Web Client} now shows that the car is sold, but leaves it available to view in the system for another five days.
+    \item The \texttt{DriveIT Web Client} now shows that the car is sold, but leaves it available to view in the system for another week.
 \end{itemize}
 \HRule \\[0.4cm]
 % Main success scenarios
 \textbf{Main success scenario:}
 \begin{enumerate}
-    \item The \texttt{Employee} opens the `Sales' window.
-    \item The \texttt{Employee} presses the `Create' button and selects the \texttt{Car}, \texttt{Customer}, and the agreed upon \texttt{Price}.
-    \item If the \texttt{Customer} does not already exist in the system, the \texttt{Employee} creates a profile for the  \texttt{Customer}.
-    \item When all the requires fields to make a valid \texttt{Sale} is filled, the \texttt{Employee} clicks the `Create Sale' button.
+    \item The \texttt{Employee} opens the 'Sales' view.
+   
+    \item The \texttt{Employee} presses the 'Create' button and selects the \texttt{Car}, \texttt{Customer}, and fills in the \texttt{Price} agreed upon.
+    \item When all the requires fields to make a valid \texttt{Sale} is filled, the \texttt{Employee} clicks the 'Create Sale' button.
 \end{enumerate}
+\HRule \\[0.4cm]
+\textbf{Exception Cases:}
+\begin{itemize}
+	\item If the \texttt{Customer} does not already exist in the system, then the \texttt{Employee} performs the use case \texttt{"Create Customer"}.
+\end{itemize}
 \HRule \\[0.4cm]
 % Frequency
 \textbf{Frequency:}
 Daily \\
 \HRule \\[0.4cm]
+
 
