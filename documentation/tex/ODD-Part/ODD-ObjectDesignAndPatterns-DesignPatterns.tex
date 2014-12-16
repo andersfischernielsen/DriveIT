@@ -25,15 +25,15 @@ This implementation provides the \texttt{DriveIT Windows Client} with an easy wa
 	\caption{The Model View Controller Pattern}
 	\label{fig:MVCPattern}
 \end{figure}
-The \texttt{DriveIT Web Client} uses the \textit{Model View Controller}\footnote{\url{http://msdn.microsoft.com/en-us/library/dd381412}} (henceforth \textit{MVC}) architectural pattern, which is making a separation of the business logic, the \textit{Model}, and the input control, the \textit{Controller}, from the display logic, \textit{View}.
+The \texttt{DriveIT Web Client} uses the \textit{Model View Controller}\footnote{\url{http://msdn.microsoft.com/en-us/library/dd381412}} architectural pattern (henceforth \textit{MVC}), which separates the business logic, called \textit{Model}, and the input control, called \textit{Controller}, from the display logic, called \textit{View}.
 
-The model is the part of the application that wil be handling all the logic for the application data. The models are being used to store data from the dabatase.
-The view is the part of the application that will be handling the representation of the data. Most often, this data will be given by the model.
-The controller is the part of the application that will be handling the user interaction with the \texttt{DriveIT Web Client}. The controllers reads the user input and updates the model's state.
+The \textit{Model} is the part of the application that will be handling the logic for the application data. The \textit{Model}s are being used to store data from the database.
+The \textit{View} is the part of the application that will be handling the representation of the data. Mostly this data will be given by the \textit{Model}.
+The \textit{Controller} is the part of the application that will be handling the user interaction with the \texttt{DriveIT Web Client}. The \textit{Controller}s read the user input from the \textit{View}s and updates the state of the \textit{Model}.
 
-The MVC pattern allows for seperation of the model, view and the controller classes, such that their individual purposes are clearly distinct from each other. This means that different developers are able to work on each of the individual parts of the MVC pattern, E.g we are able to work on the view without depending on the business logic (model) or the input (controller). By making this distinction between different parts of the MVC pattern, it also makes it easier to test our \texttt{DriveIT Web Client} application, and remain a good data-structure throughout the development of our Web Client.
+The \textit{MVC} pattern allows for separation of the \textit{Model}, \textit{View}, and \textit{Controller} classes, such that their individual purposes are clearly distinct from each other. This means that different developers are able to work on each of the individual parts of the \textit{MVC} pattern, e.g we are able to work on the \textit{View} without depending on the business logic or the input.\\
 
-\todo{Write more specific about how we have implemented it in our system.}
+By making this distinction between different parts of the \textit{MVC} pattern, it is easier to test the \texttt{DriveIT Web Client}, and retain a good data structure throughout the development of the \texttt{DriveIT Web Client}.
 
 \subsection{Façade Pattern}
 The facade design pattern is used several times in the \texttt{DriveIT System}.
