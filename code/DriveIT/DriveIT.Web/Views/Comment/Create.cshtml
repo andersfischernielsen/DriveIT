@@ -1,5 +1,9 @@
 ﻿@model DriveIT.Models.CommentDto
 
+@{
+    ViewBag.Title = "Create Comment";
+}
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
