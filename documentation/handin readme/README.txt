@@ -49,6 +49,8 @@ compiled.
 Compiling the DriveIT Windows Client in Debug Mode will make the DriveIT Windows 
 Client run on a database hosted locally. 
 
+The login for the DriveIT Windows Client is: awis@itu.dk with the password: 4dmin_Password
+
 Compiling the DriveIT Windows Client in Release Mode will make the DriveIT Windows 
 Client run on the production database hosted on Microsoft Azure (the same on that 
 the .exe is running on).

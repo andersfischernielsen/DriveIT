@@ -13,6 +13,7 @@ Windows Client
 ==============
 - Included in this .zip file is the compiled binary for the DriveIT Windows Client. 
 - Running “DriveIT.WindowsClient.exe” will launch the client. 
+- The login for the DriveIT Windows Client is: **awis@itu.dk** with the password: **4dmin_Password**.
 
 Compiling Yourself
 ==============
