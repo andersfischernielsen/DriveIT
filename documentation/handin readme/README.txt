@@ -1,4 +1,4 @@
-﻿
+
 DRIVEIT SYSTEM
 
 ==============
@@ -30,7 +30,7 @@ WINDOWS CLIENT
 
 Included in this .zip file is the compiled binary for the DriveIT Windows Client. 
 
-Running “DriveIT.exe” will launch the client. 
+Running “DriveIT.WindowsClient.exe” will launch the client. 
 
 
 
@@ -41,7 +41,7 @@ COMPILING YOURSELF
 If you wish to compile the either client yourself, the complete source code for the 
 entire DriveIT system has been attached as well. 
 Double clicking on “DriveIT.sln” will open the solution in Visual Studio, where the 
-DriveIT Windows Client and DriveIT Web Client can be set as Startup Project and 
+DriveIT Windows Client and DriveIT Web can be set as the Startup Project and 
 compiled.
 
 
