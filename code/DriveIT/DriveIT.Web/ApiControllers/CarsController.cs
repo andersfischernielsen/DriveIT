@@ -68,7 +68,7 @@ namespace DriveIT.Web.ApiControllers
         }
 
         /// <summary>
-        /// Returns CarDto's of the Cars which has not been sold, or has been sold within the last 5 days.
+        /// Returns CarDto's of the Cars which has not been sold, or has been sold within the last 7 days.
         /// </summary>
         /// <returns>A Task resulting in a List of CarDto's</returns>
         [Route("api/cars/webcarlist")]
@@ -80,8 +80,8 @@ namespace DriveIT.Web.ApiControllers
             foreach (var car in cars)
             {
                 var sale = await _repo.GetSaleByCarId(car.Id);
-                // Check if car has been sold, and if it has, if it is less than 5 days ago.
-                if (sale == null || DateTime.Now.Subtract(sale.DateOfSale).Days < 5)
+                // Check if car has been sold, and if it has, if it is less than 7 days ago.
+                if (sale == null || DateTime.Now.Subtract(sale.DateOfSale).Days < 7)
                 {
                     car.Sold = sale != null;
                     dtos.Add(car.ToDto());

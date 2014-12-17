@@ -1,23 +1,21 @@
 \section{Object Design}
-\subsection{DriveIT Windows Client Controllers}
-\subsubsection{Reuse and Encapsulation}
+\subsection{Reuse}
+\subsubsection{DriveIT Windows Client Controllers}
 To perform the create, read, update, and delete functionality the \texttt{DriveIT Windows Client} uses a number of controllers. These controllers each handle the different kinds of entities which the client supports. By reusing code the client becomes easier to test, maintain and less error prone. The class \texttt{DriveITWebAPI} is created with this purpose in mind. This class encapsulate all HTTP request code to contact the \texttt{DriveIT Web API} and uses generics to allow all of the controllers to reuse the methods. 
 Therefore all the entity controllers know nothing of the \texttt{DriveIT Web API} or the code to contact it, and with a few adjustments the static \texttt{DriveITWebAPI} class could be reused in any other project involving a REST based web API.
 
-\subsection{Persistent Storage}
-
-\subsubsection{Reuse}
+\subsubsection{Persistent Storage}
 The \texttt{EntitiyStorage} class is very specific for the \texttt{DriveIT System} since it only deals with creating, reading, updating and deleting \texttt{DriveIT} entities. It therefore does not provide any major re usability for other purposes than this. 
 
 Adding re-usability could be accomplished by using generics, supported by the C$\sharp$ language, which would allow the system to create, read, update and delete any input entity, provided it was supported by the given \texttt{DbContext}. This would allow for greater extensibility and easier code maintenance.
 
-\subsubsection{Inheritance}
-The \texttt{DriveITContext} extends an \texttt{IdentityDbContext} which provides the built in functionality for handling user logins and different user roles. This is used for the sign in and access control functionality of the \texttt{DriveIT System}.
-The \texttt{IdentityDbContext} in turn extends a \texttt{DbContext} which enables \texttt{Entity Framework} to save the user entities, along with every other \texttt{DriveIT} entity, in the underlying Microsoft SQL database.
+\subsubsection{CarQuery}
+The \texttt{JSONWrapper} of the \texttt{CarQuery} subsystem is written using generics, which enables using any object and URL as input for getting and deserialising a serialised JSON object, provided that the properties of the input object match the received JSON data.
+The class is only used by the \texttt{CarQuery} subsystem, though. This functionality could be used by other classes in the system for communicating with e.g. the \texttt{DriveIT Web API}.
+Having a generic method for dealing with filling out properties instead of a specific \texttt{Car}-only method would also have benefited reuse of the system.
 
-In the \texttt{Persistent Storage} subsystem we have two kinds of concrete user types. The \texttt{Customer} and the \texttt{Employee}. Both of these inherits from an abstract \texttt{DriveITUser} which inherits from \texttt{IdentityUser} which is a base for users in ASP.NET Identity. \texttt{DriveITUser} adds a few common properties to the user-model, which means that both \texttt{Customer}s and \texttt{Employee}s have first and last names.
-
-\subsubsection{Encapsulation}
+\subsection{Encapsulation}
+\subsubsection{Persistent Storage}
 Encapsulation has been of high priority during development of the \texttt{DriveIT System}. 
 
 Keeping functionality of different subsystems encapsulated has helped debugging and refactoring. Extensibility is also made easier in the future.
@@ -28,20 +26,19 @@ A design choice in implementing the methods were to keep a \texttt{DriveITContex
 
 Updating entities requires copying all attributes of the entity which is done in separate methods without side effects.
 
-\subsection{CarQuery}
-
-\subsubsection{Reuse}
-The \texttt{JSONWrapper} of the \texttt{CarQuery} subsystem is written using generics, which enables using any object and URL as input for getting and deserialising a serialised JSON object, provided that the properties of the input object match the received JSON data.
-The class is only used by the \texttt{CarQuery} subsystem, though. This functionality could be used by other classes in the system for communicating with e.g. the \texttt{DriveIT Web API}.
-Having a generic method for dealing with filling out properties instead of a specific \texttt{Car}-only method would also have benefited reuse of the system.
-
-\subsubsection{Encapsulation}
+\subsubsection{CarQuery}
 The functionality of the \texttt{CarQuery} subsystem is implemented using few static classes with few methods dealing with small tasks. The classes have been made static due to the fact that their functionality has a "use and forget"-feel to them. 
 
-The subsystem is used in short periods of time and only has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} subsystem is therefore made up of static functionality.
+The subsystem is used in short periods of time and only has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} subsystem is therefore made up of static functionality, since no data needs to be set up before using the sub system ie. by using a constructor etc. 
 
-\subsection{Web API}
-\subsubsection{Encapsulation}
-Because the \texttt{DriveIT Web API} is supposed to provide an external REST-interface, it has been important not to expose the internal types of the \texttt{Persisten Storage} subsystem. Due to this only \textit{DTO}'s are exchanged between the \texttt{DriveIT Web API} and the clients.\\
+\subsubsection{Web API}
+Because the \texttt{DriveIT Web API} is supposed to provide an external REST-interface, it has been important not to expose the internal types of the \texttt{Persistent Storage} subsystem. Due to this only \textit{DTO}'s are exchanged between the \texttt{DriveIT Web API} and the clients.\\
 
 This has also made it possible to change details about the storage without having to change the \textit{DTO} and therefore functionality in the clients. An example is the \texttt{Car} entity. In the first draft of the database the property \texttt{Sold} was maintained by the \texttt{Employee}s of the car dealership using \texttt{DriveIT}. In a later revision it was decided to calculate the value from data in the database. If a \texttt{Sale} entity references the \texttt{Car}, it is sold. This could happen without breaking the functionality in i.e. the \texttt{DriveIT Windows Client}.
+
+\subsection{Inheritance}
+\subsubsection{Persistent Storage}
+The \texttt{DriveITContext} extends an \texttt{IdentityDbContext} which provides the built in functionality for handling user logins and different user roles. This is used for the sign in and access control functionality of the \texttt{DriveIT System}.
+The \texttt{IdentityDbContext} in turn extends a \texttt{DbContext} which enables \texttt{Entity Framework} to save the user entities, along with every other \texttt{DriveIT} entity, in the underlying Microsoft SQL database.
+
+In the \texttt{Persistent Storage} subsystem we have two kinds of concrete user types. The \texttt{Customer} and the \texttt{Employee}. Both of these inherits from an abstract \texttt{DriveITUser} which inherits from \texttt{IdentityUser} which is a base for users in ASP.NET Identity. \texttt{DriveITUser} adds a few common properties to the user-model, which means that both \texttt{Customer}s and \texttt{Employee}s have first and last names.

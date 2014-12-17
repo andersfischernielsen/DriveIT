@@ -36,14 +36,14 @@ The \textit{MVC} pattern allows for separation of the \textit{Model}, \textit{Vi
 By making this distinction between different parts of the \textit{MVC} pattern, it is easier to test the \texttt{DriveIT Web Client}, and retain a good data structure throughout the development of the \texttt{DriveIT Web Client}.
 
 \subsection{Façade Pattern}
-The facade design pattern is used several times in the \texttt{DriveIT System}.
-The \texttt{Persistent Storage} sub system uses a facade pattern do hide the internal sub systems that accomplish the functionality defined in the \texttt{IPersistentStorage} interface.
+The \textit{Façade design pattern}\footnote{\url{http://en.wikipedia.org/wiki/Facade_pattern}} is used several times in the \texttt{DriveIT System}.
+The \texttt{Persistent Storage} subsystem uses a façade pattern to hide the internal subsystems that accomplish the functionality defined in the \texttt{IPersistentStorage} interface.
 
-The \texttt{DriveITContext} defined in the sub system is used by an implementer, \texttt{EntityStorage}, on the interface, but is hidden for users of the interface. 
+The \texttt{DriveITContext} in the subsystem is used by the implementer of the \texttt{IPersistentStorage} interface, \texttt{EntityStorage}, but is hidden for users of the interface.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{Figures/FacadePatternPersistentStorage}\\
+	\includegraphics[width=\textwidth]{Figures/FacadePatternPersistentStorage}\\
 	% place the figure in the Figures folder (located with the main file)
 	% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{The Facade Pattern of IPersistentStorage.}
@@ -53,7 +53,7 @@ The \texttt{DriveITContext} defined in the sub system is used by an implementer,
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{Figures/FacadeKindOfPattern}\\
+	\includegraphics[width=\textwidth]{Figures/FacadeKindOfPattern}\\
 	% place the figure in the Figures folder (located with the main file)
 	% you need to fix the scale a few times to get it right, but latex does not compress so one can always zoom in to see details.
 	\caption{The Facade Pattern Used by the \texttt{DriveIT Web API}.}
