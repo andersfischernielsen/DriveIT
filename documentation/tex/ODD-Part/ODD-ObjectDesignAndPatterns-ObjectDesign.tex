@@ -29,7 +29,7 @@ Updating entities requires copying all attributes of the entity which is done in
 \subsubsection{CarQuery}
 The functionality of the \texttt{CarQuery} subsystem is implemented using few static classes with few methods dealing with small tasks. The classes have been made static due to the fact that their functionality has a "use and forget"-feel to them. 
 
-The subsystem is used in short periods of time and only has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} subsystem is therefore made up of static functionality.
+The subsystem is used in short periods of time and only has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} subsystem is therefore made up of static functionality, since no data needs to be set up before using the sub system ie. by using a constructor etc. 
 
 \subsubsection{Web API}
 Because the \texttt{DriveIT Web API} is supposed to provide an external REST-interface, it has been important not to expose the internal types of the \texttt{Persistent Storage} subsystem. Due to this only \textit{DTO}'s are exchanged between the \texttt{DriveIT Web API} and the clients.\\
