@@ -6,9 +6,16 @@ Furthermore the \texttt{DriveIT Web API} must run constantly to allow the client
 
 \subsection{Subsystem Boundary Condition}
 \subsubsection{DriveIT Web Client}
+On initialisation of the \texttt{DriveIT Web Client} all controllers are configured to map to certain routes. Furthermore \textit{OWIN}\footnote{\url{http://owin.org}} configured for the \texttt{DriveIT Web Client}. This is all done automatically by \textit{ASP.NET} and \textit{OWIN}. 
+
+Every time a page is loaded the data shown in the view is read from the \texttt{DriveIT Web API}, thereby synchronising data.
+
+Exceptions which are not caught and handled, will display a generic status message, but will not crash the server.
+
+No actions are currently performed at shutdown.
 
 \subsubsection{DriveIT Windows Client}
-On initialisation of the \texttt{Employee} must sign in with valid account in the \texttt{LoginView}. This initialises the static class \texttt{DriveITWebAPI} such that an connection to the \texttt{DriveIT Web API} is can be established when needed.
+On initialisation of the \texttt{DriveIT Windows Client} an \texttt{Employee} must sign in with valid account in the \texttt{LoginView}. This initialises the static class \texttt{DriveITWebAPI} such that an connection to the \texttt{DriveIT Web API} is can be established when needed.
 
 To synchronise with the \texttt{DriveIT Web API}, the \texttt{DriveIT Windows Client} updates data each time a list-\texttt{View} changes.
 
