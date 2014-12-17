@@ -356,7 +356,7 @@ namespace DriveIT.EntityFramework.Migrations
                     CustomerId = "andersfischern@me.com",
                     EmployeeId = "mlin@itu.dk",
                     Price = 90000,
-                    DateOfSale = DateTime.Now // Less than 5 days ago (will appear on web)
+                    DateOfSale = DateTime.Now // Less than 7 days ago (will appear on web)
                 },
                 new Sale
                 {
@@ -365,7 +365,7 @@ namespace DriveIT.EntityFramework.Migrations
                     CustomerId = "christopher.n.blundell@gmail.com",
                     EmployeeId = "ppma@itu.dk",
                     Price = 80000,
-                    DateOfSale = DateTime.Now.Subtract(TimeSpan.FromDays(5)) // More than 5 days ago (shouldn't appear on web at time of deployment!)
+                    DateOfSale = DateTime.Now.Subtract(TimeSpan.FromDays(8)) // More than 7 days ago (shouldn't appear on web at time of deployment!)
                 },
             };
 
