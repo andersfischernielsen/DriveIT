@@ -1,16 +1,24 @@
 \section{Boundary Conditions}
+\subsection{Service Boundary Condition}
+For the \texttt{DriveIT Web Client} and the \texttt{DriveIT Windows Client} to be initiated the \texttt{DriveIT Web API} must have been initialised otherwise all functionality will be unavailable. 
 
-\textbf{Boundary Conditions for DriveIT}\\\\
-\begin{tabular}{ | p{4cm} | p{10cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Boundary Conditions:} \\
-  \hline
-    StartSystem & The DriveITSystem invokes the CheckDataIntegrity use case on start-up, and depending on the state of connection  will load from the persistent storage.\\
-    \hline
-    ExitSystem & The DriveITSystem checks for any changes being committed at the time of termination, and depending on the internet connection, will confirm saves to the respective storage current. \\
-    \hline
-    CheckDataIntegrity & The DriveITSystem checks the integrity of the persistent data. This includes invoking tools providing by the database system to re-index the tables. \\
-    \hline
-    ExceptionHandling & The DriveITSystem handles exceptions by displaying a error message to the user. This is displayed in a status label, mentioning which action went wrong.\\
-    \hline 
-\end{tabular}
+Furthermore the \texttt{DriveIT Web API} must run constantly to allow the clients to persist and retrieve data.
+
+\subsection{Subsystem Boundary Condition}
+\subsubsection{DriveIT Web Client}
+On initialisation of the \texttt{DriveIT Web Client} all controllers are configured to map to certain routes. Furthermore \textit{OWIN}\footnote{\url{http://owin.org}} configured for the \texttt{DriveIT Web Client}. This is all done automatically by \textit{ASP.NET} and \textit{OWIN}. 
+
+Every time a page is loaded the data shown in the view is read from the \texttt{DriveIT Web API}, thereby synchronising data.
+
+Exceptions which are not caught and handled, will display a generic status message, but will not crash the server.
+
+No actions are currently performed at shutdown.
+
+\subsubsection{DriveIT Windows Client}
+On initialisation of the \texttt{DriveIT Windows Client} an \texttt{Employee} must sign in with valid account in the \texttt{LoginView}. This initialises the static class \texttt{DriveITWebAPI} such that an connection to the \texttt{DriveIT Web API} is can be established when needed.
+
+To synchronise with the \texttt{DriveIT Web API}, the \texttt{DriveIT Windows Client} updates data each time a list-\texttt{View} changes.
+
+The \texttt{DriveIT Windows Client} handles exceptions by displaying a error message to the user in the \texttt{View} where the error originated. This is displayed in a status label, mentioning which action went wrong.
+
+On shutdown the objects of the \texttt{DriveIT Windows Client} are disposed by the \textit{CLR}\footnote{\url{http://msdn.microsoft.com/en-us/library/8bs2ecf4\%28v=vs.110\%29.aspx}}. No further actions are performed.
