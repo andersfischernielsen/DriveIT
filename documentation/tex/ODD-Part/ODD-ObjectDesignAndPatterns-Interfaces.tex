@@ -1,11 +1,11 @@
 \section{Interfaces}
 
 \subsection{Persistent Storage}
-The \texttt{PersistentStorage} sub system provides an interface \texttt{IPersistenStorage}, which gives access to creating, reading, updating and deleting \texttt{DriveIT} entities. 
+The \texttt{PersistentStorage} subsystem provides an interface \texttt{IPersistentStorage}, which gives access to creating, reading, updating and deleting \texttt{DriveIT} entities. 
 
-\subsubsection{Implementers, Extenders \& Users}
-The implementor of \texttt{IPersistentStorage}, \texttt{EntityStorage}, uses an instance of DriveITContext to accomplish its tasks. The main purpose of the \texttt{DriveITContext} is to support the functionality of EntityStorage. Other implementers are free to support the functionality of the methods of the \texttt{IPersistenStorage} in other ways. 
+\subsubsection{Implementers, Extenders, and Users}
+The implementer of \texttt{IPersistentStorage}, \texttt{EntityStorage}, uses an instance of \texttt{DriveITContext} to accomplish its tasks. The main purpose of the \texttt{DriveITContext} is to support the functionality of \texttt{EntityStorage}. Other implementers are free to support the functionality of the methods of the \texttt{IPersistenStorage} in other ways. 
 
 \subsubsection{Visibility}
 Every method in the \texttt{IPersistentStorage} is public to users. The methods in the interface are expected to be implemented, and users of the interface should not expect otherwise.
-The \texttt{EntityStorage} implementation has few private methods exclusively for internal use, since their purpose is very specific to the functionality of the implementation.
+The \texttt{EntityStorage} implementation has few private methods exclusively for internal use, since their purpose is very specific to the functionality of the implementation.\todo{maybe add something more code specific. I need the feeling that a reader will understand our system after reading the report, and not just some generic solution to the requirements}

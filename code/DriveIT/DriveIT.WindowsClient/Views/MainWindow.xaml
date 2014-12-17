@@ -673,7 +673,7 @@
                                 </i:Interaction.Triggers>
                                 <xcdg:DataGridControl.Columns>
                                     <xcdg:Column IsMainColumn="True" FieldName="CarId" Title="CarId"  ReadOnly="True" Width="*"/>
-                                    <xcdg:Column FieldName="CarMake" Title="Make"  ReadOnly="True" Width="*"/>
+                                    <xcdg:Column FieldName="CarMake" Title="Manufacturer"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="CarModel" Title="Model" ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Fuel"  Title="Fuel"  ReadOnly="True" Width="*"/>
                                     <xcdg:Column FieldName="Status" Title="Status"  ReadOnly="True" Width="*"/>

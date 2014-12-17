@@ -1,5 +1,5 @@
 \section{Subsystem Decomposition}
-The \texttt{DriveIT System} can be split into five main sub systems - the \texttt{WindowsClient}, \texttt{CarQuery}, \texttt{Web}, \texttt{WebAPI} and \texttt{EntityFramework} sub systems. 
+The \texttt{DriveIT System} can be split into five main subsystems - the \texttt{DriveIT Windows Client}, \texttt{CarQuery}, \texttt{DriveIT Web Client}, \texttt{DriveIT Web API}, and \texttt{Persistent Storage} subsystems. 
 These subsystems are described below. 
 
 \subsection{The DriveIT System}
@@ -9,50 +9,69 @@ These subsystems are described below.
 	\caption{Subsystems of the \texttt{DriveIT System}.}
 \end{figure}
 
-\subsection{Persistence subsystem (EntityFramework)} 
-This sub system manages storing and retrieving Entity objects using the Entity Framework and its serialisation functionality.\\
-The serialised Entities are stored in a Microsoft SQL database which is hosted on Microsoft Azure. The sub system provides the \texttt{DriveIT Web API} (mentioned below) deserialised Entities, which uses these to provide the backend for other sub systems using the API.\\
-The subsystem supports retrieving all Entities of a given type, a specific Entity using its unique ID and retrieving an Entity on its relation to other Entities. 
+\subsection{Persistent Storage Subsystem} 
+The Persistent Storage Subsystem manages storing and retrieving entity objects using the \textit{Entity Framework} and its serialisation functionality.\\
+The serialised entities are stored in a \textit{Microsoft SQL Database} which is hosted on \textit{Microsoft Azure}. The subsystem provides the \texttt{DriveIT Web API} with deserialised entities, which uses the entities to provide the backend for other subsystems.\\
+The subsystem supports retrieving all Entities of a given type, a specific entity using its unique ID, and retrieving an entity on its relation to other entities.
+The Persistent Storage Subsystem consists of two classes and an interface (see figure \ref{fig:entityframeworksubsystem}). \texttt{EntityStorage} is the repository working on top of the \textit{Entity Framework} database layer, \texttt{DriveITContext}, providing the \texttt{IPersistentStorage} interface.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Figures/EntityFrameworkSubsystemDecomposition}
-	\caption{Subsystems of the EntityFramework Subsystem.}
+	\caption{Classes in the Persistent Storage Subsystem.}
+	\label{fig:entityframeworksubsystem}
 \end{figure}
 
-\subsection{Web API} 
-\todo{maybe more should as this are still some kind of analysis.}
-The \texttt{DriveIT Web API} provides public communication with the persistence subsystem and also handles authorisation of users of the sub system.\\
-The subsystem, which is built on ASP.NET Web API, provides access to the persistence sub system using specific URL routes and enforces authorisation so unauthorized users, and users with different user roles, only have limited access to the data of the \texttt{DriveIT System}.\\ 
-Every table in the persistence module must therefore be supported by the Web API, although not every table is available to every user.\\
-The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JSON}\footnote{\url{http://en.wikipedia.org/wiki/JSON}} or \texttt{XML}\footnote{\url{http://en.wikipedia.org/wiki/XML}} and transferring these via a \texttt{REST} interface accessible using \texttt{HTTP}. \\
-These modules are built into the ASP.NET Web API framework, and are not handled in our code.\\
+\subsection{Web API}
+The \texttt{DriveIT Web API}, which is built on \textit{ASP.NET Web API}\footnote{\url{http://www.asp.net/web-api}}, provides public communication with the \texttt{Persistent Storage} subsystem. This is done using specific URL routes. Furthermore it enforces authorisation so unauthorized users, and users with different user roles, only have limited access to the data of the \texttt{DriveIT System}.\\ 
+Every table in the \texttt{Persistent Storage} subsystem must therefore be supported by the web API, although not every table is available to every user.\\
+The \texttt{DriveIT Web API} is comprised of a series of modules for serialising the Model Entities into \texttt{JSON}\footnote{\url{http://en.wikipedia.org/wiki/JSON}} or \texttt{XML}\footnote{\url{http://en.wikipedia.org/wiki/XML}} and transferring these via a \texttt{REST} interface accessible using \texttt{HTTP}.\\
+These modules are built into \textit{ASP.NET Web API}, and are not handled in our code.\\
 
-The Web API consists of several controllers which uses a static class to translate \texttt{DTO's}\footnote{\url{http://en.wikipedia.org/wiki/Data_transfer_object}} into entities and vice versa. It is also the controllers that checks for special cases, e.g. when a customer wants to update or delete a comment, and it is not allowed to change other peoples comments.
-
+The Web API consists of several controllers which uses a static class to translate \texttt{DTO's}\footnote{\url{http://en.wikipedia.org/wiki/Data_transfer_object}} into entities and vice versa. It is also the controllers that check for special cases, e.g. when a customer wants to update or delete a comment, and it is not allowed to change other \texttt{Customer}s' comments.
 
 \subsection{Windows Client} 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Figures/WindowsClientCodeMap}
+	\includegraphics[width=\textwidth]{Figures/WindowsClientCodeMapProper}
 	\caption{The Code Map of the Windows Client}
 	\label{fig:WindowsClientCodeMap}
 \end{figure}
-The Windows Client is used by the employees, to manipulate data in the system. Depending on their role Employee or Administrator They can Create, Read, Update and Delete all entities except for creating \texttt{ContactRequest}, which only can be created through the \texttt{DriveIT Web Client}.\\
-The employee logs into the client with his or hers username and password, and can then via an user interface manipulate data in the system.\\
-The subsystem is made out of three main systems: The DriveIT.Views, the DriveIT.ViewModels and the DriveIT.Controllers.\\
-The DriveIT.Views contains the user interface written in with Microsofts WPF framework. The DriveIT.ViewModels contains the ViewModels which holds data which is bound to the Views following Microsoft's \emph{Model View ViewModel} architectural pattern. Viewmodels for entities are often created in the form EntityListViewModel and EntityViewModel, but a few extra viewmodels exists for extra views such as the LoginViewModel and the PasswordCreationViewModel.\\
-The DriveIT.Controllers section contains the controllers which transforms data and sends and receives HTTP Requests to/from the \texttt{DriveIT Web API}. Images are uploaded to \emph{Azures Blob Storage} and therefore does not contact the API. Another controller to notice is the \texttt{GravatarController} which takes email strings and converts it to a link to that emails Gravatar profile url.
+The \texttt{DriveIT Windows Client} is used by the \texttt{Employee}s, to manipulate data in the \texttt{DriveIT System}. Depending on their role, \texttt{Employee} or \texttt{Administrator}, they can \textit{CRUD} all entities except for creating \texttt{ContactRequest}s.\\
+
+The \texttt{Employee} signs in to the client with his or her email and password, and can then use the user interface to manipulate data in the \texttt{DriveIT System}.
+
+The subsystem is made out of three main components: The \texttt{Views}, the \texttt{ViewModels} and the \texttt{Controllers}.
+
+The \texttt{Views} package contains the user interface written in Windows Presentation Foundation (henceforth WPF). The \texttt{ViewModels} package contains the \texttt{ViewModel}s which hold data bound to the \texttt{View}s following Microsoft's \textit{Model View ViewModel} architectural pattern\footnote{\url{http://en.wikipedia.org/wiki/Model_View_ViewModel}}.
+
+\texttt{ViewModel}s for entities are often created in the form of a \texttt{EntityListViewModel} and a \texttt{EntityViewModel}, but a few extra \texttt{ViewModel}s exists for additional \texttt{View}s such as the \texttt{LoginViewModel} and the \texttt{PasswordCreationViewModel}.
+
+The \texttt{Controllers} package contains the \texttt{Controller}s which transforms data and sends and receives HTTP requests to and from the \texttt{DriveIT Web API}. Images are uploaded to \textit{Azure Blob Storage}. To provide \texttt{Employee}s and \texttt{Customer}s with profile pictures, a \texttt{GravatarController} exists to convert email strings into \textit{Gravatar} profile URLs.
 
 \subsection{Web Client}
-The \texttt{DriveIT Web Client} is accessable through the internet, whereas it is being used by non-registered users and customers, who already have registered themselves through the web client and logged on. The web client is being used to search for cars, that are being sold by the company using the \texttt{DriveIT System}, CRUD comments (if the customer is logged in, else it's only read), CRD contact requests, read orders and read employees (contact tab). A customer is also able to create, read and update information regarding their own user account.\\
-The web client is based on the ASP.NET MVC framework, that is implementing the MVC design pattern. The subsystem is made of three components: Models, Views and Controllers. The views contains the user interface and is written in cshtml, which is a mix of C$\sharp$ and HTML code. The models contains lists of database records and the controllers are responsible for giving the models, filled with database records, to the views, for them to display the data in the model.
+The \texttt{DriveIT Web Client} is accessible through the Internet, where it is being used by non-registered and registered \texttt{Customer}s. The \texttt{DriveIT Web Client} is being used to search for \texttt{Car}s, that are up for sale in the \texttt{DriveIT System}.
+
+The \texttt{DriveIT Web Client} allows the \texttt{Customer} to \textit{CRUD} \texttt{Comment}s if signed in. Otherwise \texttt{Comment}s can only be read.
+
+It is also possible to \textit{create}, \textit{read} and \textit{delete} \texttt{ContactRequest}s and to read \texttt{Order}s and \texttt{Employee}s. A \texttt{Customer} is also able to \textit{read} and \textit{update} information regarding their own account.
+
+It is possible to create an account on the web page with a non registered email.
+
+The \texttt{DriveIT Web Client} is based on the \textit{ASP.NET MVC} framework\footnote{\url{http://www.asp.net/mvc}}, that is implementing the \textit{Model View Controller} design pattern (see section \ref{sec:MVC}).
+
+\todo{rewrite}The subsystem is made of three components: Models, Views and Controllers. The views contains the user interface and is written in cshtml, which is a mix of C$\sharp$ and HTML code. The models contains lists of database records and the controllers are responsible for giving the models, filled with database records, to the views, for them to display the data in the model.
 
 \subsection{CarQuery} 
-This subsystem is a collection of classes that enable the rest of the \texttt{DriveIT System} to fill out missing information about cars from the CarQuery API.\\
-The sub system is used by an employee when creating a new car. The subsystem mainly consists of a \texttt{JSON} deserialiser that communicates with the \texttt{CarQuery REST API} and another class that receives a Car object and fills out the missing attributes using the deserialised JSON data. \\
-The employee fills out the information he/she knows about the car and the system then narrows its information search against the \texttt{CarQuery REST API}.
+This subsystem is a collection of classes that enable the the \texttt{DriveIT Windows Client} to fill out missing information about cars, using the \textit{CarQuery API}.\\
+The subsystem is used by an \texttt{Employee} when creating or updating a \texttt{Car}. The subsystem consists of a \textit{JSON} deserialiser that communicates with the \textit{CarQuery API} and another class that receives a \texttt{Car} object and fills out the missing attributes using the deserialised \textit{JSON} data.
+
+An \texttt{Employee} fills out the known information about the \texttt{Car} and the \texttt{CarQuery} subsystem then creates its query on the \textit{CarQuery API}.
+
+Only the \texttt{CarQuery} static class is publicly accessible. As seen in figure \ref{fig:carquerysubsystem} it uses a \texttt{JSONWrapper} to receive data from the \textit{CarQuery API} and deserialises it into a \texttt{Trims} object which is an array of \texttt{Trim} objects holding the actual \texttt{Car} data.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Figures/CarQuerySubsystemDecomposition}\\
-	\caption{Subsystems of the CarQuery Subsystem.}
+	\caption{Classes of the \texttt{CarQuery} Subsystem.}
+	\label{fig:carquerysubsystem}
 \end{figure}
