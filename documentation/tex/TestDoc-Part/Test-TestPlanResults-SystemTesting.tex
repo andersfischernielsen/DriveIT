@@ -16,8 +16,10 @@ The \texttt{DriveIT Web Client} and \texttt{DriveIT Windows Client} have been te
 
 At the end of development the near-finished \texttt{DriveIT System} was system tested by the developers. The developers sat down and opened a release version of the \texttt{DriveIT System}.
 
-Every requirement from the Requirement Analysis Document was tested to see whether the system fulfills the functionality specified.
-Minor errors were found and fixed, e.g. long image path strings would not be saved, and system tests were run again.\\
+Every requirement from the Requirement Analysis Document was tested to see whether the system fulfils the functionality specified.
+
+Minor errors were found and fixed, e.g. long image path strings would not be persisted, because of database limitations. After fixing this bug by only using \textit{GUID}s\footnote{\url{http://en.wikipedia.org/wiki/Globally_unique_identifier}} as file names, system tests were run again and passed successfully.\\
+
 When a use case was completed in an acceptable fashion the test was deemed as passed.
 
 \subsection{Requirements}
