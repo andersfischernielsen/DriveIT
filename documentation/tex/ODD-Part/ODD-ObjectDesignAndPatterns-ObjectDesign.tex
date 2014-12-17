@@ -36,6 +36,9 @@ Because the \texttt{DriveIT Web API} is supposed to provide an external REST-int
 
 This has also made it possible to change details about the storage without having to change the \textit{DTO} and therefore functionality in the clients. An example is the \texttt{Car} entity. In the first draft of the database the property \texttt{Sold} was maintained by the \texttt{Employee}s of the car dealership using \texttt{DriveIT}. In a later revision it was decided to calculate the value from data in the database. If a \texttt{Sale} entity references the \texttt{Car}, it is sold. This could happen without breaking the functionality in i.e. the \texttt{DriveIT Windows Client}.
 
+\subsubsection{Web Client}
+Initially the \texttt{DriveIT Web Client} was using the \texttt{DriveIT Web API} through \textit{HTTP}-requests. However, after some consideration it was clear that it did not make much sense not to use the controllers from the \texttt{DriveIT Web API} as controllers for the \texttt{DriveIT Web Client} as well. This was due to the fact that it is common to use \textit{ASP.NET MVC} projects as \textit{REST API}s for other systems to use. Since both the \texttt{Web API} and \texttt{Web Client} is to be deployed on \textit{Microsoft Azure} it makes the most sense to have the implementation of both in the same project.
+
 \subsection{Inheritance}
 \subsubsection{Persistent Storage}
 The \texttt{DriveITContext} extends an \texttt{IdentityDbContext} which provides the built in functionality for handling user logins and different user roles. This is used for the sign in and access control functionality of the \texttt{DriveIT System}.
