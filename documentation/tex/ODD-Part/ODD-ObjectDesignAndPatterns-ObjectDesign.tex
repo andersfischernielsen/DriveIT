@@ -15,11 +15,10 @@ The class is only used by the \texttt{CarQuery} subsystem, though. This function
 Having a generic method for dealing with filling out properties instead of a specific \texttt{Car}-only method would also have benefited reuse of the system.
 
 \subsection{Encapsulation}
-\subsubsection{Persistent Storage}
 Encapsulation has been of high priority during development of the \texttt{DriveIT System}. 
 
 Keeping functionality of different subsystems encapsulated has helped debugging and refactoring. Extensibility is also made easier in the future.
-
+\subsubsection{Persistent Storage}
 Encapsulation has been used in the \texttt{Persistent Storage} subsystem in methods dealing with retrieving, editing and deleting entities. Methods generally have few side effects and do not keep references to other objects after performing their task.
 
 A design choice in implementing the methods were to keep a \texttt{DriveITContext} in memory for a short amount of time. This ensures that the context fulfil its purpose in dealing with the entities where after it is disposed.
@@ -27,9 +26,9 @@ A design choice in implementing the methods were to keep a \texttt{DriveITContex
 Updating entities requires copying all attributes of the entity which is done in separate methods without side effects.
 
 \subsubsection{CarQuery}
-The functionality of the \texttt{CarQuery} subsystem is implemented using few static classes with few methods dealing with small tasks. The classes have been made static due to the fact that their functionality has a "use and forget"-feel to them. 
+The functionality of the \texttt{CarQuery} subsystem is implemented using few static classes with few methods dealing with small tasks. The classes have been made static due to the fact that no initialisation is required.
 
-The subsystem is used in short periods of time and only has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} subsystem is therefore made up of static functionality, since no data needs to be set up before using the sub system ie. by using a constructor etc. 
+The subsystem is used in short periods of time and has one purpose: getting \texttt{Car} data. Therefore no object needs to be kept in memory, data should just be deserialised and added to a \texttt{Car}. The entire \texttt{CarQuery} subsystem is therefore made up of static functionality, since no data needs to be set up before using the sub system i.e. by using a constructor.
 
 \subsubsection{Web API}
 Because the \texttt{DriveIT Web API} is supposed to provide an external REST-interface, it has been important not to expose the internal types of the \texttt{Persistent Storage} subsystem. Due to this only \textit{DTO}'s are exchanged between the \texttt{DriveIT Web API} and the clients.\\
@@ -37,7 +36,7 @@ Because the \texttt{DriveIT Web API} is supposed to provide an external REST-int
 This has also made it possible to change details about the storage without having to change the \textit{DTO} and therefore functionality in the clients. An example is the \texttt{Car} entity. In the first draft of the database the property \texttt{Sold} was maintained by the \texttt{Employee}s of the car dealership using \texttt{DriveIT}. In a later revision it was decided to calculate the value from data in the database. If a \texttt{Sale} entity references the \texttt{Car}, it is sold. This could happen without breaking the functionality in i.e. the \texttt{DriveIT Windows Client}.
 
 \subsubsection{Web Client}
-Initially the \texttt{DriveIT Web Client} was using the \texttt{DriveIT Web API} through \textit{HTTP}-requests. However, after some consideration it was clear that it did not make much sense not to use the controllers from the \texttt{DriveIT Web API} as controllers for the \texttt{DriveIT Web Client} as well. This was due to the fact that it is common to use \textit{ASP.NET MVC} projects as \textit{REST API}s for other systems to use. Since both the \texttt{Web API} and \texttt{Web Client} is to be deployed on \textit{Microsoft Azure} it makes the most sense to have the implementation of both in the same project.
+Initially the \texttt{DriveIT Web Client} was using the \texttt{DriveIT Web API} through \textit{HTTP}-requests. However, after some consideration it was clear that it did not make much sense, not to use the controllers from the \texttt{DriveIT Web API} as controllers for the \texttt{DriveIT Web Client} as well. This was due to the fact that it is common to use \textit{ASP.NET MVC} projects as \textit{REST API}s for other systems to use. Since both the \texttt{DriveIT Web API} and \texttt{DriveIT Web Client} is to be deployed on \textit{Microsoft Azure} it makes the most sense to have the implementation of both in the same project.
 
 \subsection{Inheritance}
 \subsubsection{Persistent Storage}
