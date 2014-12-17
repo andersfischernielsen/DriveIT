@@ -1,12 +1,13 @@
 \section{Integration Testing}
-When implementing a system which is based on having a separation of application and storage, integration testing is of utmost importance. In this system we have both done both automatic and manual integration testing. The \texttt{DriveIT Windows Client} has a full automatic integration testing of the CRUD functionalities for the entities \texttt{Car}, \texttt{ContactRequest}, \texttt{Employee}, \texttt{Customers} and \texttt{Sales}. The tests are not properly formed and could be improved in many ways, but the results can be used to indicate if there are problems with the integration with the Web API.\\
-Since the \texttt{DriveIT Windows Client} is able to chance between the local database and using the Azure Server, the testing can also be set up to test both of these environments. \\
-The \texttt{DriveIT Web Client} does not contain automatic integration testing but we have executed extensive testing based on the functionality which is provided to the Web Client by the Web API provides.
+When implementing a system which is based on having a separation of application and storage, integration testing is of utmost importance. In this system we have both done both automatic and manual integration testing. 
 
-\subsection{CarQuery Unit Testing}
-The most significant methods ensuring the functionality of the \texttt{CarQuery} class have primarily been unit tested.\\
-Retrieving information as \textit{JSON} and transferring this data to DTO objects has been tested to ensure that this functionality does not have any errors.
+The \texttt{DriveIT Windows Client} has a fully automatic integration test suite of the CRUD functionality for the entities \texttt{Car}, \texttt{ContactRequest}, \texttt{Employee}, \texttt{Customer} and \texttt{Sale}. The tests are not properly formed and could be improved in many ways, but the results can be used to indicate if there are problems with the integration with the \texttt{DriveIT Web API}.\\
+Since the \texttt{DriveIT Windows Client} is able to switch between the local database and \textit{Micrososft Azure}, the testing can also be set up to test both of these environments. \\
+The \texttt{DriveIT Web Client} does not contain automatic integration tests, but extensive testing based on the functionality which is provided to the \texttt{DriveIT Web Client} by the \texttt{DriveIT Web API} has been executed manually.
 
-Testing that data is received and that this data is correct is tested by requesting a known data set, e.g. \texttt{"make=ford"}, and checking that the received data is of the anticipated type. Different queries have also been tested against the \texttt{DriveIT Web API}.
+The most significant methods ensuring the functionality of the \texttt{CarQuery} class have primarily been integration tested.\\
+Retrieving information as \textit{JSON} and transferring this data to \textit{DTO} objects has been tested to ensure that this functionality does not have any errors.
 
-Boundary testing is performed by sending a malformed \texttt{CarDto} object as a parameter to the class and checking that the expected exception is thrown. Positive testing is performed as well by sending a correct \texttt{CarDto} object.
+Testing that data is received and that this data is correct is tested by requesting a known data set, e.g. \texttt{"make=ford"}, and checking that the received data is of the anticipated type.
+
+Boundary testing is performed by sending a malformed \texttt{CarDto} object as a parameter to the class and checking that the expected exception is thrown.
