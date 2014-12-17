@@ -87,7 +87,7 @@ namespace DriveIT.Web.Tests.ApiControllers
                     Id = 1,
                     CarId = 1,
                     CustomerId = "cust@driveit.dk",
-                    DateOfSale = DateTime.Now, // less than 5 days ago.
+                    DateOfSale = DateTime.Now, // less than 7 days ago.
                     EmployeeId = "admin@driveit.dk",
                     Price = 20000
                 },
@@ -96,7 +96,7 @@ namespace DriveIT.Web.Tests.ApiControllers
                     Id = 2,
                     CarId = 2,
                     CustomerId = "cust@driveit.dk",
-                    DateOfSale = DateTime.Now.Subtract(TimeSpan.FromDays(6)), // More than 5 days ago
+                    DateOfSale = DateTime.Now.Subtract(TimeSpan.FromDays(8)), // More than 7 days ago
                     EmployeeId = "admin@driveit.dk",
                     Price = 10000
                 }
@@ -169,7 +169,7 @@ namespace DriveIT.Web.Tests.ApiControllers
             Assert.IsNotNull(result);
             foreach (var carDto in result)
             {
-                Assert.IsTrue(carDto.Id != 2); //Test that the car that was sold more than 5 days ago is not in the list.
+                Assert.IsTrue(carDto.Id != 2); //Test that the car that was sold more than 7 days ago is not in the list.
             }
         }
 
